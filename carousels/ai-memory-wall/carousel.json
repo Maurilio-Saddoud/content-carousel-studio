@@ -6,10 +6,10 @@
   "aspectRatio": "portrait",
   "updatedAt": "2026-03-21",
   "theme": {
-    "accent": "#D1702B",
-    "background": "#F7F4ED",
-    "foreground": "#171717",
-    "muted": "#5E5A55"
+    "accent": "#1D9BF0",
+    "background": "#000000",
+    "foreground": "#E7E9EA",
+    "muted": "#71767B"
   },
   "slides": [
     {
