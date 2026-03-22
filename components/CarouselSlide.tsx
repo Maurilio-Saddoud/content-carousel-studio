@@ -24,8 +24,9 @@ type InlineToken =
 function ReplyIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M1.75 11.96c0-4.86 3.92-8.8 8.75-8.8 4.68 0 8.5 3.7 8.73 8.34" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M9.25 8.6 4.5 12l4.75 3.4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4.9 11.42c0-4.57 3.7-8.27 8.27-8.27 3.38 0 6.08 1.59 7.88 4.26" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="m4.9 12.06 4.52-3.92" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="m4.9 12.06 4.52 3.92" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
     </svg>
   )
 }
@@ -33,12 +34,12 @@ function ReplyIcon() {
 function RepostIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M7.5 6.25h10.25l-2.7-2.7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M17.75 6.25 20.5 9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M16.5 17.75H6.25l2.7 2.7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M6.25 17.75 3.5 15" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M6.25 17.75v-7.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M17.75 6.25v7.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M4.75 7.5h10.82" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="m13.05 4.92 3.52 2.58-3.52 2.58" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M19.25 16.5H8.43" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="m10.95 13.92-3.52 2.58 3.52 2.58" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M7.43 16.5V7.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M16.57 7.5v9" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
     </svg>
   )
 }
@@ -46,7 +47,7 @@ function RepostIcon() {
 function LikeIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M16.7 4.6c-1.87 0-3.19.9-4.2 2.2-1.01-1.3-2.33-2.2-4.2-2.2A5.3 5.3 0 0 0 3 9.92c0 4.98 5.13 8.48 8.46 10.96.63.46 1.45.46 2.08 0C16.87 18.4 22 14.9 22 9.92a5.3 5.3 0 0 0-5.3-5.32Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16.7 5.1c-1.97 0-3.28 1.04-4.12 2.31C11.74 6.14 10.43 5.1 8.46 5.1 5.62 5.1 3.5 7.29 3.5 10.02c0 2.12.88 3.8 2.65 5.66 1.63 1.73 3.73 3.28 5.62 4.67a.4.4 0 0 0 .47 0c1.89-1.39 3.99-2.94 5.62-4.67 1.77-1.86 2.65-3.54 2.65-5.66 0-2.73-2.12-4.92-4.96-4.92Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -54,11 +55,11 @@ function LikeIcon() {
 function ViewsIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M4 18.5h16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" opacity="0.5" />
-      <path d="M6.75 16.5v-2.25" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M10.5 16.5V9.75" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M14.25 16.5v-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M18 16.5V7.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M4.5 18.5h15" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" opacity="0.55" />
+      <path d="M7.25 16.8v-3.05" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M11.1 16.8V9.95" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M14.95 16.8v-4.7" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M18.8 16.8V7.2" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
     </svg>
   )
 }
@@ -66,7 +67,7 @@ function ViewsIcon() {
 function BookmarkIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M6.75 4.5h10.5a.75.75 0 0 1 .75.75v14.96l-6-4.2-6 4.2V5.25a.75.75 0 0 1 .75-.75Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M6.75 4.5h10.5c.41 0 .75.34.75.75v14.29l-5.53-3.95a.8.8 0 0 0-.94 0L6 19.54V5.25c0-.41.34-.75.75-.75Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -74,9 +75,9 @@ function BookmarkIcon() {
 function ShareIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M12 4.25v9.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="m8.2 8.05 3.8-3.8 3.8 3.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M5.75 12.75v5.5c0 .83.67 1.5 1.5 1.5h9.5c.83 0 1.5-.67 1.5-1.5v-5.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 4.75v8.78" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="m8.48 8.22 3.52-3.47 3.52 3.47" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5.75 13.75v4.5c0 .83.67 1.5 1.5 1.5h9.5c.83 0 1.5-.67 1.5-1.5v-4.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
