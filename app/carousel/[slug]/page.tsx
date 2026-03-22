@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { CarouselSlide } from '@/components/CarouselSlide'
 import { getCarousel, getCarouselDirectory } from '@/lib/carousels'
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+
 type Props = {
   params: Promise<{ slug: string }>
 }
@@ -28,7 +30,7 @@ export default async function CarouselPage({ params }: Props) {
           <h1>{carousel.title}</h1>
           <p>{carousel.description}</p>
           <p>
-            <a href={`/exports/${carousel.slug}/${carousel.slug}.zip`} download>
+            <a href={`${basePath}/exports/${carousel.slug}/${carousel.slug}.zip`} download>
               Download PNG batch (.zip)
             </a>
           </p>
@@ -49,7 +51,7 @@ export default async function CarouselPage({ params }: Props) {
               total={carousel.slides.length}
             />
             <div className="preview-slide-actions">
-              <a href={`/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`} target="_blank" rel="noreferrer">
+              <a href={`${basePath}/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`} target="_blank" rel="noreferrer">
                 Open image (then Save Image to Photos)
               </a>
             </div>
