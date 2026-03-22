@@ -1,0 +1,46 @@
+[
+  {
+    "id": "brief-segment-01",
+    "primaryIdeaId": "segment-01",
+    "supportingIdeaIds": [
+      "segment-41",
+      "segment-19",
+      "segment-23"
+    ],
+    "thesis": "I'm going to get into why it's good news.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "I think one of the lessons that we are learning, one of the bitter pills that we need to swallow is that AI is telling us our jobs were never the real job.",
+    "supportPoints": [
+      "I'm going to get into why it's good news.",
+      "I'm describing is going to be temporary.",
+      "We are going to move to this world.",
+      "An EM's job is sprint planning."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-41"
+    ],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
+  },
+  {
+    "id": "brief-segment-41",
+    "primaryIdeaId": "segment-41",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-19",
+      "segment-23"
+    ],
+    "thesis": "I'm describing is going to be temporary.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "We are going to move to this world.",
+    "supportPoints": [
+      "Do you love the 11.6 hours you spend in meetings?",
+      "Really, I don't think you do.",
+      "I think one of the lessons that we are learning, one of the bitter pills that we need to swallow is that AI is telling us our jobs were never the real job.",
+      "Think about what happens when a new engineer joins the team."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01"
+    ],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-"
+  }
+]

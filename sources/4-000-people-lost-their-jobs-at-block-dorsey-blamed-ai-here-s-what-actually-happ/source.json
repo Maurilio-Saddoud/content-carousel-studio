@@ -1,0 +1,68 @@
+{
+  "slug": "4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ",
+  "sourceType": "transcript",
+  "sourceUrl": "https://youtu.be/lbfoNxoHl2o?si=qnhahgH3bf9YOWcH",
+  "fetchedAt": "2026-03-22T17:22:02.852Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "4,000 People Lost Their Jobs At Block. Dorsey Blamed AI. Here's What Actually Happened.",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/lbfoNxoHl2o/hqdefault.jpg"
+  },
+  "transcriptLineCount": 586,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 2,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 76,
+  "briefCount": 2,
+  "publishedIdeaIds": [
+    "segment-01",
+    "segment-41"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-01",
+      "primaryIdeaId": "segment-01",
+      "thesis": "I'm going to get into why it's good news.",
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
+    },
+    {
+      "id": "brief-segment-41",
+      "primaryIdeaId": "segment-41",
+      "thesis": "I'm describing is going to be temporary.",
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh",
+      "segmentId": "segment-01",
+      "title": "I'm going to get into why it's good news.",
+      "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh",
+      "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh/carousel.md"
+    },
+    {
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
+      "segmentId": "segment-41",
+      "title": "I'm describing is going to be temporary.",
+      "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
+      "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/source.json",
+    "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/raw-transcript.md",
+    "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/clean-transcript.md",
+    "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/segments.json",
+    "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/ideas.json",
+    "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/briefs.json",
+    "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/summary.md",
+    "carousels/4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh/carousel.md",
+    "carousels/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-/carousel.md",
+    "carousels/index.json"
+  ]
+}

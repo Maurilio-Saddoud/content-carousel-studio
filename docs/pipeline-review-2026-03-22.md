@@ -29,6 +29,17 @@ The repo already had ingest/rebuild/render/build paths, but no cheap inspection 
 2. Run `./content-carousel self-test <source-slug>`.
 3. Fix anything noisy before `render-all` / `build-pages` / publish.
 
+## Operator expectation update
+
+For this workflow, when the user sends a **new video link** after discussing carousel generation, treat it as an implicit request to:
+- wipe the current preview batch
+- generate a fresh batch from that video
+- keep the post count low (default 2 strong posts unless the user says otherwise)
+- optimize for low overlap / high signal
+- rebuild and publish Pages
+
+Do **not** bounce back with "if you want me to run it, say run it" unless the user was genuinely ambiguous.
+
 ## Current finding on the existing sample package
 
 The existing source package still produces some weak slide titles/openers. The self-test now surfaces that explicitly instead of hiding it in generated markdown.
