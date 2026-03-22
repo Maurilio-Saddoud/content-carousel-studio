@@ -1,0 +1,104 @@
+[
+  {
+    "id": "segment-06",
+    "rank": 1,
+    "score": -10,
+    "start": "00:02:08",
+    "end": "00:02:29",
+    "durationSeconds": 21,
+    "lineStart": 34,
+    "lineEnd": 41,
+    "wordCount": 68,
+    "text": "♪ Never gonna give, never gonna give ♪ ♪ (Give you up) ♪ ♪ Never gonna give, never gonna give ♪ ♪ (Give you up) ♪ ♪ We've known each other for so long ♪ ♪ Your heart's been aching but you're too shy to say it ♪ ♪ Inside we both know what's been going ♪ ♪ We know the game and we're gonna play it ♪",
+    "titleSuggestion": "♪ Never gonna give, never gonna give ♪ ♪ (Give you up) ♪ ♪ Never gonna give, never…",
+    "hook": "♪ Never gonna give, never gonna give ♪ ♪ (Give you up) ♪ ♪ Never gonna give, never gonna give ♪ ♪ (Give you up) ♪ ♪ We'…",
+    "whyItCouldWork": [
+      "has contrast/tension, which usually makes better post framing"
+    ],
+    "scoreBreakdown": {
+      "hookWords": 0,
+      "contrast": 2,
+      "specificity": 0,
+      "structure": 0,
+      "question": 0,
+      "credibility": 0,
+      "clarity": 0,
+      "openingStrength": 0,
+      "density": 0,
+      "fillerPenalty": 0,
+      "lyricPenalty": -12,
+      "repetitionPenalty": 0,
+      "fragmentPenalty": 0,
+      "introOutroPenalty": 0,
+      "lengthPenalty": 0
+    }
+  },
+  {
+    "id": "segment-03",
+    "rank": 2,
+    "score": -10,
+    "start": "00:00:47",
+    "end": "00:01:13",
+    "durationSeconds": 26,
+    "lineStart": 10,
+    "lineEnd": 17,
+    "wordCount": 74,
+    "text": "♪ Never gonna run around and desert you ♪ ♪ Never gonna make you cry ♪ ♪ Never gonna say goodbye ♪ ♪ Never gonna tell a lie and hurt you ♪ ♪ We've known each other for so long ♪ ♪ Your heart's been aching but you're too shy to say it ♪ ♪ Inside we both know what's been going ♪ ♪ We know the game and we're gonna play it ♪",
+    "titleSuggestion": "♪ Never gonna run around and desert you ♪ ♪ Never gonna make you cry ♪ ♪ Never gonn…",
+    "hook": "♪ Never gonna run around and desert you ♪ ♪ Never gonna make you cry ♪ ♪ Never gonna say goodbye ♪ ♪ Never gonna tell a…",
+    "whyItCouldWork": [
+      "has contrast/tension, which usually makes better post framing"
+    ],
+    "scoreBreakdown": {
+      "hookWords": 0,
+      "contrast": 2,
+      "specificity": 0,
+      "structure": 0,
+      "question": 0,
+      "credibility": 0,
+      "clarity": 0,
+      "openingStrength": 0,
+      "density": 0,
+      "fillerPenalty": 0,
+      "lyricPenalty": -12,
+      "repetitionPenalty": 0,
+      "fragmentPenalty": 0,
+      "introOutroPenalty": 0,
+      "lengthPenalty": 0
+    }
+  },
+  {
+    "id": "segment-04",
+    "rank": 3,
+    "score": -12,
+    "start": "00:01:17",
+    "end": "00:01:38",
+    "durationSeconds": 21,
+    "lineStart": 18,
+    "lineEnd": 25,
+    "wordCount": 66,
+    "text": "♪ And if you ask me how I'm feeling ♪ ♪ Don't tell me you're too blind to see ♪ ♪ Never gonna give you up ♪ ♪ Never gonna let you down ♪ ♪ Never gonna run around and desert you ♪ ♪ Never gonna make you cry ♪ ♪ Never gonna say goodbye ♪ ♪ Never gonna tell a lie and hurt you ♪",
+    "titleSuggestion": "♪ And if you ask me how I'm feeling ♪ ♪ Don't tell me you're too blind to see ♪ ♪ N…",
+    "hook": "♪ And if you ask me how I'm feeling ♪ ♪ Don't tell me you're too blind to see ♪ ♪ Never gonna give you up ♪ ♪ Never gon…",
+    "whyItCouldWork": [
+      "is structurally clean enough to be edited into a tighter post"
+    ],
+    "scoreBreakdown": {
+      "hookWords": 0,
+      "contrast": 0,
+      "specificity": 0,
+      "structure": 0,
+      "question": 0,
+      "credibility": 0,
+      "clarity": 0,
+      "openingStrength": 0,
+      "density": 0,
+      "fillerPenalty": 0,
+      "lyricPenalty": -12,
+      "repetitionPenalty": 0,
+      "fragmentPenalty": 0,
+      "introOutroPenalty": 0,
+      "lengthPenalty": 0
+    }
+  }
+]

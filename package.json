@@ -1,17 +1,21 @@
 {
   "name": "content-carousel-studio",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "bin": {
+    "content-carousel": "./content-carousel"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:pages": "tsx scripts/build-pages.ts",
+    "cli": "node ./bin/content-carousel.js",
+    "build:pages": "node ./bin/content-carousel.js build-pages",
     "start": "next start",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
-    "render": "tsx scripts/render-carousel.ts",
-    "render:all": "tsx scripts/render-all.ts",
-    "ingest:youtube": "tsx scripts/ingest-youtube.ts"
+    "render": "node ./bin/content-carousel.js render",
+    "render:all": "node ./bin/content-carousel.js render-all",
+    "ingest:youtube": "node ./bin/content-carousel.js youtube"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

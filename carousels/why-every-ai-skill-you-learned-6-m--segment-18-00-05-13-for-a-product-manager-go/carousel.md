@@ -18,7 +18,7 @@ eyebrow: AUTO DRAFT
 
 I've seen two structures emerging here that are significant, right?
 
-If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+The first is a team of one.
 
 ---
 
@@ -26,9 +26,9 @@ eyebrow: WHY IT MATTERS
 
 # I've seen two structures emerging here that are significant, right?
 
-This is much much more important.
+If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-If you run an organization, the question isn't are we using AI.
+The skill is going to be triaging your own attention in real time.
 
 ---
 
@@ -36,9 +36,9 @@ eyebrow: THE REAL SHIFT
 
 # I've seen two structures emerging here that are significant, right?
 
-The first is a team of one.
+Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
-The skill is going to be triaging your own attention in real time.
+If you run an organization, the question isn't are we using AI.
 
 ---
 
@@ -46,7 +46,7 @@ eyebrow: OPERATING MODEL
 
 # If you have a 100 streams of agent output 8 hours a day, you cannot review everythi…
 
-It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shift…
+February the person whose boundary sense was current last August are operating worlds apart.
 
 This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
 

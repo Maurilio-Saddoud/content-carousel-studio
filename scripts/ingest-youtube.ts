@@ -76,6 +76,12 @@ type Carousel = {
 
 type CarouselDirectoryItem = Omit<Carousel, 'slides'>
 
+type DraftCarouselBundle = {
+  segment: Segment
+  carousel: Carousel
+  briefMarkdown: string
+}
+
 const TRANSCRIPT_TOOL_PATH = path.resolve('../youtube-transcript-v1/yt_transcript.py')
 const RAW_TRANSCRIPT_RE = /^\[(\d{2}):(\d{2}):(\d{2})\]\s+(.*)$/
 const execFileAsync = promisify(execFile)
@@ -86,21 +92,19 @@ const DEFAULT_THEME = {
   muted: '#71767B',
 }
 
-async function main() {
-  const args = parseArgs(process.argv.slice(2))
+export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(2)) {
+  const args = parseArgs(argv)
   if (!args.url) {
     printUsageAndExit()
   }
 
   const metadata = await fetchVideoMetadata(args.url)
-  const slug = args.slug ?? slugify(metadata.title || args.url)
-  const sourceDir = path.resolve('sources', slug)
-  const draftDir = path.resolve('drafts', slug)
-  const carouselDir = path.resolve('carousels', slug)
+  const sourceSlug = args.slug ?? slugify(metadata.title || args.url)
+  const sourceDir = path.resolve('sources', sourceSlug)
+  const draftDir = path.resolve('drafts', sourceSlug)
 
   await mkdir(sourceDir, { recursive: true })
   await mkdir(draftDir, { recursive: true })
-  await mkdir(carouselDir, { recursive: true })
 
   const { transcript, transcriptMode } = await fetchTranscript(args.url, args.whisperModel)
   const transcriptLines = parseTranscript(transcript)
@@ -117,13 +121,20 @@ async function main() {
     throw new Error('Could not find any usable transcript segments after editorial filtering.')
   }
 
-  const draftCarousel = buildDraftCarousel(metadata, slug, segments)
-  const summary = buildSummary(metadata, draftCarousel, segments)
-  const draftNotes = buildDraftNotes(metadata, slug, draftCarousel, segments)
-  await upsertCarouselDirectoryItem(draftCarousel)
+  const draftBundles = buildDraftCarouselBundles(metadata, sourceSlug, segments)
+
+  for (const bundle of draftBundles) {
+    await mkdir(path.resolve('carousels', bundle.carousel.slug), { recursive: true })
+    await mkdir(path.resolve('drafts', sourceSlug, bundle.carousel.slug), { recursive: true })
+    await upsertCarouselDirectoryItem(bundle.carousel)
+    await writeFile(path.resolve('carousels', bundle.carousel.slug, 'carousel.md'), renderCarouselMarkdown(bundle.carousel), 'utf8')
+    await writeFile(path.resolve('drafts', sourceSlug, bundle.carousel.slug, 'post-brief.md'), bundle.briefMarkdown, 'utf8')
+  }
+
+  const summary = buildSummary(metadata, sourceSlug, draftBundles, segments)
 
   const sourceManifest = {
-    slug,
+    slug: sourceSlug,
     sourceType: 'transcript',
     sourceUrl: args.url,
     fetchedAt: new Date().toISOString(),
@@ -131,16 +142,30 @@ async function main() {
     whisperModel: args.whisperModel,
     video: metadata,
     transcriptLineCount: transcriptLines.length,
-    defaultBehavior: 'creates source artifacts and a previewable draft carousel automatically',
+    defaultBehavior: 'creates source artifacts and one markdown-first draft carousel per qualifying editorial segment',
+    draftCarouselRule: {
+      maxDrafts: args.maxSegments,
+      threshold: `Each draft comes from a selected editorial segment. Selected segments must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates).`,
+    },
     selectedSegmentIds: segments.map((segment) => segment.id),
+    draftCarousels: draftBundles.map((bundle) => ({
+      slug: bundle.carousel.slug,
+      segmentId: bundle.segment.id,
+      title: bundle.carousel.title,
+      previewPath: `/carousel/${bundle.carousel.slug}`,
+      briefPath: `drafts/${sourceSlug}/${bundle.carousel.slug}/post-brief.md`,
+      carouselPath: `carousels/${bundle.carousel.slug}/carousel.md`,
+    })),
     createdFiles: [
-      `sources/${slug}/source.json`,
-      `sources/${slug}/raw-transcript.md`,
-      `sources/${slug}/clean-transcript.md`,
-      `sources/${slug}/segments.json`,
-      `sources/${slug}/summary.md`,
-      `drafts/${slug}/post-brief.md`,
-      `carousels/${slug}/carousel.md`,
+      `sources/${sourceSlug}/source.json`,
+      `sources/${sourceSlug}/raw-transcript.md`,
+      `sources/${sourceSlug}/clean-transcript.md`,
+      `sources/${sourceSlug}/segments.json`,
+      `sources/${sourceSlug}/summary.md`,
+      ...draftBundles.flatMap((bundle) => [
+        `drafts/${sourceSlug}/${bundle.carousel.slug}/post-brief.md`,
+        `carousels/${bundle.carousel.slug}/carousel.md`,
+      ]),
       'carousels/index.json',
     ],
   }
@@ -150,13 +175,45 @@ async function main() {
   await writeFile(path.join(sourceDir, 'clean-transcript.md'), renderCleanTranscript(metadata, cleanTranscript), 'utf8')
   await writeFile(path.join(sourceDir, 'segments.json'), `${JSON.stringify(segments, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'summary.md'), summary, 'utf8')
-  await writeFile(path.join(draftDir, 'post-brief.md'), draftNotes, 'utf8')
-  await writeFile(path.join(carouselDir, 'carousel.md'), renderCarouselMarkdown(draftCarousel), 'utf8')
 
-  console.log(`Created transcript package and draft carousel for ${slug}`)
+  console.log(`Created transcript package and ${draftBundles.length} draft carousel${draftBundles.length === 1 ? '' : 's'} for ${sourceSlug}`)
   for (const file of sourceManifest.createdFiles) {
     console.log(`- ${file}`)
   }
+
+  await autoCommitAndPushGeneratedChanges(sourceSlug, draftBundles)
+}
+
+export async function rebuildDraftsFromSourceArgv(argv: string[] = process.argv.slice(2)) {
+  const sourceSlug = argv[0]
+  if (!sourceSlug) {
+    throw new Error('Usage: content-carousel rebuild-source <source-slug>')
+  }
+
+  const sourceDir = path.resolve('sources', sourceSlug)
+  const sourceManifestRaw = await readFile(path.join(sourceDir, 'source.json'), 'utf8')
+  const sourceManifest = JSON.parse(sourceManifestRaw) as {
+    video?: VideoMetadata
+  }
+  const segmentsRaw = await readFile(path.join(sourceDir, 'segments.json'), 'utf8')
+  const segments = JSON.parse(segmentsRaw) as Segment[]
+  const metadata = sourceManifest.video
+
+  if (!metadata?.title) {
+    throw new Error(`Source package ${sourceSlug} is missing video metadata in sources/${sourceSlug}/source.json`)
+  }
+
+  const draftBundles = buildDraftCarouselBundles(metadata, sourceSlug, segments)
+
+  for (const bundle of draftBundles) {
+    await mkdir(path.resolve('carousels', bundle.carousel.slug), { recursive: true })
+    await mkdir(path.resolve('drafts', sourceSlug, bundle.carousel.slug), { recursive: true })
+    await upsertCarouselDirectoryItem(bundle.carousel)
+    await writeFile(path.resolve('carousels', bundle.carousel.slug, 'carousel.md'), renderCarouselMarkdown(bundle.carousel), 'utf8')
+    await writeFile(path.resolve('drafts', sourceSlug, bundle.carousel.slug, 'post-brief.md'), bundle.briefMarkdown, 'utf8')
+  }
+
+  console.log(`Rebuilt ${draftBundles.length} draft carousel${draftBundles.length === 1 ? '' : 's'} for ${sourceSlug}`)
 }
 
 function parseArgs(argv: string[]) {
@@ -213,7 +270,7 @@ function parseArgs(argv: string[]) {
 }
 
 function printUsageAndExit(): never {
-  console.error('Usage: pnpm ingest:youtube <youtube-url> [--slug your-slug] [--whisper-model base] [--max-segments 8]')
+  console.error('Usage: content-carousel youtube <youtube-url> [--slug your-slug] [--whisper-model base] [--max-segments 8]')
   process.exit(1)
 }
 
@@ -559,34 +616,49 @@ function trimSentence(text: string, max: number) {
   return `${text.slice(0, max - 1).trimEnd()}…`
 }
 
-function buildSummary(metadata: VideoMetadata, carousel: Carousel, segments: Segment[]) {
+function buildDraftCarouselBundles(metadata: VideoMetadata, sourceSlug: string, segments: Segment[]): DraftCarouselBundle[] {
+  return segments.map((segment) => {
+    const carouselSlug = buildCarouselSlug(sourceSlug, segment)
+    const carousel = buildDraftCarousel(metadata, sourceSlug, carouselSlug, segment, segments)
+    return {
+      segment,
+      carousel,
+      briefMarkdown: buildDraftNotes(metadata, sourceSlug, carousel, segment, segments),
+    }
+  })
+}
+
+function buildSummary(metadata: VideoMetadata, sourceSlug: string, draftBundles: DraftCarouselBundle[], segments: Segment[]) {
   const top = segments.slice(0, 5)
-  return `# Source Summary\n\n## Video\n- Title: ${metadata.title}\n- Creator: ${metadata.authorName ?? 'Unknown'}\n\n## Draft carousel created automatically\n- Carousel slug: ${carousel.slug}\n- Preview route: /carousel/${carousel.slug}\n- Draft title: ${carousel.title}\n\n## Best candidate segments\n${top
+  return `# Source Summary\n\n## Video\n- Title: ${metadata.title}\n- Creator: ${metadata.authorName ?? 'Unknown'}\n\n## Draft carousels created automatically\n- Source slug: ${sourceSlug}\n- Draft count: ${draftBundles.length}\n${draftBundles
+    .map(
+      (bundle) => `- ${bundle.carousel.slug} → /carousel/${bundle.carousel.slug} (from ${bundle.segment.id}, ${bundle.segment.start} → ${bundle.segment.end}, score ${bundle.segment.score})`,
+    )
+    .join('\n')}\n\n## Best candidate segments\n${top
     .map(
       (segment) => `\n### #${segment.rank} — ${segment.titleSuggestion}\n- Score: ${segment.score}\n- Time: ${segment.start} → ${segment.end}\n- Hook: ${segment.hook}\n- Why it could work:\n${segment.whyItCouldWork.map((reason) => `  - ${reason}`).join('\n')}\n`,
     )
-    .join('\n')}\n## Editorial note\nThese are filtered source chunks plus an auto-generated draft carousel. The default path now keeps moving, but the result is still a draft — not final publishing copy.\n`
+    .join('\n')}\n## Editorial note\nEach generated carousel comes from one selected editorial segment. Selection rules: score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, and no near-duplicate overlap with a stronger pick.\n`
 }
 
-function buildDraftNotes(metadata: VideoMetadata, slug: string, carousel: Carousel, segments: Segment[]) {
-  const top = segments.slice(0, 3)
-  return `# ${metadata.title}\n\nSlug: ${slug}\nStatus: draft carousel created automatically\n\n## Default output\nThis ingest run already created a previewable draft carousel at \`carousels/${slug}/carousel.md\`.\nIf the angle is good, edit that markdown file directly instead of starting from scratch.\n\n## Draft carousel angle\n- Title: ${carousel.title}\n- Description: ${carousel.description}\n\n## Top source options\n${top
+function buildDraftNotes(metadata: VideoMetadata, sourceSlug: string, carousel: Carousel, primary: Segment, segments: Segment[]) {
+  const alternates = segments.filter((segment) => segment.id !== primary.id).slice(0, 3)
+  return `# ${metadata.title}\n\nSource slug: ${sourceSlug}\nCarousel slug: ${carousel.slug}\nStatus: draft carousel created automatically\nPrimary source segment: ${primary.id} (${primary.start} → ${primary.end})\n\n## Default output\nThis ingest run created a previewable draft carousel at \`carousels/${carousel.slug}/carousel.md\`.\nIts source artifacts still live under \`sources/${sourceSlug}/\`.\n\n## Draft carousel angle\n- Title: ${carousel.title}\n- Description: ${carousel.description}\n- Raw hook: ${primary.hook}\n\n## Primary source text\n\n> ${primary.text}\n\n## Alternate source options\n${alternates
     .map(
-      (segment) => `\n### Option ${segment.rank}: ${segment.titleSuggestion}\n- Time range: ${segment.start} → ${segment.end}\n- Raw hook: ${segment.hook}\n- Angle: ${segment.whyItCouldWork[0]}\n- Source text:\n\n> ${segment.text}\n`,
+      (segment) => `\n### ${segment.id}: ${segment.titleSuggestion}\n- Time range: ${segment.start} → ${segment.end}\n- Raw hook: ${segment.hook}\n- Angle: ${segment.whyItCouldWork[0]}\n\n> ${segment.text}\n`,
     )
-    .join('\n')}\n## Next editing pass\n- tighten slide 1 until it punches harder\n- trim any slide body that still sounds transcript-y\n- verify claims, numbers, and examples\n- if needed, swap in a better segment from \`sources/${slug}/segments.json\`\n`
+    .join('\n')}\n## Next editing pass\n- tighten slide 1 until it punches harder\n- trim any slide body that still sounds transcript-y\n- verify claims, numbers, and examples\n- if needed, swap in a better segment from \`sources/${sourceSlug}/segments.json\`\n`
 }
 
-function buildDraftCarousel(metadata: VideoMetadata, slug: string, segments: Segment[]): Carousel {
-  const primary = segments[0]
+function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug: string, primary: Segment, segments: Segment[]): Carousel {
+  const companionSegments = segments.filter((segment) => segment.id !== primary.id)
   const sentences = getUsableSentences(primary.text).filter((sentence) => sentence.length >= 24)
 
   const opening = normalizeForSlide(sentences[0] || primary.hook || primary.titleSuggestion)
   const support = uniqueNormalized([
     ...sentences.slice(1),
-    ...segments.slice(1).map((segment) => normalizeForSlide(segment.hook)),
-    ...segments.slice(1).flatMap((segment) => splitSentences(segment.text).slice(0, 2).map((sentence) => normalizeForSlide(sentence))),
-  ]).filter((sentence) => sentence.length >= 24 && sentence.length <= 180)
+    ...companionSegments.flatMap((segment) => splitSentences(segment.text).slice(0, 2).map((sentence) => normalizeForSlide(sentence))),
+  ]).filter((sentence) => sentence.length >= 24)
 
   const titleBase = trimSentence(opening, 80)
   const slides: CarouselSlide[] = [
@@ -611,7 +683,7 @@ function buildDraftCarousel(metadata: VideoMetadata, slug: string, segments: Seg
     {
       id: '03',
       eyebrow: 'THE REAL SHIFT',
-      title: trimSentence(normalizeForSlide(segments[1]?.hook ?? support[4] ?? 'The skill is maintaining calibration as the boundary keeps moving.'), 84),
+      title: trimSentence(normalizeForSlide(companionSegments[0]?.hook ?? support[4] ?? 'The skill is maintaining calibration as the boundary keeps moving.'), 84),
       body: buildBodyLines([
         support[5] ?? 'What worked as a rule of thumb a few months ago can already be wrong now.',
         support[6] ?? 'Operators need current failure models, not generic vibes.',
@@ -620,7 +692,7 @@ function buildDraftCarousel(metadata: VideoMetadata, slug: string, segments: Seg
     {
       id: '04',
       eyebrow: 'OPERATING MODEL',
-      title: trimSentence(normalizeForSlide(segments[2]?.hook ?? support[7] ?? 'Human attention becomes the real bottleneck.'), 84),
+      title: trimSentence(normalizeForSlide(companionSegments[1]?.hook ?? support[7] ?? 'Human attention becomes the real bottleneck.'), 84),
       body: buildBodyLines([
         support[8] ?? 'As agents improve, the question becomes what deserves review and what can safely flow through.',
         support[9] ?? 'That means attention allocation becomes part of the skill.',
@@ -629,8 +701,9 @@ function buildDraftCarousel(metadata: VideoMetadata, slug: string, segments: Seg
     {
       id: '05',
       eyebrow: 'TAKEAWAY',
-      title: trimSentence(normalizeForSlide(extractTakeaway(primary.text, segments)), 84),
+      title: trimSentence(normalizeForSlide(extractTakeaway(primary.text, companionSegments)), 84),
       body: buildBodyLines([
+        `Source package: ${sourceSlug}`,
         'Use the source package as evidence, not as final copy.',
         'Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.',
       ]),
@@ -638,9 +711,9 @@ function buildDraftCarousel(metadata: VideoMetadata, slug: string, segments: Seg
   ]
 
   return {
-    slug,
+    slug: carouselSlug,
     title: `Draft: ${trimSentence(removeDraftPrefix(titleBase), 52)}`,
-    description: `Auto-generated draft carousel from ${metadata.authorName ?? 'YouTube'} transcript source: ${metadata.title}.`,
+    description: `Auto-generated draft carousel from ${metadata.authorName ?? 'YouTube'} transcript source: ${metadata.title} (${primary.start} → ${primary.end}).`,
     sourceType: 'transcript',
     aspectRatio: 'portrait',
     updatedAt: new Date().toISOString().slice(0, 10),
@@ -651,7 +724,6 @@ function buildDraftCarousel(metadata: VideoMetadata, slug: string, segments: Seg
 
 function buildBodyLines(lines: string[]) {
   return uniqueNormalized(lines)
-    .map((line) => trimSentence(line, 150))
     .slice(0, 3)
     .join('\n\n')
 }
@@ -688,11 +760,78 @@ function removeDraftPrefix(text: string) {
 function extractTakeaway(primaryText: string, segments: Segment[]) {
   const candidate = [
     ...splitSentences(primaryText),
-    ...segments.slice(1).map((segment) => segment.hook),
+    ...segments.map((segment) => segment.hook),
     'The edge is not knowing one workflow. It is keeping your operating model current.',
   ].find((sentence) => /\b(skill|attention|boundary|calibration|system|workflow|operators?)\b/i.test(sentence))
 
   return candidate ?? 'The edge is keeping your operating model current.'
+}
+
+function buildCarouselSlug(sourceSlug: string, segment: Segment) {
+  const segmentToken = `${segment.id}-${segment.start.replace(/:/g, '-')}`
+  const angleSlug = slugify(segment.titleSuggestion || segment.hook || segment.id).slice(0, 24) || segment.id
+  const maxLength = 80
+  const reserved = `--${segmentToken}-${angleSlug}`
+  const maxSourceLength = Math.max(12, maxLength - reserved.length)
+  const normalizedSourceSlug = sourceSlug.slice(0, maxSourceLength).replace(/-+$/g, '') || 'youtube-source'
+  return `${normalizedSourceSlug}${reserved}`
+}
+
+async function autoCommitAndPushGeneratedChanges(sourceSlug: string, bundles: DraftCarouselBundle[]) {
+  if (process.env.CONTENT_CAROUSEL_SKIP_PUSH === '1') {
+    console.log('Auto-push skipped because CONTENT_CAROUSEL_SKIP_PUSH=1.')
+    return
+  }
+
+  const paths = [
+    path.join('sources', sourceSlug),
+    path.join('drafts', sourceSlug),
+    ...bundles.map((bundle) => path.join('carousels', bundle.carousel.slug)),
+    path.join('carousels', 'index.json'),
+  ]
+
+  const { stdout: insideWorkTree } = await execFileAsync('git', ['rev-parse', '--is-inside-work-tree'], {
+    cwd: process.cwd(),
+  }).catch(() => ({ stdout: 'false' }))
+
+  if (insideWorkTree.trim() !== 'true') {
+    console.warn('Skipping auto-push: current directory is not a git work tree.')
+    return
+  }
+
+  await execFileAsync('git', ['add', '--', ...paths], { cwd: process.cwd() })
+
+  const { stdout: stagedDiff } = await execFileAsync('git', ['diff', '--cached', '--name-only', '--', ...paths], {
+    cwd: process.cwd(),
+  })
+
+  const changedFiles = stagedDiff
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+
+  if (changedFiles.length === 0) {
+    console.log('Auto-push skipped: no generated changes to commit.')
+    return
+  }
+
+  const message = `chore: ingest youtube source ${sourceSlug}`
+  await execFileAsync('git', ['commit', '-m', message, '--', ...paths], { cwd: process.cwd(), maxBuffer: 10 * 1024 * 1024 })
+
+  const { stdout: currentBranch } = await execFileAsync('git', ['branch', '--show-current'], { cwd: process.cwd() })
+  const branch = currentBranch.trim() || 'main'
+  const hasUpstream = await execFileAsync('git', ['rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{u}'], {
+    cwd: process.cwd(),
+  })
+    .then(() => true)
+    .catch(() => false)
+
+  await execFileAsync('git', hasUpstream ? ['push'] : ['push', '--set-upstream', 'origin', branch], {
+    cwd: process.cwd(),
+    maxBuffer: 10 * 1024 * 1024,
+  })
+
+  console.log(`Auto-pushed ${changedFiles.length} generated file${changedFiles.length === 1 ? '' : 's'} to ${branch}`)
 }
 
 async function upsertCarouselDirectoryItem(carousel: Carousel) {
@@ -774,8 +913,3 @@ function slugify(input: string) {
     .replace(/^-+|-+$/g, '')
     .slice(0, 80) || 'youtube-source'
 }
-
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error)
-  process.exit(1)
-})

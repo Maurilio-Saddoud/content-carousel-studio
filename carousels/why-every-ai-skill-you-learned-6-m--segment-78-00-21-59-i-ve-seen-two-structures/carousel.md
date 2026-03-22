@@ -26,7 +26,7 @@ eyebrow: WHY IT MATTERS
 
 # The first is a team of one.
 
-For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, rea…
+both kinds of errors are very expensive.
 
 If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
@@ -36,9 +36,9 @@ eyebrow: THE REAL SHIFT
 
 # For a product manager, good boundary sensing looks like letting an agent draft a cr…
 
-If you run an organization, the question isn't are we using AI.
+This is much much more important.
 
-February the person whose boundary sense was current last August are operating worlds apart.
+Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
 ---
 
@@ -46,9 +46,9 @@ eyebrow: OPERATING MODEL
 
 # If you have a 100 streams of agent output 8 hours a day, you cannot review everythi…
 
-The skill is going to be triaging your own attention in real time.
+It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
 
-Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have…
+February the person whose boundary sense was current last August are operating worlds apart.
 
 ---
 

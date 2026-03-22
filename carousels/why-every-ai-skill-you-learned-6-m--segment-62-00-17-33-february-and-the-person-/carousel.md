@@ -26,7 +26,7 @@ eyebrow: WHY IT MATTERS
 
 # This is really the mechanism behind those gigantic leverage numbers that keep appea…
 
-For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, rea…
+both kinds of errors are very expensive.
 
 I've seen two structures emerging here that are significant, right?
 
@@ -36,9 +36,9 @@ eyebrow: THE REAL SHIFT
 
 # For a product manager, good boundary sensing looks like letting an agent draft a cr…
 
-This is much much more important.
+If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-If you run an organization, the question isn't are we using AI.
+The skill is going to be triaging your own attention in real time.
 
 ---
 
@@ -46,9 +46,9 @@ eyebrow: OPERATING MODEL
 
 # I've seen two structures emerging here that are significant, right?
 
-The first is a team of one.
+Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
-The skill is going to be triaging your own attention in real time.
+If you run an organization, the question isn't are we using AI.
 
 ---
 

@@ -2,6 +2,27 @@
 
 Next.js-powered carousel studio for transcript-driven social content.
 
+## CLI
+
+The repo now exposes a first-class CLI:
+
+```bash
+./content-carousel <command>
+```
+
+Primary commands:
+
+```bash
+./content-carousel youtube <youtube-url>
+./content-carousel render <slug>
+./content-carousel render-all
+./content-carousel build-pages
+```
+
+If you install or link the package as a binary, the same commands are available as `content-carousel ...`.
+
+The existing `pnpm ingest:youtube`, `pnpm render`, `pnpm render:all`, and `pnpm build:pages` scripts still work. They now delegate to the same CLI entrypoint.
+
 ## What this repo does now
 
 - ingest a YouTube video into source artifacts **and** a draft carousel
@@ -119,19 +140,19 @@ It’s memory.
 Basic usage:
 
 ```bash
-pnpm ingest:youtube 'https://www.youtube.com/watch?v=VIDEO_ID'
+./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID'
 ```
 
 Optional explicit slug:
 
 ```bash
-pnpm ingest:youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --slug my-topic-slug
+./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --slug my-topic-slug
 ```
 
-Optional segment limit:
+Optional segment/draft limit:
 
 ```bash
-pnpm ingest:youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --max-segments 6
+./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --max-segments 6
 ```
 
 ### What ingest creates
@@ -140,25 +161,66 @@ One command now does the practical first pass:
 
 1. fetches the official YouTube transcript first
 2. falls back to local Whisper transcription if captions are missing
-3. writes source artifacts into `sources/<slug>/`
-4. creates editorial notes in `drafts/<slug>/post-brief.md`
-5. creates or updates `carousels/<slug>/carousel.md`
-6. refreshes `carousels/index.json` as a legacy/generated directory artifact
+3. writes source artifacts into `sources/<source-slug>/`
+4. selects up to `--max-segments` editorially-usable transcript segments
+5. creates one markdown-first draft carousel per selected segment
+6. writes per-draft notes under `drafts/<source-slug>/<carousel-slug>/post-brief.md`
+7. creates or updates `carousels/<carousel-slug>/carousel.md`
+8. refreshes `carousels/index.json` as a legacy/generated directory artifact
+9. auto-commits and pushes the generated draft/source files to the current Git branch so GitHub Pages can rebuild immediately
 
-Created files:
+Created files look like this:
 
 ```text
-sources/<slug>/source.json
-sources/<slug>/raw-transcript.md
-sources/<slug>/clean-transcript.md
-sources/<slug>/segments.json
-sources/<slug>/summary.md
-drafts/<slug>/post-brief.md
-carousels/<slug>/carousel.md
+sources/<source-slug>/source.json
+sources/<source-slug>/raw-transcript.md
+sources/<source-slug>/clean-transcript.md
+sources/<source-slug>/segments.json
+sources/<source-slug>/summary.md
+drafts/<source-slug>/<carousel-slug>/post-brief.md
+carousels/<carousel-slug>/carousel.md
 carousels/index.json
 ```
 
-That means the carousel becomes part of the static site inventory immediately.
+Slug pattern for generated carousel drafts:
+
+```text
+<source-slug>--segment-02-00-03-41-<angle-slug>
+<source-slug>--segment-05-00-08-12-<angle-slug>
+<source-slug>--segment-11-00-14-09-<angle-slug>
+```
+
+So each draft slug is tied to the selected transcript segment itself (`segment id + start timestamp`), not just the fanout order from one run.
+
+Selection rule for generating multiple drafts:
+
+- segment must pass the editorial filter
+- score must be at least `4`
+- length must be between `28` and `155` words
+- must contain at least `2` full sentences
+- obvious intro/outro junk gets rejected
+- near-duplicate segments are skipped
+
+That means one source package can immediately fan out into multiple previewable/exportable carousel drafts.
+
+### Auto-push behavior after ingest
+
+After a successful `./content-carousel youtube ...` run, the CLI now stages only the generated paths for that source package:
+
+- `sources/<source-slug>/`
+- `drafts/<source-slug>/`
+- each generated `carousels/<carousel-slug>/`
+- `carousels/index.json`
+
+If those staged files actually changed, it creates a commit like:
+
+```text
+chore: ingest youtube source <source-slug>
+```
+
+Then it pushes to the current branch (or sets upstream to `origin/<branch>` if needed). If nothing changed, it skips the commit/push cleanly.
+
+If you need a dry local ingest without a push (for testing), set `CONTENT_CAROUSEL_SKIP_PUSH=1` for that run.
 
 ## Workflow 2: preview locally while editing
 
@@ -178,7 +240,7 @@ Open:
 Run:
 
 ```bash
-pnpm build:pages
+./content-carousel build-pages
 ```
 
 What this does:

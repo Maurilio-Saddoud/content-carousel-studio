@@ -18,7 +18,7 @@ eyebrow: AUTO DRAFT
 
 The skill is going to be triaging your own attention in real time.
 
-For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, rea…
+both kinds of errors are very expensive.
 
 ---
 
@@ -28,7 +28,7 @@ eyebrow: WHY IT MATTERS
 
 I've seen two structures emerging here that are significant, right?
 
-This is much much more important.
+The first is a team of one.
 
 ---
 
@@ -36,9 +36,9 @@ eyebrow: THE REAL SHIFT
 
 # For a product manager, good boundary sensing looks like letting an agent draft a cr…
 
-February the person whose boundary sense was current last August are operating worlds apart.
+Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
-both kinds of errors are very expensive.
+If you run an organization, the question isn't are we using AI.
 
 ---
 
@@ -46,9 +46,9 @@ eyebrow: OPERATING MODEL
 
 # I've seen two structures emerging here that are significant, right?
 
-Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have…
+February the person whose boundary sense was current last August are operating worlds apart.
 
-It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shift…
+This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci"
-title: "Draft: Good boundary sensing is becoming a real management skill"
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them)."
+title: "Draft: February the person whose boundary sense was curren…"
+description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:17:33 → 00:17:46)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22
@@ -14,48 +14,50 @@ theme:
 
 eyebrow: AUTO DRAFT
 
-# Good boundary sensing is becoming a real management skill.
+# February the person whose boundary sense was current last August are operating…
 
-A manager does not need to review every agent output at the same depth.
+This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
 
-The job is deciding where autonomy is safe, where oversight is required, and when judgment should stay human.
+When you see,, cursor hitting stunning numbers with a small number of people
 
 ---
 
 eyebrow: WHY IT MATTERS
 
-# The question is no longer “are we using AI?”
+# This is really the mechanism behind those gigantic leverage numbers that keep appea…
 
-The real question is whether the team knows **where the agent-human boundary should sit today**.
+For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, rea…
 
-That boundary keeps moving, so the operating model has to move with it.
+I've seen two structures emerging here that are significant, right?
 
 ---
 
 eyebrow: THE REAL SHIFT
 
-# Most workforce skills used to have a finish line.
+# For a product manager, good boundary sensing looks like letting an agent draft a cr…
 
-You learned the tool, locked in the process, and repeated it.
+This is much much more important.
 
-With AI, the skill is staying calibrated while the capabilities keep changing.
+If you run an organization, the question isn't are we using AI.
 
 ---
 
 eyebrow: OPERATING MODEL
 
-# You cannot review one hundred streams of agent output with the same intensity.
+# I've seen two structures emerging here that are significant, right?
 
-High-volume systems need triage, thresholds, and escalation rules.
+The first is a team of one.
 
-Good operators design practice environments where agents can fail safely, assumptions can change, and people can keep refining the boundary.
+The skill is going to be triaging your own attention in real time.
 
 ---
 
 eyebrow: TAKEAWAY
 
-# The real skill is maintaining calibration.
+# February the person whose boundary sense was current last August are operating worl…
 
-Use the **source package** as evidence, not as final copy.
+Source package: why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci
 
-Then sharpen the thesis until it actually sounds like *Maurilio* instead of a transcript.
+Use the source package as evidence, not as final copy.
+
+Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.

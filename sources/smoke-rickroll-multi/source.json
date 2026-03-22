@@ -1,0 +1,65 @@
+{
+  "slug": "smoke-rickroll-multi",
+  "sourceType": "transcript",
+  "sourceUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "fetchedAt": "2026-03-22T03:45:09.635Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "authorName": "Rick Astley",
+    "authorUrl": "https://www.youtube.com/@RickAstleyYT",
+    "thumbnailUrl": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+  },
+  "transcriptLineCount": 61,
+  "defaultBehavior": "creates source artifacts and one markdown-first draft carousel per qualifying editorial segment",
+  "draftCarouselRule": {
+    "maxDrafts": 3,
+    "threshold": "Each draft comes from a selected editorial segment. Selected segments must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "selectedSegmentIds": [
+    "segment-06",
+    "segment-03",
+    "segment-04"
+  ],
+  "draftCarousels": [
+    {
+      "slug": "smoke-rickroll-multi--01-never-gonna-give-never-gonna-give-gi",
+      "segmentId": "segment-06",
+      "title": "Draft: ♪ Never gonna give, never gonna give ♪ ♪ (Give you…",
+      "previewPath": "/carousel/smoke-rickroll-multi--01-never-gonna-give-never-gonna-give-gi",
+      "briefPath": "drafts/smoke-rickroll-multi/smoke-rickroll-multi--01-never-gonna-give-never-gonna-give-gi/post-brief.md",
+      "carouselPath": "carousels/smoke-rickroll-multi--01-never-gonna-give-never-gonna-give-gi/carousel.md"
+    },
+    {
+      "slug": "smoke-rickroll-multi--02-never-gonna-run-around-and-desert-yo",
+      "segmentId": "segment-03",
+      "title": "Draft: ♪ Never gonna run around desert you ♪ ♪ Never gonna…",
+      "previewPath": "/carousel/smoke-rickroll-multi--02-never-gonna-run-around-and-desert-yo",
+      "briefPath": "drafts/smoke-rickroll-multi/smoke-rickroll-multi--02-never-gonna-run-around-and-desert-yo/post-brief.md",
+      "carouselPath": "carousels/smoke-rickroll-multi--02-never-gonna-run-around-and-desert-yo/carousel.md"
+    },
+    {
+      "slug": "smoke-rickroll-multi--03-and-if-you-ask-me-how-i-m-feeling-do",
+      "segmentId": "segment-04",
+      "title": "Draft: ♪ if you ask me how I'm feeling ♪ ♪ Don't tell me y…",
+      "previewPath": "/carousel/smoke-rickroll-multi--03-and-if-you-ask-me-how-i-m-feeling-do",
+      "briefPath": "drafts/smoke-rickroll-multi/smoke-rickroll-multi--03-and-if-you-ask-me-how-i-m-feeling-do/post-brief.md",
+      "carouselPath": "carousels/smoke-rickroll-multi--03-and-if-you-ask-me-how-i-m-feeling-do/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/smoke-rickroll-multi/source.json",
+    "sources/smoke-rickroll-multi/raw-transcript.md",
+    "sources/smoke-rickroll-multi/clean-transcript.md",
+    "sources/smoke-rickroll-multi/segments.json",
+    "sources/smoke-rickroll-multi/summary.md",
+    "drafts/smoke-rickroll-multi/smoke-rickroll-multi--01-never-gonna-give-never-gonna-give-gi/post-brief.md",
+    "carousels/smoke-rickroll-multi--01-never-gonna-give-never-gonna-give-gi/carousel.md",
+    "drafts/smoke-rickroll-multi/smoke-rickroll-multi--02-never-gonna-run-around-and-desert-yo/post-brief.md",
+    "carousels/smoke-rickroll-multi--02-never-gonna-run-around-and-desert-yo/carousel.md",
+    "drafts/smoke-rickroll-multi/smoke-rickroll-multi--03-and-if-you-ask-me-how-i-m-feeling-do/post-brief.md",
+    "carousels/smoke-rickroll-multi--03-and-if-you-ask-me-how-i-m-feeling-do/carousel.md",
+    "carousels/index.json"
+  ]
+}
