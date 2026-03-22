@@ -2,42 +2,149 @@
   {
     "id": "brief-segment-01",
     "primaryIdeaId": "segment-01",
-    "supportingIdeaIds": [
-      "segment-19",
-      "segment-23",
-      "segment-39"
-    ],
+    "supportingIdeaIds": [],
     "thesis": "I think one of the lessons that we are learning, one of the bitter pills that we need to swallow is that AI is telling us our jobs were never the real job.",
-    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
-    "whyItMatters": "An EM's job is sprint planning.",
-    "supportPoints": [
-      "An EM's job is sprint planning.",
-      "Think about what happens when a new engineer joins the team.",
-      "I know that there are many interstitial states.",
-      "There are many steps along the way to move in that direction."
-    ],
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "The edge is not knowing one workflow. It is keeping your operating model current.",
+    "supportPoints": [],
     "distinctFromBriefIds": [
-      "brief-segment-41"
+      "brief-segment-41",
+      "brief-segment-19",
+      "brief-segment-23",
+      "brief-segment-39",
+      "brief-segment-63",
+      "brief-segment-42",
+      "brief-segment-10"
     ],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
   },
   {
     "id": "brief-segment-41",
     "primaryIdeaId": "segment-41",
-    "supportingIdeaIds": [
-      "segment-19",
-      "segment-23",
-      "segment-39"
-    ],
+    "supportingIdeaIds": [],
     "thesis": "I'm describing is going to be temporary.",
-    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
-    "whyItMatters": "Really, I don't think you do.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "If your mental model is stale, you redesign the wrong part of the workflow.",
     "supportPoints": [
-      "Really, I don't think you do."
+      "The edge is not knowing one workflow. It is keeping your operating model current."
     ],
     "distinctFromBriefIds": [
-      "brief-segment-01"
+      "brief-segment-01",
+      "brief-segment-19",
+      "brief-segment-23",
+      "brief-segment-39",
+      "brief-segment-63",
+      "brief-segment-42",
+      "brief-segment-10"
     ],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-"
+  },
+  {
+    "id": "brief-segment-19",
+    "primaryIdeaId": "segment-19",
+    "supportingIdeaIds": [],
+    "thesis": "If you work in software, everything between we",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "An EM's job is sprint planning.",
+    "supportPoints": [
+      "We don't experience these activities as what they really are as overhead.",
+      "We experience them as the role."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-41",
+      "brief-segment-23",
+      "brief-segment-39",
+      "brief-segment-63",
+      "brief-segment-42",
+      "brief-segment-10"
+    ],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl"
+  },
+  {
+    "id": "brief-segment-23",
+    "primaryIdeaId": "segment-23",
+    "supportingIdeaIds": [],
+    "thesis": "Not because they're incompetent, but because they're absorbing context.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "Think about what happens when a new engineer joins the team.",
+    "supportPoints": [
+      "Every decision the team made in the past year lives in someone's head and probably in some scattered documents."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-41",
+      "brief-segment-19",
+      "brief-segment-39",
+      "brief-segment-63",
+      "brief-segment-42",
+      "brief-segment-10"
+    ],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens"
+  },
+  {
+    "id": "brief-segment-39",
+    "primaryIdeaId": "segment-39",
+    "supportingIdeaIds": [],
+    "thesis": "I know that there are many interstitial states.",
+    "audience": "Audience: product, design, and engineering leaders figuring out where AI changes the work.",
+    "whyItMatters": "There are many steps along the way to move in that direction.",
+    "supportPoints": [
+      "You may be at a point where you are using clawed code to generate smarter PRDs and those PRDs are informing your engineers and saving you time and you celebrate that and you should."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-41",
+      "brief-segment-19",
+      "brief-segment-23",
+      "brief-segment-63",
+      "brief-segment-42",
+      "brief-segment-10"
+    ],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma"
+  },
+  {
+    "id": "brief-segment-42",
+    "primaryIdeaId": "segment-42",
+    "supportingIdeaIds": [],
+    "thesis": "This is where the analysis goes really interesting places.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "It's one of the most important structural arguments that I think I'm going to make this year.",
+    "supportPoints": [
+      "The edge is not knowing one workflow. It is keeping your operating model current."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-41",
+      "brief-segment-19",
+      "brief-segment-23",
+      "brief-segment-39",
+      "brief-segment-63",
+      "brief-segment-10"
+    ],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys"
+  },
+  {
+    "id": "brief-segment-10",
+    "primaryIdeaId": "segment-10",
+    "supportingIdeaIds": [],
+    "thesis": "If you are in any kind of product company, the shipped product is the value.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "If you are in any product company, the shipped product is the value.",
+    "supportPoints": [
+      "Everything else is the cost of producing that value with an execution layer made out of humans.",
+      "When AI agent harnesses can go directly from insight to code in one big loop, which they can now, I did a whole video on this.",
+      "the shipped product is the value."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-41",
+      "brief-segment-19",
+      "brief-segment-23",
+      "brief-segment-39",
+      "brief-segment-63",
+      "brief-segment-42"
+    ],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o"
   }
 ]

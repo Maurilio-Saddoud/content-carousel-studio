@@ -1,8 +1,8 @@
 {
   "slug": "4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ",
   "sourceType": "transcript",
-  "sourceUrl": "https://youtu.be/lbfoNxoHl2o?si=qnhahgH3bf9YOWcH",
-  "fetchedAt": "2026-03-22T17:22:02.852Z",
+  "sourceUrl": "https://youtu.be/lbfoNxoHl2o?si=XKdqbSQsdY6YF7oh",
+  "fetchedAt": "2026-03-22T20:08:27.144Z",
   "transcriptMode": "official-transcript",
   "whisperModel": "base",
   "video": {
@@ -12,17 +12,22 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/lbfoNxoHl2o/hqdefault.jpg"
   },
   "transcriptLineCount": 586,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
-  "ideaCount": 76,
-  "briefCount": 2,
-  "publishedIdeaIds": [
-    "segment-01",
-    "segment-41"
-  ],
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
   "ideaRule": {
-    "publishLimit": 2,
+    "publishLimit": 8,
     "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
   },
+  "ideaCount": 76,
+  "briefCount": 7,
+  "publishedIdeaIds": [
+    "segment-01",
+    "segment-41",
+    "segment-19",
+    "segment-23",
+    "segment-39",
+    "segment-42",
+    "segment-10"
+  ],
   "briefs": [
     {
       "id": "brief-segment-01",
@@ -35,6 +40,36 @@
       "primaryIdeaId": "segment-41",
       "thesis": "I'm describing is going to be temporary.",
       "slug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-"
+    },
+    {
+      "id": "brief-segment-19",
+      "primaryIdeaId": "segment-19",
+      "thesis": "If you work in software, everything between we",
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl"
+    },
+    {
+      "id": "brief-segment-23",
+      "primaryIdeaId": "segment-23",
+      "thesis": "Not because they're incompetent, but because they're absorbing context.",
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens"
+    },
+    {
+      "id": "brief-segment-39",
+      "primaryIdeaId": "segment-39",
+      "thesis": "I know that there are many interstitial states.",
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma"
+    },
+    {
+      "id": "brief-segment-42",
+      "primaryIdeaId": "segment-42",
+      "thesis": "This is where the analysis goes really interesting places.",
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys"
+    },
+    {
+      "id": "brief-segment-10",
+      "primaryIdeaId": "segment-10",
+      "thesis": "If you are in any kind of product company, the shipped product is the value.",
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o"
     }
   ],
   "carousels": [
@@ -51,6 +86,41 @@
       "title": "I'm describing is going to be temporary.",
       "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
       "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-/carousel.md"
+    },
+    {
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl",
+      "segmentId": "segment-19",
+      "title": "If you work in software, everything between we",
+      "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl",
+      "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl/carousel.md"
+    },
+    {
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens",
+      "segmentId": "segment-23",
+      "title": "Not because they're incompetent, but because they're absorbing context.",
+      "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens",
+      "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens/carousel.md"
+    },
+    {
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma",
+      "segmentId": "segment-39",
+      "title": "I know that there are many interstitial states.",
+      "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma",
+      "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma/carousel.md"
+    },
+    {
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys",
+      "segmentId": "segment-42",
+      "title": "This is where the analysis goes really interesting places.",
+      "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys",
+      "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys/carousel.md"
+    },
+    {
+      "slug": "4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o",
+      "segmentId": "segment-10",
+      "title": "If you are in any kind of product company, the shipped product is the value.",
+      "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o",
+      "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o/carousel.md"
     }
   ],
   "createdFiles": [
@@ -63,6 +133,11 @@
     "sources/4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ/summary.md",
     "carousels/4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh/carousel.md",
     "carousels/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-/carousel.md",
+    "carousels/4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl/carousel.md",
+    "carousels/4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens/carousel.md",
+    "carousels/4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma/carousel.md",
+    "carousels/4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys/carousel.md",
+    "carousels/4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o/carousel.md",
     "carousels/index.json"
   ]
 }

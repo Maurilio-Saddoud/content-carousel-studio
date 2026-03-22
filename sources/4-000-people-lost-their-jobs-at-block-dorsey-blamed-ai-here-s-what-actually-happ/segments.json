@@ -1875,7 +1875,7 @@
     "lineEnd": 313,
     "wordCount": 63,
     "text": "with you that there is world here where all of those coordination artifacts go away because if we can't see this world, the world some of us already live in, we are going to get surprised when it comes to us. And I don't want you to be surprised. Whether we like it or not, every step along the way to the world",
-    "titleSuggestion": "Whether we like it or not, every step along the way to the world",
+    "titleSuggestion": "I don't want you to be surprised.",
     "hook": "Whether we like it or not, every step along the way to the world",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2119,7 +2119,7 @@
     "lineEnd": 201,
     "wordCount": 49,
     "text": "know, in a video a few days ago, I talked about the fact that multi- aent coordination harnesses all converge on the same structural pattern. Decompose the work, parallelize the execution, verify the outputs, iterate toward completion. And I showed that the key variable determining what's in range is",
-    "titleSuggestion": "Decompose the work,",
+    "titleSuggestion": "I showed that the key variable determining what's in range is",
     "hook": "Decompose the work, parallelize the execution, verify the outputs, iterate toward completion.",
     "whyItCouldWork": [
       "contains enough complete thoughts to turn into multiple slides"
@@ -2223,8 +2223,8 @@
     "lineEnd": 217,
     "wordCount": 63,
     "text": "So the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
-    "titleSuggestion": "So the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
-    "hook": "So the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
+    "titleSuggestion": "the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
+    "hook": "the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",

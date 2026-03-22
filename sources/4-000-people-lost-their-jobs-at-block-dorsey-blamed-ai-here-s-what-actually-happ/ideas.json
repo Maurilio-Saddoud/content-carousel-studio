@@ -38,7 +38,7 @@
       "lengthPenalty": 0
     },
     "status": "published",
-    "selectionReason": "Selected for publication as one of the top 2 non-overlapping ideas.",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
   },
@@ -79,7 +79,7 @@
       "lengthPenalty": 0
     },
     "status": "published",
-    "selectionReason": "Selected for publication as one of the top 2 non-overlapping ideas.",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-"
   },
@@ -205,9 +205,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl"
   },
   {
     "id": "segment-23",
@@ -244,9 +245,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens"
   },
   {
     "id": "segment-39",
@@ -282,9 +284,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma"
   },
   {
     "id": "segment-63",
@@ -320,8 +323,9 @@
       "lengthPenalty": 0
     },
     "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief-overlap filtering.",
+    "rejectionReasons": [],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-block-d--segment-63-00-18-33-thank-you-very-much"
   },
   {
     "id": "segment-42",
@@ -358,9 +362,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys"
   },
   {
     "id": "segment-18",
@@ -688,9 +693,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o"
   },
   {
     "id": "segment-55",
@@ -2152,7 +2158,7 @@
     "lineEnd": 313,
     "wordCount": 63,
     "text": "with you that there is world here where all of those coordination artifacts go away because if we can't see this world, the world some of us already live in, we are going to get surprised when it comes to us. And I don't want you to be surprised. Whether we like it or not, every step along the way to the world",
-    "titleSuggestion": "Whether we like it or not, every step along the way to the world",
+    "titleSuggestion": "I don't want you to be surprised.",
     "hook": "Whether we like it or not, every step along the way to the world",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2439,7 +2445,7 @@
     "lineEnd": 201,
     "wordCount": 49,
     "text": "know, in a video a few days ago, I talked about the fact that multi- aent coordination harnesses all converge on the same structural pattern. Decompose the work, parallelize the execution, verify the outputs, iterate toward completion. And I showed that the key variable determining what's in range is",
-    "titleSuggestion": "Decompose the work,",
+    "titleSuggestion": "I showed that the key variable determining what's in range is",
     "hook": "Decompose the work, parallelize the execution, verify the outputs, iterate toward completion.",
     "whyItCouldWork": [
       "contains enough complete thoughts to turn into multiple slides"
@@ -2561,8 +2567,8 @@
     "lineEnd": 217,
     "wordCount": 63,
     "text": "So the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
-    "titleSuggestion": "So the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
-    "hook": "So the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
+    "titleSuggestion": "the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
+    "hook": "the key thing to think about is that if we take seriously the idea that agentic coding harnesses can generalize that they can solve a lot of knowledge work what we are really saying is that the org is moving to code and so when I say the or is moving to code I do not mean everyone then becomes a software",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",

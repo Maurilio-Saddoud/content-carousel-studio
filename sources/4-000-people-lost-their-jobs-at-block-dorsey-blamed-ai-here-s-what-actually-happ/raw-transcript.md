@@ -2,7 +2,7 @@
 
 - Title: 4,000 People Lost Their Jobs At Block. Dorsey Blamed AI. Here's What Actually Happened.
 - Creator: AI News & Strategy Daily | Nate B Jones
-- URL: https://youtu.be/lbfoNxoHl2o?si=qnhahgH3bf9YOWcH
+- URL: https://youtu.be/lbfoNxoHl2o?si=XKdqbSQsdY6YF7oh
 
 ---
 

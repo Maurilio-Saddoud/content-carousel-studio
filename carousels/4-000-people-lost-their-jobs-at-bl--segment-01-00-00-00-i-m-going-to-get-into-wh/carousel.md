@@ -1,7 +1,7 @@
 ---
 slug: "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
-title: "AI operating models are getting stale faster than most teams realize."
-description: "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:00:00 → 00:00:14."
+title: "AI isn’t just changing jobs. It’s exposing what the job always was."
+description: "Post-ready carousel distilled from the source video segment at 00:00:00 → 00:00:14."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22
@@ -12,38 +12,45 @@ theme:
   muted: "#71767B"
 ---
 
-# AI operating models are getting stale faster than most teams realize.
+eyebrow: AI & WORK
+# AI isn’t just changing jobs.
+
+It’s exposing what the job always was.
 
 ---
 
-# An EM's job is sprint planning.
+eyebrow: THE MISTAKE
+# Most teams mistake the coordination layer for the work.
 
-An EM's job is sprint planning.
+Meetings.
+Docs.
+Status updates.
+Hand-offs.
 
-We are going to move to this world.
-
----
-
-# Really, I don't think you do.
-
-> An EM's job is sprint planning.
-
-Microsoft's 2025 work trend index found that the average employee spends 57% of their time communicating 43% creating.
+A lot of that was never the value.
 
 ---
 
-# Think about what happens when a new engineer joins the team.
+eyebrow: THE REAL JOB
+# The real job was always creating customer value.
 
-We get to get fingertippy with the product.
+Building the thing.
+Improving the thing.
+Getting closer to the customer.
 
-1. An EM's job is sprint planning.
-2. Think about what happens when a new engineer joins the team.
-3. I know that there are many interstitial states.
+Everything else was often just the cost of humans coordinating.
 
 ---
 
-# I know that there are many interstitial states.
+eyebrow: WHAT AI CHANGES
+# AI compresses the distance between intent and execution.
 
-Audience: operators, team leads, founders redesigning AI-assisted workflows.
+When more work can go straight from idea → artifact,
+the old operating model starts looking bloated fast.
 
-Use the source package as evidence, not as final copy.
+---
+
+eyebrow: TAKEAWAY
+# The edge is not knowing one AI workflow.
+
+The edge is updating your operating model faster than everyone else.
