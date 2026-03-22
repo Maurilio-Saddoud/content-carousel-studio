@@ -4,8 +4,8 @@ import {
   Bookmark,
   Check,
   Heart,
-  MessageCircle,
-  Repeat2,
+  MessageCircleMore,
+  Repeat,
   BarChart3,
   Share,
 } from 'lucide-react'
@@ -265,8 +265,8 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
 
         <footer className="tweet-footer">
           <div className="tweet-engagement" aria-label="Tweet actions">
-            <span className="tweet-action"><MessageCircle className="tweet-icon" strokeWidth={1.8} /> <span>28</span></span>
-            <span className="tweet-action"><Repeat2 className="tweet-icon" strokeWidth={1.8} /> <span>14</span></span>
+            <span className="tweet-action"><MessageCircleMore className="tweet-icon" strokeWidth={1.8} /> <span>28</span></span>
+            <span className="tweet-action"><Repeat className="tweet-icon" strokeWidth={1.8} /> <span>14</span></span>
             <span className="tweet-action"><Heart className="tweet-icon" strokeWidth={1.8} /> <span>197</span></span>
             <span className="tweet-action"><BarChart3 className="tweet-icon" strokeWidth={1.8} /> <span>2.1K</span></span>
             <span className="tweet-action tweet-action-icon-only"><Bookmark className="tweet-icon" strokeWidth={1.8} /></span>
