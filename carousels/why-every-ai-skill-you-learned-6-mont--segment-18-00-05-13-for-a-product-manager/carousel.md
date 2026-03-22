@@ -14,6 +14,8 @@ theme:
 
 eyebrow: AUTO DRAFT
 
+variant: claim
+
 # For a product manager,
 
 I've seen two structures emerging here that are significant, right?
@@ -24,6 +26,8 @@ The first is a team of one.
 
 eyebrow: WHY IT MATTERS
 
+variant: explainer
+
 # I've seen two structures emerging here that are significant, right?
 
 A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
@@ -32,11 +36,13 @@ If you have a 100 streams of agent output 8 hours a day, you cannot review every
 
 ---
 
-eyebrow: THE REAL SHIFT
+eyebrow: THESIS
+
+variant: quote
 
 # I've seen two structures emerging here that are significant, right?
 
-This is much much more important.
+> This is much much more important.
 
 Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
@@ -44,15 +50,21 @@ Practice environments are where agents have different capability levels, where f
 
 eyebrow: OPERATING MODEL
 
+variant: framework
+
 # Human attention becomes the real bottleneck.
 
-If you run an organization, the question isn't are we using AI.
+This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
 
-It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+1. This is much much more important.
+2. If you run an organization, the question isn't are we using AI.
+3. the skill is maintaining the calibration, not having it once.
 
 ---
 
 eyebrow: TAKEAWAY
+
+variant: claim
 
 # So the skill is maintaining the calibration, not having it once.
 

@@ -14,6 +14,8 @@ theme:
 
 eyebrow: AUTO DRAFT
 
+variant: claim
+
 # AI operating models are getting stale faster than most teams realize.
 
 This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
@@ -24,6 +26,8 @@ I've seen two structures emerging here that are significant, right?
 
 eyebrow: WHY IT MATTERS
 
+variant: explainer
+
 # This matters because stale mental models break fast.
 
 The first is a team of one.
@@ -32,11 +36,13 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 ---
 
-eyebrow: THE REAL SHIFT
+eyebrow: THESIS
+
+variant: quote
 
 # For a product manager,
 
-The skill is going to be triaging your own attention in real time.
+> The skill is going to be triaging your own attention in real time.
 
 This is much much more important.
 
@@ -44,15 +50,21 @@ This is much much more important.
 
 eyebrow: OPERATING MODEL
 
+variant: framework
+
 # I've seen two structures emerging here that are significant, right?
 
-This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
+Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
-If you run an organization, the question isn't are we using AI.
+1. The skill is going to be triaging your own attention in real time.
+2. This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
+3. February the person whose boundary sense was current last August are operating worlds apart.
 
 ---
 
 eyebrow: TAKEAWAY
+
+variant: claim
 
 # The edge is keeping your operating model current.
 

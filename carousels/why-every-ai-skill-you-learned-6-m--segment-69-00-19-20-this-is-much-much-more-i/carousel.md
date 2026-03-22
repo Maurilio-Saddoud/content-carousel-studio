@@ -14,6 +14,8 @@ theme:
 
 eyebrow: AUTO DRAFT
 
+variant: claim
+
 # This is much much more important.
 
 Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
@@ -24,6 +26,8 @@ This is much more practical than just looking at a bunch of slides saying you di
 
 eyebrow: WHY IT MATTERS
 
+variant: explainer
+
 # This matters because stale mental models break fast.
 
 I've seen two structures emerging here that are significant, right?
@@ -32,11 +36,13 @@ The first is a team of one.
 
 ---
 
-eyebrow: THE REAL SHIFT
+eyebrow: THESIS
+
+variant: quote
 
 # For a product manager,
 
-If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+> If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
 The skill is going to be triaging your own attention in real time.
 
@@ -44,15 +50,21 @@ The skill is going to be triaging your own attention in real time.
 
 eyebrow: OPERATING MODEL
 
+variant: framework
+
 # I've seen two structures emerging here that are significant, right?
 
-It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+If you run an organization, the question isn't are we using AI.
 
-February the person whose boundary sense was current last August are operating worlds apart.
+1. If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+3. February the person whose boundary sense was current last August are operating worlds apart.
 
 ---
 
 eyebrow: TAKEAWAY
+
+variant: claim
 
 # The edge is keeping your operating model current.
 

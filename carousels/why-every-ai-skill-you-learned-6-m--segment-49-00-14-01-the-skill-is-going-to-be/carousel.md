@@ -14,6 +14,8 @@ theme:
 
 eyebrow: AUTO DRAFT
 
+variant: claim
+
 # The skill is going to be triaging your own attention in real time.
 
 The skill is going to be triaging your own attention in real time.
@@ -24,6 +26,8 @@ I've seen two structures emerging here that are significant, right?
 
 eyebrow: WHY IT MATTERS
 
+variant: explainer
+
 # The skill is going to be triaging your own attention in real time.
 
 The first is a team of one.
@@ -32,11 +36,13 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 ---
 
-eyebrow: THE REAL SHIFT
+eyebrow: THESIS
+
+variant: quote
 
 # For a product manager,
 
-Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
+> Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
 This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
 
@@ -44,15 +50,21 @@ This is much more practical than just looking at a bunch of slides saying you di
 
 eyebrow: OPERATING MODEL
 
+variant: framework
+
 # I've seen two structures emerging here that are significant, right?
 
-It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+If you run an organization, the question isn't are we using AI.
 
-February the person whose boundary sense was current last August are operating worlds apart.
+1. Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
+2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+3. The skill is going to be triaging your own attention in real time.
 
 ---
 
 eyebrow: TAKEAWAY
+
+variant: claim
 
 # The skill is going to be triaging your own attention in real time.
 

@@ -14,6 +14,8 @@ theme:
 
 eyebrow: AUTO DRAFT
 
+variant: claim
+
 # I've seen two structures emerging here that are significant, right?
 
 The first is a team of one.
@@ -24,6 +26,8 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 eyebrow: WHY IT MATTERS
 
+variant: explainer
+
 # The first is a team of one.
 
 If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
@@ -32,11 +36,13 @@ The skill is going to be triaging your own attention in real time.
 
 ---
 
-eyebrow: THE REAL SHIFT
+eyebrow: THESIS
+
+variant: quote
 
 # For a product manager,
 
-Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
+> Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
 This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
 
@@ -44,15 +50,21 @@ This is much more practical than just looking at a bunch of slides saying you di
 
 eyebrow: OPERATING MODEL
 
+variant: framework
+
 # If you run an organization, the question isn't are we using AI.
 
-It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+If you run an organization, the question isn't are we using AI.
 
-February the person whose boundary sense was current last August are operating worlds apart.
+1. Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
+2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+3. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
 
 eyebrow: TAKEAWAY
+
+variant: claim
 
 # The edge is keeping your operating model current.
 
