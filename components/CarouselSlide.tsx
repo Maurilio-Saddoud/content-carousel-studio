@@ -40,6 +40,34 @@ function VerifiedBadge() {
   )
 }
 
+function getSeededStats(slug: string, index: number) {
+  const seed = `${slug}:${index}`
+  let hash = 2166136261
+  for (let i = 0; i < seed.length; i++) {
+    hash ^= seed.charCodeAt(i)
+    hash = Math.imul(hash, 16777619)
+  }
+
+  const scalar = 0.72 + ((hash >>> 0) % 61) / 100
+  const replies = Math.max(6, Math.round(28 * scalar))
+  const reposts = Math.max(3, Math.round(14 * scalar * 0.9))
+  const likes = Math.max(40, Math.round(197 * scalar * 1.15))
+  const views = Math.max(700, Math.round(2100 * scalar * 1.35))
+
+  return {
+    replies: replies.toString(),
+    reposts: reposts.toString(),
+    likes: likes.toString(),
+    views: formatViews(views),
+  }
+}
+
+function formatViews(value: number) {
+  if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`
+  if (value >= 1000) return `${(value / 1000).toFixed(1)}K`
+  return value.toString()
+}
+
 function getTextProfile(slide: Slide) {
   const blocks = parseBodyBlocks(slide.body)
   const eyebrowLength = slide.eyebrow?.trim().length ?? 0
@@ -201,6 +229,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
     muted: carousel.theme?.muted ?? '#71767b',
   }
   const textProfile = getTextProfile(slide)
+  const stats = getSeededStats(carousel.slug, index)
 
   return (
     <article
@@ -258,17 +287,17 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
         <div className="tweet-meta-row">
           <span>7:42 PM</span>
           <span className="tweet-dot">·</span>
-          <span>2.1K Views</span>
+          <span>{stats.views} Views</span>
           <span className="tweet-dot">·</span>
           <span>{slide.eyebrow ?? carousel.title}</span>
         </div>
 
         <footer className="tweet-footer">
           <div className="tweet-engagement" aria-label="Tweet actions">
-            <span className="tweet-action"><MessageCircleMore className="tweet-icon" strokeWidth={1.8} /> <span>28</span></span>
-            <span className="tweet-action"><Repeat className="tweet-icon" strokeWidth={1.8} /> <span>14</span></span>
-            <span className="tweet-action"><Heart className="tweet-icon" strokeWidth={1.8} /> <span>197</span></span>
-            <span className="tweet-action"><BarChart3 className="tweet-icon" strokeWidth={1.8} /> <span>2.1K</span></span>
+            <span className="tweet-action"><MessageCircleMore className="tweet-icon" strokeWidth={1.8} /> <span>{stats.replies}</span></span>
+            <span className="tweet-action"><Repeat className="tweet-icon" strokeWidth={1.8} /> <span>{stats.reposts}</span></span>
+            <span className="tweet-action"><Heart className="tweet-icon" strokeWidth={1.8} /> <span>{stats.likes}</span></span>
+            <span className="tweet-action"><BarChart3 className="tweet-icon" strokeWidth={1.8} /> <span>{stats.views}</span></span>
             <span className="tweet-action tweet-action-icon-only"><Bookmark className="tweet-icon" strokeWidth={1.8} /></span>
             <span className="tweet-action tweet-action-icon-only"><Share className="tweet-icon" strokeWidth={1.8} /></span>
           </div>
