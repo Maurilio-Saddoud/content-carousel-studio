@@ -857,7 +857,12 @@ function getCompleteThoughts(text: string) {
 }
 
 function cleanSentence(text: string) {
-  return text.replace(/^[-–—:;,\s]+/, '').replace(/\s+/g, ' ').trim()
+  return text
+    .replace(/^[-–—:;,\s]+/, '')
+    .replace(/\s+/g, ' ')
+    .replace(/^(?:and|but|so|because|well)\b\s+/i, '')
+    .replace(/^(?:really|honestly|frankly),?\s+/i, '')
+    .trim()
 }
 
 function isWeakDisplayLine(text: string) {
@@ -977,19 +982,22 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
   const fallbackIdea = publishedIdeas[0]
   if (!fallbackIdea) return []
 
+  const fallbackThesis = pickDistinctThesis([
+    fallbackIdea.hook,
+    fallbackIdea.titleSuggestion,
+    ...getCompleteThoughts(fallbackIdea.text),
+    'The old operating model is already expiring.',
+  ], new Set())
+  const fallbackWhy = inferWhyItMatters(fallbackIdea, [], fallbackThesis, new Set())
+
   return [{
     id: `brief-${fallbackIdea.id}`,
     primaryIdeaId: fallbackIdea.id,
     supportingIdeaIds: [],
-    thesis: pickDistinctThesis([
-      fallbackIdea.hook,
-      fallbackIdea.titleSuggestion,
-      ...getCompleteThoughts(fallbackIdea.text),
-      'The old operating model is already expiring.',
-    ], new Set()),
+    thesis: fallbackThesis,
     audience: inferAudience(fallbackIdea.text, []),
-    whyItMatters: inferWhyItMatters(fallbackIdea, [], fallbackIdea.titleSuggestion),
-    supportPoints: buildSupportPoints(fallbackIdea, [], new Set()),
+    whyItMatters: fallbackWhy,
+    supportPoints: buildSupportPoints(fallbackIdea, [], new Set(), fallbackThesis, fallbackWhy),
     distinctFromBriefIds: [],
     carouselSlug: existingSlugs[fallbackIdea.id] || buildCarouselSlug(sourceSlug, fallbackIdea),
   }]
@@ -1325,7 +1333,8 @@ function normalizeForSlide(text: string) {
   return text
     .replace(/\s+/g, ' ')
     .replace(/^[-–—:;,\s]+/, '')
-    .replace(/\b(and|but|so|because)\b\s+/i, '')
+    .replace(/^(?:and|but|so|because|well)\b\s+/i, '')
+    .replace(/^(?:really|honestly|frankly),?\s+/i, '')
     .replace(/\b(?:you know|sort of|kind of)\b/gi, '')
     .replace(/\s+([,.!?;:])/g, '$1')
     .trim()
@@ -1395,22 +1404,39 @@ function inferAudience(primary: string, support: Idea[]) {
   return 'Audience: people using AI in real work, not just talking about it.'
 }
 
-function inferWhyItMatters(primary: Idea, support: Idea[], thesis: string) {
+function inferWhyItMatters(primary: Idea, support: Idea[], thesis: string, usedWhy: Set<string>) {
   const thesisKey = slugify(thesis)
-  const picked = [
+  const candidates = uniqueNormalized([
     ...getCompleteThoughts(primary.text),
     ...support.flatMap((idea) => getCompleteThoughts(idea.text)),
+    extractTakeaway(primary.text, support),
     'If your mental model is stale, you redesign the wrong part of the workflow.',
-  ].find((line) => slugify(line) !== thesisKey && !isWeakDisplayLine(line) && !isWeakBriefLineCandidate(line))
+  ])
 
-  return picked ?? 'If your mental model is stale, you redesign the wrong part of the workflow.'
+  for (const candidate of candidates) {
+    const key = slugify(candidate)
+    if (key === thesisKey) continue
+    if (usedWhy.has(key)) continue
+    if (isWeakDisplayLine(candidate) || isWeakBriefLineCandidate(candidate)) continue
+    usedWhy.add(key)
+    return candidate
+  }
+
+  const fallback = 'If your mental model is stale, you redesign the wrong part of the workflow.'
+  usedWhy.add(slugify(fallback))
+  return fallback
 }
 
-function buildSupportPoints(primary: Idea, support: Idea[], usedSupport: Set<string>) {
+function buildSupportPoints(primary: Idea, support: Idea[], usedSupport: Set<string>, thesis: string, whyItMatters: string) {
+  const reserved = new Set([slugify(thesis), slugify(whyItMatters)])
   const points = uniqueNormalized([
     ...getCompleteThoughts(primary.text).slice(1),
     ...support.flatMap((idea) => getCompleteThoughts(idea.text).slice(0, 2)),
+    titleFromSentence(primary.titleSuggestion),
+    titleFromSentence(primary.hook),
+    extractTakeaway(primary.text, support),
   ])
+    .filter((line) => !reserved.has(slugify(line)))
     .filter((line) => !isWeakDisplayLine(line))
     .filter((line) => !isWeakBriefLineCandidate(line))
 
