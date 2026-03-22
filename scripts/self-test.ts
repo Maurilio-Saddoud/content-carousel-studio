@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
+import { isDirectExecution } from './direct-execution'
 
 type SourceManifest = {
   slug?: string
@@ -12,6 +13,15 @@ type ExportManifest = {
   slug?: string
   files?: Array<string | { fileName?: string }>
   slideCount?: number
+}
+
+type BriefRecord = {
+  id?: string
+  thesis?: string
+  audience?: string
+  whyItMatters?: string
+  supportPoints?: string[]
+  carouselSlug?: string
 }
 
 type AuditIssue = {
@@ -50,6 +60,7 @@ async function auditSource(sourceSlug: string) {
   const rawSource = await readFile(path.join(sourceDir, 'source.json'), 'utf8')
   const source = JSON.parse(rawSource) as SourceManifest
   const ideas = JSON.parse(await readFile(path.join(sourceDir, 'ideas.json'), 'utf8')) as Array<Record<string, unknown>>
+  const briefs = await readBriefs(sourceDir)
   const carousels = await Promise.all(
     (source.carousels ?? [])
       .filter((entry): entry is { segmentId?: string; slug: string; title?: string } => Boolean(entry.slug))
@@ -82,6 +93,12 @@ async function auditSource(sourceSlug: string) {
       code: 'published-count-mismatch',
       message: `source.json lists ${(source.carousels ?? []).length} carousel(s) but ideas.json has ${publishedIdeas.length} published idea(s).`,
     })
+  }
+
+  if (briefs.length === 0) {
+    issues.push({ level: 'warn', code: 'missing-briefs', message: `${sourceSlug} has no briefs.json records yet.` })
+  } else {
+    auditBriefs(briefs, issues)
   }
 
   const carouselTitles = new Map<string, string[]>()
@@ -199,6 +216,76 @@ async function readExportManifest(slug: string) {
   }
 }
 
+async function readBriefs(sourceDir: string) {
+  try {
+    const raw = await readFile(path.join(sourceDir, 'briefs.json'), 'utf8')
+    return JSON.parse(raw) as BriefRecord[]
+  } catch {
+    return []
+  }
+}
+
+function auditBriefs(briefs: BriefRecord[], issues: AuditIssue[]) {
+  const thesisOwners = new Map<string, string[]>()
+
+  for (const brief of briefs) {
+    const briefId = brief.id ?? brief.carouselSlug ?? 'unknown-brief'
+    const thesis = String(brief.thesis ?? '').trim()
+    const whyItMatters = String(brief.whyItMatters ?? '').trim()
+    const supportPoints = Array.isArray(brief.supportPoints) ? brief.supportPoints.map((value) => String(value).trim()).filter(Boolean) : []
+
+    if (isWeakBriefLine(thesis)) {
+      issues.push({ level: 'warn', code: 'weak-brief-thesis', message: `${briefId} has a weak thesis: "${thesis}"` })
+    }
+
+    if (isWeakBriefLine(whyItMatters)) {
+      issues.push({ level: 'warn', code: 'weak-brief-why', message: `${briefId} has a weak why-it-matters line: "${whyItMatters}"` })
+    }
+
+    if (supportPoints.length < 2) {
+      issues.push({ level: 'warn', code: 'thin-brief-support', message: `${briefId} only has ${supportPoints.length} support point(s).` })
+    }
+
+    for (const supportPoint of supportPoints) {
+      if (isWeakBriefLine(supportPoint)) {
+        issues.push({ level: 'warn', code: 'weak-brief-support', message: `${briefId} has a weak support point: "${supportPoint}"` })
+      }
+    }
+
+    const thesisKey = normalize(thesis)
+    if (thesisKey) {
+      thesisOwners.set(thesisKey, [...(thesisOwners.get(thesisKey) ?? []), briefId])
+    }
+  }
+
+  for (const [thesis, refs] of thesisOwners) {
+    if (thesis && refs.length > 1) {
+      issues.push({ level: 'warn', code: 'duplicate-brief-thesis', message: `Duplicate brief thesis across: ${refs.join(', ')}` })
+    }
+  }
+
+  for (let index = 0; index < briefs.length; index += 1) {
+    for (let otherIndex = index + 1; otherIndex < briefs.length; otherIndex += 1) {
+      const left = briefs[index]
+      const right = briefs[otherIndex]
+      const leftId = left.id ?? left.carouselSlug ?? `brief-${index + 1}`
+      const rightId = right.id ?? right.carouselSlug ?? `brief-${otherIndex + 1}`
+
+      const leftClaim = [left.thesis, left.whyItMatters, ...(left.supportPoints ?? [])].join(' ')
+      const rightClaim = [right.thesis, right.whyItMatters, ...(right.supportPoints ?? [])].join(' ')
+      const similarity = overlapScore(leftClaim, rightClaim)
+
+      if (similarity >= 0.52) {
+        issues.push({
+          level: 'warn',
+          code: 'brief-overlap',
+          message: `${leftId} and ${rightId} share ${Math.round(similarity * 100)}% normalized claim vocabulary. Recheck thesis/support territory before publishing both.`,
+        })
+      }
+    }
+  }
+}
+
 async function listDirectoryNames(dir: string) {
   try {
     const entries = await readdir(dir, { withFileTypes: true })
@@ -227,6 +314,55 @@ function isWeakTitle(value: string) {
   return false
 }
 
+function isWeakBriefLine(value: string) {
+  const line = normalize(value)
+  if (!line) return true
+  if (line.length < 28) return true
+  if (/,$/.test(line)) return true
+  if (/\?$/.test(line)) return true
+  if (/\b(right|okay|ok)\??$/.test(line)) return true
+  if (/^(i'm going to|get into|we are going to|i've seen|for a|and |but |so )\b/i.test(line) && line.length < 70) return true
+  if (/^(this|that|it)\b/.test(line) && line.length < 48) return true
+  return false
+}
+
+function overlapScore(left: string, right: string) {
+  const leftTokens = new Set(tokenize(left))
+  const rightTokens = new Set(tokenize(right))
+  if (leftTokens.size === 0 || rightTokens.size === 0) {
+    return 0
+  }
+
+  let intersection = 0
+  for (const token of leftTokens) {
+    if (rightTokens.has(token)) {
+      intersection += 1
+    }
+  }
+
+  const union = new Set([...leftTokens, ...rightTokens]).size
+  return union === 0 ? 0 : intersection / union
+}
+
+function tokenize(value: string) {
+  return normalize(value)
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 4 && !STOP_WORDS.has(token))
+}
+
+const STOP_WORDS = new Set([
+  'about', 'after', 'before', 'being', 'from', 'have', 'into', 'just', 'more', 'much', 'that', 'their', 'them', 'then', 'they', 'this', 'what', 'when', 'where', 'which', 'with', 'your', 'yours', 'because', 'really', 'there', 'those', 'these', 'around', 'across', 'while', 'will', 'would', 'could', 'should', 'right', 'going',
+])
+
 function normalize(value: string) {
   return value.trim().replace(/^"|"$/g, '').toLowerCase()
+}
+
+if (isDirectExecution(import.meta.url) && /self-test\.(t|j)sx?$/.test(process.argv[1] ?? '')) {
+  runSelfTestFromArgv().catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
 }

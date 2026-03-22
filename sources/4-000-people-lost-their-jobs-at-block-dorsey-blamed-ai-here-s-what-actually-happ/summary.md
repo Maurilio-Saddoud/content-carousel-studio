@@ -12,16 +12,16 @@
 
 ## Published briefs
 
-### #1 — I'm going to get into why it's good news.
+### #1 — I think one of the lessons that we are learning, one of the bitter pills that we need to swallow is that AI is telling us our jobs were never the real job.
 - Brief: brief-segment-01
 - Primary idea: segment-01
 - Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
-- Why it matters: I think one of the lessons that we are learning, one of the bitter pills that we need to swallow is that AI is telling us our jobs were never the real job.
+- Why it matters: An EM's job is sprint planning.
 - Support:
-  - I'm going to get into why it's good news.
-  - I'm describing is going to be temporary.
-  - We are going to move to this world.
   - An EM's job is sprint planning.
+  - Think about what happens when a new engineer joins the team.
+  - I know that there are many interstitial states.
+  - There are many steps along the way to move in that direction.
 - Distinct from: brief-segment-41
 
 
@@ -29,12 +29,9 @@
 - Brief: brief-segment-41
 - Primary idea: segment-41
 - Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
-- Why it matters: We are going to move to this world.
+- Why it matters: Really, I don't think you do.
 - Support:
-  - Do you love the 11.6 hours you spend in meetings?
   - Really, I don't think you do.
-  - I think one of the lessons that we are learning, one of the bitter pills that we need to swallow is that AI is telling us our jobs were never the real job.
-  - Think about what happens when a new engineer joins the team.
 - Distinct from: brief-segment-01
 
 

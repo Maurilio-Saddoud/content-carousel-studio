@@ -267,6 +267,10 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
       .filter((entry): entry is [string, string] => Boolean(entry[0] && entry[1])),
   )
   const publishLimit = args.maxSegments
+    ?? sourceManifest.ideaRule?.publishLimit
+    ?? sourceManifest.publishedIdeaIds?.length
+    ?? (sourceManifest.carousels?.length || 0)
+    ?? 8
   const ideas = buildIdeas(segments, sourceSlug, publishLimit, existingSlugs)
   const publishedIdeas = ideas.filter((idea) => idea.status === 'published')
   const briefs = buildBriefs(publishedIdeas, ideas, sourceSlug, existingSlugs)
@@ -382,9 +386,7 @@ function parseArgs(argv: string[]) {
 }
 
 function parseRebuildArgs(argv: string[]) {
-  const args: { sourceSlug?: string; maxSegments: number } = {
-    maxSegments: 8,
-  }
+  const args: { sourceSlug?: string; maxSegments?: number } = {}
 
   for (let i = 0; i < argv.length; i++) {
     const current = argv[i]
@@ -826,6 +828,19 @@ function isWeakDisplayLine(text: string) {
   if (/,$/.test(cleaned)) return true
   if (/^(for|to|and|but|or)\b/i.test(cleaned)) return true
   if (/\b(this|that|it) is (much )?more important\b/i.test(cleaned)) return true
+  if (isWeakBriefLineCandidate(cleaned)) return true
+  return false
+}
+
+function isWeakBriefLineCandidate(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return true
+  if (cleaned.length < 28) return true
+  if (/,$/.test(cleaned)) return true
+  if (/\?$/.test(cleaned)) return true
+  if (/^(i('| a)?m going to|get into|we are going to|i('| a)?ve seen|the first is|do you love|thank you very much|here('| i)?s what|right now)\b/i.test(cleaned)) return true
+  if (/^(this|that|it)\b/i.test(cleaned) && cleaned.length < 48) return true
+  if (/\b(right|okay|ok|cheers)\b[.!?]*$/i.test(cleaned)) return true
   return false
 }
 
@@ -870,8 +885,9 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
   for (const idea of publishedIdeas) {
     const supportingIdeas = allIdeas
       .filter((candidate) => candidate.id !== idea.id)
-      .filter((candidate) => candidate.status !== 'rejected')
+      .filter((candidate) => candidate.status === 'candidate')
       .filter((candidate) => !areNearDuplicates(candidate, idea))
+      .filter((candidate) => getCompleteThoughts(candidate.text).some((line) => !isWeakBriefLineCandidate(line)))
       .sort((a, b) => b.score - a.score)
       .slice(0, 3)
 
@@ -1186,13 +1202,15 @@ function pickDistinctThesis(candidates: string[], usedTheses: Set<string>) {
   const normalized = candidates.map((candidate) => cleanSentence(candidate)).filter(Boolean)
   for (const candidate of normalized) {
     const key = slugify(candidate)
-    if (!isWeakDisplayLine(candidate) && !usedTheses.has(key)) {
+    if (!isWeakDisplayLine(candidate) && !isWeakBriefLineCandidate(candidate) && !usedTheses.has(key)) {
       usedTheses.add(key)
       return candidate
     }
   }
 
-  const fallback = normalized[0] ?? 'A stronger operating model beats a stale workflow.'
+  const fallback = normalized.find((candidate) => !isWeakBriefLineCandidate(candidate))
+    ?? normalized[0]
+    ?? 'A stronger operating model beats a stale workflow.'
   usedTheses.add(slugify(fallback))
   return fallback
 }
@@ -1210,7 +1228,7 @@ function inferWhyItMatters(primary: Idea, support: Idea[], thesis: string) {
     ...getCompleteThoughts(primary.text),
     ...support.flatMap((idea) => getCompleteThoughts(idea.text)),
     'If your mental model is stale, you redesign the wrong part of the workflow.',
-  ].find((line) => slugify(line) !== thesisKey && !isWeakDisplayLine(line))
+  ].find((line) => slugify(line) !== thesisKey && !isWeakDisplayLine(line) && !isWeakBriefLineCandidate(line))
 
   return picked ?? 'If your mental model is stale, you redesign the wrong part of the workflow.'
 }
@@ -1221,6 +1239,7 @@ function buildSupportPoints(primary: Idea, support: Idea[], usedSupport: Set<str
     ...support.flatMap((idea) => getCompleteThoughts(idea.text).slice(0, 2)),
   ])
     .filter((line) => !isWeakDisplayLine(line))
+    .filter((line) => !isWeakBriefLineCandidate(line))
 
   const selected: string[] = []
   for (const point of points) {

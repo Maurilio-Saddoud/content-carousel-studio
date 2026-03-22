@@ -1,6 +1,6 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
-title: "The skill is maintaining calibration, not having it once."
+title: "So the skill is maintaining the calibration, not having it once."
 description: "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:05:13 → 00:05:29."
 sourceType: transcript
 aspectRatio: portrait
@@ -12,52 +12,38 @@ theme:
   muted: "#71767B"
 ---
 
-# The skill is maintaining calibration, not having it once.
-
-A lot of people still talk about AI like you learn the rules once,
-then apply them for the next year.
-
-That is already dead.
+# So the skill is maintaining the calibration, not having it once.
 
 ---
 
-# The real edge is noticing when your old mental model expired.
+# If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-What mattered in February
-and what mattered last August
-can be worlds apart.
+If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-That gap compounds fast.
+A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
 
-# This is why shallow “AI literacy” ages badly.
+# The skill is going to be triaging your own attention in real time.
 
-You do not need more people repeating a frozen playbook.
+> If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-You need people who can tell,
-in real time,
-where the model is strong,
-where it breaks,
-and where the human should step in.
+Opus 4.5 couldn't reliably retrieve information from deep in a long document.
 
 ---
 
-# So the job is not memorizing a workflow.
+# Human attention becomes the real bottleneck.
 
-It is maintaining an accurate current picture
-of the model,
-the task,
-and the failure modes.
+Are they reviewing everything at the same depth?
 
-That is what lets you redesign work well.
+1. If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+2. The skill is going to be triaging your own attention in real time.
+3. Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
 ---
 
-# If your calibration is stale, your decisions will be too.
+# Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
-You will review the wrong things.
-Trust the wrong steps.
-And miss where leverage actually moved.
+Audience: operators, team leads, founders redesigning AI-assisted workflows.
 
-That is why calibration is the skill.
+Use the source package as evidence, not as final copy.

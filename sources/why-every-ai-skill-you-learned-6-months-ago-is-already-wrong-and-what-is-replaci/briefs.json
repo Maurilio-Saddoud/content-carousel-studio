@@ -3,18 +3,18 @@
     "id": "brief-segment-18",
     "primaryIdeaId": "segment-18",
     "supportingIdeaIds": [
-      "segment-78",
       "segment-49",
-      "segment-69"
+      "segment-69",
+      "segment-97"
     ],
     "thesis": "So the skill is maintaining the calibration, not having it once.",
     "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
-    "whyItMatters": "I've seen two structures emerging here that are significant, right?",
+    "whyItMatters": "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.",
     "supportPoints": [
-      "I've seen two structures emerging here that are significant, right?",
-      "The first is a team of one.",
       "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.",
-      "The skill is going to be triaging your own attention in real time."
+      "The skill is going to be triaging your own attention in real time.",
+      "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.",
+      "If you run an organization, the question isn't are we using AI."
     ],
     "distinctFromBriefIds": [
       "brief-segment-78"
@@ -25,17 +25,16 @@
     "id": "brief-segment-78",
     "primaryIdeaId": "segment-78",
     "supportingIdeaIds": [
-      "segment-18",
       "segment-49",
-      "segment-69"
+      "segment-69",
+      "segment-97"
     ],
-    "thesis": "I've seen two structures emerging here that are significant, right?",
+    "thesis": "A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.",
     "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
-    "whyItMatters": "The first is a team of one.",
+    "whyItMatters": "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.",
     "supportPoints": [
       "A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.",
-      "This is much much more important.",
-      "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate."
+      "It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts."
     ],
     "distinctFromBriefIds": [
       "brief-segment-18"

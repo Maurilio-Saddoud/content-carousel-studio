@@ -16,24 +16,23 @@
 - Brief: brief-segment-18
 - Primary idea: segment-18
 - Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
-- Why it matters: I've seen two structures emerging here that are significant, right?
+- Why it matters: If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 - Support:
-  - I've seen two structures emerging here that are significant, right?
-  - The first is a team of one.
   - If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
   - The skill is going to be triaging your own attention in real time.
+  - Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
+  - If you run an organization, the question isn't are we using AI.
 - Distinct from: brief-segment-78
 
 
-### #2 — I've seen two structures emerging here that are significant, right?
+### #2 — A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 - Brief: brief-segment-78
 - Primary idea: segment-78
 - Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
-- Why it matters: The first is a team of one.
+- Why it matters: If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 - Support:
   - A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
-  - This is much much more important.
-  - Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
+  - It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
 - Distinct from: brief-segment-18
 
 

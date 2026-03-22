@@ -1,0 +1,46 @@
+[
+  {
+    "id": "brief-segment-80",
+    "primaryIdeaId": "segment-80",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-100",
+      "segment-70"
+    ],
+    "thesis": "If you are waiting seeing, you are signing your own death warrant as a company because by the time you understand all of the elements of the Asian ecosystem and say we're ready, it will have passed you by and you will not be visible to most of the interactions customers have.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
+    "supportPoints": [
+      "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
+      "When OpenCloud went from a weekend project to 250ome thousand GitHub stars, it became what Jensen called the operating system of the future.",
+      "I make this happen?\" Well, I'm going to give you an exercise that will make you sweat a little bit.",
+      "Go to your top three competitors I want you to actually have a meaningful conversation with Claude or with Chad GPT I want you to see how far you can get on transacting with them."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-45"
+    ],
+    "carouselSlug": "mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s"
+  },
+  {
+    "id": "brief-segment-45",
+    "primaryIdeaId": "segment-45",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-100",
+      "segment-70"
+    ],
+    "thesis": "We as humans have discovered it's really nice if we don't even have to go to clott JPT and we could just type into a little chat like WhatsApp, hey agent, can you shop for my running shoes that is 250,000 GitHub stars worth of customer validation?",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
+    "supportPoints": [
+      "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
+      "When OpenCloud went from a weekend project to 250ome thousand GitHub stars, it became what Jensen called the operating system of the future.",
+      "I make this happen?\" Well, I'm going to give you an exercise that will make you sweat a little bit.",
+      "Go to your top three competitors I want you to actually have a meaningful conversation with Claude or with Chad GPT I want you to see how far you can get on transacting with them."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-80"
+    ],
+    "carouselSlug": "mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov"
+  }
+]

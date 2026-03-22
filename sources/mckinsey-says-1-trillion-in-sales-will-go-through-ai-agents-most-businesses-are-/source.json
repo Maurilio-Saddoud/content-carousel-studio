@@ -1,0 +1,68 @@
+{
+  "slug": "mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-",
+  "sourceType": "transcript",
+  "sourceUrl": "https://youtu.be/BE4RclIGDmY?si=KOHVhnquJiWevNu5",
+  "fetchedAt": "2026-03-22T19:20:55.332Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "McKinsey Says $1 Trillion In Sales Will Go Through AI Agents. Most Businesses Are Invisible.",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/BE4RclIGDmY/hqdefault.jpg"
+  },
+  "transcriptLineCount": 809,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 2,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 105,
+  "briefCount": 2,
+  "publishedIdeaIds": [
+    "segment-80",
+    "segment-45"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-80",
+      "primaryIdeaId": "segment-80",
+      "thesis": "If you are waiting seeing, you are signing your own death warrant as a company because by the time you understand all of the elements of the Asian ecosystem and say we're ready, it will have passed you by and you will not be visible to most of the interactions customers have.",
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s"
+    },
+    {
+      "id": "brief-segment-45",
+      "primaryIdeaId": "segment-45",
+      "thesis": "We as humans have discovered it's really nice if we don't even have to go to clott JPT and we could just type into a little chat like WhatsApp, hey agent, can you shop for my running shoes that is 250,000 GitHub stars worth of customer validation?",
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s",
+      "segmentId": "segment-80",
+      "title": "The internet was built to block bots.",
+      "previewPath": "/carousel/mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s",
+      "carouselPath": "carousels/mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s/carousel.md"
+    },
+    {
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov",
+      "segmentId": "segment-45",
+      "title": "Go try to buy from your competitors with AI.",
+      "previewPath": "/carousel/mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov",
+      "carouselPath": "carousels/mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/source.json",
+    "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/raw-transcript.md",
+    "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/clean-transcript.md",
+    "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/segments.json",
+    "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/ideas.json",
+    "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/briefs.json",
+    "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/summary.md",
+    "carousels/mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s/carousel.md",
+    "carousels/mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov/carousel.md",
+    "carousels/index.json"
+  ]
+}

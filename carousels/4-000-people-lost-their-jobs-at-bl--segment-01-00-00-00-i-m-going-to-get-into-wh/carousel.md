@@ -1,6 +1,6 @@
 ---
 slug: "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
-title: "AI is exposing that many jobs were never the real job."
+title: "AI operating models are getting stale faster than most teams realize."
 description: "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:00:00 → 00:00:14."
 sourceType: transcript
 aspectRatio: portrait
@@ -12,41 +12,38 @@ theme:
   muted: "#71767B"
 ---
 
-# AI is exposing that many jobs were never the real job.
-
-That is the bitter pill a lot of teams are about to swallow.
+# AI operating models are getting stale faster than most teams realize.
 
 ---
 
-# A lot of knowledge work drifted into coordination theater.
+# An EM's job is sprint planning.
 
-Status meetings.
-Sprint rituals.
-Updates about updates.
-Approval chains pretending to be productivity.
+An EM's job is sprint planning.
 
----
-
-# Then AI shows up and makes that painfully obvious.
-
-Not because AI is magical.
-
-Because a surprising amount of white-collar work was really just overhead wrapped in process.
+We are going to move to this world.
 
 ---
 
-# The valuable part was never the ceremony.
+# Really, I don't think you do.
 
-It was the judgment.
-The taste.
-The actual product sense.
-The ability to see what matters and move the work forward.
+> An EM's job is sprint planning.
+
+Microsoft's 2025 work trend index found that the average employee spends 57% of their time communicating 43% creating.
 
 ---
 
-# That is why this is bad news for bloated process and good news for real builders.
+# Think about what happens when a new engineer joins the team.
 
-If AI strips out the fake work,
-what remains is the actual job.
+We get to get fingertippy with the product.
 
-And that is where the leverage goes.
+1. An EM's job is sprint planning.
+2. Think about what happens when a new engineer joins the team.
+3. I know that there are many interstitial states.
+
+---
+
+# I know that there are many interstitial states.
+
+Audience: operators, team leads, founders redesigning AI-assisted workflows.
+
+Use the source package as evidence, not as final copy.

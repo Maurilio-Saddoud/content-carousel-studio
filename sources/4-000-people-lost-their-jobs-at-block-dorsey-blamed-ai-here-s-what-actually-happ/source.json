@@ -12,22 +12,22 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/lbfoNxoHl2o/hqdefault.jpg"
   },
   "transcriptLineCount": 586,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
-  "ideaRule": {
-    "publishLimit": 2,
-    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
-  },
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
   "ideaCount": 76,
   "briefCount": 2,
   "publishedIdeaIds": [
     "segment-01",
     "segment-41"
   ],
+  "ideaRule": {
+    "publishLimit": 2,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
   "briefs": [
     {
       "id": "brief-segment-01",
       "primaryIdeaId": "segment-01",
-      "thesis": "I'm going to get into why it's good news.",
+      "thesis": "I think one of the lessons that we are learning, one of the bitter pills that we need to swallow is that AI is telling us our jobs were never the real job.",
       "slug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
     },
     {
@@ -41,14 +41,14 @@
     {
       "slug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh",
       "segmentId": "segment-01",
-      "title": "AI is exposing that many jobs were never the real job.",
+      "title": "AI operating models are getting stale faster than most teams realize.",
       "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh",
       "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh/carousel.md"
     },
     {
       "slug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
       "segmentId": "segment-41",
-      "title": "The transition period is the ugliest part.",
+      "title": "I'm describing is going to be temporary.",
       "previewPath": "/carousel/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
       "carouselPath": "carousels/4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-/carousel.md"
     }

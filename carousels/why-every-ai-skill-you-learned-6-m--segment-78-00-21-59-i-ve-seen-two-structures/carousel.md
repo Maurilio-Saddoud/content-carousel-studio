@@ -1,6 +1,6 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
-title: "I think two operating structures are emerging."
+title: "AI operating models are getting stale faster than most teams realize."
 description: "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:21:59 → 00:22:13."
 sourceType: transcript
 aspectRatio: portrait
@@ -12,45 +12,38 @@ theme:
   muted: "#71767B"
 ---
 
-# I think two operating structures are emerging.
-
-And the difference between them matters a lot.
+# AI operating models are getting stale faster than most teams realize.
 
 ---
 
-# The first is a team of one.
+# If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-One strong operator,
-working with multiple agent workflows,
-across a domain.
+If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-Not because the work got simpler.
-Because the leverage changed.
+The skill is going to be triaging your own attention in real time.
 
 ---
 
-# The bottleneck becomes judgment, not output.
+# A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
-If you have a hundred streams of agent output all day,
-you cannot review everything at the same depth.
+> A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
-So judgment becomes the bottleneck.
-
----
-
-# The second structure shows up at the org level.
-
-Not “are we using AI?”
-
-But:
-**do we have people whose job is to know where the AI-human boundary is now?**
+3 months later, Opus 4.6 scores 93% on retrieval at 256,000 tokens.
 
 ---
 
-# That is where the advantage compounds.
+# It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
 
-The advantage is not just model access.
+Is there a bottleneck that's masquerading as due diligence?
 
-It is having people who can keep the boundary current,
-redesign workflows around it,
-and compound that advantage before everyone else catches up.
+1. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+3. 3 months later, Opus 4.6 scores 93% on retrieval at 256,000 tokens.
+
+---
+
+# The edge is keeping your operating model current.
+
+Audience: operators, team leads, founders redesigning AI-assisted workflows.
+
+Use the source package as evidence, not as final copy.

@@ -14,6 +14,7 @@ Primary commands:
 
 ```bash
 ./content-carousel youtube <youtube-url>
+./content-carousel rebuild-source <source-slug>
 ./content-carousel render <slug>
 ./content-carousel render-all
 ./content-carousel self-test <source-slug>
@@ -23,6 +24,8 @@ Primary commands:
 If you install or link the package as a binary, the same commands are available as `content-carousel ...`.
 
 The existing `pnpm ingest:youtube`, `pnpm render`, `pnpm render:all`, and `pnpm build:pages` scripts still work. They now delegate to the same CLI entrypoint.
+
+`./content-carousel rebuild-source <source-slug>` reuses the source package's stored publish limit by default, so a quick rebuild does not silently fan out from a curated 2-post package to the CLI fallback of 8 posts. You can still override it explicitly with `--max-segments`.
 
 ## What this repo does now
 
@@ -353,7 +356,8 @@ pnpm lint
 - PNG generation uses Playwright screenshots of the rendered Pages-safe site.
 - The markdown parser intentionally supports a narrow authoring format right now: frontmatter + slide separators + paragraphs/lists.
 - `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
-- `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, weak/duplicate titles, and export drift before you bother publishing.
+- `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, brief quality/overlap, weak/duplicate titles, and export drift before you bother publishing.
+- `pnpm exec tsx scripts/self-test.ts <source-slug>` now works too when you want to iterate on the audit logic directly without going through the bundled CLI.
 - In the current operator workflow, a newly supplied video link should usually be treated as an implicit request to generate a fresh preview batch from that source, not as a prompt for another round of clarification.
 - Preserve existing preview batches by default. Only wipe/delete old previews when the user explicitly asks for replacement or cleanup.
 - If you add a carousel and want it public, it still needs to be committed and pushed to `main`. Pages is public, not magical.

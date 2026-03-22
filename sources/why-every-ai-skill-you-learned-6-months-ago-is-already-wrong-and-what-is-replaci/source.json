@@ -12,17 +12,17 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/RnjgLlQTMf0/hqdefault.jpg"
   },
   "transcriptLineCount": 786,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
-  "ideaRule": {
-    "publishLimit": 2,
-    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
-  },
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
   "ideaCount": 102,
   "briefCount": 2,
   "publishedIdeaIds": [
     "segment-18",
     "segment-78"
   ],
+  "ideaRule": {
+    "publishLimit": 2,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
   "briefs": [
     {
       "id": "brief-segment-18",
@@ -33,7 +33,7 @@
     {
       "id": "brief-segment-78",
       "primaryIdeaId": "segment-78",
-      "thesis": "I've seen two structures emerging here that are significant, right?",
+      "thesis": "A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.",
       "slug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
     }
   ],
@@ -41,14 +41,14 @@
     {
       "slug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager",
       "segmentId": "segment-18",
-      "title": "The skill is maintaining calibration, not having it once.",
+      "title": "So the skill is maintaining the calibration, not having it once.",
       "previewPath": "/carousel/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager",
       "carouselPath": "carousels/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager/carousel.md"
     },
     {
       "slug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
       "segmentId": "segment-78",
-      "title": "I think two operating structures are emerging.",
+      "title": "AI operating models are getting stale faster than most teams realize.",
       "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
       "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/carousel.md"
     }
