@@ -1,4 +1,6 @@
+import { execFile } from 'node:child_process'
 import { mkdir, writeFile } from 'node:fs/promises'
+import { promisify } from 'node:util'
 import path from 'node:path'
 import { chromium } from 'playwright'
 import { getCarousel } from '@/lib/carousels'
@@ -30,6 +32,7 @@ type RenderManifest = {
 const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carousel-studio'
 const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.env.BASE_PATH ?? '')
 const publicSiteUrl = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL)
+const execFileAsync = promisify(execFile)
 
 export async function renderCarouselFromArgv(argv: string[] = process.argv.slice(2)) {
   const options = parseArgs(argv)
@@ -77,6 +80,9 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
     await browser.close()
   }
 
+  const zipFileName = `${slug}.zip`
+  await createZipBundle(outDir, zipFileName, files.map((file) => file.fileName))
+
   const manifest: RenderManifest = {
     slug,
     title: carousel.title,
@@ -88,7 +94,7 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
     files,
   }
 
-  await writeFile(path.join(outDir, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(outDir, 'manifest.json'), `${JSON.stringify({ ...manifest, zipFileName }, null, 2)}\n`, 'utf8')
   await writeFile(path.join(outDir, 'index.html'), buildBatchHtml(manifest), 'utf8')
 
   console.log(`Rendered ${files.length} slides to ${outDir}`)
@@ -131,7 +137,15 @@ async function readCarousel(slug: string): Promise<Carousel> {
   return carousel
 }
 
+async function createZipBundle(outDir: string, zipFileName: string, fileNames: string[]) {
+  if (fileNames.length === 0) return
+
+  const zipPath = path.join(outDir, zipFileName)
+  await execFileAsync('zip', ['-jq', zipPath, ...fileNames], { cwd: outDir })
+}
+
 function buildBatchHtml(manifest: RenderManifest) {
+  const zipFileName = `${manifest.slug}.zip`
   const items = manifest.files
     .map(
       (file) => `
@@ -164,6 +178,7 @@ function buildBatchHtml(manifest: RenderManifest) {
       <p><a href="${manifest.previewPath}">← Open live preview</a></p>
       <h1>${escapeHtml(manifest.title)} PNG batch</h1>
       <p class="meta">${escapeHtml(manifest.description)}</p>
+      <p class="meta"><a href="./${zipFileName}" download>Download all slides as .zip</a></p>
       <p class="meta">Download every card below, or use <code>manifest.json</code> for automation.</p>
       <ul>${items}
       </ul>

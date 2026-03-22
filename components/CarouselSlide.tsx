@@ -332,8 +332,6 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
           <span>7:42 PM</span>
           <span className="tweet-dot">·</span>
           <span>{stats.views} Views</span>
-          <span className="tweet-dot">·</span>
-          <span>{carousel.title}</span>
         </div>
 
         <footer className="tweet-footer">

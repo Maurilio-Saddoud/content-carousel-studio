@@ -27,6 +27,11 @@ export default async function CarouselPage({ params }: Props) {
           <p className="eyebrow">{carousel.sourceType.toUpperCase()}</p>
           <h1>{carousel.title}</h1>
           <p>{carousel.description}</p>
+          <p>
+            <a href={`/exports/${carousel.slug}/${carousel.slug}.zip`} download>
+              Download PNG batch (.zip)
+            </a>
+          </p>
         </div>
         <Link href="/">← Back</Link>
       </div>
