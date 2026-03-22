@@ -2,73 +2,55 @@
 
 Next.js-powered carousel studio for transcript-driven social content.
 
-## What it does
+## What this repo does now
 
-- hosts many carousels in one repo
-- gives each carousel a preview route
-- keeps source material and finished carousel content organized
-- renders portrait PNG exports for LinkedIn / Instagram carousels
-- ingests YouTube transcripts into draft-ready source packages
+- ingest a YouTube video into source artifacts **and** a draft carousel
+- preview every carousel locally in Next.js
+- export the site as a static GitHub Pages bundle
+- render every carousel slide to PNG files
+- publish both the live preview pages **and** PNG batches on GitHub Pages
 
-## Structure
+So the repo stays Next-based, but the output is Pages-safe.
+
+## Important URL pattern
+
+Once GitHub Pages is enabled for this repo, every carousel preview lives at:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/carousel/<slug>/
+```
+
+And every PNG batch lives at:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/
+```
+
+There is also a batch index page at:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/
+```
+
+## Repo structure
 
 - `app/` — Next.js App Router pages
 - `components/` — reusable carousel presentation components
-- `carousels/` — finished carousel configs
-- `drafts/` — draft-ready editorial briefs that are not final carousel content yet
+- `carousels/` — previewable carousel configs, including auto-generated drafts
+- `drafts/` — editorial notes / briefs for a source package
 - `sources/` — raw source material and notes
 - `lib/` — shared data loaders and types
-- `scripts/` — PNG rendering + source ingestion scripts
-- `public/` — static assets used by previews
-- `exports/` — generated PNGs (local only)
+- `scripts/` — ingest, Pages build, and PNG rendering scripts
+- `public/exports/` — generated PNG batches + manifests + simple download pages
+- `out/` — static export produced for GitHub Pages deployment
 
-## Local workflow
-
-Install dependencies:
+## Install
 
 ```bash
 pnpm install
 ```
 
-Run the preview app locally:
-
-```bash
-pnpm dev
-```
-
-Open:
-
-- `http://localhost:3000/` — table of contents
-- `http://localhost:3000/carousel/ai-memory-wall` — individual carousel preview
-
-Build for production:
-
-```bash
-pnpm build
-pnpm start
-```
-
-Render PNGs from a running local app:
-
-```bash
-pnpm render ai-memory-wall
-pnpm render:all
-```
-
-If your app is not running on port 3000, set the base URL:
-
-```bash
-CAROUSEL_BASE_URL=http://127.0.0.1:4000 pnpm render ai-memory-wall
-```
-
-## Semi-automatic YouTube ingest (v1)
-
-This repo now supports a **semi-automatic source pipeline** for YouTube videos.
-
-It is intentionally **not** a one-click autopost tool.
-It creates a structured source package so you can review, edit, and decide what deserves to become a post or carousel.
-
-### Exact command
+## Workflow 1: ingest a YouTube video
 
 Basic usage:
 
@@ -76,43 +58,30 @@ Basic usage:
 pnpm ingest:youtube 'https://www.youtube.com/watch?v=VIDEO_ID'
 ```
 
-With an explicit slug:
+Optional explicit slug:
 
 ```bash
 pnpm ingest:youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --slug my-topic-slug
 ```
 
-With a different Whisper fallback model:
-
-```bash
-pnpm ingest:youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --whisper-model small
-```
-
-Limit how many ranked segments are saved:
+Optional segment limit:
 
 ```bash
 pnpm ingest:youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --max-segments 6
 ```
 
-### Transcript fetch behavior
+### What ingest creates
 
-The ingest script uses the existing `youtube-transcript-v1` helper under the workspace.
+One command now does the practical first pass:
 
-Fetch order:
+1. fetches the official YouTube transcript first
+2. falls back to local Whisper transcription if captions are missing
+3. writes source artifacts into `sources/<slug>/`
+4. creates editorial notes in `drafts/<slug>/post-brief.md`
+5. creates or updates `carousels/<slug>/carousel.json`
+6. updates `carousels/index.json`
 
-1. tries the video's official YouTube transcript/captions first
-2. if captions are unavailable, falls back to local Whisper transcription
-
-Requirements for fallback:
-
-- `python3`
-- `uv`
-- `ffmpeg`
-- `whisper` CLI in `PATH`
-
-### Files created
-
-Running the ingest command creates:
+Created files:
 
 ```text
 sources/<slug>/source.json
@@ -121,76 +90,126 @@ sources/<slug>/clean-transcript.md
 sources/<slug>/segments.json
 sources/<slug>/summary.md
 drafts/<slug>/post-brief.md
+carousels/<slug>/carousel.json
+carousels/index.json
 ```
 
-What each file is for:
+That means the carousel becomes part of the static site inventory immediately.
 
-- `source.json` — metadata, source URL, transcript mode, and generation info
-- `raw-transcript.md` — untouched timestamped transcript output
-- `clean-transcript.md` — cleaned reading version without line-by-line timestamps
-- `segments.json` — ranked candidate source chunks for posts/carousels
-- `summary.md` — quick human-readable shortlist of best segments
-- `drafts/<slug>/post-brief.md` — editorial brief stub for the top ideas
+## Workflow 2: preview locally while editing
 
-### How segment scoring works
+Run the app:
 
-`segments.json` is deterministic and heuristic-based in v1. It is **not** an LLM judgment pass.
+```bash
+pnpm dev
+```
 
-Each segment gets a score from signals like:
+Open:
 
-- **hook words** — terms like `problem`, `mistake`, `truth`, `moat`, `why`, `fail`
-- **contrast / tension** — phrases like `but`, `instead`, `however`, `not`, `without`
-- **specificity** — numbers, acronyms, or concrete business/system language
-- **structure** — punctuation that suggests a stronger framing shape
-- **questions** — useful for engagement-style post hooks
-- **credibility cues** — phrases that imply practical experience
-- **penalties for filler** — `um`, `uh`, `you know`, etc.
-- **penalties for lyrics / low-information repetition** — useful for preventing songs or repetitive hooks from floating to the top
-- **penalties for weak length** — too short feels underdeveloped; too long usually needs trimming
+- `http://localhost:3000/` — carousel table of contents
+- `http://localhost:3000/carousel/<slug>` — a single carousel preview
 
-This is not trying to be magic. It is trying to be useful enough to surface the best raw material fast.
+## Workflow 3: build the GitHub Pages site + PNG outputs
 
-### What remains manual / editorial
+Run:
 
-Still human work, on purpose:
+```bash
+pnpm build:pages
+```
 
-- choosing the one real thesis worth publishing
-- deciding whether the idea should become a carousel, text post, or talk track
-- rewriting for Maurilio's voice
-- verifying claims / numbers / examples
-- trimming or combining source chunks intelligently
-- writing final slide copy
-- creating the final `carousels/<slug>/carousel.json` only after review
+What this does:
 
-### Recommended workflow
+1. builds a static Next export into `out/`
+2. serves that static export locally for rendering
+3. renders PNGs for every carousel into `public/exports/<slug>/`
+4. writes `manifest.json` and a tiny batch gallery page for each slug
+5. rebuilds the static site so the PNG files are included in `out/`
 
-1. Run `pnpm ingest:youtube ...`
-2. Read `sources/<slug>/summary.md`
-3. Open `sources/<slug>/segments.json` and skim the top 3 scored chunks
-4. Use `drafts/<slug>/post-brief.md` to pick one angle
-5. Only then turn the winner into a real carousel config
+After that you have:
 
-## Adding content
+- `out/` — the exact GitHub Pages artifact
+- `public/exports/<slug>/01.png`, `02.png`, etc.
+- `public/exports/<slug>/manifest.json`
+- `public/exports/<slug>/index.html`
+- `public/exports/index.html`
+- `public/exports/index.json`
 
-### Finished carousel
+## Workflow 4: get the public GitHub Pages preview
 
-1. Add a new folder in `carousels/<slug>/carousel.json`
-2. Add the carousel summary entry to `carousels/index.json`
-3. Add supporting raw material under `sources/<slug>/`
+This repo includes `.github/workflows/deploy-pages.yml`.
 
-### Draft-first source package
+On every push to `main`, GitHub Actions now:
 
-1. Run `pnpm ingest:youtube ...`
-2. Review `drafts/<slug>/post-brief.md`
-3. Promote to `carousels/<slug>/carousel.json` only when the idea is actually ready
+1. installs dependencies
+2. installs Playwright Chromium
+3. runs `pnpm build:pages`
+4. uploads `out/`
+5. deploys to GitHub Pages
 
-## Deployment recommendation
+So the public preview URL pattern is always:
 
-This repo no longer assumes GitHub Pages. The cleanest default deployment target is **Vercel** because it matches the Next.js runtime out of the box and keeps routing simple.
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/carousel/<slug>/
+```
 
-Other workable options:
+Example if the slug is `ai-memory-wall`:
 
-- Netlify with Next.js support
-- Self-hosted Node runtime with `pnpm build && pnpm start`
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/carousel/ai-memory-wall/
+```
 
-If you later need fully static export again, that is possible, but it would reintroduce tradeoffs around dynamic growth and export workflows.
+## Workflow 5: get the PNGs
+
+### Local files
+
+After `pnpm build:pages`, the easiest local location is:
+
+```text
+public/exports/<slug>/
+```
+
+You will find:
+
+- numbered slide PNGs like `01.png`, `02.png`, `03.png`
+- `manifest.json` with the file list
+- `index.html` with a dead-simple gallery/download page
+
+### Public URLs
+
+After the Pages deploy finishes, the PNGs are publicly reachable at:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/
+```
+
+Direct file pattern:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/01.png
+```
+
+Manifest pattern:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/manifest.json
+```
+
+Global batch index:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/
+```
+
+## Type-checking
+
+```bash
+pnpm lint
+```
+
+## Notes / tradeoffs
+
+- GitHub Pages is static-only, so the app is configured for `next export` output.
+- Carousel routes are statically generated from `carousels/index.json`.
+- PNG generation uses Playwright screenshots of the rendered Pages-safe site.
+- `pnpm start` is still there, but the real deploy target is now GitHub Pages, not a Node server.
+- If you add a carousel and want it public, it still needs to be committed and pushed to `main`. Pages is public, not magical.

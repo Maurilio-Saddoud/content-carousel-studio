@@ -1,15 +1,20 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CarouselSlide } from '@/components/CarouselSlide'
-import { getCarousel } from '@/lib/carousels'
+import { getCarousel, getCarouselDirectory } from '@/lib/carousels'
 
 type Props = {
   params: Promise<{ slug: string }>
 }
 
+export async function generateStaticParams() {
+  const directory = await getCarouselDirectory()
+  return directory.map((item) => ({ slug: item.slug }))
+}
+
 export default async function CarouselPage({ params }: Props) {
   const { slug } = await params
-  const carousel = getCarousel(slug)
+  const carousel = await getCarousel(slug)
 
   if (!carousel) {
     notFound()

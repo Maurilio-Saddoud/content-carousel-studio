@@ -2,7 +2,7 @@
   "slug": "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci",
   "sourceType": "transcript",
   "sourceUrl": "https://youtu.be/RnjgLlQTMf0?si=75rDwtQdBgj7nT41",
-  "fetchedAt": "2026-03-22T00:43:17.597Z",
+  "fetchedAt": "2026-03-22T00:54:54.559Z",
   "transcriptMode": "official-transcript",
   "whisperModel": "base",
   "video": {
@@ -12,12 +12,24 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/RnjgLlQTMf0/hqdefault.jpg"
   },
   "transcriptLineCount": 786,
+  "defaultBehavior": "creates source artifacts and a previewable draft carousel automatically",
+  "selectedSegmentIds": [
+    "segment-18",
+    "segment-78",
+    "segment-49",
+    "segment-69",
+    "segment-97",
+    "segment-62",
+    "segment-01"
+  ],
   "createdFiles": [
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/source.json",
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/raw-transcript.md",
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/clean-transcript.md",
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/segments.json",
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/summary.md",
-    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/post-brief.md"
+    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/post-brief.md",
+    "carousels/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/carousel.json",
+    "carousels/index.json"
   ]
 }

@@ -1,7 +1,9 @@
 import Link from 'next/link'
-import { carouselDirectory } from '@/lib/carousels'
+import { getCarouselDirectory } from '@/lib/carousels'
 
-export default function HomePage() {
+export default async function HomePage() {
+  const carouselDirectory = await getCarouselDirectory()
+
   return (
     <main className="page-shell">
       <section className="hero-card">

@@ -1,45 +1,46 @@
 # Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them)
 
 Slug: why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci
-Status: draft-ready source package
+Status: draft carousel created automatically
 
-## Recommended editorial path
-Pick one of the top-ranked segments below and turn it into a single clear thesis. Do not try to merge all of them into one carousel unless they genuinely support the same point.
+## Default output
+This ingest run already created a previewable draft carousel at `carousels/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/carousel.json`.
+If the angle is good, edit that file directly instead of starting from scratch.
 
-## Top options
+## Draft carousel angle
+- Title: Draft: For a product manager, good boundary sensing looks…
+- Description: Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them).
 
-### Option 1: felt the difference and you feel it whether you're touching Opus 4.6 versus 4.5, yo…
-- Time range: 00:27:40 → 00:27:48
-- Raw hook: felt the difference and you feel it whether you're touching Opus 4.6 versus 4.5, you feel it touching codeex 5.3, you f…
-- Angle: includes enough specificity to avoid sounding generic
-- First edit pass: remove filler, tighten claims, and pull the sharpest sentence to slide 1 / opening line.
+## Top source options
+
+### Option 1: For a product manager, good boundary sensing looks like letting an agent draft a cr…
+- Time range: 00:05:13 → 00:05:29
+- Raw hook: For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, but rea…
+- Angle: contains strong hook language instead of bland exposition
 - Source text:
 
-> felt the difference and you feel it whether you're touching Opus 4.6 versus 4.5, you feel it touching codeex 5.3, you feel it touching Gemini 3.1 Pro. And
+> February model. And both kinds of errors are very expensive. So the skill is maintaining the calibration, not having it once. So what does this look like in practice? For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, but realizing that that same
 
 
-### Option 2: Opus 4.5 couldn't reliably retrieve information from deep in a long document.
-- Time range: 00:04:53 → 00:05:11
-- Raw hook: or tool use.
-- Angle: includes enough specificity to avoid sounding generic
-- First edit pass: remove filler, tighten claims, and pull the sharpest sentence to slide 1 / opening line.
+### Option 2: I've seen two structures emerging here that are significant, right?
+- Time range: 00:21:59 → 00:22:13
+- Raw hook: I've seen two structures emerging here that are significant, right?
+- Angle: contains strong hook language instead of bland exposition
 - Source text:
 
-> or tool use. Opus 4.5 couldn't reliably retrieve information from deep in a long document. 3 months later, Opus 4.6 scores 93% on retrieval at 256,000 tokens. A person who calibrated his boundary sense against the November model and hasn't updated that is now either overrusting or underusing the
+> I've seen two structures emerging here that are significant, right? The first is a team of one. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain. That person does the boundary sensing, blinds the seams, maintains the failure models, and calibrates
 
 
-### Option 3: supervising 50 to 100 agents running an endto-end process.
-- Time range: 00:13:46 → 00:13:59
-- Raw hook: And that's not just McKenzie.
-- Angle: has contrast/tension, which usually makes better post framing
-- First edit pass: remove filler, tighten claims, and pull the sharpest sentence to slide 1 / opening line.
+### Option 3: If you have a 100 streams of agent output and 8 hours a day, you cannot review ever…
+- Time range: 00:14:01 → 00:14:16
+- Raw hook: If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.
+- Angle: contains strong hook language instead of bland exposition
 - Source text:
 
-> supervising 50 to 100 agents running an endto-end process. And that's not just McKenzie. It's a lot of different agentic patterns coalesing across the industry. That roughly 10:1 ratio makes the math of attention very very clear.
+> If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth. The skill is going to be triaging your own attention in real time. So this might look like an engineering manager overseeing agent assisted development across five teams and that person
 
-## Manual/editorial work still required
-- choose the one real thesis worth publishing
-- rewrite for Maurilio's voice and audience
-- verify any claims, numbers, or examples
-- decide whether this becomes a text post, carousel, or talking-head script
-- if it becomes a carousel: write slide-by-slide copy and only then add a final carousels/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/carousel.json
+## Next editing pass
+- tighten slide 1 until it punches harder
+- trim any slide body that still sounds transcript-y
+- verify claims, numbers, and examples
+- if needed, swap in a better segment from `sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/segments.json`

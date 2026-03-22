@@ -1,10 +1,10 @@
 {
   "slug": "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci",
-  "title": "Draft: AI Skills Age Fast",
-  "description": "Draft carousel generated automatically from a YouTube transcript about frontier operations, calibration, and how AI skills expire faster than traditional workforce skills.",
+  "title": "Draft: For a product manager, good boundary sensing looks…",
+  "description": "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them).",
   "sourceType": "transcript",
   "aspectRatio": "portrait",
-  "updatedAt": "2026-03-21",
+  "updatedAt": "2026-03-22",
   "theme": {
     "accent": "#1D9BF0",
     "background": "#000000",
@@ -14,74 +14,47 @@
   "slides": [
     {
       "id": "01",
-      "eyebrow": "DRAFT CAROUSEL",
-      "title": "Most AI skills now expire on a quarterly cycle.",
+      "eyebrow": "AUTO DRAFT",
+      "title": "For a product manager, good boundary sensing looks like letting an agent draft…",
       "body": [
-        "That’s the real shift.",
-        "This isn’t like learning Excel, coding, or some fixed tool once and being done.",
-        "The target keeps moving."
+        "I've seen two structures emerging here that are significant, right?",
+        "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth."
       ]
     },
     {
       "id": "02",
-      "eyebrow": "THE BUBBLE",
-      "title": "The useful metaphor is an expanding bubble.",
+      "eyebrow": "WHY IT MATTERS",
+      "title": "I've seen two structures emerging here that are significant, right?",
       "body": [
-        "Inside the bubble: everything agents can do reliably today.",
-        "Outside the bubble: everything that still needs a person.",
-        "The surface is where the interesting work happens."
+        "This is much much more important.",
+        "If you run an organization, the question isn't are we using AI."
       ]
     },
     {
       "id": "03",
-      "eyebrow": "WHY THIS MATTERS",
-      "title": "The skill is not learning the boundary once.",
+      "eyebrow": "THE REAL SHIFT",
+      "title": "I've seen two structures emerging here that are significant, right?",
       "body": [
-        "The skill is maintaining calibration as the boundary keeps shifting.",
-        "If your mental model is six months old, you’re probably underusing AI in some places and overtrusting it in others.",
-        "Both are expensive."
+        "Every workforce skill in history far has had a finish line, a point where it was done.",
+        "The first is a team of one."
       ]
     },
     {
       "id": "04",
-      "eyebrow": "FAILURE MODELS",
-      "title": "The best operators don’t just know that agents fail.",
+      "eyebrow": "OPERATING MODEL",
+      "title": "If you have a 100 streams of agent output 8 hours a day, you cannot review everythi…",
       "body": [
-        "They know the specific texture of failure at the current capability level.",
-        "That matters more than generic skepticism.",
-        "You need differentiated checks for different kinds of work."
+        "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have…",
+        "It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shift…"
       ]
     },
     {
       "id": "05",
-      "eyebrow": "EXAMPLE",
-      "title": "Old failure patterns go stale fast.",
+      "eyebrow": "TAKEAWAY",
+      "title": "the skill is maintaining the calibration, not having it once.",
       "body": [
-        "One model generation struggled to retrieve details from deep inside long documents.",
-        "A few months later, retrieval performance jumped dramatically.",
-        "If you didn’t update your boundary sense, your workflow is already wrong."
-      ]
-    },
-    {
-      "id": "06",
-      "eyebrow": "LEVERAGE",
-      "title": "This is why the real bottleneck becomes human attention.",
-      "body": [
-        "As agents get better, the problem shifts from doing the work to deciding what deserves a human review.",
-        "You cannot review everything at the same depth.",
-        "So attention allocation becomes part of the skill."
-      ]
-    },
-    {
-      "id": "07",
-      "eyebrow": "THE TAKEAWAY",
-      "title": "The winning skill is frontier operations.",
-      "body": [
-        "Boundary sensing.",
-        "Seam design.",
-        "Failure model maintenance.",
-        "Capability forecasting.",
-        "Leverage calibration."
+        "Use the source package as evidence, not as final copy.",
+        "Then sharpen the thesis until it actually sounds like Maurilio, not a transcript."
       ]
     }
   ]
