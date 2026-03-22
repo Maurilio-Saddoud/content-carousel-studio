@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-variant: claim
-
 # AI operating models are getting stale faster than most teams realize.
 
 This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
@@ -21,8 +19,6 @@ This is really the mechanism behind those gigantic leverage numbers that keep ap
 I've seen two structures emerging here that are significant, right?
 
 ---
-
-variant: explainer
 
 # This matters because stale mental models break fast.
 
@@ -32,8 +28,6 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 ---
 
-variant: quote
-
 # For a product manager,
 
 > The skill is going to be triaging your own attention in real time.
@@ -41,8 +35,6 @@ variant: quote
 This is much much more important.
 
 ---
-
-variant: framework
 
 # I've seen two structures emerging here that are significant, right?
 
@@ -53,8 +45,6 @@ Practice environments are where agents have different capability levels, where f
 3. February the person whose boundary sense was current last August are operating worlds apart.
 
 ---
-
-variant: claim
 
 # The edge is keeping your operating model current.
 

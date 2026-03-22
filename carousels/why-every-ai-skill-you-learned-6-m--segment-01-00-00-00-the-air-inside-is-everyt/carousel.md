@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-variant: claim
-
 # The air inside is everything AI agents can do reliably today.
 
 The air inside is everything AI agents can do reliably today.
@@ -21,8 +19,6 @@ The air inside is everything AI agents can do reliably today.
 The air outside is everything that still requires a person.
 
 ---
-
-variant: explainer
 
 # The air inside is everything AI agents can do reliably today.
 
@@ -32,8 +28,6 @@ The first is a team of one.
 
 ---
 
-variant: quote
-
 # For a product manager,
 
 > If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
@@ -41,8 +35,6 @@ variant: quote
 The skill is going to be triaging your own attention in real time.
 
 ---
-
-variant: framework
 
 # I've seen two structures emerging here that are significant, right?
 
@@ -53,8 +45,6 @@ This is much much more important.
 3. Every workforce skill in history far has had a finish line, a point where it was done.
 
 ---
-
-variant: claim
 
 # The edge is keeping your operating model current.
 

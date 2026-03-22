@@ -89,6 +89,7 @@ Format:
 3. each slide starts with an optional `eyebrow: ...` line
 4. the slide title is the first markdown heading
 5. the rest of the slide is markdown-ish body copy
+6. do not add `variant:` lines — the markdown itself should drive the slide
    - paragraphs work out of the box
    - simple unordered lists (`- item`) also render
 

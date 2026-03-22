@@ -9,7 +9,7 @@ import {
   BarChart3,
   Share,
 } from 'lucide-react'
-import type { Carousel, CarouselSlide as Slide, CarouselSlideVariant } from '@/lib/types'
+import type { Carousel, CarouselSlide as Slide } from '@/lib/types'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
@@ -229,15 +229,6 @@ function renderInlineTokens(tokens: InlineToken[], keyPrefix = 'md'): ReactNode[
   })
 }
 
-function getSlideVariant(slide: Slide, blocks: BodyBlock[]): CarouselSlideVariant {
-  if (slide.variant) return slide.variant
-
-  if (blocks.some((block) => block.type === 'list')) return 'framework'
-  if (blocks.every((block) => block.type === 'quote')) return 'quote'
-
-  return 'explainer'
-}
-
 function getLeadParagraph(blocks: BodyBlock[]) {
   const paragraph = blocks.find((block): block is ParagraphBlock => block.type === 'paragraph')
   if (!paragraph) return undefined
@@ -286,37 +277,8 @@ function renderBodyBlock(block: BodyBlock, key: string, options?: { asQuoteCard?
   )
 }
 
-function renderVariantBody(variant: CarouselSlideVariant, blocks: BodyBlock[]) {
-  if (variant === 'quote') {
-    const quoteBlock = blocks.find((block): block is QuoteBlock => block.type === 'quote')
-      ?? blocks.find((block): block is ParagraphBlock => block.type === 'paragraph')
-    const supporting = blocks.filter((block) => block !== quoteBlock)
-
-    return (
-      <>
-        {quoteBlock ? renderBodyBlock(quoteBlock.type === 'paragraph' ? { type: 'quote', text: quoteBlock.text } : quoteBlock, 'quote-primary', { asQuoteCard: true }) : null}
-        {supporting.length > 0 ? <div className="body-copy body-copy-supporting">{supporting.map((block, i) => renderBodyBlock(block, `support-${i}`))}</div> : null}
-      </>
-    )
-  }
-
-  if (variant === 'framework') {
-    const listBlock = blocks.find((block): block is ListBlock => block.type === 'list')
-    const introBlocks = listBlock ? blocks.filter((block) => block !== listBlock) : blocks
-
-    return (
-      <>
-        {introBlocks.length > 0 ? <div className="body-copy body-copy-intro">{introBlocks.map((block, i) => renderBodyBlock(block, `intro-${i}`))}</div> : null}
-        {listBlock ? <div className="body-copy framework-list">{renderBodyBlock(listBlock, 'framework-list')}</div> : null}
-      </>
-    )
-  }
-
-  if (variant === 'claim') {
-    return <div className="body-copy claim-body">{blocks.map((block, i) => renderBodyBlock(block, `claim-${i}`, { emphasizeLead: true }))}</div>
-  }
-
-  return <div className="body-copy explainer-body">{blocks.map((block, i) => renderBodyBlock(block, `explainer-${i}`, { emphasizeLead: i === 0 }))}</div>
+function renderBody(blocks: BodyBlock[]) {
+  return <div className="body-copy explainer-body">{blocks.map((block, i) => renderBodyBlock(block, `body-${i}`, { emphasizeLead: i === 0 }))}</div>
 }
 
 export function CarouselSlide({ carousel, slide, index, total }: Props) {
@@ -328,11 +290,10 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
   }
   const textProfile = getTextProfile(slide)
   const stats = getSeededStats(carousel.slug, index)
-  const variant = getSlideVariant(slide, textProfile.blocks)
 
   return (
     <article
-      className={`carousel-slide tweet-card ${textProfile.density} ${textProfile.titleTone} ${textProfile.bodyTone} tweet-variant-${variant}`}
+      className={`carousel-slide tweet-card ${textProfile.density} ${textProfile.titleTone} ${textProfile.bodyTone}`}
       style={{
         background: theme.background,
         color: theme.foreground,
@@ -364,7 +325,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
         <div className="tweet-content">
           {slide.eyebrow ? <p className="tweet-kicker">{renderInlineMarkdown(slide.eyebrow)}</p> : null}
           <h2>{renderInlineMarkdown(slide.title)}</h2>
-          {slide.body.trim() ? renderVariantBody(variant, textProfile.blocks) : null}
+          {slide.body.trim() ? renderBody(textProfile.blocks) : null}
         </div>
 
         <div className="tweet-meta-row">

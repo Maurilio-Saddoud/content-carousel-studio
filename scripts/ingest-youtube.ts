@@ -725,13 +725,11 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
   const slides: CarouselSlide[] = [
     {
       id: '01',
-      variant: 'claim',
       title: opening,
       body: '',
     },
     {
       id: '02',
-      variant: 'explainer',
       title: pickDisplayLine([
         primaryThoughts[1] ?? '',
         support[0] ?? '',
@@ -744,7 +742,6 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     },
     {
       id: '03',
-      variant: 'quote',
       title: pickDisplayLine([
         companionSegments[0]?.hook ?? '',
         support[4] ?? '',
@@ -757,7 +754,6 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     },
     {
       id: '04',
-      variant: 'framework',
       title: pickDisplayLine([
         companionSegments[1]?.hook ?? '',
         support[7] ?? '',
@@ -770,7 +766,6 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     },
     {
       id: '05',
-      variant: 'claim',
       title: pickDisplayLine([
         extractTakeaway(primary.text, companionSegments),
         'The edge is keeping your operating model current.',

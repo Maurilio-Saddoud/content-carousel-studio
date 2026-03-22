@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-variant: claim
-
 # I've seen two structures emerging here that are significant, right?
 
 The first is a team of one.
@@ -21,8 +19,6 @@ The first is a team of one.
 A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
-
-variant: explainer
 
 # The first is a team of one.
 
@@ -32,8 +28,6 @@ The skill is going to be triaging your own attention in real time.
 
 ---
 
-variant: quote
-
 # For a product manager,
 
 > Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
@@ -41,8 +35,6 @@ variant: quote
 This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
 
 ---
-
-variant: framework
 
 # If you run an organization, the question isn't are we using AI.
 
@@ -53,8 +45,6 @@ If you run an organization, the question isn't are we using AI.
 3. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
-
-variant: claim
 
 # The edge is keeping your operating model current.
 

@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-variant: claim
-
 # This is much much more important.
 
 Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
@@ -21,8 +19,6 @@ Practice environments are where agents have different capability levels, where f
 This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
 
 ---
-
-variant: explainer
 
 # This matters because stale mental models break fast.
 
@@ -32,8 +28,6 @@ The first is a team of one.
 
 ---
 
-variant: quote
-
 # For a product manager,
 
 > If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
@@ -41,8 +35,6 @@ variant: quote
 The skill is going to be triaging your own attention in real time.
 
 ---
-
-variant: framework
 
 # I've seen two structures emerging here that are significant, right?
 
@@ -53,8 +45,6 @@ If you run an organization, the question isn't are we using AI.
 3. February the person whose boundary sense was current last August are operating worlds apart.
 
 ---
-
-variant: claim
 
 # The edge is keeping your operating model current.
 

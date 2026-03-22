@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-variant: claim
-
 # If you run an organization, the question isn't are we using AI.
 
 It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
@@ -21,8 +19,6 @@ It's do we have people whose job it is to know where the evolving AI agent human
 I've seen two structures emerging here that are significant, right?
 
 ---
-
-variant: explainer
 
 # This matters because stale mental models break fast.
 
@@ -32,8 +28,6 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 ---
 
-variant: quote
-
 # For a product manager,
 
 > The skill is going to be triaging your own attention in real time.
@@ -41,8 +35,6 @@ variant: quote
 This is much much more important.
 
 ---
-
-variant: framework
 
 # I've seen two structures emerging here that are significant, right?
 
@@ -53,8 +45,6 @@ Practice environments are where agents have different capability levels, where f
 3. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
 
 ---
-
-variant: claim
 
 # The edge is keeping your operating model current.
 

@@ -1,11 +1,8 @@
-export type CarouselSlideVariant = 'claim' | 'quote' | 'framework' | 'explainer'
-
 export type CarouselSlide = {
   id: string
   eyebrow?: string
   title: string
   body: string
-  variant?: CarouselSlideVariant
 }
 
 export type CarouselTheme = {

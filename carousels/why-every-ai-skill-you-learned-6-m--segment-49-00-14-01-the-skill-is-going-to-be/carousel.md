@@ -12,13 +12,9 @@ theme:
   muted: "#71767B"
 ---
 
-variant: claim
-
 # AI work is becoming **attention triage**.
 
 ---
-
-variant: explainer
 
 # The old skill was doing the work yourself.
 
@@ -30,8 +26,6 @@ It’s **judgment**.
 
 ---
 
-variant: claim
-
 # You cannot review 100 streams of agent output at the same depth.
 
 So the job shifts.
@@ -40,8 +34,6 @@ You stop acting like the sole producer and start acting like the person who know
 
 ---
 
-variant: framework
-
 # High-leverage operators do 3 things well:
 
 1. They know **what must be checked carefully**.
@@ -49,8 +41,6 @@ variant: framework
 3. They keep recalibrating as model capabilities change.
 
 ---
-
-variant: claim
 
 # The edge is not “using AI.”
 

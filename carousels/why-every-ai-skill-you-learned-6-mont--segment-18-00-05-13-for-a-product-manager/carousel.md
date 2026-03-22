@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-variant: claim
-
 # For a product manager,
 
 I've seen two structures emerging here that are significant, right?
@@ -21,8 +19,6 @@ I've seen two structures emerging here that are significant, right?
 The first is a team of one.
 
 ---
-
-variant: explainer
 
 # I've seen two structures emerging here that are significant, right?
 
@@ -32,8 +28,6 @@ If you have a 100 streams of agent output 8 hours a day, you cannot review every
 
 ---
 
-variant: quote
-
 # I've seen two structures emerging here that are significant, right?
 
 > This is much much more important.
@@ -41,8 +35,6 @@ variant: quote
 Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
 ---
-
-variant: framework
 
 # Human attention becomes the real bottleneck.
 
@@ -53,8 +45,6 @@ This is much more practical than just looking at a bunch of slides saying you di
 3. the skill is maintaining the calibration, not having it once.
 
 ---
-
-variant: claim
 
 # So the skill is maintaining the calibration, not having it once.
 
