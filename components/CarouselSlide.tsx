@@ -1,5 +1,14 @@
 import Image from 'next/image'
 import type { ReactNode } from 'react'
+import {
+  Bookmark,
+  Check,
+  Heart,
+  MessageCircle,
+  Repeat2,
+  BarChart3,
+  Share,
+} from 'lucide-react'
 import type { Carousel, CarouselSlide as Slide } from '@/lib/types'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
@@ -21,74 +30,12 @@ type InlineToken =
   | { type: 'strong'; children: InlineToken[] }
   | { type: 'em'; children: InlineToken[] }
 
-function ReplyIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M4.9 11.42c0-4.57 3.7-8.27 8.27-8.27 3.38 0 6.08 1.59 7.88 4.26" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="m4.9 12.06 4.52-3.92" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="m4.9 12.06 4.52 3.92" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function RepostIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M4.75 7.5h10.82" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="m13.05 4.92 3.52 2.58-3.52 2.58" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M19.25 16.5H8.43" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="m10.95 13.92-3.52 2.58 3.52 2.58" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M7.43 16.5V7.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="M16.57 7.5v9" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function LikeIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M16.7 5.1c-1.97 0-3.28 1.04-4.12 2.31C11.74 6.14 10.43 5.1 8.46 5.1 5.62 5.1 3.5 7.29 3.5 10.02c0 2.12.88 3.8 2.65 5.66 1.63 1.73 3.73 3.28 5.62 4.67a.4.4 0 0 0 .47 0c1.89-1.39 3.99-2.94 5.62-4.67 1.77-1.86 2.65-3.54 2.65-5.66 0-2.73-2.12-4.92-4.96-4.92Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function ViewsIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M4.5 18.5h15" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" opacity="0.55" />
-      <path d="M7.25 16.8v-3.05" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="M11.1 16.8V9.95" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="M14.95 16.8v-4.7" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="M18.8 16.8V7.2" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function BookmarkIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M6.75 4.5h10.5c.41 0 .75.34.75.75v14.29l-5.53-3.95a.8.8 0 0 0-.94 0L6 19.54V5.25c0-.41.34-.75.75-.75Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function ShareIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
-      <path d="M12 4.75v8.78" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-      <path d="m8.48 8.22 3.52-3.47 3.52 3.47" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M5.75 13.75v4.5c0 .83.67 1.5 1.5 1.5h9.5c.83 0 1.5-.67 1.5-1.5v-4.5" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
 function VerifiedBadge() {
   return (
     <span className="tweet-badge" aria-label="Verified account">
-      <svg viewBox="0 0 20 20" className="tweet-badge-icon" aria-hidden="true">
-        <circle cx="10" cy="10" r="8.5" fill="currentColor" />
-        <path d="m8.53 12.72-2.1-2.1 1.06-1.06 1.04 1.04 3.04-3.04 1.06 1.06-4.1 4.1Z" fill="#fff" />
-      </svg>
+      <span className="tweet-badge-circle">
+        <Check className="tweet-badge-check" aria-hidden="true" strokeWidth={3} />
+      </span>
     </span>
   )
 }
@@ -318,12 +265,12 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
 
         <footer className="tweet-footer">
           <div className="tweet-engagement" aria-label="Tweet actions">
-            <span className="tweet-action"><ReplyIcon /> <span>28</span></span>
-            <span className="tweet-action"><RepostIcon /> <span>14</span></span>
-            <span className="tweet-action"><LikeIcon /> <span>197</span></span>
-            <span className="tweet-action"><ViewsIcon /> <span>2.1K</span></span>
-            <span className="tweet-action tweet-action-icon-only"><BookmarkIcon /></span>
-            <span className="tweet-action tweet-action-icon-only"><ShareIcon /></span>
+            <span className="tweet-action"><MessageCircle className="tweet-icon" strokeWidth={1.8} /> <span>28</span></span>
+            <span className="tweet-action"><Repeat2 className="tweet-icon" strokeWidth={1.8} /> <span>14</span></span>
+            <span className="tweet-action"><Heart className="tweet-icon" strokeWidth={1.8} /> <span>197</span></span>
+            <span className="tweet-action"><BarChart3 className="tweet-icon" strokeWidth={1.8} /> <span>2.1K</span></span>
+            <span className="tweet-action tweet-action-icon-only"><Bookmark className="tweet-icon" strokeWidth={1.8} /></span>
+            <span className="tweet-action tweet-action-icon-only"><Share className="tweet-icon" strokeWidth={1.8} /></span>
           </div>
           <span className="tweet-counter">{String(index + 1).padStart(2, '0')}/{String(total).padStart(2, '0')}</span>
         </footer>

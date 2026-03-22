@@ -131,8 +131,23 @@ a { color: inherit; text-decoration: none; }
   height: 18px;
   display: inline-grid;
   place-items: center;
-  color: #1d9bf0;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.22));
+}
+
+.tweet-badge-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #1d9bf0;
+  color: #fff;
+}
+
+.tweet-badge-check {
+  width: 11px;
+  height: 11px;
+  display: block;
 }
 
 .tweet-badge-icon {
