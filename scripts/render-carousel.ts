@@ -44,29 +44,38 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
   await mkdir(outDir, { recursive: true })
 
   const carousel = await readCarousel(slug)
-  const browser = await chromium.launch()
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1200 }, deviceScaleFactor: 2 })
   const previewPath = `${basePath}/carousel/${slug}/`
-  await page.goto(`${stripTrailingSlash(baseUrl)}${previewPath}`, { waitUntil: 'networkidle' })
-  const slides = await page.locator('.carousel-slide').all()
-
   const files: RenderManifest['files'] = []
+  const browser = await chromium.launch()
 
-  for (let i = 0; i < slides.length; i++) {
-    const fileName = `${String(i + 1).padStart(2, '0')}.png`
-    const relativePath = path.posix.join('exports', slug, fileName)
-    await slides[i].screenshot({ path: path.join(outDir, fileName) })
+  try {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 1200 }, deviceScaleFactor: 2 })
+    await page.goto(`${stripTrailingSlash(baseUrl)}${previewPath}`, { waitUntil: 'networkidle' })
 
-    files.push({
-      index: i + 1,
-      fileName,
-      relativePath,
-      publicPath: `${basePath}/${relativePath}`,
-      publicUrl: publicSiteUrl ? `${publicSiteUrl}/${relativePath}` : undefined,
-    })
+    const slidesLocator = page.locator('.carousel-slide')
+    const slideCount = await slidesLocator.count()
+
+    if (slideCount === 0) {
+      throw new Error(`Render target produced 0 .carousel-slide elements at ${stripTrailingSlash(baseUrl)}${previewPath}`)
+    }
+
+    for (let i = 0; i < slideCount; i++) {
+      const slide = slidesLocator.nth(i)
+      const fileName = `${String(i + 1).padStart(2, '0')}.png`
+      const relativePath = path.posix.join('exports', slug, fileName)
+      await slide.screenshot({ path: path.join(outDir, fileName) })
+
+      files.push({
+        index: i + 1,
+        fileName,
+        relativePath,
+        publicPath: `${basePath}/${relativePath}`,
+        publicUrl: publicSiteUrl ? `${publicSiteUrl}/${relativePath}` : undefined,
+      })
+    }
+  } finally {
+    await browser.close()
   }
-
-  await browser.close()
 
   const manifest: RenderManifest = {
     slug,
@@ -82,7 +91,7 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
   await writeFile(path.join(outDir, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8')
   await writeFile(path.join(outDir, 'index.html'), buildBatchHtml(manifest), 'utf8')
 
-  console.log(`Rendered ${slides.length} slides to ${outDir}`)
+  console.log(`Rendered ${files.length} slides to ${outDir}`)
 }
 
 function parseArgs(argv: string[]) {

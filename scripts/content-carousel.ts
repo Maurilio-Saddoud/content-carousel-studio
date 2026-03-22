@@ -4,6 +4,7 @@ import { buildPagesFromArgv } from './build-pages'
 import { ingestYoutubeFromArgv, rebuildCarouselsFromSourceArgv } from './ingest-youtube'
 import { renderAllFromArgv } from './render-all'
 import { renderCarouselFromArgv } from './render-carousel'
+import { runSelfTestFromArgv } from './self-test'
 
 export async function runCli(argv: string[] = process.argv.slice(2)) {
   const [command, ...rest] = argv
@@ -34,6 +35,9 @@ export async function runCli(argv: string[] = process.argv.slice(2)) {
     case 'build-pages':
       await buildPagesFromArgv(rest)
       return
+    case 'self-test':
+      await runSelfTestFromArgv(rest)
+      return
     default:
       throw new Error(`Unknown command: ${command}`)
   }
@@ -47,6 +51,7 @@ Commands:
   render <slug>         Render one carousel preview route to PNG files
   render-all            Render PNG files for every carousel in the directory
   rebuild-source <slug> Rebuild published carousels from an existing local source package
+  self-test <slug>      Audit one source package for drift, weak titles, duplicates, and stale artifacts
   build-pages           Build the static site and PNG export bundle for Pages
   help                  Show this help
 
@@ -54,6 +59,7 @@ Examples:
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID --slug my-topic
   content-carousel rebuild-source my-topic --max-segments 8
+  content-carousel self-test my-topic
   content-carousel render ai-memory-wall
   content-carousel build-pages
 `)

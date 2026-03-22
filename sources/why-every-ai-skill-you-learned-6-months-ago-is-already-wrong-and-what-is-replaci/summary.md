@@ -6,13 +6,36 @@
 
 ## Carousels created automatically
 - Source slug: why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci
-- Carousel count: 6
-- why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager → /carousel/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager (from segment-18, 00:05:13 → 00:05:29, score 19)
-- why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures → /carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures (from segment-78, 00:21:59 → 00:22:13, score 17)
-- why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be → /carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be (from segment-49, 00:14:01 → 00:14:16, score 16)
-- why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i → /carousel/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i (from segment-69, 00:19:20 → 00:19:34, score 12)
-- why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati → /carousel/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati (from segment-97, 00:26:56 → 00:27:13, score 10)
-- why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu → /carousel/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu (from segment-62, 00:17:33 → 00:17:46, score 10)
+- Carousel count: 2
+- why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager → /carousel/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager (brief brief-segment-18 from segment-18, 00:05:13 → 00:05:29, score 19)
+- why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures → /carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures (brief brief-segment-78 from segment-78, 00:21:59 → 00:22:13, score 17)
+
+## Published briefs
+
+### #1 — So the skill is maintaining the calibration, not having it once.
+- Brief: brief-segment-18
+- Primary idea: segment-18
+- Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
+- Why it matters: I've seen two structures emerging here that are significant, right?
+- Support:
+  - I've seen two structures emerging here that are significant, right?
+  - The first is a team of one.
+  - If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+  - The skill is going to be triaging your own attention in real time.
+- Distinct from: brief-segment-78
+
+
+### #2 — I've seen two structures emerging here that are significant, right?
+- Brief: brief-segment-78
+- Primary idea: segment-78
+- Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
+- Why it matters: The first is a team of one.
+- Support:
+  - A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+  - This is much much more important.
+  - Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
+- Distinct from: brief-segment-18
+
 
 ## Published ideas
 
@@ -40,54 +63,31 @@
   - contains enough complete thoughts to turn into multiple slides
 
 
+## Candidate ideas not published this run
+
 ### #3 — The skill is going to be triaging your own attention in real time.
-- Status: published
-- Score: 16
+- Status: candidate
+- Reason: Strong candidate kept in the source package but not promoted to a published carousel in this run.
 - Time: 00:14:01 → 00:14:16
-- Hook: If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.
-- Why it could work:
-  - contains strong hook language instead of bland exposition
-  - has contrast/tension, which usually makes better post framing
-  - includes enough specificity to avoid sounding generic
-  - sounds grounded in lived or practical experience
-  - contains enough complete thoughts to turn into multiple slides
 
 
 ### #6 — This is much much more important.
-- Status: published
-- Score: 12
+- Status: candidate
+- Reason: Strong candidate kept in the source package but not promoted to a published carousel in this run.
 - Time: 00:19:20 → 00:19:34
-- Hook: This is much much more important.
-- Why it could work:
-  - contains strong hook language instead of bland exposition
-  - includes enough specificity to avoid sounding generic
-  - sounds grounded in lived or practical experience
-  - contains enough complete thoughts to turn into multiple slides
 
 
 ### #11 — If you run an organization, the question isn't are we using AI.
-- Status: published
-- Score: 10
+- Status: candidate
+- Reason: Strong candidate kept in the source package but not promoted to a published carousel in this run.
 - Time: 00:26:56 → 00:27:13
-- Hook: If you run an organization, the question isn't are we using AI.
-- Why it could work:
-  - contains strong hook language instead of bland exposition
-  - includes enough specificity to avoid sounding generic
-  - contains enough complete thoughts to turn into multiple slides
 
 
 ### #12 — When you see, you know, cursor hitting stunning numbers with a small number of people
-- Status: published
-- Score: 10
+- Status: candidate
+- Reason: Strong candidate kept in the source package but not promoted to a published carousel in this run.
 - Time: 00:17:33 → 00:17:46
-- Hook: February and the person whose boundary sense was current last August are operating worlds apart.
-- Why it could work:
-  - contains strong hook language instead of bland exposition
-  - sounds grounded in lived or practical experience
-  - contains enough complete thoughts to turn into multiple slides
 
-
-## Candidate ideas not published this run
 
 ### #13 — The air inside is everything AI agents can do reliably today.
 - Status: candidate
@@ -126,4 +126,4 @@
 - Rejection notes: Starts with lowercase text, which usually indicates a fragment.
 
 ## Editorial note
-Published ideas are the only ones materialized as markdown carousels. The source package keeps the broader ideas list so re-ingest can reselect without polluting the site or export indexes.
+Published ideas are now promoted into explicit briefs before carousels are generated. The source package keeps ideas plus briefs so a later pass can improve distinctness without re-ingesting the transcript.

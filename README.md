@@ -16,6 +16,7 @@ Primary commands:
 ./content-carousel youtube <youtube-url>
 ./content-carousel render <slug>
 ./content-carousel render-all
+./content-carousel self-test <source-slug>
 ./content-carousel build-pages
 ```
 
@@ -164,9 +165,10 @@ One command now does the practical first pass:
 3. writes source artifacts into `sources/<source-slug>/`
 4. ranks transcript segments into idea candidates
 5. rejects weak or overlapping ideas
-6. publishes up to `--max-segments` selected ideas as markdown carousels
-7. removes superseded carousel/export artifacts from earlier ingests of the same source
-8. refreshes `carousels/index.json` as a generated compatibility artifact
+6. promotes the strongest surviving ideas into distinct editorial briefs
+7. publishes up to `--max-segments` briefs as markdown carousels
+8. removes superseded carousel/export artifacts from earlier ingests of the same source
+9. refreshes `carousels/index.json` as a generated compatibility artifact
 
 Created files look like this:
 
@@ -176,6 +178,7 @@ sources/<source-slug>/raw-transcript.md
 sources/<source-slug>/clean-transcript.md
 sources/<source-slug>/segments.json
 sources/<source-slug>/ideas.json
+sources/<source-slug>/briefs.json
 sources/<source-slug>/summary.md
 carousels/<carousel-slug>/carousel.md
 carousels/index.json
@@ -350,4 +353,5 @@ pnpm lint
 - PNG generation uses Playwright screenshots of the rendered Pages-safe site.
 - The markdown parser intentionally supports a narrow authoring format right now: frontmatter + slide separators + paragraphs/lists.
 - `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
+- `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, weak/duplicate titles, and export drift before you bother publishing.
 - If you add a carousel and want it public, it still needs to be committed and pushed to `main`. Pages is public, not magical.

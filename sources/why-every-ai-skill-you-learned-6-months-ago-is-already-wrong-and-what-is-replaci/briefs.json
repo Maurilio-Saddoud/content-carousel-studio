@@ -1,0 +1,45 @@
+[
+  {
+    "id": "brief-segment-18",
+    "primaryIdeaId": "segment-18",
+    "supportingIdeaIds": [
+      "segment-78",
+      "segment-49",
+      "segment-69"
+    ],
+    "thesis": "So the skill is maintaining the calibration, not having it once.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "I've seen two structures emerging here that are significant, right?",
+    "supportPoints": [
+      "I've seen two structures emerging here that are significant, right?",
+      "The first is a team of one.",
+      "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.",
+      "The skill is going to be triaging your own attention in real time."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-78"
+    ],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
+  },
+  {
+    "id": "brief-segment-78",
+    "primaryIdeaId": "segment-78",
+    "supportingIdeaIds": [
+      "segment-18",
+      "segment-49",
+      "segment-69"
+    ],
+    "thesis": "I've seen two structures emerging here that are significant, right?",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "The first is a team of one.",
+    "supportPoints": [
+      "A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.",
+      "This is much much more important.",
+      "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-18"
+    ],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
+  }
+]

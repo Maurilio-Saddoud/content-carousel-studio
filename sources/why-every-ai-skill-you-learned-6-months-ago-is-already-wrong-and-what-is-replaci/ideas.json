@@ -37,7 +37,7 @@
       "lengthPenalty": 0
     },
     "status": "published",
-    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "selectionReason": "Selected for publication as one of the top 2 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
   },
@@ -77,7 +77,7 @@
       "lengthPenalty": 0
     },
     "status": "published",
-    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "selectionReason": "Selected for publication as one of the top 2 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
   },
@@ -118,10 +118,9 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "published",
-    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
-    "rejectionReasons": [],
-    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
+    "status": "candidate",
+    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
+    "rejectionReasons": []
   },
   {
     "id": "segment-17",
@@ -242,10 +241,9 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "published",
-    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
-    "rejectionReasons": [],
-    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i"
+    "status": "candidate",
+    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
+    "rejectionReasons": []
   },
   {
     "id": "segment-31",
@@ -451,10 +449,9 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "published",
-    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
-    "rejectionReasons": [],
-    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati"
+    "status": "candidate",
+    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
+    "rejectionReasons": []
   },
   {
     "id": "segment-62",
@@ -491,10 +488,9 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "published",
-    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
-    "rejectionReasons": [],
-    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu"
+    "status": "candidate",
+    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
+    "rejectionReasons": []
   },
   {
     "id": "segment-01",

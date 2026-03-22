@@ -87,7 +87,20 @@ type Carousel = {
 
 type CarouselDirectoryItem = Omit<Carousel, 'slides'>
 
+type Brief = {
+  id: string
+  primaryIdeaId: string
+  supportingIdeaIds: string[]
+  thesis: string
+  audience: string
+  whyItMatters: string
+  supportPoints: string[]
+  distinctFromBriefIds: string[]
+  carouselSlug?: string
+}
+
 type CarouselBundle = {
+  brief: Brief
   idea: Idea
   carousel: Carousel
 }
@@ -108,8 +121,10 @@ type SourceManifest = {
     threshold?: string
   }
   ideaCount?: number
+  briefCount?: number
   publishedIdeaIds?: string[]
   selectedSegmentIds?: string[]
+  briefs?: Array<{ id?: string; primaryIdeaId?: string; thesis?: string; slug?: string }>
   carousels?: Array<{ segmentId?: string; slug?: string; title?: string; previewPath?: string; carouselPath?: string }>
   createdFiles?: string[]
 }
@@ -158,7 +173,8 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
     throw new Error('Could not find any usable transcript segments after editorial filtering.')
   }
 
-  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, publishedIdeas)
+  const briefs = buildBriefs(publishedIdeas, ideas, sourceSlug, existingSlugs)
+  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas)
   await removeStalePublishedArtifacts(previousManifest?.carousels ?? [], carouselBundles)
 
   for (const bundle of carouselBundles) {
@@ -167,7 +183,7 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
   }
   await syncCarouselDirectoryIndex()
 
-  const summary = buildSummary(metadata, sourceSlug, carouselBundles, ideas)
+  const summary = buildSummary(metadata, sourceSlug, carouselBundles, ideas, briefs)
 
   const sourceManifest = {
     slug: sourceSlug,
@@ -184,7 +200,14 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
       threshold: 'Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates).',
     },
     ideaCount: ideas.length,
+    briefCount: briefs.length,
     publishedIdeaIds: publishedIdeas.map((idea) => idea.id),
+    briefs: briefs.map((brief) => ({
+      id: brief.id,
+      primaryIdeaId: brief.primaryIdeaId,
+      thesis: brief.thesis,
+      slug: brief.carouselSlug,
+    })),
     carousels: carouselBundles.map((bundle) => ({
       slug: bundle.carousel.slug,
       segmentId: bundle.idea.id,
@@ -198,6 +221,7 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
       `sources/${sourceSlug}/clean-transcript.md`,
       `sources/${sourceSlug}/segments.json`,
       `sources/${sourceSlug}/ideas.json`,
+      `sources/${sourceSlug}/briefs.json`,
       `sources/${sourceSlug}/summary.md`,
       ...carouselBundles.map((bundle) => `carousels/${bundle.carousel.slug}/carousel.md`),
       'carousels/index.json',
@@ -209,6 +233,7 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
   await writeFile(path.join(sourceDir, 'clean-transcript.md'), renderCleanTranscript(metadata, cleanTranscript), 'utf8')
   await writeFile(path.join(sourceDir, 'segments.json'), `${JSON.stringify(rankedSegments, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'ideas.json'), `${JSON.stringify(ideas, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(sourceDir, 'briefs.json'), `${JSON.stringify(briefs, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'summary.md'), summary, 'utf8')
 
   console.log(`Created transcript package and ${carouselBundles.length} carousel${carouselBundles.length === 1 ? '' : 's'} for ${sourceSlug}`)
@@ -244,10 +269,12 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
   const publishLimit = args.maxSegments
   const ideas = buildIdeas(segments, sourceSlug, publishLimit, existingSlugs)
   const publishedIdeas = ideas.filter((idea) => idea.status === 'published')
-  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, publishedIdeas)
+  const briefs = buildBriefs(publishedIdeas, ideas, sourceSlug, existingSlugs)
+  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas)
   await removeStalePublishedArtifacts(sourceManifest.carousels ?? [], carouselBundles)
   await writeFile(path.join(sourceDir, 'segments.json'), `${JSON.stringify(segments, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'ideas.json'), `${JSON.stringify(ideas, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(sourceDir, 'briefs.json'), `${JSON.stringify(briefs, null, 2)}\n`, 'utf8')
 
   for (const bundle of carouselBundles) {
     await mkdir(path.resolve('carousels', bundle.carousel.slug), { recursive: true })
@@ -263,13 +290,20 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
     whisperModel: sourceManifest.whisperModel,
     video: sourceManifest.video,
     transcriptLineCount: sourceManifest.transcriptLineCount,
-    defaultBehavior: 'creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas',
+    defaultBehavior: 'creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs',
     ideaCount: ideas.length,
+    briefCount: briefs.length,
     publishedIdeaIds: publishedIdeas.map((idea) => idea.id),
     ideaRule: {
       publishLimit,
       threshold: 'Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates).',
     },
+    briefs: briefs.map((brief) => ({
+      id: brief.id,
+      primaryIdeaId: brief.primaryIdeaId,
+      thesis: brief.thesis,
+      slug: brief.carouselSlug,
+    })),
     carousels: carouselBundles.map((bundle) => ({
       slug: bundle.carousel.slug,
       segmentId: bundle.idea.id,
@@ -283,12 +317,13 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
       `sources/${sourceSlug}/clean-transcript.md`,
       `sources/${sourceSlug}/segments.json`,
       `sources/${sourceSlug}/ideas.json`,
+      `sources/${sourceSlug}/briefs.json`,
       `sources/${sourceSlug}/summary.md`,
       ...carouselBundles.map((bundle) => `carousels/${bundle.carousel.slug}/carousel.md`),
       'carousels/index.json',
     ],
   }, null, 2)}\n`, 'utf8')
-  await writeFile(path.join(sourceDir, 'summary.md'), buildSummary(metadata, sourceSlug, carouselBundles, ideas), 'utf8')
+  await writeFile(path.join(sourceDir, 'summary.md'), buildSummary(metadata, sourceSlug, carouselBundles, ideas, briefs), 'utf8')
 
   console.log(`Rebuilt ${carouselBundles.length} carousel${carouselBundles.length === 1 ? '' : 's'} for ${sourceSlug}`)
 }
@@ -784,6 +819,16 @@ function cleanSentence(text: string) {
   return text.replace(/^[-–—:;,\s]+/, '').replace(/\s+/g, ' ').trim()
 }
 
+function isWeakDisplayLine(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return true
+  if (cleaned.length < 24) return true
+  if (/,$/.test(cleaned)) return true
+  if (/^(for|to|and|but|or)\b/i.test(cleaned)) return true
+  if (/\b(this|that|it) is (much )?more important\b/i.test(cleaned)) return true
+  return false
+}
+
 function trimSentence(text: string, max: number) {
   return pickDisplayLine([text], { preferredMax: max }) || cleanSentence(text)
 }
@@ -817,24 +862,69 @@ function splitIntoClauses(text: string) {
     .filter(Boolean)
 }
 
-function buildCarouselBundles(metadata: VideoMetadata, sourceSlug: string, ideas: Idea[]): CarouselBundle[] {
-  return ideas.map((idea) => {
-    const carouselSlug = idea.carouselSlug || buildCarouselSlug(sourceSlug, idea)
-    const carousel = buildCarousel(metadata, sourceSlug, carouselSlug, idea, ideas)
-    return {
+function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: string, existingSlugs: ExistingSlugMap = {}) {
+  const briefs: Brief[] = []
+  const usedTheses = new Set<string>()
+  const usedSupport = new Set<string>()
+
+  for (const idea of publishedIdeas) {
+    const supportingIdeas = allIdeas
+      .filter((candidate) => candidate.id !== idea.id)
+      .filter((candidate) => candidate.status !== 'rejected')
+      .filter((candidate) => !areNearDuplicates(candidate, idea))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3)
+
+    const thesis = pickDistinctThesis([
+      idea.hook,
+      idea.titleSuggestion,
+      ...getCompleteThoughts(idea.text),
+      extractTakeaway(idea.text, supportingIdeas),
+    ], usedTheses)
+
+    const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport)
+
+    briefs.push({
+      id: `brief-${idea.id}`,
+      primaryIdeaId: idea.id,
+      supportingIdeaIds: supportingIdeas.map((entry) => entry.id),
+      thesis,
+      audience: inferAudience(idea.text, supportingIdeas),
+      whyItMatters: inferWhyItMatters(idea, supportingIdeas, thesis),
+      supportPoints,
+      distinctFromBriefIds: publishedIdeas.filter((entry) => entry.id !== idea.id).map((entry) => `brief-${entry.id}`),
+      carouselSlug: existingSlugs[idea.id] || buildCarouselSlug(sourceSlug, idea),
+    })
+  }
+
+  return briefs
+}
+
+function buildCarouselBundles(metadata: VideoMetadata, sourceSlug: string, briefs: Brief[], ideas: Idea[]): CarouselBundle[] {
+  return briefs.flatMap((brief) => {
+    const idea = ideas.find((entry) => entry.id === brief.primaryIdeaId)
+    if (!idea) return []
+    const carouselSlug = brief.carouselSlug || idea.carouselSlug || buildCarouselSlug(sourceSlug, idea)
+    const carousel = buildCarousel(metadata, sourceSlug, carouselSlug, brief, idea, ideas)
+    return [{
+      brief: { ...brief, carouselSlug },
       idea: { ...idea, carouselSlug },
       carousel,
-    }
+    }]
   })
 }
 
-function buildSummary(metadata: VideoMetadata, sourceSlug: string, carouselBundles: CarouselBundle[], ideas: Idea[]) {
+function buildSummary(metadata: VideoMetadata, sourceSlug: string, carouselBundles: CarouselBundle[], ideas: Idea[], briefs: Brief[]) {
   const published = ideas.filter((idea) => idea.status === 'published')
   const candidates = ideas.filter((idea) => idea.status === 'candidate').slice(0, 5)
   const rejected = ideas.filter((idea) => idea.status === 'rejected').slice(0, 5)
   return `# Source Summary\n\n## Video\n- Title: ${metadata.title}\n- Creator: ${metadata.authorName ?? 'Unknown'}\n\n## Carousels created automatically\n- Source slug: ${sourceSlug}\n- Carousel count: ${carouselBundles.length}\n${carouselBundles
     .map(
-      (bundle) => `- ${bundle.carousel.slug} → /carousel/${bundle.carousel.slug} (from ${bundle.idea.id}, ${bundle.idea.start} → ${bundle.idea.end}, score ${bundle.idea.score})`,
+      (bundle) => `- ${bundle.carousel.slug} → /carousel/${bundle.carousel.slug} (brief ${bundle.brief.id} from ${bundle.idea.id}, ${bundle.idea.start} → ${bundle.idea.end}, score ${bundle.idea.score})`,
+    )
+    .join('\n')}\n\n## Published briefs\n${briefs
+    .map(
+      (brief, index) => `\n### #${index + 1} — ${brief.thesis}\n- Brief: ${brief.id}\n- Primary idea: ${brief.primaryIdeaId}\n- Audience: ${brief.audience}\n- Why it matters: ${brief.whyItMatters}\n- Support:\n${brief.supportPoints.map((point) => `  - ${point}`).join('\n')}\n- Distinct from: ${brief.distinctFromBriefIds.join(', ') || 'n/a'}\n`,
     )
     .join('\n')}\n\n## Published ideas\n${published
     .map(
@@ -852,77 +942,114 @@ function buildSummary(metadata: VideoMetadata, sourceSlug: string, carouselBundl
         (idea) => `\n### #${idea.rank} — ${idea.titleSuggestion}\n- Status: ${idea.status}\n- Reason: ${idea.selectionReason}\n- Rejection notes: ${idea.rejectionReasons.join('; ')}\n`,
       )
       .join('\n')
-    : '\nNo top-ranked ideas were rejected.\n'}\n## Editorial note\nPublished ideas are the only ones materialized as markdown carousels. The source package keeps the broader ideas list so re-ingest can reselect without polluting the site or export indexes.\n`
+    : '\nNo top-ranked ideas were rejected.\n'}\n## Editorial note\nPublished ideas are now promoted into explicit briefs before carousels are generated. The source package keeps ideas plus briefs so a later pass can improve distinctness without re-ingesting the transcript.\n`
 }
 
-function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug: string, primary: Idea, ideas: Idea[]): Carousel {
-  const companionSegments = ideas.filter((idea) => idea.id !== primary.id)
+function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug: string, brief: Brief, primary: Idea, ideas: Idea[]): Carousel {
+  const companionSegments = ideas.filter((idea) => brief.supportingIdeaIds.includes(idea.id) || idea.id !== primary.id)
   const primaryThoughts = getCompleteThoughts(primary.text)
   const companionThoughts = companionSegments.flatMap((segment) => getCompleteThoughts(segment.text))
   const support = uniqueNormalized([...primaryThoughts.slice(1), ...companionThoughts]).filter((sentence) => sentence.length >= 24)
 
-  const opening = pickDisplayLine([
+  const opening = chooseOpeningTitle([
+    brief.thesis,
     primaryThoughts[0] ?? '',
     primary.hook,
     primary.titleSuggestion,
+    extractTakeaway(primary.text, companionSegments),
     'AI operating models are getting stale faster than most teams realize.',
-  ], { preferredMax: 84 }) ?? 'AI operating models are getting stale faster than most teams realize.'
+  ])
 
   const frameworkItems = uniqueNormalized([
+    ...brief.supportPoints,
     support[5] ?? 'Update your mental model before you update the workflow.',
     support[8] ?? 'Decide what deserves human review and what can safely flow through.',
     extractTakeaway(primary.text, companionSegments),
   ]).slice(0, 3)
 
+  const usedTitles = new Set<string>()
+  const takeTitle = (...candidates: string[]) => pickUniqueTitle(usedTitles, candidates)
+
+  const slide1Title = takeTitle(
+    opening,
+    brief.thesis,
+    primary.hook,
+    primary.titleSuggestion,
+    'AI operating models are getting stale faster than most teams realize.',
+  )
+
+  const slide2Title = takeTitle(
+    brief.whyItMatters,
+    primaryThoughts[1] ?? '',
+    primaryThoughts[2] ?? '',
+    support[0] ?? '',
+    titleFromIdea(primary, 'This matters because stale mental models break fast.'),
+  )
+
+  const slide3Title = takeTitle(
+    brief.supportPoints[0] ?? '',
+    primaryThoughts[2] ?? '',
+    primaryThoughts[3] ?? '',
+    titleFromSentence(support[4] ?? ''),
+    titleFromIdea(primary, 'The real skill is recalibrating as the boundary keeps moving.'),
+  )
+
+  const slide4Title = takeTitle(
+    brief.supportPoints[1] ?? '',
+    primaryThoughts[3] ?? '',
+    primaryThoughts[4] ?? '',
+    titleFromSentence(companionSegments[0]?.hook ?? ''),
+    titleFromIdea(primary, 'Human attention becomes the real bottleneck.'),
+  )
+
+  const slide5Title = takeTitle(
+    brief.supportPoints[2] ?? '',
+    primaryThoughts[4] ?? '',
+    extractTakeaway(primary.text, companionSegments),
+    titleFromIdea(primary, 'The edge is keeping your operating model current.'),
+    'The edge is keeping your operating model current.',
+  )
+
+  const slide4Intro = uniqueNormalized([
+    titleFromSentence(support[7] ?? ''),
+    support[6] ?? '',
+    'The workflow needs clearer review boundaries.',
+  ])[0] ?? 'The workflow needs clearer review boundaries.'
+
   const slides: CarouselSlide[] = [
     {
       id: '01',
-      title: opening,
+      title: slide1Title,
       body: '',
     },
     {
       id: '02',
-      title: pickDisplayLine([
-        primaryThoughts[1] ?? '',
-        support[0] ?? '',
-        'This matters because stale mental models break fast.',
-      ], { preferredMax: 84 }) ?? 'This matters because stale mental models break fast.',
+      title: slide2Title,
       body: buildBodyLines([
+        brief.whyItMatters,
         support[2] ?? 'Most people are still acting on an old picture of what AI can and cannot do.',
         support[3] ?? 'That creates wasted effort, bad delegation, and skepticism aimed at the wrong failure modes.',
       ]),
     },
     {
       id: '03',
-      title: pickDisplayLine([
-        companionSegments[0]?.hook ?? '',
-        support[4] ?? '',
-        'The skill is maintaining calibration as the boundary keeps moving.',
-      ], { preferredMax: 84 }) ?? 'The skill is maintaining calibration as the boundary keeps moving.',
+      title: slide3Title,
       body: buildQuoteBody([
+        brief.supportPoints[0] ?? '',
         support[5] ?? 'What worked as a rule of thumb a few months ago can already be wrong now.',
         support[6] ?? 'Operators need current failure models, not generic vibes.',
       ]),
     },
     {
       id: '04',
-      title: pickDisplayLine([
-        companionSegments[1]?.hook ?? '',
-        support[7] ?? '',
-        'Human attention becomes the real bottleneck.',
-      ], { preferredMax: 84 }) ?? 'Human attention becomes the real bottleneck.',
-      body: buildFrameworkBody(
-        support[7] ?? 'The workflow needs clearer review boundaries.',
-        frameworkItems,
-      ),
+      title: slide4Title,
+      body: buildFrameworkBody(slide4Intro, frameworkItems),
     },
     {
       id: '05',
-      title: pickDisplayLine([
-        extractTakeaway(primary.text, companionSegments),
-        'The edge is keeping your operating model current.',
-      ], { preferredMax: 84 }) ?? 'The edge is keeping your operating model current.',
+      title: slide5Title,
       body: buildBodyLines([
+        brief.audience,
         'Use the source package as evidence, not as final copy.',
         'Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.',
       ]),
@@ -950,6 +1077,38 @@ function buildBodyLines(lines: string[]) {
     .filter((line) => !/[.…]$/.test(line) || /[.!?]$/.test(line))
     .slice(0, 2)
     .join('\n\n')
+}
+
+function pickUniqueTitle(usedTitles: Set<string>, candidates: string[]) {
+  const normalizedCandidates = candidates
+    .map((candidate) => cleanSentence(candidate))
+    .filter(Boolean)
+
+  for (const candidate of normalizedCandidates) {
+    const key = candidate.toLowerCase()
+    if (isWeakDisplayLine(candidate) || usedTitles.has(key)) continue
+    usedTitles.add(key)
+    return candidate
+  }
+
+  const fallback = normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase())) || 'Untitled slide'
+  usedTitles.add(fallback.toLowerCase())
+  return fallback
+}
+
+function chooseOpeningTitle(candidates: string[]) {
+  const normalizedCandidates = candidates
+    .map((candidate) => cleanSentence(candidate))
+    .filter(Boolean)
+
+  const strong = normalizedCandidates.find((candidate) => !isWeakDisplayLine(candidate) && candidate.length <= 84)
+  if (strong) return strong
+
+  const picked = pickDisplayLine(normalizedCandidates, { preferredMax: 84 })
+  if (picked && !isWeakDisplayLine(picked)) return picked
+
+  const fallback = normalizedCandidates.find((candidate) => candidate.length >= 28)
+  return fallback || 'AI operating models are getting stale faster than most teams realize.'
 }
 
 function buildQuoteBody(lines: string[]) {
@@ -989,6 +1148,30 @@ function normalizeForSlide(text: string) {
     .trim()
 }
 
+function titleFromSentence(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return ''
+
+  const clauses = splitIntoClauses(cleaned)
+    .map((part) => cleanSentence(part))
+    .filter(Boolean)
+    .filter((part) => !isWeakDisplayLine(part))
+    .sort((a, b) => b.length - a.length)
+
+  return clauses[0] ?? cleaned
+}
+
+function titleFromIdea(idea: Idea, fallback: string) {
+  const candidates = [
+    titleFromSentence(idea.hook),
+    titleFromSentence(idea.titleSuggestion),
+    ...getCompleteThoughts(idea.text).map((sentence) => titleFromSentence(sentence)),
+    fallback,
+  ]
+
+  return candidates.find((candidate) => candidate && !isWeakDisplayLine(candidate)) ?? fallback
+}
+
 function extractTakeaway(primaryText: string, segments: Segment[]) {
   const candidate = [
     ...splitSentences(primaryText),
@@ -997,6 +1180,59 @@ function extractTakeaway(primaryText: string, segments: Segment[]) {
   ].find((sentence) => /\b(skill|attention|boundary|calibration|system|workflow|operators?)\b/i.test(sentence))
 
   return candidate ?? 'The edge is keeping your operating model current.'
+}
+
+function pickDistinctThesis(candidates: string[], usedTheses: Set<string>) {
+  const normalized = candidates.map((candidate) => cleanSentence(candidate)).filter(Boolean)
+  for (const candidate of normalized) {
+    const key = slugify(candidate)
+    if (!isWeakDisplayLine(candidate) && !usedTheses.has(key)) {
+      usedTheses.add(key)
+      return candidate
+    }
+  }
+
+  const fallback = normalized[0] ?? 'A stronger operating model beats a stale workflow.'
+  usedTheses.add(slugify(fallback))
+  return fallback
+}
+
+function inferAudience(primary: string, support: Idea[]) {
+  const combined = `${primary} ${support.map((idea) => idea.text).join(' ')}`.toLowerCase()
+  if (/organization|team|manager|operator|workflow|domain/.test(combined)) return 'Audience: operators, team leads, and founders redesigning AI-assisted workflows.'
+  if (/product manager|designer|engineer/.test(combined)) return 'Audience: product, design, and engineering leaders figuring out where AI changes the work.'
+  return 'Audience: people using AI in real work, not just talking about it.'
+}
+
+function inferWhyItMatters(primary: Idea, support: Idea[], thesis: string) {
+  const thesisKey = slugify(thesis)
+  const picked = [
+    ...getCompleteThoughts(primary.text),
+    ...support.flatMap((idea) => getCompleteThoughts(idea.text)),
+    'If your mental model is stale, you redesign the wrong part of the workflow.',
+  ].find((line) => slugify(line) !== thesisKey && !isWeakDisplayLine(line))
+
+  return picked ?? 'If your mental model is stale, you redesign the wrong part of the workflow.'
+}
+
+function buildSupportPoints(primary: Idea, support: Idea[], usedSupport: Set<string>) {
+  const points = uniqueNormalized([
+    ...getCompleteThoughts(primary.text).slice(1),
+    ...support.flatMap((idea) => getCompleteThoughts(idea.text).slice(0, 2)),
+  ])
+    .filter((line) => !isWeakDisplayLine(line))
+
+  const selected: string[] = []
+  for (const point of points) {
+    const key = slugify(point)
+    if (usedSupport.has(key)) continue
+    usedSupport.add(key)
+    selected.push(point)
+    if (selected.length >= 4) break
+  }
+
+  if (selected.length > 0) return selected
+  return points.slice(0, 4)
 }
 
 function buildCarouselSlug(sourceSlug: string, segment: Segment) {

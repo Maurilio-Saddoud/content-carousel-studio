@@ -1,6 +1,6 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
-title: "I've seen two structures emerging here that are significant, right?"
+title: "I think two operating structures are emerging."
 description: "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:21:59 → 00:22:13."
 sourceType: transcript
 aspectRatio: portrait
@@ -12,38 +12,45 @@ theme:
   muted: "#71767B"
 ---
 
-# I've seen two structures emerging here that are significant, right?
+# I think two operating structures are emerging.
+
+And the difference between them matters a lot.
 
 ---
 
 # The first is a team of one.
 
-If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+One strong operator,
+working with multiple agent workflows,
+across a domain.
 
-The skill is going to be triaging your own attention in real time.
-
----
-
-# For a product manager,
-
-> Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
-
-This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
+Not because the work got simpler.
+Because the leverage changed.
 
 ---
 
-# If you run an organization, the question isn't are we using AI.
+# The bottleneck becomes judgment, not output.
 
-If you run an organization, the question isn't are we using AI.
+If you have a hundred streams of agent output all day,
+you cannot review everything at the same depth.
 
-1. Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
-2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
-3. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+So judgment becomes the bottleneck.
 
 ---
 
-# The edge is keeping your operating model current.
+# The second structure shows up at the org level.
 
-Use the source package as evidence, not as final copy.
+Not “are we using AI?”
 
-Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.
+But:
+**do we have people whose job is to know where the AI-human boundary is now?**
+
+---
+
+# That is where the advantage compounds.
+
+The advantage is not just model access.
+
+It is having people who can keep the boundary current,
+redesign workflows around it,
+and compound that advantage before everyone else catches up.
