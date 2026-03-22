@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises'
-import { spawn } from 'node:child_process'
 import path from 'node:path'
 import { getCarouselDirectory } from '@/lib/carousels'
+import { renderCarouselFromArgv } from './render-carousel'
 
 type DirectoryItem = {
   slug: string
@@ -24,11 +24,15 @@ const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carous
 const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.env.BASE_PATH ?? '')
 const publicSiteUrl = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL)
 
-async function main() {
+export async function renderAllFromArgv(argv: string[] = process.argv.slice(2)) {
+  if (argv.length > 0) {
+    throw new Error(`Unknown arguments: ${argv.join(' ')}`)
+  }
+
   const items = await getCarouselDirectory() as DirectoryItem[]
 
   for (const item of items) {
-    await run('pnpm', ['render', item.slug], process.env)
+    await renderCarouselFromArgv([item.slug])
   }
 
   await mkdir(path.resolve('public', 'exports'), { recursive: true })
@@ -45,25 +49,6 @@ async function main() {
 
   await writeFile(path.resolve('public', 'exports', 'index.json'), `${JSON.stringify(exportIndex, null, 2)}\n`, 'utf8')
   await writeFile(path.resolve('public', 'exports', 'index.html'), buildExportsIndexHtml(exportIndex), 'utf8')
-}
-
-async function run(command: string, args: string[], env: NodeJS.ProcessEnv) {
-  await new Promise<void>((resolve, reject) => {
-    const child = spawn(command, args, {
-      stdio: 'inherit',
-      env,
-    })
-
-    child.on('error', reject)
-    child.on('exit', (code) => {
-      if (code === 0) {
-        resolve()
-        return
-      }
-
-      reject(new Error(`${command} ${args.join(' ')} exited with code ${code ?? 'unknown'}`))
-    })
-  })
 }
 
 function buildExportsIndexHtml(items: ExportIndexItem[]) {
@@ -127,8 +112,3 @@ function normalizePublicSiteUrl(value?: string) {
   }
   return undefined
 }
-
-main().catch((error) => {
-  console.error(error)
-  process.exit(1)
-})

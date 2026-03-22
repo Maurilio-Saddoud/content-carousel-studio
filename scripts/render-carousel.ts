@@ -31,14 +31,15 @@ const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carous
 const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.env.BASE_PATH ?? '')
 const publicSiteUrl = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL)
 
-async function main() {
-  const slug = process.argv[2]
+export async function renderCarouselFromArgv(argv: string[] = process.argv.slice(2)) {
+  const options = parseArgs(argv)
+  const slug = options.slug
   if (!slug) {
-    console.error('Usage: pnpm render <slug>')
+    console.error('Usage: content-carousel render <slug> [--base-url http://127.0.0.1:3000]')
     process.exit(1)
   }
 
-  const baseUrl = process.env.CAROUSEL_BASE_URL ?? 'http://127.0.0.1:3000'
+  const baseUrl = options.baseUrl ?? process.env.CAROUSEL_BASE_URL ?? 'http://127.0.0.1:3000'
   const outDir = path.resolve('public', 'exports', slug)
   await mkdir(outDir, { recursive: true })
 
@@ -82,6 +83,34 @@ async function main() {
   await writeFile(path.join(outDir, 'index.html'), buildBatchHtml(manifest), 'utf8')
 
   console.log(`Rendered ${slides.length} slides to ${outDir}`)
+}
+
+function parseArgs(argv: string[]) {
+  const options: { slug?: string; baseUrl?: string } = {}
+
+  for (let i = 0; i < argv.length; i++) {
+    const current = argv[i]
+    if (!current) continue
+
+    if (!options.slug && !current.startsWith('--')) {
+      options.slug = current
+      continue
+    }
+
+    if (current === '--base-url') {
+      options.baseUrl = argv[++i]
+      continue
+    }
+
+    if (current.startsWith('--base-url=')) {
+      options.baseUrl = current.split('=').slice(1).join('=')
+      continue
+    }
+
+    throw new Error(`Unknown argument: ${current}`)
+  }
+
+  return options
 }
 
 async function readCarousel(slug: string): Promise<Carousel> {
@@ -164,8 +193,3 @@ function normalizePublicSiteUrl(value?: string) {
 function stripTrailingSlash(value: string) {
   return value.replace(/\/+$/, '')
 }
-
-main().catch((error) => {
-  console.error(error)
-  process.exit(1)
-})

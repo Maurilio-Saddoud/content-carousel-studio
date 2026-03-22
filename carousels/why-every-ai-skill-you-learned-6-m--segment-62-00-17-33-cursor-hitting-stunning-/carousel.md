@@ -1,6 +1,6 @@
 ---
-slug: "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person-"
-title: "Draft: AI operating models are getting stale faster than most teams realize."
+slug: "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-cursor-hitting-stunning-"
+title: "Draft: cursor hitting stunning numbers with a small number of people"
 description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:17:33 → 00:17:46)."
 sourceType: transcript
 aspectRatio: portrait
@@ -14,7 +14,7 @@ theme:
 
 eyebrow: AUTO DRAFT
 
-# AI operating models are getting stale faster than most teams realize.
+# cursor hitting stunning numbers with a small number of people
 
 This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
 
@@ -34,7 +34,7 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 eyebrow: THE REAL SHIFT
 
-# For a product manager,
+# The skill is maintaining calibration as the boundary keeps moving.
 
 The skill is going to be triaging your own attention in real time.
 

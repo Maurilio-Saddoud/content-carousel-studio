@@ -1,6 +1,6 @@
 ---
-slug: "why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go"
-title: "Draft: For a product manager,"
+slug: "why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-but-realizing-that-that-"
+title: "Draft: but realizing that that same"
 description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:05:13 → 00:05:29)."
 sourceType: transcript
 aspectRatio: portrait
@@ -14,7 +14,7 @@ theme:
 
 eyebrow: AUTO DRAFT
 
-# For a product manager,
+# but realizing that that same
 
 I've seen two structures emerging here that are significant, right?
 

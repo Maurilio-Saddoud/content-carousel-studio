@@ -8,7 +8,11 @@ const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.
 const publicSiteUrl = process.env.PUBLIC_SITE_URL ?? derivePublicSiteUrl()
 const serveRoot = path.resolve('.pages-serve')
 
-async function main() {
+export async function buildPagesFromArgv(argv: string[] = process.argv.slice(2)) {
+  if (argv.length > 0) {
+    throw new Error(`Unknown arguments: ${argv.join(' ')}`)
+  }
+
   const port = await getAvailablePort(Number(process.env.PAGES_RENDER_PORT ?? '4310'))
   const sharedEnv = {
     ...process.env,
@@ -119,8 +123,3 @@ function derivePublicSiteUrl() {
 
   return `https://example.github.io/${repoName}`
 }
-
-main().catch((error) => {
-  console.error(error)
-  process.exit(1)
-})

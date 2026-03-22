@@ -82,6 +82,8 @@ type DraftCarouselBundle = {
   briefMarkdown: string
 }
 
+type ExistingSlugMap = Record<string, string>
+
 const TRANSCRIPT_TOOL_PATH = path.resolve('../youtube-transcript-v1/yt_transcript.py')
 const RAW_TRANSCRIPT_RE = /^\[(\d{2}):(\d{2}):(\d{2})\]\s+(.*)$/
 const execFileAsync = promisify(execFile)
@@ -194,16 +196,23 @@ export async function rebuildDraftsFromSourceArgv(argv: string[] = process.argv.
   const sourceManifestRaw = await readFile(path.join(sourceDir, 'source.json'), 'utf8')
   const sourceManifest = JSON.parse(sourceManifestRaw) as {
     video?: VideoMetadata
+    draftCarousels?: Array<{ segmentId?: string; slug?: string }>
   }
   const segmentsRaw = await readFile(path.join(sourceDir, 'segments.json'), 'utf8')
-  const segments = JSON.parse(segmentsRaw) as Segment[]
+  const segments = refreshSegmentSuggestions(JSON.parse(segmentsRaw) as Segment[])
   const metadata = sourceManifest.video
 
   if (!metadata?.title) {
     throw new Error(`Source package ${sourceSlug} is missing video metadata in sources/${sourceSlug}/source.json`)
   }
 
-  const draftBundles = buildDraftCarouselBundles(metadata, sourceSlug, segments)
+  const existingSlugs = Object.fromEntries(
+    (sourceManifest.draftCarousels ?? [])
+      .map((entry) => [entry.segmentId, entry.slug])
+      .filter((entry): entry is [string, string] => Boolean(entry[0] && entry[1])),
+  )
+  const draftBundles = buildDraftCarouselBundles(metadata, sourceSlug, segments, existingSlugs)
+  await writeFile(path.join(sourceDir, 'segments.json'), `${JSON.stringify(segments, null, 2)}\n`, 'utf8')
 
   for (const bundle of draftBundles) {
     await mkdir(path.resolve('carousels', bundle.carousel.slug), { recursive: true })
@@ -424,6 +433,15 @@ function rankSegments(segments: Segment[]): Segment[] {
     .map((segment, index) => ({ ...segment, rank: index + 1 }))
 }
 
+function refreshSegmentSuggestions(segments: Segment[]) {
+  return segments.map((segment) => ({
+    ...segment,
+    titleSuggestion: suggestTitle(segment.text),
+    hook: suggestHook(segment.text),
+    whyItCouldWork: explainSegment(segment.scoreBreakdown, segment.text),
+  }))
+}
+
 function scoreSegment(text: string): SegmentScoreBreakdown {
   const lower = text.toLowerCase()
   const words = lower.split(/\s+/).filter(Boolean)
@@ -569,14 +587,14 @@ function countRegex(text: string, regex: RegExp) {
 
 function suggestTitle(text: string) {
   const sentences = getUsableSentences(text)
-  const best = sentences.find((sentence) => sentence.length >= 32 && sentence.length <= 110) ?? sentences[0] ?? text
-  return trimSentence(cleanSentence(best), 84)
+  const best = pickDisplayLine(sentences, { preferredMax: 84 })
+  return best || cleanSentence(text)
 }
 
 function suggestHook(text: string) {
   const sentences = getUsableSentences(text)
   const direct = sentences.find((sentence) => /\b(problem|mistake|truth|why|if|without|not|the skill|this is why)\b/i.test(sentence))
-  return trimSentence(cleanSentence(direct ?? sentences[0] ?? text), 120)
+  return pickDisplayLine([direct ?? '', ...sentences], { preferredMax: 120 }) || cleanSentence(text)
 }
 
 function explainSegment(score: SegmentScoreBreakdown, text: string) {
@@ -607,18 +625,52 @@ function getUsableSentences(text: string) {
     .filter((sentence) => !/^(and|but|so|because|which|that|then)\b/i.test(sentence))
 }
 
+function getCompleteThoughts(text: string) {
+  return getUsableSentences(text)
+    .filter((sentence) => /[.!?]$/.test(sentence))
+    .map((sentence) => normalizeForSlide(sentence))
+}
+
 function cleanSentence(text: string) {
   return text.replace(/^[-–—:;,\s]+/, '').replace(/\s+/g, ' ').trim()
 }
 
 function trimSentence(text: string, max: number) {
-  if (text.length <= max) return text
-  return `${text.slice(0, max - 1).trimEnd()}…`
+  return pickDisplayLine([text], { preferredMax: max }) || cleanSentence(text)
 }
 
-function buildDraftCarouselBundles(metadata: VideoMetadata, sourceSlug: string, segments: Segment[]): DraftCarouselBundle[] {
+function pickDisplayLine(candidates: string[], options: { preferredMax: number }) {
+  const normalized = candidates
+    .map((candidate) => cleanSentence(candidate))
+    .filter(Boolean)
+
+  const directFit = normalized.find((candidate) => candidate.length <= options.preferredMax)
+  if (directFit) return directFit
+
+  const clauseFits = normalized
+    .flatMap((candidate) => splitIntoClauses(candidate))
+    .map((candidate) => cleanSentence(candidate))
+    .filter((candidate) => candidate.length >= 18 && candidate.length <= options.preferredMax)
+    .filter((candidate) => !/^[a-z]/.test(candidate))
+    .filter((candidate) => !/^(and|but|so|because|which|that|then)\b/i.test(candidate))
+
+  if (clauseFits.length > 0) {
+    return clauseFits.sort((a, b) => b.length - a.length)[0]
+  }
+
+  return normalized.sort((a, b) => a.length - b.length)[0]
+}
+
+function splitIntoClauses(text: string) {
+  return text
+    .split(/(?<=[,;:])\s+|\s+[—–-]\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+}
+
+function buildDraftCarouselBundles(metadata: VideoMetadata, sourceSlug: string, segments: Segment[], existingSlugs: ExistingSlugMap = {}): DraftCarouselBundle[] {
   return segments.map((segment) => {
-    const carouselSlug = buildCarouselSlug(sourceSlug, segment)
+    const carouselSlug = existingSlugs[segment.id] || buildCarouselSlug(sourceSlug, segment)
     const carousel = buildDraftCarousel(metadata, sourceSlug, carouselSlug, segment, segments)
     return {
       segment,
@@ -652,38 +704,48 @@ function buildDraftNotes(metadata: VideoMetadata, sourceSlug: string, carousel: 
 
 function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug: string, primary: Segment, segments: Segment[]): Carousel {
   const companionSegments = segments.filter((segment) => segment.id !== primary.id)
-  const sentences = getUsableSentences(primary.text).filter((sentence) => sentence.length >= 24)
+  const primaryThoughts = getCompleteThoughts(primary.text)
+  const companionThoughts = companionSegments.flatMap((segment) => getCompleteThoughts(segment.text))
+  const support = uniqueNormalized([...primaryThoughts.slice(1), ...companionThoughts]).filter((sentence) => sentence.length >= 24)
 
-  const opening = normalizeForSlide(sentences[0] || primary.hook || primary.titleSuggestion)
-  const support = uniqueNormalized([
-    ...sentences.slice(1),
-    ...companionSegments.flatMap((segment) => splitSentences(segment.text).slice(0, 2).map((sentence) => normalizeForSlide(sentence))),
-  ]).filter((sentence) => sentence.length >= 24)
+  const opening = pickDisplayLine([
+    primaryThoughts[0] ?? '',
+    primary.hook,
+    primary.titleSuggestion,
+    'AI operating models are getting stale faster than most teams realize.',
+  ], { preferredMax: 84 }) ?? 'AI operating models are getting stale faster than most teams realize.'
 
-  const titleBase = trimSentence(opening, 80)
   const slides: CarouselSlide[] = [
     {
       id: '01',
       eyebrow: 'AUTO DRAFT',
-      title: titleBase,
+      title: opening,
       body: buildBodyLines([
-        support[0] ?? normalizeForSlide(sentences[1] ?? primary.text),
-        support[1] ?? 'The useful move is turning the cleanest claim into a tighter operational point.',
+        support[0] ?? 'The useful move is turning the clearest claim into an operational decision.',
+        support[1] ?? 'Teams that keep using old assumptions are already making slower and worse calls.',
       ]),
     },
     {
       id: '02',
       eyebrow: 'WHY IT MATTERS',
-      title: trimSentence(normalizeForSlide(sentences[1] ?? support[0] ?? 'This matters because stale mental models break fast.'), 84),
+      title: pickDisplayLine([
+        primaryThoughts[1] ?? '',
+        support[0] ?? '',
+        'This matters because stale mental models break fast.',
+      ], { preferredMax: 84 }) ?? 'This matters because stale mental models break fast.',
       body: buildBodyLines([
         support[2] ?? 'Most people are still acting on an old picture of what AI can and cannot do.',
-        support[3] ?? 'That creates wasted effort, bad delegation, and expensive skepticism in the wrong places.',
+        support[3] ?? 'That creates wasted effort, bad delegation, and skepticism aimed at the wrong failure modes.',
       ]),
     },
     {
       id: '03',
       eyebrow: 'THE REAL SHIFT',
-      title: trimSentence(normalizeForSlide(companionSegments[0]?.hook ?? support[4] ?? 'The skill is maintaining calibration as the boundary keeps moving.'), 84),
+      title: pickDisplayLine([
+        companionSegments[0]?.hook ?? '',
+        support[4] ?? '',
+        'The skill is maintaining calibration as the boundary keeps moving.',
+      ], { preferredMax: 84 }) ?? 'The skill is maintaining calibration as the boundary keeps moving.',
       body: buildBodyLines([
         support[5] ?? 'What worked as a rule of thumb a few months ago can already be wrong now.',
         support[6] ?? 'Operators need current failure models, not generic vibes.',
@@ -692,18 +754,24 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     {
       id: '04',
       eyebrow: 'OPERATING MODEL',
-      title: trimSentence(normalizeForSlide(companionSegments[1]?.hook ?? support[7] ?? 'Human attention becomes the real bottleneck.'), 84),
+      title: pickDisplayLine([
+        companionSegments[1]?.hook ?? '',
+        support[7] ?? '',
+        'Human attention becomes the real bottleneck.',
+      ], { preferredMax: 84 }) ?? 'Human attention becomes the real bottleneck.',
       body: buildBodyLines([
         support[8] ?? 'As agents improve, the question becomes what deserves review and what can safely flow through.',
-        support[9] ?? 'That means attention allocation becomes part of the skill.',
+        support[9] ?? 'Attention allocation becomes part of the skill.',
       ]),
     },
     {
       id: '05',
       eyebrow: 'TAKEAWAY',
-      title: trimSentence(normalizeForSlide(extractTakeaway(primary.text, companionSegments)), 84),
+      title: pickDisplayLine([
+        extractTakeaway(primary.text, companionSegments),
+        'The edge is keeping your operating model current.',
+      ], { preferredMax: 84 }) ?? 'The edge is keeping your operating model current.',
       body: buildBodyLines([
-        `Source package: ${sourceSlug}`,
         'Use the source package as evidence, not as final copy.',
         'Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.',
       ]),
@@ -712,7 +780,7 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
 
   return {
     slug: carouselSlug,
-    title: `Draft: ${trimSentence(removeDraftPrefix(titleBase), 52)}`,
+    title: `Draft: ${removeDraftPrefix(titleBaseFromSlides(slides))}`,
     description: `Auto-generated draft carousel from ${metadata.authorName ?? 'YouTube'} transcript source: ${metadata.title} (${primary.start} → ${primary.end}).`,
     sourceType: 'transcript',
     aspectRatio: 'portrait',
@@ -722,9 +790,14 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
   }
 }
 
+function titleBaseFromSlides(slides: CarouselSlide[]) {
+  return slides[0]?.title?.trim() || 'Draft carousel'
+}
+
 function buildBodyLines(lines: string[]) {
   return uniqueNormalized(lines)
-    .slice(0, 3)
+    .filter((line) => !/[.…]$/.test(line) || /[.!?]$/.test(line))
+    .slice(0, 2)
     .join('\n\n')
 }
 
