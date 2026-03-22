@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
-title: "Draft: The skill is going to be triaging your own attention in real time."
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:14:01 → 00:14:16)."
+title: "Draft: AI work is becoming attention triage"
+description: "Manual rewrite of the strongest draft angle from the Nate B Jones transcript: the new AI skill is knowing what deserves your attention, when, and at what depth."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22
@@ -12,62 +12,50 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AUTO DRAFT
-
 variant: claim
 
-# The skill is going to be triaging your own attention in real time.
-
-The skill is going to be triaging your own attention in real time.
-
-I've seen two structures emerging here that are significant, right?
+# AI work is becoming **attention triage**.
 
 ---
-
-eyebrow: WHY IT MATTERS
 
 variant: explainer
 
-# The skill is going to be triaging your own attention in real time.
+# The old skill was doing the work yourself.
 
-The first is a team of one.
+The new skill is deciding **what gets done by you, by agents, and by nobody at all**.
 
-A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+Because once you have streams of output everywhere, your bottleneck is no longer effort.
 
----
-
-eyebrow: THESIS
-
-variant: quote
-
-# For a product manager,
-
-> Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
-
-This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
+It’s **judgment**.
 
 ---
-
-eyebrow: OPERATING MODEL
-
-variant: framework
-
-# I've seen two structures emerging here that are significant, right?
-
-If you run an organization, the question isn't are we using AI.
-
-1. Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
-2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
-3. The skill is going to be triaging your own attention in real time.
-
----
-
-eyebrow: TAKEAWAY
 
 variant: claim
 
-# The skill is going to be triaging your own attention in real time.
+# You cannot review 100 streams of agent output at the same depth.
 
-Use the source package as evidence, not as final copy.
+So the job shifts.
 
-Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.
+You stop acting like the sole producer and start acting like the person who knows **where deep review matters** and where fast acceptance is enough.
+
+---
+
+variant: framework
+
+# High-leverage operators do 3 things well:
+
+1. They know **what must be checked carefully**.
+2. They know **what can move with lightweight review**.
+3. They keep recalibrating as model capabilities change.
+
+---
+
+variant: claim
+
+# The edge is not “using AI.”
+
+The edge is having a current feel for the **human ↔ agent boundary**.
+
+That boundary is moving fast.
+
+If your mental model is 6 months old, your workflow probably is too.

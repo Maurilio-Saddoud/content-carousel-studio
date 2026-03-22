@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AUTO DRAFT
-
 variant: claim
 
 # This is much much more important.
@@ -23,8 +21,6 @@ Practice environments are where agents have different capability levels, where f
 This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
 
 ---
-
-eyebrow: WHY IT MATTERS
 
 variant: explainer
 
@@ -36,8 +32,6 @@ The first is a team of one.
 
 ---
 
-eyebrow: THESIS
-
 variant: quote
 
 # For a product manager,
@@ -47,8 +41,6 @@ variant: quote
 The skill is going to be triaging your own attention in real time.
 
 ---
-
-eyebrow: OPERATING MODEL
 
 variant: framework
 
@@ -61,8 +53,6 @@ If you run an organization, the question isn't are we using AI.
 3. February the person whose boundary sense was current last August are operating worlds apart.
 
 ---
-
-eyebrow: TAKEAWAY
 
 variant: claim
 

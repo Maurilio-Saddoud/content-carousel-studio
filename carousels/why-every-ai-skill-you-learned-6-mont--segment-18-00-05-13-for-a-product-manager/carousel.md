@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AUTO DRAFT
-
 variant: claim
 
 # For a product manager,
@@ -23,8 +21,6 @@ I've seen two structures emerging here that are significant, right?
 The first is a team of one.
 
 ---
-
-eyebrow: WHY IT MATTERS
 
 variant: explainer
 
@@ -36,8 +32,6 @@ If you have a 100 streams of agent output 8 hours a day, you cannot review every
 
 ---
 
-eyebrow: THESIS
-
 variant: quote
 
 # I've seen two structures emerging here that are significant, right?
@@ -47,8 +41,6 @@ variant: quote
 Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 
 ---
-
-eyebrow: OPERATING MODEL
 
 variant: framework
 
@@ -61,8 +53,6 @@ This is much more practical than just looking at a bunch of slides saying you di
 3. the skill is maintaining the calibration, not having it once.
 
 ---
-
-eyebrow: TAKEAWAY
 
 variant: claim
 

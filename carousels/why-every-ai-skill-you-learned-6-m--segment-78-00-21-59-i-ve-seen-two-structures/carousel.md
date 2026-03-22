@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AUTO DRAFT
-
 variant: claim
 
 # I've seen two structures emerging here that are significant, right?
@@ -23,8 +21,6 @@ The first is a team of one.
 A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
-
-eyebrow: WHY IT MATTERS
 
 variant: explainer
 
@@ -36,8 +32,6 @@ The skill is going to be triaging your own attention in real time.
 
 ---
 
-eyebrow: THESIS
-
 variant: quote
 
 # For a product manager,
@@ -47,8 +41,6 @@ variant: quote
 This is much more practical than just looking at a bunch of slides saying you did an AI workshop.
 
 ---
-
-eyebrow: OPERATING MODEL
 
 variant: framework
 
@@ -61,8 +53,6 @@ If you run an organization, the question isn't are we using AI.
 3. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
-
-eyebrow: TAKEAWAY
 
 variant: claim
 

@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AUTO DRAFT
-
 variant: claim
 
 # AI operating models are getting stale faster than most teams realize.
@@ -23,8 +21,6 @@ This is really the mechanism behind those gigantic leverage numbers that keep ap
 I've seen two structures emerging here that are significant, right?
 
 ---
-
-eyebrow: WHY IT MATTERS
 
 variant: explainer
 
@@ -36,8 +32,6 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 ---
 
-eyebrow: THESIS
-
 variant: quote
 
 # For a product manager,
@@ -47,8 +41,6 @@ variant: quote
 This is much much more important.
 
 ---
-
-eyebrow: OPERATING MODEL
 
 variant: framework
 
@@ -61,8 +53,6 @@ Practice environments are where agents have different capability levels, where f
 3. February the person whose boundary sense was current last August are operating worlds apart.
 
 ---
-
-eyebrow: TAKEAWAY
 
 variant: claim
 

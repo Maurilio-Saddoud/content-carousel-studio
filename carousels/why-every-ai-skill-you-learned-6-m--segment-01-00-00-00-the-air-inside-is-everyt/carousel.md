@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AUTO DRAFT
-
 variant: claim
 
 # The air inside is everything AI agents can do reliably today.
@@ -23,8 +21,6 @@ The air inside is everything AI agents can do reliably today.
 The air outside is everything that still requires a person.
 
 ---
-
-eyebrow: WHY IT MATTERS
 
 variant: explainer
 
@@ -36,8 +32,6 @@ The first is a team of one.
 
 ---
 
-eyebrow: THESIS
-
 variant: quote
 
 # For a product manager,
@@ -47,8 +41,6 @@ variant: quote
 The skill is going to be triaging your own attention in real time.
 
 ---
-
-eyebrow: OPERATING MODEL
 
 variant: framework
 
@@ -61,8 +53,6 @@ This is much much more important.
 3. Every workforce skill in history far has had a finish line, a point where it was done.
 
 ---
-
-eyebrow: TAKEAWAY
 
 variant: claim
 

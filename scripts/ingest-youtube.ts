@@ -725,17 +725,12 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
   const slides: CarouselSlide[] = [
     {
       id: '01',
-      eyebrow: 'AUTO DRAFT',
       variant: 'claim',
       title: opening,
-      body: buildBodyLines([
-        support[0] ?? 'The useful move is turning the clearest claim into an operational decision.',
-        support[1] ?? 'Teams that keep using old assumptions are already making slower and worse calls.',
-      ]),
+      body: '',
     },
     {
       id: '02',
-      eyebrow: 'WHY IT MATTERS',
       variant: 'explainer',
       title: pickDisplayLine([
         primaryThoughts[1] ?? '',
@@ -749,7 +744,6 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     },
     {
       id: '03',
-      eyebrow: 'THESIS',
       variant: 'quote',
       title: pickDisplayLine([
         companionSegments[0]?.hook ?? '',
@@ -763,7 +757,6 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     },
     {
       id: '04',
-      eyebrow: 'OPERATING MODEL',
       variant: 'framework',
       title: pickDisplayLine([
         companionSegments[1]?.hook ?? '',
@@ -777,7 +770,6 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     },
     {
       id: '05',
-      eyebrow: 'TAKEAWAY',
       variant: 'claim',
       title: pickDisplayLine([
         extractTakeaway(primary.text, companionSegments),

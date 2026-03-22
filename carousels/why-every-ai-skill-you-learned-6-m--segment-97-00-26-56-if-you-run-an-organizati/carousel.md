@@ -12,8 +12,6 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AUTO DRAFT
-
 variant: claim
 
 # If you run an organization, the question isn't are we using AI.
@@ -23,8 +21,6 @@ It's do we have people whose job it is to know where the evolving AI agent human
 I've seen two structures emerging here that are significant, right?
 
 ---
-
-eyebrow: WHY IT MATTERS
 
 variant: explainer
 
@@ -36,8 +32,6 @@ A single person with a very strong frontier operation skill set who runs multipl
 
 ---
 
-eyebrow: THESIS
-
 variant: quote
 
 # For a product manager,
@@ -47,8 +41,6 @@ variant: quote
 This is much much more important.
 
 ---
-
-eyebrow: OPERATING MODEL
 
 variant: framework
 
@@ -61,8 +53,6 @@ Practice environments are where agents have different capability levels, where f
 3. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
 
 ---
-
-eyebrow: TAKEAWAY
 
 variant: claim
 

@@ -70,11 +70,11 @@ function formatViews(value: number) {
 
 function getTextProfile(slide: Slide) {
   const blocks = parseBodyBlocks(slide.body)
-  const eyebrowLength = slide.eyebrow?.trim().length ?? 0
+  const kickerLength = slide.eyebrow?.trim().length ?? 0
   const titleLength = getPlainTextLength(slide.title)
   const bodyLength = blocks.reduce((sum, block) => sum + getBlockTextLength(block), 0)
   const paragraphCount = blocks.reduce((sum, block) => sum + (block.type === 'list' ? block.items.length : 1), 0)
-  const totalLength = eyebrowLength + titleLength + bodyLength
+  const totalLength = kickerLength + titleLength + bodyLength
 
   const density = totalLength > 340 || paragraphCount >= 4 || titleLength > 120
     ? 'tweet-card-dense'
@@ -362,9 +362,9 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
         </header>
 
         <div className="tweet-content">
-          <p className="tweet-kicker">{renderInlineMarkdown(slide.eyebrow ?? carousel.title)}</p>
+          {slide.eyebrow ? <p className="tweet-kicker">{renderInlineMarkdown(slide.eyebrow)}</p> : null}
           <h2>{renderInlineMarkdown(slide.title)}</h2>
-          {renderVariantBody(variant, textProfile.blocks)}
+          {slide.body.trim() ? renderVariantBody(variant, textProfile.blocks) : null}
         </div>
 
         <div className="tweet-meta-row">
@@ -372,7 +372,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
           <span className="tweet-dot">·</span>
           <span>{stats.views} Views</span>
           <span className="tweet-dot">·</span>
-          <span>{slide.eyebrow ?? carousel.title}</span>
+          <span>{carousel.title}</span>
         </div>
 
         <footer className="tweet-footer">
