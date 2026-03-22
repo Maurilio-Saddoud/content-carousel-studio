@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati"
-title: "Draft: If you run an organization, the question isn't are we using AI."
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:26:56 → 00:27:13)."
+title: "If you run an organization, the question isn't are we using AI."
+description: "Carousel generated from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:26:56 → 00:27:13)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22

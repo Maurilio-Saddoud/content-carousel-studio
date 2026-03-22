@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
-title: "Draft: I've seen two structures emerging here that are significant, right?"
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:21:59 → 00:22:13)."
+title: "I've seen two structures emerging here that are significant, right?"
+description: "Carousel generated from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:21:59 → 00:22:13)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22

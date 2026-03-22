@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt"
-title: "Draft: The air inside is everything AI agents can do reliably today."
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:00:00 → 00:00:17)."
+title: "The air inside is everything AI agents can do reliably today."
+description: "Carousel generated from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:00:00 → 00:00:17)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22

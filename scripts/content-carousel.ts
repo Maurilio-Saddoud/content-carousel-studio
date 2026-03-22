@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { buildPagesFromArgv } from './build-pages'
-import { ingestYoutubeFromArgv, rebuildDraftsFromSourceArgv } from './ingest-youtube'
+import { ingestYoutubeFromArgv, rebuildCarouselsFromSourceArgv } from './ingest-youtube'
 import { renderAllFromArgv } from './render-all'
 import { renderCarouselFromArgv } from './render-carousel'
 
@@ -26,7 +26,7 @@ export async function runCli(argv: string[] = process.argv.slice(2)) {
       await renderCarouselFromArgv(rest)
       return
     case 'rebuild-source':
-      await rebuildDraftsFromSourceArgv(rest)
+      await rebuildCarouselsFromSourceArgv(rest)
       return
     case 'render-all':
       await renderAllFromArgv(rest)
@@ -43,10 +43,10 @@ function printHelp() {
   console.log(`content-carousel <command> [options]
 
 Commands:
-  youtube <url>         Ingest a YouTube video into source artifacts and draft carousel(s)
+  youtube <url>         Ingest a YouTube video into source artifacts and carousel(s)
   render <slug>         Render one carousel preview route to PNG files
   render-all            Render PNG files for every carousel in the directory
-  rebuild-source <slug> Rebuild draft carousels from an existing local source package
+  rebuild-source <slug> Rebuild carousels from an existing local source package
   build-pages           Build the static site and PNG export bundle for Pages
   help                  Show this help
 

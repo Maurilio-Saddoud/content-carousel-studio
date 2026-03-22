@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu"
-title: "Draft: AI operating models are getting stale faster than most teams realize."
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:17:33 → 00:17:46)."
+title: "AI operating models are getting stale faster than most teams realize."
+description: "Carousel generated from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:17:33 → 00:17:46)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22

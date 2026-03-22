@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i"
-title: "Draft: This is much much more important."
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:19:20 → 00:19:34)."
+title: "This is much much more important."
+description: "Carousel generated from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:19:20 → 00:19:34)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22

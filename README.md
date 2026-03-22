@@ -25,7 +25,7 @@ The existing `pnpm ingest:youtube`, `pnpm render`, `pnpm render:all`, and `pnpm 
 
 ## What this repo does now
 
-- ingest a YouTube video into source artifacts **and** a draft carousel
+- ingest a YouTube video into source artifacts **and** a carousel
 - author carousel copy in a single markdown file per carousel
 - preview every carousel locally in Next.js
 - export the site as a static GitHub Pages bundle
@@ -59,7 +59,7 @@ https://maurilio-saddoud.github.io/content-carousel-studio/exports/
 - `app/` — Next.js App Router pages
 - `components/` — reusable carousel presentation components
 - `carousels/` — one folder per carousel, with `carousel.md` as the main source file
-- `drafts/` — editorial notes / briefs for a source package
+- `sources/` — editorial notes / briefs for a source package
 - `sources/` — raw source material and notes
 - `lib/` — shared data loaders and types
 - `scripts/` — ingest, Pages build, and PNG rendering scripts
@@ -150,7 +150,7 @@ Optional explicit slug:
 ./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --slug my-topic-slug
 ```
 
-Optional segment/draft limit:
+Optional segment limit:
 
 ```bash
 ./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --max-segments 6
@@ -164,11 +164,11 @@ One command now does the practical first pass:
 2. falls back to local Whisper transcription if captions are missing
 3. writes source artifacts into `sources/<source-slug>/`
 4. selects up to `--max-segments` editorially-usable transcript segments
-5. creates one markdown-first draft carousel per selected segment
-6. writes per-draft notes under `drafts/<source-slug>/<carousel-slug>/post-brief.md`
+5. creates one markdown-first carousel per selected segment
+6. writes per-carousel notes under `sources/<source-slug>/<carousel-slug>/post-brief.md`
 7. creates or updates `carousels/<carousel-slug>/carousel.md`
 8. refreshes `carousels/index.json` as a legacy/generated directory artifact
-9. auto-commits and pushes the generated draft/source files to the current Git branch so GitHub Pages can rebuild immediately
+9. auto-commits and pushes the generated source/carousel files to the current Git branch so GitHub Pages can rebuild immediately
 
 Created files look like this:
 
@@ -178,12 +178,12 @@ sources/<source-slug>/raw-transcript.md
 sources/<source-slug>/clean-transcript.md
 sources/<source-slug>/segments.json
 sources/<source-slug>/summary.md
-drafts/<source-slug>/<carousel-slug>/post-brief.md
+sources/<source-slug>/<carousel-slug>/post-brief.md
 carousels/<carousel-slug>/carousel.md
 carousels/index.json
 ```
 
-Slug pattern for generated carousel drafts:
+Slug pattern for generated carousels:
 
 ```text
 <source-slug>--segment-02-00-03-41-<angle-slug>
@@ -191,9 +191,9 @@ Slug pattern for generated carousel drafts:
 <source-slug>--segment-11-00-14-09-<angle-slug>
 ```
 
-So each draft slug is tied to the selected transcript segment itself (`segment id + start timestamp`), not just the fanout order from one run.
+So each carousel slug is tied to the selected transcript segment itself (`segment id + start timestamp`), not just the fanout order from one run.
 
-Selection rule for generating multiple drafts:
+Selection rule for generating multiple carousels:
 
 - segment must pass the editorial filter
 - score must be at least `4`
@@ -202,14 +202,14 @@ Selection rule for generating multiple drafts:
 - obvious intro/outro junk gets rejected
 - near-duplicate segments are skipped
 
-That means one source package can immediately fan out into multiple previewable/exportable carousel drafts.
+That means one source package can immediately fan out into multiple previewable/exportable carousels.
 
 ### Auto-push behavior after ingest
 
 After a successful `./content-carousel youtube ...` run, the CLI now stages only the generated paths for that source package:
 
 - `sources/<source-slug>/`
-- `drafts/<source-slug>/`
+- `sources/<source-slug>/`
 - each generated `carousels/<carousel-slug>/`
 - `carousels/index.json`
 

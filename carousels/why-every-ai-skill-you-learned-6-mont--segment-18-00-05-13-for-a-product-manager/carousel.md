@@ -1,7 +1,7 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
-title: "Draft: For a product manager,"
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:05:13 → 00:05:29)."
+title: "For a product manager,"
+description: "Carousel generated from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:05:13 → 00:05:29)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22
