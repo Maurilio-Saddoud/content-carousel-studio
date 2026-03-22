@@ -16,34 +16,32 @@ theme:
 
 ---
 
-# If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+# February and the person whose boundary sense was current last August are operating worlds apart.
 
-If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+February and the person whose boundary sense was current last August are operating worlds apart.
 
-The skill is going to be triaging your own attention in real time.
+If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.
 
 ---
 
-# A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+# This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
 
-> A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+> This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.
 
 3 months later, Opus 4.6 scores 93% on retrieval at 256,000 tokens.
 
 ---
 
-# It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
+# Every workforce skill in history so far has had a finish line, a point where it was done.
 
 Is there a bottleneck that's masquerading as due diligence?
 
-1. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
-2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
-3. 3 months later, Opus 4.6 scores 93% on retrieval at 256,000 tokens.
+1. This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments. 2. Every workforce skill in history so far has had a finish line, a point where it was done. 3. The air inside is everything AI agents can do reliably today.
 
 ---
 
-# The edge is keeping your operating model current.
+# The air inside is everything AI agents can do reliably today.
 
-Audience: operators, team leads, founders redesigning AI-assisted workflows.
+The air inside is everything AI agents can do reliably today.
 
-Use the source package as evidence, not as final copy.
+operators, team leads, and founders redesigning AI-assisted workflows.
