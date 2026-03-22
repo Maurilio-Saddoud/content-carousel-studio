@@ -50,10 +50,7 @@ export default async function CarouselPage({ params }: Props) {
             />
             <div className="preview-slide-actions">
               <a href={`/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`} target="_blank" rel="noreferrer">
-                Open slide image
-              </a>
-              <a href={`/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`} download>
-                Download slide PNG
+                Open image (then Save Image to Photos)
               </a>
             </div>
           </div>
