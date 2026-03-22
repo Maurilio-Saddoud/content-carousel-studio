@@ -1,8 +1,8 @@
 {
   "slug": "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci",
   "sourceType": "transcript",
-  "sourceUrl": "https://youtu.be/RnjgLlQTMf0?si=75rDwtQdBgj7nT41",
-  "fetchedAt": "2026-03-22T00:54:54.559Z",
+  "sourceUrl": "https://youtu.be/RnjgLlQTMf0",
+  "fetchedAt": "2026-03-22T04:07:12.485Z",
   "transcriptMode": "official-transcript",
   "whisperModel": "base",
   "video": {
@@ -12,15 +12,68 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/RnjgLlQTMf0/hqdefault.jpg"
   },
   "transcriptLineCount": 786,
-  "defaultBehavior": "creates source artifacts and a previewable draft carousel automatically",
+  "defaultBehavior": "creates source artifacts and one markdown-first draft carousel per qualifying editorial segment",
+  "draftCarouselRule": {
+    "maxDrafts": 6,
+    "threshold": "Each draft comes from a selected editorial segment. Selected segments must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
   "selectedSegmentIds": [
     "segment-18",
     "segment-78",
     "segment-49",
     "segment-69",
     "segment-97",
-    "segment-62",
-    "segment-01"
+    "segment-62"
+  ],
+  "draftCarousels": [
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go",
+      "segmentId": "segment-18",
+      "title": "Draft: For a product manager, good boundary sensing looks…",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go",
+      "briefPath": "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go/post-brief.md",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
+      "segmentId": "segment-78",
+      "title": "Draft: I've seen two structures emerging here that are sig…",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
+      "briefPath": "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/post-brief.md",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream",
+      "segmentId": "segment-49",
+      "title": "Draft: If you have a 100 streams of agent output 8 hours a…",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream",
+      "briefPath": "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream/post-brief.md",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i",
+      "segmentId": "segment-69",
+      "title": "Draft: This is much much more important.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i",
+      "briefPath": "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/post-brief.md",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati",
+      "segmentId": "segment-97",
+      "title": "Draft: If you run an organization, the question isn't are…",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati",
+      "briefPath": "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/post-brief.md",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person-",
+      "segmentId": "segment-62",
+      "title": "Draft: February the person whose boundary sense was curren…",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person-",
+      "briefPath": "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person-/post-brief.md",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person-/carousel.md"
+    }
   ],
   "createdFiles": [
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/source.json",
@@ -28,8 +81,18 @@
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/clean-transcript.md",
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/segments.json",
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/summary.md",
-    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/post-brief.md",
-    "carousels/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/carousel.json",
+    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go/post-brief.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go/carousel.md",
+    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/post-brief.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/carousel.md",
+    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream/post-brief.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream/carousel.md",
+    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/post-brief.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/carousel.md",
+    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/post-brief.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/carousel.md",
+    "drafts/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person-/post-brief.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person-/carousel.md",
     "carousels/index.json"
   ]
 }

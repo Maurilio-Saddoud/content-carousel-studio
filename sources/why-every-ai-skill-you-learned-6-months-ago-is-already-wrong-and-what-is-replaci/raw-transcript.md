@@ -2,7 +2,7 @@
 
 - Title: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them)
 - Creator: AI News & Strategy Daily | Nate B Jones
-- URL: https://youtu.be/RnjgLlQTMf0?si=75rDwtQdBgj7nT41
+- URL: https://youtu.be/RnjgLlQTMf0
 
 ---
 

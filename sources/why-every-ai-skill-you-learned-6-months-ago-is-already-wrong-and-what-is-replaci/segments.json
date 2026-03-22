@@ -219,40 +219,5 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     }
-  },
-  {
-    "id": "segment-01",
-    "rank": 7,
-    "score": 9,
-    "start": "00:00:00",
-    "end": "00:00:17",
-    "durationSeconds": 17,
-    "lineStart": 1,
-    "lineEnd": 8,
-    "wordCount": 57,
-    "text": "Every workforce skill in history so far has had a finish line, a point where it was done. AI doesn't. Picture a bubble. The air inside is everything AI agents can do reliably today. The air outside is everything that still requires a person. The surface of that bubble, that thin curved membrane, that is where the",
-    "titleSuggestion": "Every workforce skill in history so far has had a finish line, a point where it was…",
-    "hook": "Every workforce skill in history so far has had a finish line, a point where it was done.",
-    "whyItCouldWork": [
-      "includes enough specificity to avoid sounding generic",
-      "contains enough complete thoughts to turn into multiple slides"
-    ],
-    "scoreBreakdown": {
-      "hookWords": 0,
-      "contrast": 0,
-      "specificity": 3,
-      "structure": 0,
-      "question": 0,
-      "credibility": 0,
-      "clarity": 3,
-      "openingStrength": 0,
-      "density": 3,
-      "fillerPenalty": 0,
-      "lyricPenalty": 0,
-      "repetitionPenalty": 0,
-      "fragmentPenalty": 0,
-      "introOutroPenalty": 0,
-      "lengthPenalty": 0
-    }
   }
 ]

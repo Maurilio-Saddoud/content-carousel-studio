@@ -4,10 +4,15 @@
 - Title: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them)
 - Creator: AI News & Strategy Daily | Nate B Jones
 
-## Draft carousel created automatically
-- Carousel slug: why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci
-- Preview route: /carousel/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci
-- Draft title: Draft: For a product manager, good boundary sensing looks…
+## Draft carousels created automatically
+- Source slug: why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci
+- Draft count: 6
+- why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go → /carousel/why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go (from segment-18, 00:05:13 → 00:05:29, score 19)
+- why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures → /carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures (from segment-78, 00:21:59 → 00:22:13, score 17)
+- why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream → /carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream (from segment-49, 00:14:01 → 00:14:16, score 16)
+- why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i → /carousel/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i (from segment-69, 00:19:20 → 00:19:34, score 12)
+- why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati → /carousel/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati (from segment-97, 00:26:56 → 00:27:13, score 10)
+- why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person- → /carousel/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person- (from segment-62, 00:17:33 → 00:17:46, score 10)
 
 ## Best candidate segments
 
@@ -66,4 +71,4 @@
   - contains enough complete thoughts to turn into multiple slides
 
 ## Editorial note
-These are filtered source chunks plus an auto-generated draft carousel. The default path now keeps moving, but the result is still a draft — not final publishing copy.
+Each generated carousel comes from one selected editorial segment. Selection rules: score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, and no near-duplicate overlap with a stronger pick.
