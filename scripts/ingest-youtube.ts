@@ -747,6 +747,7 @@ function buildIdeas(segments: Segment[], sourceSlug: string, publishLimit: numbe
 function getEditorialRejectionReasons(segment: Segment) {
   const reasons: string[] = []
   const text = segment.text
+  const lower = text.toLowerCase()
   const fullSentenceCount = splitSentences(text).filter((sentence) => sentence.split(/\s+/).filter(Boolean).length >= 5).length
 
   if (segment.score < 4) reasons.push('Score is too weak for publication.')
@@ -755,8 +756,96 @@ function getEditorialRejectionReasons(segment: Segment) {
   if (/^(and|but|so|because|which|that|then)\b/i.test(text)) reasons.push('Starts mid-thought instead of opening cleanly.')
   if (/^[a-z]/.test(text)) reasons.push('Starts with lowercase text, which usually indicates a fragment.')
   if (/\b(thanks for watching|subscribe|welcome back|link in the description)\b/i.test(text)) reasons.push('Contains intro/outro filler.')
+  if (isSpecDumpSegment(lower)) reasons.push('Reads like specs, setup instructions, or reference material instead of a post thesis.')
+  if (lacksClearEditorialPayoff(lower)) reasons.push('Lacks a clear why-this-matters payoff for a social post.')
 
-  return reasons
+  return [...new Set(reasons)]
+}
+
+function isSpecDumpSegment(lower: string) {
+  const repoTourSignals = countMatches(lower, [
+    'github repo',
+    'hugging face',
+    'download and run',
+    'download and use',
+    'instructions on how to',
+    'click on this repo',
+    'if you click on',
+    'if you scroll down',
+    'if you scroll up',
+    'here are some more specs',
+    'for your reference',
+    'context window',
+    'parameters',
+    'gb of vram',
+    'cuda gpu',
+    'install this locally',
+    'run this locally',
+    'set this up locally',
+  ])
+
+  const dryReferenceSignals = countMatches(lower, [
+    'specs',
+    'reference',
+    'repo',
+    'folder',
+    'architecture',
+    'instructions',
+    'requirements',
+    'recommended',
+    'download',
+    'install',
+    'setup',
+  ])
+
+  const noTensionOrLesson = countMatches(lower, [
+    'problem',
+    'mistake',
+    'why',
+    'matters',
+    'tradeoff',
+    'advantage',
+    'risk',
+    'lesson',
+    'means',
+    'changes',
+  ]) === 0
+
+  return repoTourSignals >= 2 || (repoTourSignals >= 1 && dryReferenceSignals >= 3) || (dryReferenceSignals >= 4 && noTensionOrLesson)
+}
+
+function lacksClearEditorialPayoff(lower: string) {
+  const payoffSignals = countMatches(lower, [
+    'this means',
+    'why this matters',
+    'the problem',
+    'the mistake',
+    'the point',
+    'the takeaway',
+    'the lesson',
+    'the real',
+    'advantage',
+    'tradeoff',
+    'risk',
+    'bottleneck',
+    'changes',
+    'matters',
+  ])
+
+  const dryInfoSignals = countMatches(lower, [
+    'for your reference',
+    'here are some more specs',
+    'contains all the instructions',
+    'download and run',
+    'download and use',
+    'github repo',
+    'hugging face',
+    'context window',
+    'parameters',
+    'recommended',
+  ])
+
+  return payoffSignals === 0 && dryInfoSignals >= 2
 }
 
 function areNearDuplicates(a: Segment, b: Segment) {
