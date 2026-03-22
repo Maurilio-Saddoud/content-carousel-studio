@@ -56,6 +56,8 @@ A second pass tightened later-slide title selection to prefer primary-segment th
 
 A later pass introduced explicit briefs plus set-aware support allocation. That improved the internal structure of the source package and reduced some support duplication, but the sample still shows clear overlap in slide titles because the current briefing logic is still heuristic and transcript-led.
 
+Another hardening pass now rejects new briefs when they overlap too heavily with an already-accepted brief in the same batch. The goal is simple: prefer shipping one strong post over two samey ones.
+
 ## Current findings after the latest self-test pass
 
 The new brief-level audit confirms the real weak point is still upstream of carousel markdown:

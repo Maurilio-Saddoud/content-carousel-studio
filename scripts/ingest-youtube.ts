@@ -763,6 +763,33 @@ function tokenizeForSimilarity(text: string) {
     .filter((token) => token.length >= 4)
 }
 
+function overlapScore(left: string, right: string) {
+  const leftTokens = new Set(tokenizeForOverlap(left))
+  const rightTokens = new Set(tokenizeForOverlap(right))
+  if (leftTokens.size === 0 || rightTokens.size === 0) return 0
+
+  let intersection = 0
+  for (const token of leftTokens) {
+    if (rightTokens.has(token)) intersection += 1
+  }
+
+  const union = new Set([...leftTokens, ...rightTokens]).size
+  return union === 0 ? 0 : intersection / union
+}
+
+function tokenizeForOverlap(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 4 && !OVERLAP_STOP_WORDS.has(token))
+}
+
+const OVERLAP_STOP_WORDS = new Set([
+  'about', 'after', 'before', 'being', 'from', 'have', 'into', 'just', 'more', 'much', 'that', 'their', 'them', 'then', 'they', 'this', 'what', 'when', 'where', 'which', 'with', 'your', 'yours', 'because', 'really', 'there', 'those', 'these', 'around', 'across', 'while', 'will', 'would', 'could', 'should', 'right', 'going',
+])
+
 function countMatches(text: string, phrases: string[]) {
   return phrases.reduce((sum, phrase) => sum + (text.includes(phrase) ? 1 : 0), 0)
 }
@@ -900,7 +927,7 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
 
     const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport)
 
-    briefs.push({
+    const brief: Brief = {
       id: `brief-${idea.id}`,
       primaryIdeaId: idea.id,
       supportingIdeaIds: supportingIdeas.map((entry) => entry.id),
@@ -910,10 +937,39 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
       supportPoints,
       distinctFromBriefIds: publishedIdeas.filter((entry) => entry.id !== idea.id).map((entry) => `brief-${entry.id}`),
       carouselSlug: existingSlugs[idea.id] || buildCarouselSlug(sourceSlug, idea),
-    })
+    }
+
+    const overlapsExisting = briefs.some((existing) => briefClaimOverlap(existing, brief) >= 0.48)
+    if (overlapsExisting) {
+      continue
+    }
+
+    briefs.push(brief)
   }
 
-  return briefs
+  if (briefs.length > 0) {
+    return briefs
+  }
+
+  const fallbackIdea = publishedIdeas[0]
+  if (!fallbackIdea) return []
+
+  return [{
+    id: `brief-${fallbackIdea.id}`,
+    primaryIdeaId: fallbackIdea.id,
+    supportingIdeaIds: [],
+    thesis: pickDistinctThesis([
+      fallbackIdea.hook,
+      fallbackIdea.titleSuggestion,
+      ...getCompleteThoughts(fallbackIdea.text),
+      'The old operating model is already expiring.',
+    ], new Set()),
+    audience: inferAudience(fallbackIdea.text, []),
+    whyItMatters: inferWhyItMatters(fallbackIdea, [], fallbackIdea.titleSuggestion),
+    supportPoints: buildSupportPoints(fallbackIdea, [], new Set()),
+    distinctFromBriefIds: [],
+    carouselSlug: existingSlugs[fallbackIdea.id] || buildCarouselSlug(sourceSlug, fallbackIdea),
+  }]
 }
 
 function buildCarouselBundles(metadata: VideoMetadata, sourceSlug: string, briefs: Brief[], ideas: Idea[]): CarouselBundle[] {
@@ -1213,6 +1269,12 @@ function pickDistinctThesis(candidates: string[], usedTheses: Set<string>) {
     ?? 'A stronger operating model beats a stale workflow.'
   usedTheses.add(slugify(fallback))
   return fallback
+}
+
+function briefClaimOverlap(left: Brief, right: Brief) {
+  const leftClaim = [left.thesis, left.whyItMatters, ...left.supportPoints].join(' ')
+  const rightClaim = [right.thesis, right.whyItMatters, ...right.supportPoints].join(' ')
+  return overlapScore(leftClaim, rightClaim)
 }
 
 function inferAudience(primary: string, support: Idea[]) {

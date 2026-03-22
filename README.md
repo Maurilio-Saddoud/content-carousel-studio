@@ -357,6 +357,7 @@ pnpm lint
 - The markdown parser intentionally supports a narrow authoring format right now: frontmatter + slide separators + paragraphs/lists.
 - `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
 - `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, brief quality/overlap, weak/duplicate titles, and export drift before you bother publishing.
+- Use `./content-carousel self-test <source-slug> --strict-global` only when you intentionally want to audit the whole workspace for leftover preview/export directories. The default check assumes preserving older batches is normal.
 - `pnpm exec tsx scripts/self-test.ts <source-slug>` now works too when you want to iterate on the audit logic directly without going through the bundled CLI.
 - In the current operator workflow, a newly supplied video link should usually be treated as an implicit request to generate a fresh preview batch from that source, not as a prompt for another round of clarification.
 - Preserve existing preview batches by default. Only wipe/delete old previews when the user explicitly asks for replacement or cleanup.

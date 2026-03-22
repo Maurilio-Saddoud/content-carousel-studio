@@ -32,7 +32,7 @@ type AuditIssue = {
 
 export async function runSelfTestFromArgv(argv: string[] = process.argv.slice(2)) {
   const args = parseArgs(argv)
-  const issues = await auditSource(args.sourceSlug)
+  const issues = await auditSource(args.sourceSlug, { strictGlobal: args.strictGlobal })
 
   const counts = issues.reduce(
     (acc, issue) => {
@@ -55,7 +55,7 @@ export async function runSelfTestFromArgv(argv: string[] = process.argv.slice(2)
   }
 }
 
-async function auditSource(sourceSlug: string) {
+async function auditSource(sourceSlug: string, options: { strictGlobal?: boolean } = {}) {
   const sourceDir = path.resolve('sources', sourceSlug)
   const rawSource = await readFile(path.join(sourceDir, 'source.json'), 'utf8')
   const source = JSON.parse(rawSource) as SourceManifest
@@ -162,17 +162,19 @@ async function auditSource(sourceSlug: string) {
   const exportDirSlugs = await listDirectoryNames(path.resolve('public', 'exports'))
   const expectedSlugs = new Set((source.carousels ?? []).map((entry) => entry.slug).filter(Boolean) as string[])
 
-  for (const slug of carouselDirSlugs) {
-    if (slug === 'index.json') continue
-    if (!expectedSlugs.has(slug) && slug !== '.DS_Store') {
-      issues.push({ level: 'info', code: 'extra-carousel-dir', message: `carousels/${slug} exists but is not part of source ${sourceSlug}.` })
+  if (options.strictGlobal) {
+    for (const slug of carouselDirSlugs) {
+      if (slug === 'index.json') continue
+      if (!expectedSlugs.has(slug) && slug !== '.DS_Store') {
+        issues.push({ level: 'info', code: 'extra-carousel-dir', message: `carousels/${slug} exists but is not part of source ${sourceSlug}.` })
+      }
     }
-  }
 
-  for (const slug of exportDirSlugs) {
-    if (slug === 'index.html' || slug === 'index.json' || slug === '.DS_Store') continue
-    if (!expectedSlugs.has(slug)) {
-      issues.push({ level: 'info', code: 'stale-export-dir', message: `public/exports/${slug} exists but is not part of source ${sourceSlug}.` })
+    for (const slug of exportDirSlugs) {
+      if (slug === 'index.html' || slug === 'index.json' || slug === '.DS_Store') continue
+      if (!expectedSlugs.has(slug)) {
+        issues.push({ level: 'info', code: 'stale-export-dir', message: `public/exports/${slug} exists but is not part of source ${sourceSlug}.` })
+      }
     }
   }
 
@@ -298,9 +300,9 @@ async function listDirectoryNames(dir: string) {
 function parseArgs(argv: string[]) {
   const sourceSlug = argv.find((arg) => !arg.startsWith('--'))
   if (!sourceSlug) {
-    throw new Error('Usage: content-carousel self-test <source-slug>')
+    throw new Error('Usage: content-carousel self-test <source-slug> [--strict-global]')
   }
-  return { sourceSlug }
+  return { sourceSlug, strictGlobal: argv.includes('--strict-global') }
 }
 
 function isWeakTitle(value: string) {
