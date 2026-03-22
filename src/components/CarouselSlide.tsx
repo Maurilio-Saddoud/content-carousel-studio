@@ -67,8 +67,8 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
     >
       <div className="tweet-shell">
         <header className="tweet-header">
-          <div className="tweet-avatar" aria-hidden="true">
-            <span>MS</span>
+          <div className="tweet-avatar">
+            <img src="/content-carousel-studio/assets/maurilio-profile.jpg" alt="Maurilio Saddoud" />
           </div>
 
           <div className="tweet-meta">
