@@ -4,6 +4,7 @@ import matter from 'gray-matter'
 import type { Carousel, CarouselDirectoryItem, CarouselSlide, CarouselTheme } from '@/lib/types'
 
 const carouselsDir = path.resolve(process.cwd(), 'carousels')
+const sourcesDir = path.resolve(process.cwd(), 'sources')
 const carouselIndexPath = path.join(carouselsDir, 'index.json')
 const SUPPORTED_SOURCE_TYPES = new Set(['transcript', 'notes', 'custom'])
 
@@ -34,9 +35,10 @@ export async function getCarousel(slug: string): Promise<Carousel | undefined> {
 async function loadCarouselsFromFiles() {
   const entries = await readdir(carouselsDir, { withFileTypes: true })
   const slugs = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name)
+  const sourceCreatedAtBySlug = await loadSourceCreatedAtByCarouselSlug()
   const carousels = await Promise.all(slugs.map(async (slug) => {
     try {
-      return await readCarouselFromSupportedSource(slug)
+      return await readCarouselFromSupportedSource(slug, sourceCreatedAtBySlug[slug])
     } catch {
       return undefined
     }
@@ -45,18 +47,18 @@ async function loadCarouselsFromFiles() {
   return carousels.filter((carousel): carousel is Carousel => Boolean(carousel))
 }
 
-async function readCarouselFromSupportedSource(slug: string) {
+async function readCarouselFromSupportedSource(slug: string, sourceCreatedAt?: string) {
   const mdPath = path.join(carouselsDir, slug, 'carousel.md')
   try {
     const raw = await readFile(mdPath, 'utf8')
-    return parseMarkdownCarousel(raw, slug)
+    return parseMarkdownCarousel(raw, slug, sourceCreatedAt)
   } catch {
     const raw = await readFile(path.join(carouselsDir, slug, 'carousel.json'), 'utf8')
-    return normalizeLegacyCarousel(JSON.parse(raw) as LegacyCarousel)
+    return normalizeLegacyCarousel(JSON.parse(raw) as LegacyCarousel, sourceCreatedAt)
   }
 }
 
-function parseMarkdownCarousel(raw: string, fallbackSlug: string): Carousel {
+function parseMarkdownCarousel(raw: string, fallbackSlug: string, sourceCreatedAt?: string): Carousel {
   const parsed = matter(raw)
   const data = parsed.data as Record<string, unknown>
   const slug = getString(data.slug) || fallbackSlug
@@ -66,6 +68,7 @@ function parseMarkdownCarousel(raw: string, fallbackSlug: string): Carousel {
   const sourceType = SUPPORTED_SOURCE_TYPES.has(sourceTypeValue) ? sourceTypeValue as CarouselDirectoryItem['sourceType'] : 'custom'
   const aspectRatio = (getString(data.aspectRatio) || 'portrait') as CarouselDirectoryItem['aspectRatio']
   const updatedAt = getString(data.updatedAt) || new Date().toISOString().slice(0, 10)
+  const createdAt = getString(data.createdAt) || sourceCreatedAt || updatedAt
   const theme = normalizeTheme(data.theme)
   const slides = parseSlides(parsed.content)
 
@@ -76,6 +79,7 @@ function parseMarkdownCarousel(raw: string, fallbackSlug: string): Carousel {
     sourceType,
     aspectRatio,
     updatedAt,
+    createdAt,
     theme,
     slides,
   }
@@ -159,12 +163,16 @@ function toDirectoryItem(carousel: Carousel): CarouselDirectoryItem {
     sourceType: carousel.sourceType,
     aspectRatio: carousel.aspectRatio,
     updatedAt: carousel.updatedAt,
+    createdAt: carousel.createdAt,
     theme: carousel.theme,
   }
 }
 
 function sortDirectoryItems(items: CarouselDirectoryItem[]) {
-  return items.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt) || a.slug.localeCompare(b.slug))
+  return items.sort((a, b) => {
+    const createdCompare = (b.createdAt || b.updatedAt).localeCompare(a.createdAt || a.updatedAt)
+    return createdCompare || b.updatedAt.localeCompare(a.updatedAt) || a.slug.localeCompare(b.slug)
+  })
 }
 
 function requireString(value: unknown, field: string) {
@@ -179,6 +187,40 @@ function getString(value: unknown) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
+async function loadSourceCreatedAtByCarouselSlug() {
+  const createdAtBySlug: Record<string, string> = {}
+
+  try {
+    const entries = await readdir(sourcesDir, { withFileTypes: true })
+    const sourceDirs = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name)
+
+    await Promise.all(sourceDirs.map(async (sourceSlug) => {
+      try {
+        const raw = await readFile(path.join(sourcesDir, sourceSlug, 'source.json'), 'utf8')
+        const data = JSON.parse(raw) as {
+          fetchedAt?: string
+          carousels?: Array<{ slug?: string }>
+          briefs?: Array<{ slug?: string }>
+        }
+        const createdAt = getString(data.fetchedAt)
+        if (!createdAt) return
+
+        for (const entry of [...(data.carousels ?? []), ...(data.briefs ?? [])]) {
+          const slug = getString(entry.slug)
+          if (!slug) continue
+          createdAtBySlug[slug] = createdAt
+        }
+      } catch {
+        // Ignore malformed or partial source packages.
+      }
+    }))
+  } catch {
+    // Ignore missing sources directory in partial builds.
+  }
+
+  return createdAtBySlug
+}
+
 type LegacyCarousel = Omit<Carousel, 'slides'> & {
   slides: Array<{
     id: string
@@ -188,9 +230,10 @@ type LegacyCarousel = Omit<Carousel, 'slides'> & {
   }>
 }
 
-function normalizeLegacyCarousel(carousel: LegacyCarousel): Carousel {
+function normalizeLegacyCarousel(carousel: LegacyCarousel, sourceCreatedAt?: string): Carousel {
   return {
     ...carousel,
+    createdAt: carousel.createdAt || sourceCreatedAt || carousel.updatedAt,
     slides: carousel.slides.map((slide, index) => ({
       id: slide.id || String(index + 1).padStart(2, '0'),
       eyebrow: slide.eyebrow,

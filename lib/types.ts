@@ -19,6 +19,7 @@ export type CarouselDirectoryItem = {
   sourceType: 'transcript' | 'notes' | 'custom'
   aspectRatio: 'portrait'
   updatedAt: string
+  createdAt?: string
   theme?: CarouselTheme
 }
 
