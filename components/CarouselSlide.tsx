@@ -23,40 +23,60 @@ type InlineToken =
 
 function ReplyIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon">
-      <path d="M3 12.5c0-4.694 4.03-8.5 9-8.5 4.25 0 7.813 2.78 8.725 6.5h-2.09C17.79 8.03 15.15 6 12 6c-3.866 0-7 2.91-7 6.5S8.134 19 12 19c1.73 0 3.314-.58 4.538-1.54l1.454 1.37C16.42 20.18 14.3 21 12 21c-4.97 0-9-3.806-9-8.5Zm10-1.5h8v2h-8l3.5 3.5-1.414 1.414L9.172 12l5.914-5.914L16.5 7.5 13 11Z" fill="currentColor" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
+      <path d="M1.75 11.96c0-4.86 3.92-8.8 8.75-8.8 4.68 0 8.5 3.7 8.73 8.34" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M9.25 8.6 4.5 12l4.75 3.4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
 function RepostIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon">
-      <path d="M4.5 5.5h10.879l-2.94-2.94L13.853 1.146 19.207 6.5l-5.354 5.354-1.414-1.414 2.94-2.94H6.5v6h-2v-8Zm13 5h2v8H8.621l2.94 2.94-1.414 1.414L4.793 17.5l5.354-5.354 1.414 1.414-2.94 2.94H17.5v-6Z" fill="currentColor" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
+      <path d="M7.5 6.25h10.25l-2.7-2.7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M17.75 6.25 20.5 9" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16.5 17.75H6.25l2.7 2.7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6.25 17.75 3.5 15" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6.25 17.75v-7.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M17.75 6.25v7.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   )
 }
 
 function LikeIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon">
-      <path d="M12 21.638h-.014C9.403 21.57 2 15.596 2 9.478 2 6.418 4.42 4 7.48 4c1.87 0 3.63.874 4.52 2.3C12.89 4.874 14.65 4 16.52 4 19.58 4 22 6.418 22 9.478c0 6.118-7.403 12.091-9.986 12.16H12Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
+      <path d="M16.7 4.6c-1.87 0-3.19.9-4.2 2.2-1.01-1.3-2.33-2.2-4.2-2.2A5.3 5.3 0 0 0 3 9.92c0 4.98 5.13 8.48 8.46 10.96.63.46 1.45.46 2.08 0C16.87 18.4 22 14.9 22 9.92a5.3 5.3 0 0 0-5.3-5.32Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function ViewsIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
+      <path d="M4 18.5h16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" opacity="0.5" />
+      <path d="M6.75 16.5v-2.25" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M10.5 16.5V9.75" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M14.25 16.5v-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M18 16.5V7.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   )
 }
 
 function BookmarkIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon">
-      <path d="M6 4.75A1.75 1.75 0 0 1 7.75 3h8.5A1.75 1.75 0 0 1 18 4.75V21l-6-4-6 4V4.75Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
+      <path d="M6.75 4.5h10.5a.75.75 0 0 1 .75.75v14.96l-6-4.2-6 4.2V5.25a.75.75 0 0 1 .75-.75Z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
     </svg>
   )
 }
 
 function ShareIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon">
-      <path d="M12 3.75a.75.75 0 0 1 .75.75v8.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V4.5a.75.75 0 0 1 .75-.75ZM5 14.75A1.75 1.75 0 0 1 6.75 13h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-3.5a.25.25 0 0 0-.25-.25h-2.5a.75.75 0 0 1 0-1.5h2.5A1.75 1.75 0 0 1 19 14.75v3.5A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-3.5Z" fill="currentColor" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon tweet-icon-stroke">
+      <path d="M12 4.25v9.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="m8.2 8.05 3.8-3.8 3.8 3.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5.75 12.75v5.5c0 .83.67 1.5 1.5 1.5h9.5c.83 0 1.5-.67 1.5-1.5v-5.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -296,10 +316,11 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
         </div>
 
         <footer className="tweet-footer">
-          <div className="tweet-engagement">
+          <div className="tweet-engagement" aria-label="Tweet actions">
             <span className="tweet-action"><ReplyIcon /> <span>28</span></span>
             <span className="tweet-action"><RepostIcon /> <span>14</span></span>
             <span className="tweet-action"><LikeIcon /> <span>197</span></span>
+            <span className="tweet-action"><ViewsIcon /> <span>2.1K</span></span>
             <span className="tweet-action tweet-action-icon-only"><BookmarkIcon /></span>
             <span className="tweet-action tweet-action-icon-only"><ShareIcon /></span>
           </div>
