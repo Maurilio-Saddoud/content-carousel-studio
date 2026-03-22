@@ -1,4 +1,5 @@
-import type { Carousel, CarouselSlide as Slide } from '../lib/types'
+import Image from 'next/image'
+import type { Carousel, CarouselSlide as Slide } from '@/lib/types'
 
 type Props = {
   carousel: Carousel
@@ -68,7 +69,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
       <div className="tweet-shell">
         <header className="tweet-header">
           <div className="tweet-avatar">
-            <img src="/content-carousel-studio/assets/maurilio-profile.jpg" alt="Maurilio Saddoud" />
+            <Image src="/assets/maurilio-profile.jpg" alt="Maurilio Saddoud" width={52} height={52} priority />
           </div>
 
           <div className="tweet-meta">

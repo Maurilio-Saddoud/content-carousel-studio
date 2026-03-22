@@ -5,18 +5,23 @@ export type CarouselSlide = {
   body: string[]
 }
 
-export type Carousel = {
+export type CarouselTheme = {
+  accent?: string
+  background?: string
+  foreground?: string
+  muted?: string
+}
+
+export type CarouselDirectoryItem = {
   slug: string
   title: string
   description: string
   sourceType: 'transcript' | 'notes' | 'custom'
   aspectRatio: 'portrait'
   updatedAt: string
-  theme?: {
-    accent?: string
-    background?: string
-    foreground?: string
-    muted?: string
-  }
+  theme?: CarouselTheme
+}
+
+export type Carousel = CarouselDirectoryItem & {
   slides: CarouselSlide[]
 }

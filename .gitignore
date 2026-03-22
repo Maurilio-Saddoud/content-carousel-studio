@@ -1,9 +1,11 @@
 node_modules
-playwright-report
-test-results
+.next
+out
+dist
 exports
 .DS_Store
-dist
 *.tsbuildinfo
-*.js
-*.d.ts
+scripts/*.js
+scripts/*.d.ts
+vite.config.js
+vite.config.d.ts

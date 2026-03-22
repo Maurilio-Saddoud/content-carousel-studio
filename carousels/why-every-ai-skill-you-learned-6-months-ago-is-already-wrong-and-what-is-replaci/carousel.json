@@ -1,0 +1,88 @@
+{
+  "slug": "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci",
+  "title": "Draft: AI Skills Age Fast",
+  "description": "Draft carousel generated automatically from a YouTube transcript about frontier operations, calibration, and how AI skills expire faster than traditional workforce skills.",
+  "sourceType": "transcript",
+  "aspectRatio": "portrait",
+  "updatedAt": "2026-03-21",
+  "theme": {
+    "accent": "#1D9BF0",
+    "background": "#000000",
+    "foreground": "#E7E9EA",
+    "muted": "#71767B"
+  },
+  "slides": [
+    {
+      "id": "01",
+      "eyebrow": "DRAFT CAROUSEL",
+      "title": "Most AI skills now expire on a quarterly cycle.",
+      "body": [
+        "That’s the real shift.",
+        "This isn’t like learning Excel, coding, or some fixed tool once and being done.",
+        "The target keeps moving."
+      ]
+    },
+    {
+      "id": "02",
+      "eyebrow": "THE BUBBLE",
+      "title": "The useful metaphor is an expanding bubble.",
+      "body": [
+        "Inside the bubble: everything agents can do reliably today.",
+        "Outside the bubble: everything that still needs a person.",
+        "The surface is where the interesting work happens."
+      ]
+    },
+    {
+      "id": "03",
+      "eyebrow": "WHY THIS MATTERS",
+      "title": "The skill is not learning the boundary once.",
+      "body": [
+        "The skill is maintaining calibration as the boundary keeps shifting.",
+        "If your mental model is six months old, you’re probably underusing AI in some places and overtrusting it in others.",
+        "Both are expensive."
+      ]
+    },
+    {
+      "id": "04",
+      "eyebrow": "FAILURE MODELS",
+      "title": "The best operators don’t just know that agents fail.",
+      "body": [
+        "They know the specific texture of failure at the current capability level.",
+        "That matters more than generic skepticism.",
+        "You need differentiated checks for different kinds of work."
+      ]
+    },
+    {
+      "id": "05",
+      "eyebrow": "EXAMPLE",
+      "title": "Old failure patterns go stale fast.",
+      "body": [
+        "One model generation struggled to retrieve details from deep inside long documents.",
+        "A few months later, retrieval performance jumped dramatically.",
+        "If you didn’t update your boundary sense, your workflow is already wrong."
+      ]
+    },
+    {
+      "id": "06",
+      "eyebrow": "LEVERAGE",
+      "title": "This is why the real bottleneck becomes human attention.",
+      "body": [
+        "As agents get better, the problem shifts from doing the work to deciding what deserves a human review.",
+        "You cannot review everything at the same depth.",
+        "So attention allocation becomes part of the skill."
+      ]
+    },
+    {
+      "id": "07",
+      "eyebrow": "THE TAKEAWAY",
+      "title": "The winning skill is frontier operations.",
+      "body": [
+        "Boundary sensing.",
+        "Seam design.",
+        "Failure model maintenance.",
+        "Capability forecasting.",
+        "Leverage calibration."
+      ]
+    }
+  ]
+}
