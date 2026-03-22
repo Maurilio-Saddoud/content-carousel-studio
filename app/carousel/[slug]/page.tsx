@@ -32,19 +32,31 @@ export default async function CarouselPage({ params }: Props) {
               Download PNG batch (.zip)
             </a>
           </p>
+          <p>
+            Or open any slide below and save it directly on your phone.
+          </p>
         </div>
         <Link href="/">← Back</Link>
       </div>
 
       <div className="slides-stack">
         {carousel.slides.map((slide, index) => (
-          <CarouselSlide
-            key={slide.id}
-            carousel={carousel}
-            slide={slide}
-            index={index}
-            total={carousel.slides.length}
-          />
+          <div key={slide.id} className="preview-slide-group">
+            <CarouselSlide
+              carousel={carousel}
+              slide={slide}
+              index={index}
+              total={carousel.slides.length}
+            />
+            <div className="preview-slide-actions">
+              <a href={`/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`} target="_blank" rel="noreferrer">
+                Open slide image
+              </a>
+              <a href={`/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`} download>
+                Download slide PNG
+              </a>
+            </div>
+          </div>
         ))}
       </div>
     </main>
