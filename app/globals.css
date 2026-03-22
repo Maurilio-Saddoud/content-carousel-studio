@@ -236,9 +236,50 @@ a { color: inherit; text-decoration: none; }
   max-width: 100%;
 }
 
-.body-copy p {
+.body-copy p,
+.body-copy ul,
+.body-copy blockquote {
   margin: 0;
   color: #e7e9ea;
+}
+
+.body-copy p {
+  text-wrap: pretty;
+}
+
+.body-copy ul {
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.42rem;
+}
+
+.body-copy li {
+  margin: 0;
+  padding-left: 0.1rem;
+}
+
+.body-copy li::marker {
+  color: var(--accent);
+}
+
+.body-copy strong {
+  font-weight: 800;
+  color: #f7f9f9;
+}
+
+.body-copy em,
+.tweet-kicker em,
+.carousel-slide h2 em {
+  font-style: italic;
+  color: rgba(231, 233, 234, 0.92);
+}
+
+.body-copy blockquote {
+  padding: 0.9rem 1rem;
+  border-left: 3px solid rgba(29, 155, 240, 0.9);
+  background: rgba(255,255,255,0.04);
+  border-radius: 0 16px 16px 0;
+  color: #f2f4f5;
 }
 
 .tweet-meta-row {

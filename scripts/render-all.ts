@@ -1,6 +1,7 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, writeFile } from 'node:fs/promises'
 import { spawn } from 'node:child_process'
 import path from 'node:path'
+import { getCarouselDirectory } from '@/lib/carousels'
 
 type DirectoryItem = {
   slug: string
@@ -24,9 +25,7 @@ const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.
 const publicSiteUrl = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL)
 
 async function main() {
-  const indexPath = path.resolve('carousels/index.json')
-  const raw = await readFile(indexPath, 'utf8')
-  const items = JSON.parse(raw) as DirectoryItem[]
+  const items = await getCarouselDirectory() as DirectoryItem[]
 
   for (const item of items) {
     await run('pnpm', ['render', item.slug], process.env)

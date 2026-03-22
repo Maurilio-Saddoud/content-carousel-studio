@@ -1,6 +1,7 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { chromium } from 'playwright'
+import { getCarousel } from '@/lib/carousels'
 
 type Carousel = {
   slug: string
@@ -84,8 +85,12 @@ async function main() {
 }
 
 async function readCarousel(slug: string): Promise<Carousel> {
-  const raw = await readFile(path.resolve('carousels', slug, 'carousel.json'), 'utf8')
-  return JSON.parse(raw) as Carousel
+  const carousel = await getCarousel(slug)
+  if (!carousel) {
+    throw new Error(`Carousel not found: ${slug}`)
+  }
+
+  return carousel
 }
 
 function buildBatchHtml(manifest: RenderManifest) {

@@ -55,7 +55,7 @@ type CarouselSlide = {
   id: string
   eyebrow?: string
   title: string
-  body: string[]
+  body: string
 }
 
 type Carousel = {
@@ -140,7 +140,7 @@ async function main() {
       `sources/${slug}/segments.json`,
       `sources/${slug}/summary.md`,
       `drafts/${slug}/post-brief.md`,
-      `carousels/${slug}/carousel.json`,
+      `carousels/${slug}/carousel.md`,
       'carousels/index.json',
     ],
   }
@@ -151,7 +151,7 @@ async function main() {
   await writeFile(path.join(sourceDir, 'segments.json'), `${JSON.stringify(segments, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'summary.md'), summary, 'utf8')
   await writeFile(path.join(draftDir, 'post-brief.md'), draftNotes, 'utf8')
-  await writeFile(path.join(carouselDir, 'carousel.json'), `${JSON.stringify(draftCarousel, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(carouselDir, 'carousel.md'), renderCarouselMarkdown(draftCarousel), 'utf8')
 
   console.log(`Created transcript package and draft carousel for ${slug}`)
   for (const file of sourceManifest.createdFiles) {
@@ -570,7 +570,7 @@ function buildSummary(metadata: VideoMetadata, carousel: Carousel, segments: Seg
 
 function buildDraftNotes(metadata: VideoMetadata, slug: string, carousel: Carousel, segments: Segment[]) {
   const top = segments.slice(0, 3)
-  return `# ${metadata.title}\n\nSlug: ${slug}\nStatus: draft carousel created automatically\n\n## Default output\nThis ingest run already created a previewable draft carousel at \`carousels/${slug}/carousel.json\`.\nIf the angle is good, edit that file directly instead of starting from scratch.\n\n## Draft carousel angle\n- Title: ${carousel.title}\n- Description: ${carousel.description}\n\n## Top source options\n${top
+  return `# ${metadata.title}\n\nSlug: ${slug}\nStatus: draft carousel created automatically\n\n## Default output\nThis ingest run already created a previewable draft carousel at \`carousels/${slug}/carousel.md\`.\nIf the angle is good, edit that markdown file directly instead of starting from scratch.\n\n## Draft carousel angle\n- Title: ${carousel.title}\n- Description: ${carousel.description}\n\n## Top source options\n${top
     .map(
       (segment) => `\n### Option ${segment.rank}: ${segment.titleSuggestion}\n- Time range: ${segment.start} → ${segment.end}\n- Raw hook: ${segment.hook}\n- Angle: ${segment.whyItCouldWork[0]}\n- Source text:\n\n> ${segment.text}\n`,
     )
@@ -653,6 +653,7 @@ function buildBodyLines(lines: string[]) {
   return uniqueNormalized(lines)
     .map((line) => trimSentence(line, 150))
     .slice(0, 3)
+    .join('\n\n')
 }
 
 function uniqueNormalized(lines: string[]) {
@@ -730,6 +731,40 @@ function renderRawTranscript(metadata: VideoMetadata, url: string, transcript: s
 
 function renderCleanTranscript(metadata: VideoMetadata, paragraphs: string[]) {
   return `# Clean Transcript\n\n- Title: ${metadata.title}\n- Creator: ${metadata.authorName ?? 'Unknown'}\n\n---\n\n${paragraphs.map((paragraph) => `${paragraph}\n`).join('\n')}`
+}
+
+function renderCarouselMarkdown(carousel: Carousel) {
+  const frontmatter = [
+    '---',
+    `slug: ${quoteYaml(carousel.slug)}`,
+    `title: ${quoteYaml(carousel.title)}`,
+    `description: ${quoteYaml(carousel.description)}`,
+    `sourceType: ${carousel.sourceType}`,
+    `aspectRatio: ${carousel.aspectRatio}`,
+    `updatedAt: ${carousel.updatedAt}`,
+    'theme:',
+    `  accent: ${quoteYaml(carousel.theme.accent)}`,
+    `  background: ${quoteYaml(carousel.theme.background)}`,
+    `  foreground: ${quoteYaml(carousel.theme.foreground)}`,
+    `  muted: ${quoteYaml(carousel.theme.muted)}`,
+    '---',
+  ].join('\n')
+
+  const slides = carousel.slides.map((slide) => {
+    const parts = [
+      slide.eyebrow ? `eyebrow: ${slide.eyebrow}` : undefined,
+      `# ${slide.title}`,
+      slide.body.trim(),
+    ].filter(Boolean)
+
+    return parts.join('\n\n')
+  })
+
+  return `${frontmatter}\n\n${slides.join('\n\n---\n\n')}\n`
+}
+
+function quoteYaml(value: string) {
+  return JSON.stringify(value)
 }
 
 function slugify(input: string) {

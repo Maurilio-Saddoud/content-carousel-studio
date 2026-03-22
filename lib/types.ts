@@ -2,7 +2,7 @@ export type CarouselSlide = {
   id: string
   eyebrow?: string
   title: string
-  body: string[]
+  body: string
 }
 
 export type CarouselTheme = {

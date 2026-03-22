@@ -14,6 +14,7 @@
     "ingest:youtube": "tsx scripts/ingest-youtube.ts"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "15.5.14",
     "react": "19.1.1",
     "react-dom": "19.1.1"

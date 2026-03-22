@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import type { ReactNode } from 'react'
 import type { Carousel, CarouselSlide as Slide } from '@/lib/types'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
@@ -9,6 +10,16 @@ type Props = {
   index: number
   total: number
 }
+
+type ParagraphBlock = { type: 'paragraph'; text: string }
+type ListBlock = { type: 'list'; items: string[] }
+type QuoteBlock = { type: 'quote'; text: string }
+type BodyBlock = ParagraphBlock | ListBlock | QuoteBlock
+
+type InlineToken =
+  | { type: 'text'; text: string }
+  | { type: 'strong'; children: InlineToken[] }
+  | { type: 'em'; children: InlineToken[] }
 
 function ReplyIcon() {
   return (
@@ -62,10 +73,11 @@ function VerifiedBadge() {
 }
 
 function getTextProfile(slide: Slide) {
+  const blocks = parseBodyBlocks(slide.body)
   const eyebrowLength = slide.eyebrow?.trim().length ?? 0
-  const titleLength = slide.title.trim().length
-  const bodyLength = slide.body.reduce((sum, paragraph) => sum + paragraph.trim().length, 0)
-  const paragraphCount = slide.body.length
+  const titleLength = getPlainTextLength(slide.title)
+  const bodyLength = blocks.reduce((sum, block) => sum + getBlockTextLength(block), 0)
+  const paragraphCount = blocks.reduce((sum, block) => sum + (block.type === 'list' ? block.items.length : 1), 0)
   const totalLength = eyebrowLength + titleLength + bodyLength
 
   const density = totalLength > 340 || paragraphCount >= 3 || titleLength > 120
@@ -77,7 +89,140 @@ function getTextProfile(slide: Slide) {
   const titleTone = titleLength > 110 ? 'tweet-title-long' : titleLength < 55 ? 'tweet-title-short' : 'tweet-title-balanced'
   const bodyTone = bodyLength > 170 || paragraphCount >= 3 ? 'tweet-body-long' : bodyLength < 90 ? 'tweet-body-short' : 'tweet-body-balanced'
 
-  return { density, titleTone, bodyTone }
+  return { density, titleTone, bodyTone, blocks }
+}
+
+function getBlockTextLength(block: BodyBlock) {
+  if (block.type === 'list') {
+    return block.items.join(' ').trim().length
+  }
+
+  return block.text.trim().length
+}
+
+function getPlainTextLength(text: string) {
+  return text.replace(/[*_`>#-]+/g, '').trim().length
+}
+
+function parseBodyBlocks(body: string): BodyBlock[] {
+  const sections = body
+    .split(/\n\s*\n/)
+    .map((section) => section.trim())
+    .filter(Boolean)
+
+  return sections.map((section) => {
+    const lines = section.split(/\r?\n/).map((line) => line.trim()).filter(Boolean)
+    const listItems = lines
+      .map((line) => line.match(/^[-*]\s+(.+)$/)?.[1]?.trim())
+      .filter((item): item is string => Boolean(item))
+
+    if (listItems.length === lines.length && listItems.length > 0) {
+      return { type: 'list', items: listItems }
+    }
+
+    const quoteLines = lines
+      .map((line) => line.match(/^>\s?(.+)$/)?.[1]?.trim())
+      .filter((item): item is string => Boolean(item))
+
+    if (quoteLines.length === lines.length && quoteLines.length > 0) {
+      return { type: 'quote', text: quoteLines.join(' ') }
+    }
+
+    return { type: 'paragraph', text: lines.join(' ') }
+  })
+}
+
+function parseInlineMarkdown(text: string): InlineToken[] {
+  return parseInlineSegment(text)
+}
+
+function parseInlineSegment(text: string, activeMarker?: '**' | '*'): InlineToken[] {
+  const tokens: InlineToken[] = []
+  let cursor = 0
+
+  while (cursor < text.length) {
+    const strongMarker = text.indexOf('**', cursor)
+    const emMarker = text.indexOf('*', cursor)
+    const nextMarker = getNextMarker(strongMarker, emMarker)
+
+    if (!nextMarker) {
+      pushTextToken(tokens, text.slice(cursor))
+      break
+    }
+
+    if (nextMarker.index > cursor) {
+      pushTextToken(tokens, text.slice(cursor, nextMarker.index))
+    }
+
+    if (activeMarker === nextMarker.marker) {
+      return tokens
+    }
+
+    const innerStart = nextMarker.index + nextMarker.marker.length
+    const innerTokens = parseInlineSegment(text.slice(innerStart), nextMarker.marker)
+    const consumed = getTokenText(innerTokens).length
+    const closingIndex = innerStart + consumed
+
+    if (text.slice(closingIndex, closingIndex + nextMarker.marker.length) === nextMarker.marker) {
+      tokens.push({ type: nextMarker.marker === '**' ? 'strong' : 'em', children: innerTokens })
+      cursor = closingIndex + nextMarker.marker.length
+      continue
+    }
+
+    pushTextToken(tokens, nextMarker.marker)
+    cursor = innerStart
+  }
+
+  return tokens
+}
+
+function getNextMarker(strongIndex: number, emIndex: number) {
+  const candidates = [
+    strongIndex >= 0 ? { marker: '**' as const, index: strongIndex } : undefined,
+    emIndex >= 0 ? { marker: '*' as const, index: emIndex } : undefined,
+  ].filter((value): value is { marker: '**' | '*'; index: number } => Boolean(value))
+
+  if (candidates.length === 0) {
+    return undefined
+  }
+
+  candidates.sort((a, b) => a.index - b.index || b.marker.length - a.marker.length)
+  return candidates[0]
+}
+
+function pushTextToken(tokens: InlineToken[], text: string) {
+  if (!text) return
+
+  const previous = tokens[tokens.length - 1]
+  if (previous?.type === 'text') {
+    previous.text += text
+    return
+  }
+
+  tokens.push({ type: 'text', text })
+}
+
+function getTokenText(tokens: InlineToken[]): string {
+  return tokens.map((token) => (token.type === 'text' ? token.text : getTokenText(token.children))).join('')
+}
+
+function renderInlineMarkdown(text: string): ReactNode[] {
+  return renderInlineTokens(parseInlineMarkdown(text))
+}
+
+function renderInlineTokens(tokens: InlineToken[], keyPrefix = 'md'): ReactNode[] {
+  return tokens.map((token, index) => {
+    const key = `${keyPrefix}-${index}`
+    if (token.type === 'text') {
+      return token.text
+    }
+
+    if (token.type === 'strong') {
+      return <strong key={key}>{renderInlineTokens(token.children, `${key}-strong`)}</strong>
+    }
+
+    return <em key={key}>{renderInlineTokens(token.children, `${key}-em`)}</em>
+  })
 }
 
 export function CarouselSlide({ carousel, slide, index, total }: Props) {
@@ -121,12 +266,24 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
         </header>
 
         <div className="tweet-content">
-          <p className="tweet-kicker">{slide.eyebrow ?? carousel.title}</p>
-          <h2>{slide.title}</h2>
+          <p className="tweet-kicker">{renderInlineMarkdown(slide.eyebrow ?? carousel.title)}</p>
+          <h2>{renderInlineMarkdown(slide.title)}</h2>
           <div className="body-copy">
-            {slide.body.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
+            {textProfile.blocks.map((block, i) => {
+              if (block.type === 'paragraph') {
+                return <p key={i}>{renderInlineMarkdown(block.text)}</p>
+              }
+
+              if (block.type === 'quote') {
+                return <blockquote key={i}>{renderInlineMarkdown(block.text)}</blockquote>
+              }
+
+              return (
+                <ul key={i}>
+                  {block.items.map((item, itemIndex) => <li key={`${i}-${itemIndex}`}>{renderInlineMarkdown(item)}</li>)}
+                </ul>
+              )
+            })}
           </div>
         </div>
 

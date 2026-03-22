@@ -5,6 +5,7 @@ Next.js-powered carousel studio for transcript-driven social content.
 ## What this repo does now
 
 - ingest a YouTube video into source artifacts **and** a draft carousel
+- author carousel copy in a single markdown file per carousel
 - preview every carousel locally in Next.js
 - export the site as a static GitHub Pages bundle
 - render every carousel slide to PNG files
@@ -36,7 +37,7 @@ https://maurilio-saddoud.github.io/content-carousel-studio/exports/
 
 - `app/` — Next.js App Router pages
 - `components/` — reusable carousel presentation components
-- `carousels/` — previewable carousel configs, including auto-generated drafts
+- `carousels/` — one folder per carousel, with `carousel.md` as the main source file
 - `drafts/` — editorial notes / briefs for a source package
 - `sources/` — raw source material and notes
 - `lib/` — shared data loaders and types
@@ -49,6 +50,69 @@ https://maurilio-saddoud.github.io/content-carousel-studio/exports/
 ```bash
 pnpm install
 ```
+
+## Markdown carousel format
+
+The content layer is now **markdown-first**.
+
+Each carousel lives in:
+
+```text
+carousels/<slug>/carousel.md
+```
+
+Format:
+
+1. YAML frontmatter for carousel-level metadata
+2. slide sections separated by a line containing exactly `---`
+3. each slide starts with an optional `eyebrow: ...` line
+4. the slide title is the first markdown heading
+5. the rest of the slide is markdown-ish body copy
+   - paragraphs work out of the box
+   - simple unordered lists (`- item`) also render
+
+Example:
+
+```md
+---
+slug: ai-memory-wall
+title: AI Memory Wall
+description: A bite-sized carousel about memory systems.
+sourceType: transcript
+aspectRatio: portrait
+updatedAt: 2026-03-21
+theme:
+  accent: "#1D9BF0"
+  background: "#000000"
+  foreground: "#E7E9EA"
+  muted: "#71767B"
+---
+
+eyebrow: AI DEPLOYMENTS
+
+# AI agents are getting better.
+
+The people deploying them are not.
+
+The capability curve is real.
+
+---
+
+eyebrow: THE REAL WALL
+
+# The wall isn’t just intelligence.
+
+It’s memory.
+
+- Agents can do impressive work in short bursts.
+- Real work has continuity, history, and trade-offs.
+```
+
+### Notes on parsing
+
+- The loader prefers `carousel.md`.
+- If a carousel still only has `carousel.json`, the app falls back to that legacy format.
+- The markdown body is intentionally simple right now so it stays human-editable and predictable in screenshots.
 
 ## Workflow 1: ingest a YouTube video
 
@@ -78,8 +142,8 @@ One command now does the practical first pass:
 2. falls back to local Whisper transcription if captions are missing
 3. writes source artifacts into `sources/<slug>/`
 4. creates editorial notes in `drafts/<slug>/post-brief.md`
-5. creates or updates `carousels/<slug>/carousel.json`
-6. updates `carousels/index.json`
+5. creates or updates `carousels/<slug>/carousel.md`
+6. refreshes `carousels/index.json` as a legacy/generated directory artifact
 
 Created files:
 
@@ -90,7 +154,7 @@ sources/<slug>/clean-transcript.md
 sources/<slug>/segments.json
 sources/<slug>/summary.md
 drafts/<slug>/post-brief.md
-carousels/<slug>/carousel.json
+carousels/<slug>/carousel.md
 carousels/index.json
 ```
 
@@ -209,7 +273,8 @@ pnpm lint
 ## Notes / tradeoffs
 
 - GitHub Pages is static-only, so the app is configured for `next export` output.
-- Carousel routes are statically generated from `carousels/index.json`.
+- Carousel routes are generated from the markdown carousel files on disk.
 - PNG generation uses Playwright screenshots of the rendered Pages-safe site.
-- `pnpm start` is still there, but the real deploy target is now GitHub Pages, not a Node server.
+- The markdown parser intentionally supports a narrow authoring format right now: frontmatter + slide separators + paragraphs/lists.
+- `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
 - If you add a carousel and want it public, it still needs to be committed and pushed to `main`. Pages is public, not magical.
