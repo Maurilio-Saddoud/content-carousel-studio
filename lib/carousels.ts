@@ -1,11 +1,12 @@
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
-import type { Carousel, CarouselDirectoryItem, CarouselSlide, CarouselTheme } from '@/lib/types'
+import type { Carousel, CarouselDirectoryItem, CarouselSlide, CarouselSlideVariant, CarouselTheme } from '@/lib/types'
 
 const carouselsDir = path.resolve(process.cwd(), 'carousels')
 const carouselIndexPath = path.join(carouselsDir, 'index.json')
 const SUPPORTED_SOURCE_TYPES = new Set(['transcript', 'notes', 'custom'])
+const SLIDE_VARIANTS = new Set<CarouselSlideVariant>(['claim', 'quote', 'framework', 'explainer'])
 
 export async function getCarouselDirectory(): Promise<CarouselDirectoryItem[]> {
   const items = await loadCarouselsFromFiles()
@@ -90,15 +91,35 @@ function parseSlideSection(section: string, index: number): CarouselSlide {
   const lines = section.split(/\r?\n/)
   let cursor = 0
   let eyebrow: string | undefined
+  let variant: CarouselSlideVariant | undefined
 
   while (cursor < lines.length && !lines[cursor]?.trim()) cursor++
 
-  const eyebrowMatch = lines[cursor]?.match(/^eyebrow\s*:\s*(.+)$/i)
-  if (eyebrowMatch) {
-    eyebrow = eyebrowMatch[1]?.trim()
-    cursor++
-    while (cursor < lines.length && !lines[cursor]?.trim()) cursor++
+  while (cursor < lines.length) {
+    const line = lines[cursor]?.trim()
+    if (!line) {
+      cursor++
+      continue
+    }
+
+    const eyebrowMatch = line.match(/^eyebrow\s*:\s*(.+)$/i)
+    if (eyebrowMatch) {
+      eyebrow = eyebrowMatch[1]?.trim()
+      cursor++
+      continue
+    }
+
+    const variantMatch = line.match(/^variant\s*:\s*(.+)$/i)
+    if (variantMatch) {
+      variant = normalizeVariant(variantMatch[1])
+      cursor++
+      continue
+    }
+
+    break
   }
+
+  while (cursor < lines.length && !lines[cursor]?.trim()) cursor++
 
   const titleLine = lines[cursor]?.trim()
   if (!titleLine) {
@@ -118,7 +139,39 @@ function parseSlideSection(section: string, index: number): CarouselSlide {
     eyebrow,
     title,
     body,
+    variant: variant ?? inferSlideVariant(title, body, eyebrow),
   }
+}
+
+function inferSlideVariant(title: string, body: string, eyebrow?: string): CarouselSlideVariant {
+  const blocks = body
+    .split(/\n\s*\n/)
+    .map((section) => section.trim())
+    .filter(Boolean)
+  const lines = blocks.flatMap((section) => section.split(/\r?\n/).map((line) => line.trim()).filter(Boolean))
+  const lowerTitle = title.toLowerCase()
+  const lowerBody = body.toLowerCase()
+  const lowerEyebrow = (eyebrow ?? '').toLowerCase()
+  const allList = lines.length > 0 && lines.every((line) => /^([-*]|\d+\.)\s+/.test(line))
+  const quoteLike = lines.length > 0 && lines.every((line) => /^>\s?/.test(line))
+
+  if (allList || /\b(framework|playbook|steps|process|system|stack|checklist|roadmap|three|4|five|pillars?)\b/i.test(`${title} ${eyebrow ?? ''}`)) {
+    return 'framework'
+  }
+
+  if (quoteLike || /^['"“”]/.test(title) || /\bquote|thesis|belief|principle\b/i.test(`${lowerTitle} ${lowerEyebrow}`)) {
+    return 'quote'
+  }
+
+  if (
+    title.length <= 90 &&
+    /\b(why|how|mistake|truth|problem|moat|edge|real|not|without|stop|start|most|better)\b/i.test(lowerTitle) &&
+    lowerBody.length <= 320
+  ) {
+    return 'claim'
+  }
+
+  return 'explainer'
 }
 
 function normalizeTheme(value: unknown): CarouselTheme | undefined {
@@ -159,12 +212,18 @@ function getString(value: unknown) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
+function normalizeVariant(value: string) {
+  const normalized = value.trim().toLowerCase() as CarouselSlideVariant
+  return SLIDE_VARIANTS.has(normalized) ? normalized : undefined
+}
+
 type LegacyCarousel = Omit<Carousel, 'slides'> & {
   slides: Array<{
     id: string
     eyebrow?: string
     title: string
     body: string[] | string
+    variant?: CarouselSlideVariant
   }>
 }
 
@@ -176,6 +235,7 @@ function normalizeLegacyCarousel(carousel: LegacyCarousel): Carousel {
       eyebrow: slide.eyebrow,
       title: slide.title,
       body: Array.isArray(slide.body) ? slide.body.join('\n\n') : slide.body,
+      variant: slide.variant ?? inferSlideVariant(slide.title, Array.isArray(slide.body) ? slide.body.join('\n\n') : slide.body, slide.eyebrow),
     })),
   }
 }

@@ -56,6 +56,7 @@ type CarouselSlide = {
   eyebrow?: string
   title: string
   body: string
+  variant?: 'claim' | 'quote' | 'framework' | 'explainer'
 }
 
 type Carousel = {
@@ -715,10 +716,17 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     'AI operating models are getting stale faster than most teams realize.',
   ], { preferredMax: 84 }) ?? 'AI operating models are getting stale faster than most teams realize.'
 
+  const frameworkItems = uniqueNormalized([
+    support[5] ?? 'Update your mental model before you update the workflow.',
+    support[8] ?? 'Decide what deserves human review and what can safely flow through.',
+    extractTakeaway(primary.text, companionSegments),
+  ]).slice(0, 3)
+
   const slides: CarouselSlide[] = [
     {
       id: '01',
       eyebrow: 'AUTO DRAFT',
+      variant: 'claim',
       title: opening,
       body: buildBodyLines([
         support[0] ?? 'The useful move is turning the clearest claim into an operational decision.',
@@ -728,6 +736,7 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     {
       id: '02',
       eyebrow: 'WHY IT MATTERS',
+      variant: 'explainer',
       title: pickDisplayLine([
         primaryThoughts[1] ?? '',
         support[0] ?? '',
@@ -740,13 +749,14 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     },
     {
       id: '03',
-      eyebrow: 'THE REAL SHIFT',
+      eyebrow: 'THESIS',
+      variant: 'quote',
       title: pickDisplayLine([
         companionSegments[0]?.hook ?? '',
         support[4] ?? '',
         'The skill is maintaining calibration as the boundary keeps moving.',
       ], { preferredMax: 84 }) ?? 'The skill is maintaining calibration as the boundary keeps moving.',
-      body: buildBodyLines([
+      body: buildQuoteBody([
         support[5] ?? 'What worked as a rule of thumb a few months ago can already be wrong now.',
         support[6] ?? 'Operators need current failure models, not generic vibes.',
       ]),
@@ -754,19 +764,21 @@ function buildDraftCarousel(metadata: VideoMetadata, sourceSlug: string, carouse
     {
       id: '04',
       eyebrow: 'OPERATING MODEL',
+      variant: 'framework',
       title: pickDisplayLine([
         companionSegments[1]?.hook ?? '',
         support[7] ?? '',
         'Human attention becomes the real bottleneck.',
       ], { preferredMax: 84 }) ?? 'Human attention becomes the real bottleneck.',
-      body: buildBodyLines([
-        support[8] ?? 'As agents improve, the question becomes what deserves review and what can safely flow through.',
-        support[9] ?? 'Attention allocation becomes part of the skill.',
-      ]),
+      body: buildFrameworkBody(
+        support[7] ?? 'The workflow needs clearer review boundaries.',
+        frameworkItems,
+      ),
     },
     {
       id: '05',
       eyebrow: 'TAKEAWAY',
+      variant: 'claim',
       title: pickDisplayLine([
         extractTakeaway(primary.text, companionSegments),
         'The edge is keeping your operating model current.',
@@ -799,6 +811,18 @@ function buildBodyLines(lines: string[]) {
     .filter((line) => !/[.…]$/.test(line) || /[.!?]$/.test(line))
     .slice(0, 2)
     .join('\n\n')
+}
+
+function buildQuoteBody(lines: string[]) {
+  const normalized = uniqueNormalized(lines).slice(0, 2)
+  const [quote, support] = normalized
+  return [quote ? `> ${quote}` : undefined, support].filter(Boolean).join('\n\n')
+}
+
+function buildFrameworkBody(intro: string, items: string[]) {
+  const normalizedItems = uniqueNormalized(items).slice(0, 3)
+  const list = normalizedItems.map((item, index) => `${index + 1}. ${item}`).join('\n')
+  return [normalizeForSlide(intro), list].filter(Boolean).join('\n\n')
 }
 
 function uniqueNormalized(lines: string[]) {
@@ -965,6 +989,7 @@ function renderCarouselMarkdown(carousel: Carousel) {
   const slides = carousel.slides.map((slide) => {
     const parts = [
       slide.eyebrow ? `eyebrow: ${slide.eyebrow}` : undefined,
+      slide.variant ? `variant: ${slide.variant}` : undefined,
       `# ${slide.title}`,
       slide.body.trim(),
     ].filter(Boolean)

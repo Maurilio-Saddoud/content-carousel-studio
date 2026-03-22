@@ -9,7 +9,7 @@ import {
   BarChart3,
   Share,
 } from 'lucide-react'
-import type { Carousel, CarouselSlide as Slide } from '@/lib/types'
+import type { Carousel, CarouselSlide as Slide, CarouselSlideVariant } from '@/lib/types'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
 
@@ -21,7 +21,7 @@ type Props = {
 }
 
 type ParagraphBlock = { type: 'paragraph'; text: string }
-type ListBlock = { type: 'list'; items: string[] }
+type ListBlock = { type: 'list'; items: string[]; ordered: boolean }
 type QuoteBlock = { type: 'quote'; text: string }
 type BodyBlock = ParagraphBlock | ListBlock | QuoteBlock
 
@@ -76,7 +76,7 @@ function getTextProfile(slide: Slide) {
   const paragraphCount = blocks.reduce((sum, block) => sum + (block.type === 'list' ? block.items.length : 1), 0)
   const totalLength = eyebrowLength + titleLength + bodyLength
 
-  const density = totalLength > 340 || paragraphCount >= 3 || titleLength > 120
+  const density = totalLength > 340 || paragraphCount >= 4 || titleLength > 120
     ? 'tweet-card-dense'
     : totalLength < 170 && paragraphCount <= 2 && titleLength < 80
       ? 'tweet-card-compact'
@@ -108,12 +108,20 @@ function parseBodyBlocks(body: string): BodyBlock[] {
 
   return sections.map((section) => {
     const lines = section.split(/\r?\n/).map((line) => line.trim()).filter(Boolean)
-    const listItems = lines
+    const unorderedItems = lines
       .map((line) => line.match(/^[-*]\s+(.+)$/)?.[1]?.trim())
       .filter((item): item is string => Boolean(item))
 
-    if (listItems.length === lines.length && listItems.length > 0) {
-      return { type: 'list', items: listItems }
+    if (unorderedItems.length === lines.length && unorderedItems.length > 0) {
+      return { type: 'list', items: unorderedItems, ordered: false }
+    }
+
+    const orderedItems = lines
+      .map((line) => line.match(/^\d+[.)]\s+(.+)$/)?.[1]?.trim())
+      .filter((item): item is string => Boolean(item))
+
+    if (orderedItems.length === lines.length && orderedItems.length > 0) {
+      return { type: 'list', items: orderedItems, ordered: true }
     }
 
     const quoteLines = lines
@@ -221,6 +229,96 @@ function renderInlineTokens(tokens: InlineToken[], keyPrefix = 'md'): ReactNode[
   })
 }
 
+function getSlideVariant(slide: Slide, blocks: BodyBlock[]): CarouselSlideVariant {
+  if (slide.variant) return slide.variant
+
+  if (blocks.some((block) => block.type === 'list')) return 'framework'
+  if (blocks.every((block) => block.type === 'quote')) return 'quote'
+
+  return 'explainer'
+}
+
+function getLeadParagraph(blocks: BodyBlock[]) {
+  const paragraph = blocks.find((block): block is ParagraphBlock => block.type === 'paragraph')
+  if (!paragraph) return undefined
+
+  const sentences = paragraph.text.split(/(?<=[.!?])\s+/).map((sentence) => sentence.trim()).filter(Boolean)
+  const lead = sentences[0]
+  if (!lead || lead.length > 140) return undefined
+  if (sentences.length < 2 && paragraph.text.length < 100) return undefined
+
+  return {
+    lead,
+    remainder: paragraph.text.slice(lead.length).trim(),
+  }
+}
+
+function renderBodyBlock(block: BodyBlock, key: string, options?: { asQuoteCard?: boolean; emphasizeLead?: boolean }) {
+  if (block.type === 'paragraph') {
+    if (options?.emphasizeLead) {
+      const lead = getLeadParagraph([block])
+      if (lead) {
+        return (
+          <p key={key}>
+            <span className="body-lead">{renderInlineMarkdown(lead.lead)}</span>
+            {lead.remainder ? <> {' '}{renderInlineMarkdown(lead.remainder)}</> : null}
+          </p>
+        )
+      }
+    }
+
+    return <p key={key}>{renderInlineMarkdown(block.text)}</p>
+  }
+
+  if (block.type === 'quote') {
+    return (
+      <blockquote key={key} className={options?.asQuoteCard ? 'quote-card' : undefined}>
+        {renderInlineMarkdown(block.text)}
+      </blockquote>
+    )
+  }
+
+  const ListTag = block.ordered ? 'ol' : 'ul'
+  return (
+    <ListTag key={key}>
+      {block.items.map((item, itemIndex) => <li key={`${key}-${itemIndex}`}>{renderInlineMarkdown(item)}</li>)}
+    </ListTag>
+  )
+}
+
+function renderVariantBody(variant: CarouselSlideVariant, blocks: BodyBlock[]) {
+  if (variant === 'quote') {
+    const quoteBlock = blocks.find((block): block is QuoteBlock => block.type === 'quote')
+      ?? blocks.find((block): block is ParagraphBlock => block.type === 'paragraph')
+    const supporting = blocks.filter((block) => block !== quoteBlock)
+
+    return (
+      <>
+        {quoteBlock ? renderBodyBlock(quoteBlock.type === 'paragraph' ? { type: 'quote', text: quoteBlock.text } : quoteBlock, 'quote-primary', { asQuoteCard: true }) : null}
+        {supporting.length > 0 ? <div className="body-copy body-copy-supporting">{supporting.map((block, i) => renderBodyBlock(block, `support-${i}`))}</div> : null}
+      </>
+    )
+  }
+
+  if (variant === 'framework') {
+    const listBlock = blocks.find((block): block is ListBlock => block.type === 'list')
+    const introBlocks = listBlock ? blocks.filter((block) => block !== listBlock) : blocks
+
+    return (
+      <>
+        {introBlocks.length > 0 ? <div className="body-copy body-copy-intro">{introBlocks.map((block, i) => renderBodyBlock(block, `intro-${i}`))}</div> : null}
+        {listBlock ? <div className="body-copy framework-list">{renderBodyBlock(listBlock, 'framework-list')}</div> : null}
+      </>
+    )
+  }
+
+  if (variant === 'claim') {
+    return <div className="body-copy claim-body">{blocks.map((block, i) => renderBodyBlock(block, `claim-${i}`, { emphasizeLead: true }))}</div>
+  }
+
+  return <div className="body-copy explainer-body">{blocks.map((block, i) => renderBodyBlock(block, `explainer-${i}`, { emphasizeLead: i === 0 }))}</div>
+}
+
 export function CarouselSlide({ carousel, slide, index, total }: Props) {
   const theme = {
     accent: carousel.theme?.accent ?? '#1d9bf0',
@@ -230,10 +328,11 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
   }
   const textProfile = getTextProfile(slide)
   const stats = getSeededStats(carousel.slug, index)
+  const variant = getSlideVariant(slide, textProfile.blocks)
 
   return (
     <article
-      className={`carousel-slide tweet-card ${textProfile.density} ${textProfile.titleTone} ${textProfile.bodyTone}`}
+      className={`carousel-slide tweet-card ${textProfile.density} ${textProfile.titleTone} ${textProfile.bodyTone} tweet-variant-${variant}`}
       style={{
         background: theme.background,
         color: theme.foreground,
@@ -265,23 +364,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
         <div className="tweet-content">
           <p className="tweet-kicker">{renderInlineMarkdown(slide.eyebrow ?? carousel.title)}</p>
           <h2>{renderInlineMarkdown(slide.title)}</h2>
-          <div className="body-copy">
-            {textProfile.blocks.map((block, i) => {
-              if (block.type === 'paragraph') {
-                return <p key={i}>{renderInlineMarkdown(block.text)}</p>
-              }
-
-              if (block.type === 'quote') {
-                return <blockquote key={i}>{renderInlineMarkdown(block.text)}</blockquote>
-              }
-
-              return (
-                <ul key={i}>
-                  {block.items.map((item, itemIndex) => <li key={`${i}-${itemIndex}`}>{renderInlineMarkdown(item)}</li>)}
-                </ul>
-              )
-            })}
-          </div>
+          {renderVariantBody(variant, textProfile.blocks)}
         </div>
 
         <div className="tweet-meta-row">
