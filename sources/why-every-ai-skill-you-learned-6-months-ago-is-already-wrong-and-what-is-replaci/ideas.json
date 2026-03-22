@@ -35,7 +35,11 @@
       "fragmentPenalty": 0,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
   },
   {
     "id": "segment-78",
@@ -71,7 +75,11 @@
       "fragmentPenalty": 0,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
   },
   {
     "id": "segment-49",
@@ -109,7 +117,11 @@
       "fragmentPenalty": 0,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
   },
   {
     "id": "segment-17",
@@ -145,7 +157,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-95",
@@ -182,7 +199,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-69",
@@ -219,7 +241,11 @@
       "fragmentPenalty": 0,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i"
   },
   {
     "id": "segment-31",
@@ -257,7 +283,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-48",
@@ -294,7 +325,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -3
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-73",
@@ -331,7 +367,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-91",
@@ -368,7 +409,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-97",
@@ -404,7 +450,11 @@
       "fragmentPenalty": 0,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati"
   },
   {
     "id": "segment-62",
@@ -440,7 +490,11 @@
       "fragmentPenalty": 0,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 6 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu"
   },
   {
     "id": "segment-01",
@@ -475,7 +529,10 @@
       "fragmentPenalty": 0,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "candidate",
+    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
+    "rejectionReasons": []
   },
   {
     "id": "segment-98",
@@ -510,7 +567,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-56",
@@ -547,7 +609,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-99",
@@ -581,7 +648,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -3
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Needs at least two complete sentences.",
+    "rejectionReasons": [
+      "Needs at least two complete sentences.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-04",
@@ -618,7 +691,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-42",
@@ -655,7 +733,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-40",
@@ -693,7 +776,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-34",
@@ -731,7 +819,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts mid-thought instead of opening cleanly.",
+    "rejectionReasons": [
+      "Starts mid-thought instead of opening cleanly.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-93",
@@ -768,7 +862,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-79",
@@ -805,7 +904,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-90",
@@ -842,7 +946,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-14",
@@ -877,7 +986,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-82",
@@ -914,7 +1028,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts mid-thought instead of opening cleanly.",
+    "rejectionReasons": [
+      "Starts mid-thought instead of opening cleanly.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-85",
@@ -951,7 +1071,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-68",
@@ -988,7 +1113,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts mid-thought instead of opening cleanly.",
+    "rejectionReasons": [
+      "Starts mid-thought instead of opening cleanly."
+    ]
   },
   {
     "id": "segment-75",
@@ -1024,7 +1154,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-86",
@@ -1060,7 +1195,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-05",
@@ -1098,7 +1238,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts mid-thought instead of opening cleanly.",
+    "rejectionReasons": [
+      "Starts mid-thought instead of opening cleanly.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-74",
@@ -1134,7 +1280,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-59",
@@ -1171,7 +1322,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-41",
@@ -1207,7 +1363,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-101",
@@ -1244,7 +1405,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-89",
@@ -1280,7 +1446,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-11",
@@ -1316,7 +1487,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts mid-thought instead of opening cleanly.",
+    "rejectionReasons": [
+      "Starts mid-thought instead of opening cleanly."
+    ]
   },
   {
     "id": "segment-72",
@@ -1353,7 +1529,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts mid-thought instead of opening cleanly.",
+    "rejectionReasons": [
+      "Starts mid-thought instead of opening cleanly.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-53",
@@ -1390,7 +1572,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-10",
@@ -1426,7 +1613,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-36",
@@ -1462,7 +1654,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-63",
@@ -1498,7 +1695,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-94",
@@ -1535,7 +1737,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-39",
@@ -1572,7 +1779,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-52",
@@ -1609,7 +1821,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-61",
@@ -1645,7 +1862,12 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Starts with lowercase text, which usually indicates a fragment.",
+    "rejectionReasons": [
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-21",
@@ -1681,7 +1903,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-16",
@@ -1718,7 +1946,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-92",
@@ -1754,7 +1988,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-43",
@@ -1790,7 +2030,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-22",
@@ -1827,7 +2073,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-07",
@@ -1863,7 +2115,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-88",
@@ -1899,7 +2157,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-25",
@@ -1934,7 +2198,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-44",
@@ -1969,7 +2239,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-87",
@@ -2005,7 +2281,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-02",
@@ -2041,7 +2323,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-28",
@@ -2077,7 +2365,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-32",
@@ -2113,7 +2407,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-37",
@@ -2149,7 +2449,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-47",
@@ -2185,7 +2491,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-64",
@@ -2221,7 +2533,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-54",
@@ -2257,7 +2575,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-70",
@@ -2293,7 +2617,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-19",
@@ -2328,7 +2658,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-46",
@@ -2364,7 +2700,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-03",
@@ -2400,7 +2742,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-80",
@@ -2435,7 +2783,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-24",
@@ -2471,7 +2825,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-27",
@@ -2507,7 +2867,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-45",
@@ -2543,7 +2909,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-83",
@@ -2578,7 +2950,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-58",
@@ -2614,7 +2992,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-06",
@@ -2650,7 +3034,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-77",
@@ -2686,7 +3076,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-65",
@@ -2722,7 +3118,14 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -3
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts mid-thought instead of opening cleanly.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-15",
@@ -2757,7 +3160,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-76",
@@ -2793,7 +3202,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-30",
@@ -2829,7 +3244,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-23",
@@ -2865,7 +3286,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-35",
@@ -2901,7 +3328,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-71",
@@ -2937,7 +3370,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -3
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-100",
@@ -2972,7 +3411,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-66",
@@ -3007,7 +3452,14 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts mid-thought instead of opening cleanly.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-12",
@@ -3042,7 +3494,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-60",
@@ -3077,7 +3535,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-55",
@@ -3112,7 +3576,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-29",
@@ -3147,7 +3617,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-50",
@@ -3183,7 +3659,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-13",
@@ -3217,7 +3699,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-20",
@@ -3252,7 +3740,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-33",
@@ -3288,7 +3782,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -3
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-26",
@@ -3323,7 +3823,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-38",
@@ -3359,7 +3865,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-08",
@@ -3395,7 +3907,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-81",
@@ -3430,7 +3948,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-102",
@@ -3465,7 +3989,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -3
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-09",
@@ -3499,7 +4029,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-51",
@@ -3534,7 +4070,13 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-84",
@@ -3568,7 +4110,14 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": 0
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Needs at least two complete sentences.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-96",
@@ -3604,7 +4153,14 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -8
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Transcript chunk length is outside the publishable range.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-67",
@@ -3638,7 +4194,14 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -3
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Needs at least two complete sentences.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   },
   {
     "id": "segment-57",
@@ -3672,6 +4235,14 @@
       "fragmentPenalty": -7,
       "introOutroPenalty": 0,
       "lengthPenalty": -8
-    }
+    },
+    "status": "rejected",
+    "selectionReason": "Score is too weak for publication.",
+    "rejectionReasons": [
+      "Score is too weak for publication.",
+      "Transcript chunk length is outside the publishable range.",
+      "Needs at least two complete sentences.",
+      "Starts with lowercase text, which usually indicates a fragment."
+    ]
   }
 ]

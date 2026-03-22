@@ -10,7 +10,7 @@ export default async function HomePage() {
         <p className="eyebrow">CONTENT CAROUSEL STUDIO</p>
         <h1>Table of contents</h1>
         <p>
-          Next.js-powered carousel previews built for LinkedIn and Instagram. Each carousel gets its own route and can be rendered to PNGs.
+          Published markdown carousels with dedicated preview routes and PNG exports.
         </p>
       </section>
 

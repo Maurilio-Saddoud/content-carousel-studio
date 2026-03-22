@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { getCarouselDirectory } from '@/lib/carousels'
 import { renderCarouselFromArgv } from './render-carousel'
@@ -25,17 +25,22 @@ const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.
 const publicSiteUrl = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL)
 
 export async function renderAllFromArgv(argv: string[] = process.argv.slice(2)) {
-  if (argv.length > 0) {
-    throw new Error(`Unknown arguments: ${argv.join(' ')}`)
-  }
+  const { indexOnly } = parseArgs(argv)
 
   const items = await getCarouselDirectory() as DirectoryItem[]
 
-  for (const item of items) {
-    await renderCarouselFromArgv([item.slug])
+  if (!indexOnly) {
+    await rm(path.resolve('public', 'exports'), { recursive: true, force: true })
+    await mkdir(path.resolve('public', 'exports'), { recursive: true })
+  } else {
+    await mkdir(path.resolve('public', 'exports'), { recursive: true })
   }
 
-  await mkdir(path.resolve('public', 'exports'), { recursive: true })
+  if (!indexOnly) {
+    for (const item of items) {
+      await renderCarouselFromArgv([item.slug])
+    }
+  }
 
   const exportIndex: ExportIndexItem[] = items.map((item) => ({
     slug: item.slug,
@@ -49,6 +54,21 @@ export async function renderAllFromArgv(argv: string[] = process.argv.slice(2)) 
 
   await writeFile(path.resolve('public', 'exports', 'index.json'), `${JSON.stringify(exportIndex, null, 2)}\n`, 'utf8')
   await writeFile(path.resolve('public', 'exports', 'index.html'), buildExportsIndexHtml(exportIndex), 'utf8')
+}
+
+function parseArgs(argv: string[]) {
+  let indexOnly = false
+
+  for (const arg of argv) {
+    if (arg === '--index-only') {
+      indexOnly = true
+      continue
+    }
+
+    throw new Error(`Unknown arguments: ${argv.join(' ')}`)
+  }
+
+  return { indexOnly }
 }
 
 function buildExportsIndexHtml(items: ExportIndexItem[]) {
@@ -82,8 +102,8 @@ function buildExportsIndexHtml(items: ExportIndexItem[]) {
   <body>
     <main>
       <p>${publicSiteUrl ? `Public base: <a href="${publicSiteUrl}/">${publicSiteUrl}/</a>` : 'Public site URL not set during generation.'}</p>
-      <h1>Carousel PNG exports</h1>
-      <p>Each batch has a preview route, a PNG gallery/download page, and a machine-readable manifest.</p>
+      <h1>Published carousel PNG exports</h1>
+      <p>Only published markdown carousels are indexed here. Each batch has a preview route, a PNG gallery/download page, and a machine-readable manifest.</p>
       <ul>${cards}</ul>
     </main>
   </body>

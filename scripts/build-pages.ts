@@ -13,7 +13,6 @@ export async function buildPagesFromArgv(argv: string[] = process.argv.slice(2))
     throw new Error(`Unknown arguments: ${argv.join(' ')}`)
   }
 
-  const port = await getAvailablePort(Number(process.env.PAGES_RENDER_PORT ?? '4310'))
   const sharedEnv = {
     ...process.env,
     BASE_PATH: basePath,
@@ -24,24 +23,30 @@ export async function buildPagesFromArgv(argv: string[] = process.argv.slice(2))
   await run('pnpm', ['exec', 'next', 'build'], sharedEnv)
   await prepareServeRoot()
 
-  const server = spawn('python3', ['-m', 'http.server', String(port), '--directory', serveRoot, '--bind', '127.0.0.1'], {
-    stdio: 'inherit',
-    env: process.env,
-  })
-
   try {
-    await waitForServer(`http://127.0.0.1:${port}${basePath}/`, 30000)
-    await run(
-      'pnpm',
-      ['render:all'],
-      {
-        ...sharedEnv,
-        CAROUSEL_BASE_URL: `http://127.0.0.1:${port}`,
-      },
-    )
-  } finally {
-    server.kill('SIGTERM')
-    await new Promise((resolve) => server.once('exit', () => resolve(undefined)))
+    const port = await getAvailablePort(Number(process.env.PAGES_RENDER_PORT ?? '4310'))
+    const server = spawn('python3', ['-m', 'http.server', String(port), '--directory', serveRoot, '--bind', '127.0.0.1'], {
+      stdio: 'inherit',
+      env: process.env,
+    })
+
+    try {
+      await waitForServer(`http://127.0.0.1:${port}${basePath}/`, 30000)
+      await run(
+        'pnpm',
+        ['render:all'],
+        {
+          ...sharedEnv,
+          CAROUSEL_BASE_URL: `http://127.0.0.1:${port}`,
+        },
+      )
+    } finally {
+      server.kill('SIGTERM')
+      await new Promise((resolve) => server.once('exit', () => resolve(undefined)))
+    }
+  } catch (error) {
+    console.warn(`Skipping PNG render pass during build-pages: ${String(error)}`)
+    await run('pnpm', ['render:all', '--index-only'], sharedEnv)
   }
 
   await run('pnpm', ['exec', 'next', 'build'], sharedEnv)

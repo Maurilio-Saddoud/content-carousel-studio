@@ -46,13 +46,14 @@ Commands:
   youtube <url>         Ingest a YouTube video into source artifacts and carousel(s)
   render <slug>         Render one carousel preview route to PNG files
   render-all            Render PNG files for every carousel in the directory
-  rebuild-source <slug> Rebuild carousels from an existing local source package
+  rebuild-source <slug> Rebuild published carousels from an existing local source package
   build-pages           Build the static site and PNG export bundle for Pages
   help                  Show this help
 
 Examples:
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID --slug my-topic
+  content-carousel rebuild-source my-topic --max-segments 8
   content-carousel render ai-memory-wall
   content-carousel build-pages
 `)

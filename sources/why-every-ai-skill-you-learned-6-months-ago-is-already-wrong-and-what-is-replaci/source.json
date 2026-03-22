@@ -1,8 +1,8 @@
 {
   "slug": "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci",
   "sourceType": "transcript",
-  "sourceUrl": "https://youtu.be/RnjgLlQTMf0?si=75rDwtQdBgj7nT41",
-  "fetchedAt": "2026-03-22T05:15:57.509Z",
+  "sourceUrl": "https://youtu.be/RnjgLlQTMf0",
+  "fetchedAt": "2026-03-22T07:05:20.231Z",
   "transcriptMode": "official-transcript",
   "whisperModel": "base",
   "video": {
@@ -12,36 +12,77 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/RnjgLlQTMf0/hqdefault.jpg"
   },
   "transcriptLineCount": 786,
-  "defaultBehavior": "creates source artifacts and one markdown-first carousel per qualifying editorial segment",
-  "selectedSegmentIds": [
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 6,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 102,
+  "publishedIdeaIds": [
     "segment-18",
     "segment-78",
     "segment-49",
     "segment-69",
     "segment-97",
-    "segment-62",
-    "segment-01"
+    "segment-62"
   ],
-  "createdFiles": [
-    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/source.json",
-    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/raw-transcript.md",
-    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/clean-transcript.md",
-    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/segments.json",
-    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/summary.md",
-    "carousels/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/carousel.md",
-    "carousels/index.json"
-  ],
-  "carouselRule": {
-    "maxDrafts": 8,
-    "threshold": "Each carousel comes from a selected editorial segment. Selected segments must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
-  },
   "carousels": [
+    {
+      "slug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager",
+      "segmentId": "segment-18",
+      "title": "For a product manager,",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
+      "segmentId": "segment-78",
+      "title": "I've seen two structures emerging here that are significant, right?",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/carousel.md"
+    },
     {
       "slug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be",
       "segmentId": "segment-49",
       "title": "The skill is going to be triaging your own attention in real time.",
       "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be",
       "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i",
+      "segmentId": "segment-69",
+      "title": "This is much much more important.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati",
+      "segmentId": "segment-97",
+      "title": "If you run an organization, the question isn't are we using AI.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu",
+      "segmentId": "segment-62",
+      "title": "AI operating models are getting stale faster than most teams realize.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu/carousel.md"
     }
+  ],
+  "createdFiles": [
+    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/source.json",
+    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/raw-transcript.md",
+    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/clean-transcript.md",
+    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/segments.json",
+    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/ideas.json",
+    "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/summary.md",
+    "carousels/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu/carousel.md",
+    "carousels/index.json"
   ]
 }

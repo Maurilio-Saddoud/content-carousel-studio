@@ -1,7 +1,7 @@
 ---
-slug: "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
-title: "The skill is going to be triaging your own attention in real time."
-description: "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:14:01 → 00:14:16."
+slug: "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
+title: "I've seen two structures emerging here that are significant, right?"
+description: "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:21:59 → 00:22:13."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22
@@ -12,15 +12,15 @@ theme:
   muted: "#71767B"
 ---
 
-# The skill is going to be triaging your own attention in real time.
+# I've seen two structures emerging here that are significant, right?
 
 ---
 
-# The skill is going to be triaging your own attention in real time.
+# The first is a team of one.
 
-The first is a team of one.
+If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
 
-A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+The skill is going to be triaging your own attention in real time.
 
 ---
 
@@ -32,17 +32,17 @@ This is much more practical than just looking at a bunch of slides saying you di
 
 ---
 
-# I've seen two structures emerging here that are significant, right?
+# If you run an organization, the question isn't are we using AI.
 
 If you run an organization, the question isn't are we using AI.
 
 1. Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.
 2. It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
-3. The skill is going to be triaging your own attention in real time.
+3. A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
 
-# The skill is going to be triaging your own attention in real time.
+# The edge is keeping your operating model current.
 
 Use the source package as evidence, not as final copy.
 

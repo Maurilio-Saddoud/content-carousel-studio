@@ -1,4 +1,4 @@
-import { readdir, readFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
 import type { Carousel, CarouselDirectoryItem, CarouselSlide, CarouselTheme } from '@/lib/types'
@@ -10,13 +10,17 @@ const SUPPORTED_SOURCE_TYPES = new Set(['transcript', 'notes', 'custom'])
 export async function getCarouselDirectory(): Promise<CarouselDirectoryItem[]> {
   const items = await loadCarouselsFromFiles()
   if (items.length > 0) {
-    return items
-      .map(toDirectoryItem)
-      .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt) || a.slug.localeCompare(b.slug))
+    return sortDirectoryItems(items.map(toDirectoryItem))
   }
 
   const raw = await readFile(carouselIndexPath, 'utf8')
   return JSON.parse(raw) as CarouselDirectoryItem[]
+}
+
+export async function syncCarouselDirectoryIndex() {
+  const items = sortDirectoryItems((await loadCarouselsFromFiles()).map(toDirectoryItem))
+  await writeFile(carouselIndexPath, `${JSON.stringify(items, null, 2)}\n`, 'utf8')
+  return items
 }
 
 export async function getCarousel(slug: string): Promise<Carousel | undefined> {
@@ -157,6 +161,10 @@ function toDirectoryItem(carousel: Carousel): CarouselDirectoryItem {
     updatedAt: carousel.updatedAt,
     theme: carousel.theme,
   }
+}
+
+function sortDirectoryItems(items: CarouselDirectoryItem[]) {
+  return items.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt) || a.slug.localeCompare(b.slug))
 }
 
 function requireString(value: unknown, field: string) {

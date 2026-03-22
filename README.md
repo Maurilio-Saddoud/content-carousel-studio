@@ -1,6 +1,6 @@
 # content-carousel-studio
 
-Next.js-powered carousel studio for transcript-driven social content.
+Next.js-powered carousel studio for transcript-driven social content, with a markdown-first publish layer.
 
 ## CLI
 
@@ -25,7 +25,7 @@ The existing `pnpm ingest:youtube`, `pnpm render`, `pnpm render:all`, and `pnpm 
 
 ## What this repo does now
 
-- ingest a YouTube video into source artifacts **and** a carousel
+- ingest a YouTube video into source artifacts, ranked ideas, and published carousel markdown
 - author carousel copy in a single markdown file per carousel
 - preview every carousel locally in Next.js
 - export the site as a static GitHub Pages bundle
@@ -58,9 +58,8 @@ https://maurilio-saddoud.github.io/content-carousel-studio/exports/
 
 - `app/` — Next.js App Router pages
 - `components/` — reusable carousel presentation components
-- `carousels/` — one folder per carousel, with `carousel.md` as the main source file
-- `sources/` — editorial notes / briefs for a source package
-- `sources/` — raw source material and notes
+- `carousels/` — one folder per published carousel, with `carousel.md` as the source of truth
+- `sources/` — raw source material, ranked transcript segments, candidate ideas, and ingest summaries
 - `lib/` — shared data loaders and types
 - `scripts/` — ingest, Pages build, and PNG rendering scripts
 - `public/exports/` — generated PNG batches + manifests + simple download pages
@@ -89,7 +88,7 @@ Format:
 3. each slide starts with an optional `eyebrow: ...` line
 4. the slide title is the first markdown heading
 5. the rest of the slide is markdown-ish body copy
-6. do not add `variant:` lines — the markdown itself should drive the slide
+6. do not add `variant:` lines — they are intentionally unsupported now; the markdown itself should drive the slide
    - paragraphs work out of the box
    - simple unordered lists (`- item`) also render
 
@@ -163,12 +162,11 @@ One command now does the practical first pass:
 1. fetches the official YouTube transcript first
 2. falls back to local Whisper transcription if captions are missing
 3. writes source artifacts into `sources/<source-slug>/`
-4. selects up to `--max-segments` editorially-usable transcript segments
-5. creates one markdown-first carousel per selected segment
-6. writes per-carousel notes under `sources/<source-slug>/<carousel-slug>/post-brief.md`
-7. creates or updates `carousels/<carousel-slug>/carousel.md`
-8. refreshes `carousels/index.json` as a legacy/generated directory artifact
-9. auto-commits and pushes the generated source/carousel files to the current Git branch so GitHub Pages can rebuild immediately
+4. ranks transcript segments into idea candidates
+5. rejects weak or overlapping ideas
+6. publishes up to `--max-segments` selected ideas as markdown carousels
+7. removes superseded carousel/export artifacts from earlier ingests of the same source
+8. refreshes `carousels/index.json` as a generated compatibility artifact
 
 Created files look like this:
 
@@ -177,8 +175,8 @@ sources/<source-slug>/source.json
 sources/<source-slug>/raw-transcript.md
 sources/<source-slug>/clean-transcript.md
 sources/<source-slug>/segments.json
+sources/<source-slug>/ideas.json
 sources/<source-slug>/summary.md
-sources/<source-slug>/<carousel-slug>/post-brief.md
 carousels/<carousel-slug>/carousel.md
 carousels/index.json
 ```
@@ -193,35 +191,47 @@ Slug pattern for generated carousels:
 
 So each carousel slug is tied to the selected transcript segment itself (`segment id + start timestamp`), not just the fanout order from one run.
 
-Selection rule for generating multiple carousels:
+Selection and publishing rules:
 
-- segment must pass the editorial filter
-- score must be at least `4`
-- length must be between `28` and `155` words
-- must contain at least `2` full sentences
-- obvious intro/outro junk gets rejected
-- near-duplicate segments are skipped
+- every ranked segment becomes an idea record in `sources/<source-slug>/ideas.json`
+- weak ideas are rejected with explicit reasons
+- overlapping ideas are filtered against stronger ideas
+- the strongest surviving ideas become published markdown carousels
+- only published markdown carousels appear in the app TOC and Pages export indexes
 
-That means one source package can immediately fan out into multiple previewable/exportable carousels.
+That means one source package can fan out into multiple previewable/exportable carousels without leaking non-published ideas into the site.
 
-### Auto-push behavior after ingest
+### Published output behavior
 
-After a successful `./content-carousel youtube ...` run, the CLI now stages only the generated paths for that source package:
+Published carousels live only in:
 
-- `sources/<source-slug>/`
-- `sources/<source-slug>/`
-- each generated `carousels/<carousel-slug>/`
+- `carousels/<carousel-slug>/carousel.md`
 - `carousels/index.json`
 
-If those staged files actually changed, it creates a commit like:
+That markdown is the source of truth for anything user-facing:
+
+- the site table of contents
+- static carousel routes
+- the PNG export index
+- the GitHub Pages export bundle
+
+Re-ingesting the same source replaces the published set for that source and removes stale carousel/export directories so old slugs do not linger.
+
+## Pages-first sharing
+
+After `./content-carousel build-pages` and a push, share the GitHub Pages preview URL first:
 
 ```text
-chore: ingest youtube source <source-slug>
+https://maurilio-saddoud.github.io/content-carousel-studio/carousel/<slug>/
 ```
 
-Then it pushes to the current branch (or sets upstream to `origin/<branch>` if needed). If nothing changed, it skips the commit/push cleanly.
+Use the PNG batch as the secondary operational link:
 
-If you need a dry local ingest without a push (for testing), set `CONTENT_CAROUSEL_SKIP_PUSH=1` for that run.
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/
+```
+
+The repo no longer auto-pushes on ingest. Build, review, and push deliberately after the published set looks right.
 
 ## Workflow 2: preview locally while editing
 
