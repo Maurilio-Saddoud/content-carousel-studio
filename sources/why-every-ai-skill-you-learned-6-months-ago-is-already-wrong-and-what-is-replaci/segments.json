@@ -10,8 +10,8 @@
     "lineEnd": 144,
     "wordCount": 51,
     "text": "February model. And both kinds of errors are very expensive. So the skill is maintaining the calibration, not having it once. So what does this look like in practice? For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, but realizing that that same",
-    "titleSuggestion": "For a product manager, good boundary sensing looks like letting an agent draft a cr…",
-    "hook": "For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, but rea…",
+    "titleSuggestion": "For a product manager,",
+    "hook": "For a product manager,",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "has contrast/tension, which usually makes better post framing",
@@ -84,7 +84,7 @@
     "lineEnd": 388,
     "wordCount": 53,
     "text": "If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth. The skill is going to be triaging your own attention in real time. So this might look like an engineering manager overseeing agent assisted development across five teams and that person",
-    "titleSuggestion": "If you have a 100 streams of agent output and 8 hours a day, you cannot review ever…",
+    "titleSuggestion": "The skill is going to be triaging your own attention in real time.",
     "hook": "If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -195,7 +195,7 @@
     "lineEnd": 488,
     "wordCount": 46,
     "text": "February and the person whose boundary sense was current last August are operating worlds apart. This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments. When you see, you know, cursor hitting stunning numbers with a small number of people",
-    "titleSuggestion": "February and the person whose boundary sense was current last August are operating…",
+    "titleSuggestion": "When you see, you know, cursor hitting stunning numbers with a small number of people",
     "hook": "February and the person whose boundary sense was current last August are operating worlds apart.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",

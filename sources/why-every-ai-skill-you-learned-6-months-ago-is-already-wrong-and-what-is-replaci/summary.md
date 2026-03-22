@@ -7,19 +7,19 @@
 ## Draft carousels created automatically
 - Source slug: why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci
 - Draft count: 6
-- why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go → /carousel/why-every-ai-skill-you-learned-6-m--segment-18-00-05-13-for-a-product-manager-go (from segment-18, 00:05:13 → 00:05:29, score 19)
+- why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager → /carousel/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager (from segment-18, 00:05:13 → 00:05:29, score 19)
 - why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures → /carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures (from segment-78, 00:21:59 → 00:22:13, score 17)
-- why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream → /carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-if-you-have-a-100-stream (from segment-49, 00:14:01 → 00:14:16, score 16)
+- why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be → /carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be (from segment-49, 00:14:01 → 00:14:16, score 16)
 - why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i → /carousel/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i (from segment-69, 00:19:20 → 00:19:34, score 12)
 - why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati → /carousel/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati (from segment-97, 00:26:56 → 00:27:13, score 10)
-- why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person- → /carousel/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-february-and-the-person- (from segment-62, 00:17:33 → 00:17:46, score 10)
+- why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu → /carousel/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu (from segment-62, 00:17:33 → 00:17:46, score 10)
 
 ## Best candidate segments
 
-### #1 — For a product manager, good boundary sensing looks like letting an agent draft a cr…
+### #1 — For a product manager,
 - Score: 19
 - Time: 00:05:13 → 00:05:29
-- Hook: For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, but rea…
+- Hook: For a product manager,
 - Why it could work:
   - contains strong hook language instead of bland exposition
   - has contrast/tension, which usually makes better post framing
@@ -38,7 +38,7 @@
   - contains enough complete thoughts to turn into multiple slides
 
 
-### #3 — If you have a 100 streams of agent output and 8 hours a day, you cannot review ever…
+### #3 — The skill is going to be triaging your own attention in real time.
 - Score: 16
 - Time: 00:14:01 → 00:14:16
 - Hook: If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.

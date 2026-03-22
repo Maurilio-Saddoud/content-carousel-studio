@@ -1,7 +1,7 @@
 ---
-slug: "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
-title: "Draft: I've seen two structures emerging here that are significant, right?"
-description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:21:59 → 00:22:13)."
+slug: "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
+title: "Draft: The skill is going to be triaging your own attention in real time."
+description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them) (00:14:01 → 00:14:16)."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-22
@@ -14,21 +14,21 @@ theme:
 
 eyebrow: AUTO DRAFT
 
-# I've seen two structures emerging here that are significant, right?
+# The skill is going to be triaging your own attention in real time.
 
-The first is a team of one.
+The skill is going to be triaging your own attention in real time.
 
-A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
+I've seen two structures emerging here that are significant, right?
 
 ---
 
 eyebrow: WHY IT MATTERS
 
-# The first is a team of one.
+# The skill is going to be triaging your own attention in real time.
 
-If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+The first is a team of one.
 
-The skill is going to be triaging your own attention in real time.
+A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.
 
 ---
 
@@ -44,7 +44,7 @@ This is much more practical than just looking at a bunch of slides saying you di
 
 eyebrow: OPERATING MODEL
 
-# If you run an organization, the question isn't are we using AI.
+# I've seen two structures emerging here that are significant, right?
 
 It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts.
 
@@ -54,7 +54,7 @@ February the person whose boundary sense was current last August are operating w
 
 eyebrow: TAKEAWAY
 
-# The edge is keeping your operating model current.
+# The skill is going to be triaging your own attention in real time.
 
 Use the source package as evidence, not as final copy.
 
