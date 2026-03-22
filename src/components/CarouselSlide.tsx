@@ -39,6 +39,14 @@ function BookmarkIcon() {
   )
 }
 
+function ShareIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon">
+      <path d="M12 3.75a.75.75 0 0 1 .75.75v8.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 0 1 1.06-1.06l3.72 3.72V4.5a.75.75 0 0 1 .75-.75ZM5 14.75A1.75 1.75 0 0 1 6.75 13h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-3.5a.25.25 0 0 0-.25-.25h-2.5a.75.75 0 0 1 0-1.5h2.5A1.75 1.75 0 0 1 19 14.75v3.5A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-3.5Z" fill="currentColor" />
+    </svg>
+  )
+}
+
 export function CarouselSlide({ carousel, slide, index, total }: Props) {
   const theme = {
     accent: carousel.theme?.accent ?? '#1d9bf0',
@@ -76,7 +84,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
             <div className="tweet-handle-row">
               <span className="tweet-handle">@Maurili007</span>
               <span className="tweet-dot">·</span>
-              <span className="tweet-label">{slide.eyebrow ?? carousel.title}</span>
+              <span className="tweet-label">Mar 21</span>
             </div>
           </div>
 
@@ -84,6 +92,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
         </header>
 
         <div className="tweet-content">
+          <p className="tweet-kicker">{slide.eyebrow ?? carousel.title}</p>
           <h2>{slide.title}</h2>
           <div className="body-copy">
             {slide.body.map((paragraph, i) => (
@@ -92,12 +101,21 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
           </div>
         </div>
 
+        <div className="tweet-meta-row">
+          <span>7:42 PM</span>
+          <span className="tweet-dot">·</span>
+          <span>2.1K Views</span>
+          <span className="tweet-dot">·</span>
+          <span>{slide.eyebrow ?? carousel.title}</span>
+        </div>
+
         <footer className="tweet-footer">
           <div className="tweet-engagement">
             <span className="tweet-action"><ReplyIcon /> <span>28</span></span>
             <span className="tweet-action"><RepostIcon /> <span>14</span></span>
             <span className="tweet-action"><LikeIcon /> <span>197</span></span>
             <span className="tweet-action tweet-action-icon-only"><BookmarkIcon /></span>
+            <span className="tweet-action tweet-action-icon-only"><ShareIcon /></span>
           </div>
           <span className="tweet-counter">{String(index + 1).padStart(2, '0')}/{String(total).padStart(2, '0')}</span>
         </footer>
