@@ -50,6 +50,17 @@ function ShareIcon() {
   )
 }
 
+function VerifiedBadge() {
+  return (
+    <span className="tweet-badge" aria-label="Verified account">
+      <svg viewBox="0 0 20 20" className="tweet-badge-icon" aria-hidden="true">
+        <circle cx="10" cy="10" r="8.5" fill="currentColor" />
+        <path d="m8.53 12.72-2.1-2.1 1.06-1.06 1.04 1.04 3.04-3.04 1.06 1.06-4.1 4.1Z" fill="#fff" />
+      </svg>
+    </span>
+  )
+}
+
 function getTextProfile(slide: Slide) {
   const eyebrowLength = slide.eyebrow?.trim().length ?? 0
   const titleLength = slide.title.trim().length
@@ -97,12 +108,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
           <div className="tweet-meta">
             <div className="tweet-name-row">
               <span className="tweet-name">Maurilio Saddoud</span>
-              <span className="tweet-badge" aria-label="Verified account">
-                <svg viewBox="0 0 24 24" className="tweet-badge-icon" aria-hidden="true">
-                  <path d="M22.25 12c0-.81-.9-1.42-1.14-2.14-.24-.75.09-1.77-.38-2.41-.47-.65-1.56-.76-2.21-1.23-.64-.47-1.06-1.47-1.81-1.71-.72-.24-1.62.36-2.43.36-.81 0-1.71-.6-2.43-.36-.75.24-1.17 1.24-1.81 1.71-.65.47-1.74.58-2.21 1.23-.47.64-.14 1.66-.38 2.41C2.65 10.58 1.75 11.19 1.75 12c0 .81.9 1.42 1.14 2.14.24.75-.09 1.77.38 2.41.47.65 1.56.76 2.21 1.23.64.47 1.06 1.47 1.81 1.71.72.24 1.62-.36 2.43-.36.81 0 1.71.6 2.43.36.75-.24 1.17-1.24 1.81-1.71.65-.47 1.74-.58 2.21-1.23.47-.64.14-1.66.38-2.41.24-.72 1.14-1.33 1.14-2.14Z" fill="currentColor" />
-                  <path d="m10.7 14.85-2.4-2.4 1.06-1.06 1.34 1.34 4.02-4.02 1.06 1.06-5.08 5.08Z" fill="#fff" />
-                </svg>
-              </span>
+              <VerifiedBadge />
             </div>
             <div className="tweet-handle-row">
               <span className="tweet-handle">@Maurili007</span>
