@@ -175,6 +175,12 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
 
   const briefs = buildBriefs(publishedIdeas, ideas, sourceSlug, existingSlugs)
   const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas)
+  const acceptedIdeaIds = carouselBundles.map((bundle) => bundle.idea.id)
+  const normalizedIdeas: Idea[] = ideas.map((idea) => acceptedIdeaIds.includes(idea.id)
+    ? idea
+    : idea.status === 'published'
+      ? { ...idea, status: 'candidate' as const, selectionReason: `${idea.selectionReason} Dropped after brief-overlap filtering.`.trim() }
+      : idea)
   await removeStalePublishedArtifacts(previousManifest?.carousels ?? [], carouselBundles)
 
   for (const bundle of carouselBundles) {
@@ -183,7 +189,7 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
   }
   await syncCarouselDirectoryIndex()
 
-  const summary = buildSummary(metadata, sourceSlug, carouselBundles, ideas, briefs)
+  const summary = buildSummary(metadata, sourceSlug, carouselBundles, normalizedIdeas, briefs)
 
   const sourceManifest = {
     slug: sourceSlug,
@@ -199,9 +205,9 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
       publishLimit: args.maxSegments,
       threshold: 'Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates).',
     },
-    ideaCount: ideas.length,
+    ideaCount: normalizedIdeas.length,
     briefCount: briefs.length,
-    publishedIdeaIds: publishedIdeas.map((idea) => idea.id),
+    publishedIdeaIds: acceptedIdeaIds,
     briefs: briefs.map((brief) => ({
       id: brief.id,
       primaryIdeaId: brief.primaryIdeaId,
@@ -232,7 +238,7 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
   await writeFile(path.join(sourceDir, 'raw-transcript.md'), renderRawTranscript(metadata, args.url, transcript), 'utf8')
   await writeFile(path.join(sourceDir, 'clean-transcript.md'), renderCleanTranscript(metadata, cleanTranscript), 'utf8')
   await writeFile(path.join(sourceDir, 'segments.json'), `${JSON.stringify(rankedSegments, null, 2)}\n`, 'utf8')
-  await writeFile(path.join(sourceDir, 'ideas.json'), `${JSON.stringify(ideas, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(sourceDir, 'ideas.json'), `${JSON.stringify(normalizedIdeas, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'briefs.json'), `${JSON.stringify(briefs, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'summary.md'), summary, 'utf8')
 
@@ -275,9 +281,15 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
   const publishedIdeas = ideas.filter((idea) => idea.status === 'published')
   const briefs = buildBriefs(publishedIdeas, ideas, sourceSlug, existingSlugs)
   const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas)
+  const acceptedIdeaIds = carouselBundles.map((bundle) => bundle.idea.id)
+  const normalizedIdeas: Idea[] = ideas.map((idea) => acceptedIdeaIds.includes(idea.id)
+    ? idea
+    : idea.status === 'published'
+      ? { ...idea, status: 'candidate' as const, selectionReason: `${idea.selectionReason} Dropped after brief-overlap filtering.`.trim() }
+      : idea)
   await removeStalePublishedArtifacts(sourceManifest.carousels ?? [], carouselBundles)
   await writeFile(path.join(sourceDir, 'segments.json'), `${JSON.stringify(segments, null, 2)}\n`, 'utf8')
-  await writeFile(path.join(sourceDir, 'ideas.json'), `${JSON.stringify(ideas, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(sourceDir, 'ideas.json'), `${JSON.stringify(normalizedIdeas, null, 2)}\n`, 'utf8')
   await writeFile(path.join(sourceDir, 'briefs.json'), `${JSON.stringify(briefs, null, 2)}\n`, 'utf8')
 
   for (const bundle of carouselBundles) {
@@ -295,9 +307,9 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
     video: sourceManifest.video,
     transcriptLineCount: sourceManifest.transcriptLineCount,
     defaultBehavior: 'creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs',
-    ideaCount: ideas.length,
+    ideaCount: normalizedIdeas.length,
     briefCount: briefs.length,
-    publishedIdeaIds: publishedIdeas.map((idea) => idea.id),
+    publishedIdeaIds: acceptedIdeaIds,
     ideaRule: {
       publishLimit,
       threshold: 'Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates).',
@@ -907,7 +919,9 @@ function splitIntoClauses(text: string) {
 function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: string, existingSlugs: ExistingSlugMap = {}) {
   const briefs: Brief[] = []
   const usedTheses = new Set<string>()
+  const usedWhy = new Set<string>()
   const usedSupport = new Set<string>()
+  const usedSupportingIdeaIds = new Set<string>()
 
   for (const idea of publishedIdeas) {
     const supportingIdeas = allIdeas
@@ -915,7 +929,11 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
       .filter((candidate) => candidate.status === 'candidate')
       .filter((candidate) => !areNearDuplicates(candidate, idea))
       .filter((candidate) => getCompleteThoughts(candidate.text).some((line) => !isWeakBriefLineCandidate(line)))
-      .sort((a, b) => b.score - a.score)
+      .sort((a, b) => {
+        const aFresh = usedSupportingIdeaIds.has(a.id) ? 1 : 0
+        const bFresh = usedSupportingIdeaIds.has(b.id) ? 1 : 0
+        return aFresh - bFresh || b.score - a.score
+      })
       .slice(0, 3)
 
     const thesis = pickDistinctThesis([
@@ -925,7 +943,8 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
       extractTakeaway(idea.text, supportingIdeas),
     ], usedTheses)
 
-    const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport)
+    const whyItMatters = inferWhyItMatters(idea, supportingIdeas, thesis, usedWhy)
+    const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport, thesis, whyItMatters)
 
     const brief: Brief = {
       id: `brief-${idea.id}`,
@@ -933,10 +952,14 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
       supportingIdeaIds: supportingIdeas.map((entry) => entry.id),
       thesis,
       audience: inferAudience(idea.text, supportingIdeas),
-      whyItMatters: inferWhyItMatters(idea, supportingIdeas, thesis),
+      whyItMatters,
       supportPoints,
       distinctFromBriefIds: publishedIdeas.filter((entry) => entry.id !== idea.id).map((entry) => `brief-${entry.id}`),
       carouselSlug: existingSlugs[idea.id] || buildCarouselSlug(sourceSlug, idea),
+    }
+
+    for (const supportIdea of supportingIdeas) {
+      usedSupportingIdeaIds.add(supportIdea.id)
     }
 
     const overlapsExisting = briefs.some((existing) => briefClaimOverlap(existing, brief) >= 0.48)
@@ -1128,7 +1151,7 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
     },
   ]
 
-  return {
+  return editorialPolishCarousel(brief, {
     slug: carouselSlug,
     title: titleBaseFromSlides(slides),
     description: `${metadata.authorName ?? 'YouTube'} on ${sourceSlug}: ${primary.start} → ${primary.end}.`,
@@ -1137,6 +1160,35 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
     updatedAt: new Date().toISOString().slice(0, 10),
     theme: DEFAULT_THEME,
     slides,
+  })
+}
+
+function editorialPolishCarousel(brief: Brief, carousel: Carousel) {
+  const usedTitles = new Set<string>()
+  const polishedSlides = carousel.slides.map((slide, index) => {
+    const cleanedBody = polishSlideBody(slide.body, index)
+    const titleCandidates = [
+      slide.title,
+      index === 0 ? brief.thesis : '',
+      index === 1 ? brief.whyItMatters : '',
+      brief.supportPoints[index - 2] ?? '',
+      fallbackTitleForPosition(index, brief),
+    ].filter(Boolean)
+
+    const title = pickUniqueTitle(usedTitles, titleCandidates)
+    return {
+      ...slide,
+      title,
+      body: cleanedBody,
+    }
+  })
+
+  const finalSlides = ensureCarouselProgression(brief, polishedSlides)
+
+  return {
+    ...carousel,
+    title: titleBaseFromSlides(finalSlides),
+    slides: finalSlides,
   }
 }
 
@@ -1149,6 +1201,65 @@ function buildBodyLines(lines: string[]) {
     .filter((line) => !/[.…]$/.test(line) || /[.!?]$/.test(line))
     .slice(0, 2)
     .join('\n\n')
+}
+
+function polishSlideBody(body: string, index: number) {
+  const blocks = body
+    .split(/\n\n+/)
+    .map((part) => normalizeForSlide(part))
+    .filter(Boolean)
+    .filter((part) => !/^audience:/i.test(part))
+    .filter((part) => part !== 'Use the source package as evidence, not as final copy.')
+    .filter((part) => part !== 'Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.')
+
+  if (index === 0) return ''
+
+  if (index === 4) {
+    return blocks.slice(0, 2).join('\n\n')
+  }
+
+  return blocks.slice(0, 2).join('\n\n')
+}
+
+function fallbackTitleForPosition(index: number, brief: Brief) {
+  switch (index) {
+    case 0:
+      return brief.thesis
+    case 1:
+      return brief.whyItMatters
+    case 2:
+      return brief.supportPoints[0] ?? 'This is where the real shift shows up.'
+    case 3:
+      return brief.supportPoints[1] ?? 'The operating model has to change.'
+    case 4:
+      return brief.supportPoints[2] ?? 'That is where the advantage compounds.'
+    default:
+      return 'Untitled slide'
+  }
+}
+
+function ensureCarouselProgression(brief: Brief, slides: CarouselSlide[]) {
+  if (slides.length === 0) return slides
+  const updated = [...slides]
+
+  if (updated.length >= 2 && !updated[1].body.trim()) {
+    updated[1] = { ...updated[1], body: brief.whyItMatters }
+  }
+
+  if (updated.length >= 5) {
+    const closingBody = [
+      brief.supportPoints[2] ?? '',
+      brief.audience.replace(/^Audience:\s*/i, ''),
+    ].filter(Boolean).join('\n\n')
+
+    updated[4] = {
+      ...updated[4],
+      title: isWeakDisplayLine(updated[4].title) ? 'That is where the advantage compounds.' : updated[4].title,
+      body: polishSlideBody(updated[4].body, 4) || closingBody,
+    }
+  }
+
+  return updated
 }
 
 function pickUniqueTitle(usedTitles: Set<string>, candidates: string[]) {
