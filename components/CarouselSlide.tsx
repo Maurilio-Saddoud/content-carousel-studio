@@ -45,9 +45,28 @@ function BookmarkIcon() {
 function ShareIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className="tweet-icon">
-      <path d="M12 3.75a.75.75 0 0 1 .75.75v8.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 0 1 1.06-1.06l3.72 3.72V4.5a.75.75 0 0 1 .75-.75ZM5 14.75A1.75 1.75 0 0 1 6.75 13h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-3.5a.25.25 0 0 0-.25-.25h-2.5a.75.75 0 0 1 0-1.5h2.5A1.75 1.75 0 0 1 19 14.75v3.5A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-3.5Z" fill="currentColor" />
+      <path d="M12 3.75a.75.75 0 0 1 .75.75v8.69l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V4.5a.75.75 0 0 1 .75-.75ZM5 14.75A1.75 1.75 0 0 1 6.75 13h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v3.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-3.5a.25.25 0 0 0-.25-.25h-2.5a.75.75 0 0 1 0-1.5h2.5A1.75 1.75 0 0 1 19 14.75v3.5A1.75 1.75 0 0 1 17.25 20H6.75A1.75 1.75 0 0 1 5 18.25v-3.5Z" fill="currentColor" />
     </svg>
   )
+}
+
+function getTextProfile(slide: Slide) {
+  const eyebrowLength = slide.eyebrow?.trim().length ?? 0
+  const titleLength = slide.title.trim().length
+  const bodyLength = slide.body.reduce((sum, paragraph) => sum + paragraph.trim().length, 0)
+  const paragraphCount = slide.body.length
+  const totalLength = eyebrowLength + titleLength + bodyLength
+
+  const density = totalLength > 340 || paragraphCount >= 3 || titleLength > 120
+    ? 'tweet-card-dense'
+    : totalLength < 170 && paragraphCount <= 2 && titleLength < 80
+      ? 'tweet-card-compact'
+      : 'tweet-card-balanced'
+
+  const titleTone = titleLength > 110 ? 'tweet-title-long' : titleLength < 55 ? 'tweet-title-short' : 'tweet-title-balanced'
+  const bodyTone = bodyLength > 170 || paragraphCount >= 3 ? 'tweet-body-long' : bodyLength < 90 ? 'tweet-body-short' : 'tweet-body-balanced'
+
+  return { density, titleTone, bodyTone }
 }
 
 export function CarouselSlide({ carousel, slide, index, total }: Props) {
@@ -57,10 +76,11 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
     foreground: carousel.theme?.foreground ?? '#e7e9ea',
     muted: carousel.theme?.muted ?? '#71767b',
   }
+  const textProfile = getTextProfile(slide)
 
   return (
     <article
-      className="carousel-slide tweet-card"
+      className={`carousel-slide tweet-card ${textProfile.density} ${textProfile.titleTone} ${textProfile.bodyTone}`}
       style={{
         background: theme.background,
         color: theme.foreground,
