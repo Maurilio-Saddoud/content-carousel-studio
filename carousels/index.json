@@ -12,19 +12,5 @@
       "foreground": "#E7E9EA",
       "muted": "#71767B"
     }
-  },
-  {
-    "slug": "ai-memory-wall",
-    "title": "AI Memory Wall",
-    "description": "A bite-sized carousel about why agent deployments fail at continuity, not just intelligence.",
-    "sourceType": "transcript",
-    "aspectRatio": "portrait",
-    "updatedAt": "2026-03-21",
-    "theme": {
-      "accent": "#D1702B",
-      "background": "#F7F4ED",
-      "foreground": "#171717",
-      "muted": "#5E5A55"
-    }
   }
 ]
