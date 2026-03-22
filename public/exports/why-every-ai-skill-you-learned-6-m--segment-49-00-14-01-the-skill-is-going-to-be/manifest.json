@@ -2,39 +2,45 @@
   "slug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be",
   "title": "AI work is becoming attention triage",
   "description": "Manual rewrite of the strongest draft angle from the Nate B Jones transcript: the new AI skill is knowing what deserves your attention, when, and at what depth.",
-  "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/",
-  "exportedAt": "2026-03-22T05:53:14.750Z",
+  "previewPath": "/content-carousel-studio/carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/",
+  "publicPreviewUrl": "https://example.github.io/content-carousel-studio/carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/",
+  "exportedAt": "2026-03-22T06:28:52.537Z",
   "slideCount": 5,
   "files": [
     {
       "index": 1,
       "fileName": "01.png",
       "relativePath": "exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/01.png",
-      "publicPath": "/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/01.png"
+      "publicPath": "/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/01.png",
+      "publicUrl": "https://example.github.io/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/01.png"
     },
     {
       "index": 2,
       "fileName": "02.png",
       "relativePath": "exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/02.png",
-      "publicPath": "/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/02.png"
+      "publicPath": "/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/02.png",
+      "publicUrl": "https://example.github.io/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/02.png"
     },
     {
       "index": 3,
       "fileName": "03.png",
       "relativePath": "exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/03.png",
-      "publicPath": "/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/03.png"
+      "publicPath": "/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/03.png",
+      "publicUrl": "https://example.github.io/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/03.png"
     },
     {
       "index": 4,
       "fileName": "04.png",
       "relativePath": "exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/04.png",
-      "publicPath": "/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/04.png"
+      "publicPath": "/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/04.png",
+      "publicUrl": "https://example.github.io/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/04.png"
     },
     {
       "index": 5,
       "fileName": "05.png",
       "relativePath": "exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/05.png",
-      "publicPath": "/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/05.png"
+      "publicPath": "/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/05.png",
+      "publicUrl": "https://example.github.io/content-carousel-studio/exports/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/05.png"
     }
   ]
 }
