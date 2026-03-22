@@ -50,9 +50,17 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
   const previewPath = `${basePath}/carousel/${slug}/`
   const files: RenderManifest['files'] = []
   const browser = await chromium.launch()
+  let context
 
   try {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1200 }, deviceScaleFactor: 2 })
+    context = await browser.newContext({
+      viewport: { width: 430, height: 932 },
+      screen: { width: 430, height: 932 },
+      deviceScaleFactor: 3,
+      isMobile: true,
+      hasTouch: true,
+    })
+    const page = await context.newPage()
     await page.goto(`${stripTrailingSlash(baseUrl)}${previewPath}`, { waitUntil: 'networkidle' })
 
     const slidesLocator = page.locator('.carousel-slide')
@@ -77,6 +85,7 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
       })
     }
   } finally {
+    await context?.close().catch(() => undefined)
     await browser.close()
   }
 
