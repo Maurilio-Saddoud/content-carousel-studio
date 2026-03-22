@@ -40,7 +40,7 @@ Probably not.
 
 ---
 
-# But the mess is not the destination.
+# The mess is not the destination.
 
 It is what happens when the old org design has not caught up to the new capability.
 

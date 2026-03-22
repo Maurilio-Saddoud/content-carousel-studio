@@ -32,11 +32,13 @@ The repo already had ingest/rebuild/render/build paths, but no cheap inspection 
 ## Operator expectation update
 
 For this workflow, when the user sends a **new video link** after discussing carousel generation, treat it as an implicit request to:
-- wipe the current preview batch
 - generate a fresh batch from that video
 - keep the post count low (default 2 strong posts unless the user says otherwise)
 - optimize for low overlap / high signal
 - rebuild and publish Pages
+- preserve existing previews by default
+
+Only wipe/delete existing previews if the user explicitly asks for replacement or cleanup.
 
 Do **not** bounce back with "if you want me to run it, say run it" unless the user was genuinely ambiguous.
 

@@ -355,4 +355,5 @@ pnpm lint
 - `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
 - `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, weak/duplicate titles, and export drift before you bother publishing.
 - In the current operator workflow, a newly supplied video link should usually be treated as an implicit request to generate a fresh preview batch from that source, not as a prompt for another round of clarification.
+- Preserve existing preview batches by default. Only wipe/delete old previews when the user explicitly asks for replacement or cleanup.
 - If you add a carousel and want it public, it still needs to be committed and pushed to `main`. Pages is public, not magical.

@@ -1,7 +1,7 @@
 [
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh",
-    "title": "I'm going to get into why it's good news.",
+    "title": "AI is exposing that many jobs were never the real job.",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:00:00 → 00:00:14.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -15,8 +15,36 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
-    "title": "I'm describing is going to be temporary.",
+    "title": "The transition period is the ugliest part.",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:12:11 → 00:12:30.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-22",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
+    "title": "I've seen two structures emerging here that are significant, right?",
+    "description": "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:21:59 → 00:22:13.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-22",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager",
+    "title": "So the skill is maintaining the calibration, not having it once.",
+    "description": "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:05:13 → 00:05:29.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
     "updatedAt": "2026-03-22",
