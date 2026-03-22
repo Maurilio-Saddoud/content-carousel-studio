@@ -1,6 +1,6 @@
 {
   "slug": "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci",
-  "title": "Draft: For a product manager, good boundary sensing looks…",
+  "title": "Draft: Good boundary sensing is becoming a real management skill",
   "description": "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them).",
   "sourceType": "transcript",
   "aspectRatio": "portrait",
@@ -15,46 +15,46 @@
     {
       "id": "01",
       "eyebrow": "AUTO DRAFT",
-      "title": "For a product manager, good boundary sensing looks like letting an agent draft…",
+      "title": "Good boundary sensing is becoming a real management skill.",
       "body": [
-        "I've seen two structures emerging here that are significant, right?",
-        "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth."
+        "A manager does not need to review every agent output at the same depth.",
+        "The job is deciding where autonomy is safe, where oversight is required, and when judgment should stay human."
       ]
     },
     {
       "id": "02",
       "eyebrow": "WHY IT MATTERS",
-      "title": "I've seen two structures emerging here that are significant, right?",
+      "title": "The question is no longer \"are we using AI?\"",
       "body": [
-        "This is much much more important.",
-        "If you run an organization, the question isn't are we using AI."
+        "The real question is whether the team knows **where the agent-human boundary should sit today**.",
+        "That boundary keeps moving, so the operating model has to move with it."
       ]
     },
     {
       "id": "03",
       "eyebrow": "THE REAL SHIFT",
-      "title": "I've seen two structures emerging here that are significant, right?",
+      "title": "Most workforce skills used to have a finish line.",
       "body": [
-        "Every workforce skill in history far has had a finish line, a point where it was done.",
-        "The first is a team of one."
+        "You learned the tool, locked in the process, and repeated it.",
+        "With AI, the skill is staying calibrated while the capabilities keep changing."
       ]
     },
     {
       "id": "04",
       "eyebrow": "OPERATING MODEL",
-      "title": "If you have a 100 streams of agent output 8 hours a day, you cannot review everythi…",
+      "title": "You cannot review one hundred streams of agent output with the same intensity.",
       "body": [
-        "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have…",
-        "It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shift…"
+        "High-volume systems need triage, thresholds, and escalation rules.",
+        "Good operators design practice environments where agents can fail safely, assumptions can change, and people can keep refining the boundary."
       ]
     },
     {
       "id": "05",
       "eyebrow": "TAKEAWAY",
-      "title": "the skill is maintaining the calibration, not having it once.",
+      "title": "The real skill is maintaining calibration.",
       "body": [
-        "Use the source package as evidence, not as final copy.",
-        "Then sharpen the thesis until it actually sounds like Maurilio, not a transcript."
+        "Use the **source package** as evidence, not as final copy.",
+        "Then sharpen the thesis until it actually sounds like *Maurilio* instead of a transcript."
       ]
     }
   ]

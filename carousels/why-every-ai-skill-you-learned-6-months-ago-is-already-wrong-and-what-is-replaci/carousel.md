@@ -1,6 +1,6 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci"
-title: "Draft: For a product manager, good boundary sensing looks\u2026"
+title: "Draft: Good boundary sensing is becoming a real management skill"
 description: "Auto-generated draft carousel from AI News & Strategy Daily | Nate B Jones transcript source: Why Every AI Skill You Learned 6 Months Ago Is Already Wrong (And What Is Replacing Them)."
 sourceType: transcript
 aspectRatio: portrait
@@ -14,48 +14,48 @@ theme:
 
 eyebrow: AUTO DRAFT
 
-# For a product manager, good boundary sensing looks like letting an agent draft…
+# Good boundary sensing is becoming a real management skill.
 
-I've seen two structures emerging here that are significant, right?
+A manager does not need to review every agent output at the same depth.
 
-If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.
+The job is deciding where autonomy is safe, where oversight is required, and when judgment should stay human.
 
 ---
 
 eyebrow: WHY IT MATTERS
 
-# I've seen two structures emerging here that are significant, right?
+# The question is no longer “are we using AI?”
 
-This is much much more important.
+The real question is whether the team knows **where the agent-human boundary should sit today**.
 
-If you run an organization, the question isn't are we using AI.
+That boundary keeps moving, so the operating model has to move with it.
 
 ---
 
 eyebrow: THE REAL SHIFT
 
-# I've seen two structures emerging here that are significant, right?
+# Most workforce skills used to have a finish line.
 
-Every workforce skill in history far has had a finish line, a point where it was done.
+You learned the tool, locked in the process, and repeated it.
 
-The first is a team of one.
+With AI, the skill is staying calibrated while the capabilities keep changing.
 
 ---
 
 eyebrow: OPERATING MODEL
 
-# If you have a 100 streams of agent output 8 hours a day, you cannot review everythi…
+# You cannot review one hundred streams of agent output with the same intensity.
 
-Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have…
+High-volume systems need triage, thresholds, and escalation rules.
 
-It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shift…
+Good operators design practice environments where agents can fail safely, assumptions can change, and people can keep refining the boundary.
 
 ---
 
 eyebrow: TAKEAWAY
 
-# the skill is maintaining the calibration, not having it once.
+# The real skill is maintaining calibration.
 
-Use the source package as evidence, not as final copy.
+Use the **source package** as evidence, not as final copy.
 
-Then sharpen the thesis until it actually sounds like Maurilio, not a transcript.
+Then sharpen the thesis until it actually sounds like *Maurilio* instead of a transcript.
