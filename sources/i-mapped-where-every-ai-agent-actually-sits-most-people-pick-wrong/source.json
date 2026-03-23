@@ -1,0 +1,35 @@
+{
+  "slug": "i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong",
+  "sourceType": "transcript",
+  "sourceUrl": "https://youtu.be/b7IS4C9QALc?si=NN0wyDc7FqjUS7xt",
+  "fetchedAt": "2026-03-23T23:42:12.334Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "I Mapped Where Every AI Agent Actually Sits. Most People Pick Wrong.",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/b7IS4C9QALc/hqdefault.jpg"
+  },
+  "transcriptLineCount": 752,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 8,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 97,
+  "briefCount": 0,
+  "publishedIdeaIds": [],
+  "briefs": [],
+  "carousels": [],
+  "createdFiles": [
+    "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/source.json",
+    "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/raw-transcript.md",
+    "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/clean-transcript.md",
+    "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/segments.json",
+    "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/ideas.json",
+    "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/briefs.json",
+    "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/summary.md",
+    "carousels/index.json"
+  ]
+}
