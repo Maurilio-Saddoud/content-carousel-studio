@@ -132,6 +132,7 @@ type SourceManifest = {
 const TRANSCRIPT_TOOL_PATH = path.resolve('../youtube-transcript-v1/yt_transcript.py')
 const RAW_TRANSCRIPT_RE = /^\[(\d{2}):(\d{2}):(\d{2})\]\s+(.*)$/
 const execFileAsync = promisify(execFile)
+const REPO_NAME = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carousel-studio'
 const DEFAULT_THEME = {
   accent: '#1D9BF0',
   background: '#000000',
@@ -951,6 +952,8 @@ function cleanSentence(text: string) {
     .replace(/\s+/g, ' ')
     .replace(/^(?:and|but|so|because|well)\b\s+/i, '')
     .replace(/^(?:really|honestly|frankly),?\s+/i, '')
+    .replace(/^["'“”]+|["'“”]+$/g, '')
+    .replace(/[,:;\-–—]+$/g, '')
     .trim()
 }
 
@@ -961,6 +964,7 @@ function isWeakDisplayLine(text: string) {
   if (/,$/.test(cleaned)) return true
   if (/^(for|to|and|but|or)\b/i.test(cleaned)) return true
   if (/\b(this|that|it) is (much )?more important\b/i.test(cleaned)) return true
+  if (isMetaNarrationLine(cleaned)) return true
   if (isWeakBriefLineCandidate(cleaned)) return true
   return false
 }
@@ -971,10 +975,18 @@ function isWeakBriefLineCandidate(text: string) {
   if (cleaned.length < 28) return true
   if (/,$/.test(cleaned)) return true
   if (/\?$/.test(cleaned)) return true
-  if (/^(i('| a)?m going to|get into|we are going to|i('| a)?ve seen|the first is|do you love|thank you very much|here('| i)?s what|right now)\b/i.test(cleaned)) return true
+  if (/^(i('| a)?m going to|get into|we are going to|i('| a)?ve seen|the first is|do you love|thank you very much|here('| i)?s what|right now|for \d+ years|a lot of people|if you are waiting and seeing|now|now,|starting fresh)\b/i.test(cleaned)) return true
+  if (isMetaNarrationLine(cleaned)) return true
   if (/^(this|that|it)\b/i.test(cleaned) && cleaned.length < 48) return true
+  if (/^(there('| i)?s|here('| i)?s)\b/i.test(cleaned) && cleaned.length < 54) return true
   if (/\b(right|okay|ok|cheers)\b[.!?]*$/i.test(cleaned)) return true
   return false
+}
+
+function isMetaNarrationLine(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return true
+  return /^(this is (a )?(video|podcast|episode) about|in this (video|podcast|episode)|the point of this (video|podcast|episode)|this is not about learning to code|that is the skill of \d{4})\b/i.test(cleaned)
 }
 
 function trimSentence(text: string, max: number) {
@@ -1005,7 +1017,7 @@ function pickDisplayLine(candidates: string[], options: { preferredMax: number }
 
 function splitIntoClauses(text: string) {
   return text
-    .split(/(?<=[,;:])\s+|\s+[—–-]\s+/)
+    .split(/(?<=[.!?])\s+|(?<=[,;:])\s+|\s+[—–-]\s+/)
     .map((part) => part.trim())
     .filter(Boolean)
 }
@@ -1015,6 +1027,7 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
   const usedTheses = new Set<string>()
   const usedWhy = new Set<string>()
   const usedSupport = new Set<string>()
+  const usedSupportLines: string[] = []
   const usedSupportingIdeaIds = new Set<string>()
 
   for (const idea of publishedIdeas) {
@@ -1038,7 +1051,7 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
     ], usedTheses)
 
     const whyItMatters = inferWhyItMatters(idea, supportingIdeas, thesis, usedWhy)
-    const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport, thesis, whyItMatters)
+    const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport, usedSupportLines, thesis, whyItMatters)
 
     const brief: Brief = {
       id: `brief-${idea.id}`,
@@ -1086,18 +1099,20 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
     thesis: fallbackThesis,
     audience: inferAudience(fallbackIdea.text, []),
     whyItMatters: fallbackWhy,
-    supportPoints: buildSupportPoints(fallbackIdea, [], new Set(), fallbackThesis, fallbackWhy),
+    supportPoints: buildSupportPoints(fallbackIdea, [], new Set(), [], fallbackThesis, fallbackWhy),
     distinctFromBriefIds: [],
     carouselSlug: existingSlugs[fallbackIdea.id] || buildCarouselSlug(sourceSlug, fallbackIdea),
   }]
 }
 
 function buildCarouselBundles(metadata: VideoMetadata, sourceSlug: string, briefs: Brief[], ideas: Idea[]): CarouselBundle[] {
+  const usedBatchTitles = new Set<string>()
+
   return briefs.flatMap((brief) => {
     const idea = ideas.find((entry) => entry.id === brief.primaryIdeaId)
     if (!idea) return []
     const carouselSlug = brief.carouselSlug || idea.carouselSlug || buildCarouselSlug(sourceSlug, idea)
-    const carousel = buildCarousel(metadata, sourceSlug, carouselSlug, brief, idea, ideas)
+    const carousel = buildCarousel(metadata, sourceSlug, carouselSlug, brief, idea, ideas, usedBatchTitles)
     return [{
       brief: { ...brief, carouselSlug },
       idea: { ...idea, carouselSlug },
@@ -1137,8 +1152,16 @@ function buildSummary(metadata: VideoMetadata, sourceSlug: string, carouselBundl
     : '\nNo top-ranked ideas were rejected.\n'}\n## Editorial note\nPublished ideas are now promoted into explicit briefs before carousels are generated. The source package keeps ideas plus briefs so a later pass can improve distinctness without re-ingesting the transcript.\n`
 }
 
-function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug: string, brief: Brief, primary: Idea, ideas: Idea[]): Carousel {
-  const companionSegments = ideas.filter((idea) => brief.supportingIdeaIds.includes(idea.id) || idea.id !== primary.id)
+function buildCarousel(
+  metadata: VideoMetadata,
+  sourceSlug: string,
+  carouselSlug: string,
+  brief: Brief,
+  primary: Idea,
+  ideas: Idea[],
+  usedBatchTitles: Set<string> = new Set(),
+): Carousel {
+  const companionSegments = ideas.filter((idea) => brief.supportingIdeaIds.includes(idea.id))
   const primaryThoughts = getCompleteThoughts(primary.text)
   const companionThoughts = companionSegments.flatMap((segment) => getCompleteThoughts(segment.text))
   const support = uniqueNormalized([...primaryThoughts.slice(1), ...companionThoughts]).filter((sentence) => sentence.length >= 24)
@@ -1160,7 +1183,7 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
   ]).slice(0, 3)
 
   const usedTitles = new Set<string>()
-  const takeTitle = (...candidates: string[]) => pickUniqueTitle(usedTitles, candidates)
+  const takeTitle = (...candidates: string[]) => pickUniqueTitle(usedTitles, candidates, usedBatchTitles)
 
   const slide1Title = takeTitle(
     opening,
@@ -1194,12 +1217,14 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
     titleFromIdea(primary, 'Human attention becomes the real bottleneck.'),
   )
 
+  const closingFallbackTitle = buildClosingFallback(brief)
+
   const slide5Title = takeTitle(
     brief.supportPoints[2] ?? '',
     primaryThoughts[4] ?? '',
     extractTakeaway(primary.text, companionSegments),
-    titleFromIdea(primary, 'The edge is keeping your operating model current.'),
-    'The edge is keeping your operating model current.',
+    titleFromIdea(primary, closingFallbackTitle),
+    closingFallbackTitle,
   )
 
   const slide4Intro = uniqueNormalized([
@@ -1208,14 +1233,12 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
     'The workflow needs clearer review boundaries.',
   ])[0] ?? 'The workflow needs clearer review boundaries.'
 
-  const slides: CarouselSlide[] = [
+  const draftSlides: Array<{ title: string, body: string }> = [
     {
-      id: '01',
       title: slide1Title,
       body: '',
     },
     {
-      id: '02',
       title: slide2Title,
       body: buildBodyLines([
         brief.whyItMatters,
@@ -1224,7 +1247,6 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
       ]),
     },
     {
-      id: '03',
       title: slide3Title,
       body: buildQuoteBody([
         brief.supportPoints[0] ?? '',
@@ -1233,12 +1255,10 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
       ]),
     },
     {
-      id: '04',
       title: slide4Title,
       body: buildFrameworkBody(slide4Intro, frameworkItems),
     },
     {
-      id: '05',
       title: slide5Title,
       body: buildBodyLines([
         brief.audience,
@@ -1247,6 +1267,38 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
       ]),
     },
   ]
+
+  const extraSlides = uniqueNormalized([
+    support[0] ?? '',
+    support[1] ?? '',
+    support[4] ?? '',
+    support[5] ?? '',
+    support[6] ?? '',
+    support[7] ?? '',
+    support[8] ?? '',
+    brief.supportPoints[2] ?? '',
+    extractTakeaway(primary.text, companionSegments),
+  ])
+    .filter((line) => line.length >= 32)
+    .filter((line) => !draftSlides.some((slide) => slide.title.toLowerCase() === line.toLowerCase() || slide.body.toLowerCase().includes(line.toLowerCase())))
+    .slice(0, 2)
+    .map((line) => ({
+      title: takeTitle(line, titleFromSentence(line), 'This is where the workflow really changes.'),
+      body: buildBodyLines([line, brief.whyItMatters]),
+    }))
+
+  const targetSlideCount = Math.max(4, Math.min(7, 5 + extraSlides.length))
+  const middleSlides = [...draftSlides.slice(1, -1)]
+  if (targetSlideCount > 5) {
+    middleSlides.splice(Math.max(1, middleSlides.length - 1), 0, ...extraSlides.slice(0, targetSlideCount - 5))
+  }
+
+  const assembledSlides = [draftSlides[0], ...middleSlides, draftSlides[draftSlides.length - 1]].slice(0, targetSlideCount)
+  const slides: CarouselSlide[] = assembledSlides.map((slide, index) => ({
+    id: String(index + 1).padStart(2, '0'),
+    title: slide.title,
+    body: slide.body,
+  }))
 
   return editorialPolishCarousel(brief, {
     slug: carouselSlug,
@@ -1257,22 +1309,23 @@ function buildCarousel(metadata: VideoMetadata, sourceSlug: string, carouselSlug
     updatedAt: new Date().toISOString().slice(0, 10),
     theme: DEFAULT_THEME,
     slides,
-  })
+  }, usedBatchTitles)
 }
 
-function editorialPolishCarousel(brief: Brief, carousel: Carousel) {
+function editorialPolishCarousel(brief: Brief, carousel: Carousel, usedBatchTitles: Set<string> = new Set()) {
   const usedTitles = new Set<string>()
+  const totalSlides = carousel.slides.length
   const polishedSlides = carousel.slides.map((slide, index) => {
-    const cleanedBody = polishSlideBody(slide.body, index)
+    const cleanedBody = polishSlideBody(slide.body, index, totalSlides)
     const titleCandidates = [
       slide.title,
       index === 0 ? brief.thesis : '',
       index === 1 ? brief.whyItMatters : '',
       brief.supportPoints[index - 2] ?? '',
-      fallbackTitleForPosition(index, brief),
+      fallbackTitleForPosition(index, brief, totalSlides),
     ].filter(Boolean)
 
-    const title = pickUniqueTitle(usedTitles, titleCandidates)
+    const title = pickUniqueTitle(usedTitles, titleCandidates, usedBatchTitles)
     return {
       ...slide,
       title,
@@ -1280,7 +1333,7 @@ function editorialPolishCarousel(brief: Brief, carousel: Carousel) {
     }
   })
 
-  const finalSlides = ensureCarouselProgression(brief, polishedSlides)
+  const finalSlides = ensureCarouselProgression(brief, polishedSlides, usedBatchTitles)
 
   return {
     ...carousel,
@@ -1300,7 +1353,7 @@ function buildBodyLines(lines: string[]) {
     .join('\n\n')
 }
 
-function polishSlideBody(body: string, index: number) {
+function polishSlideBody(body: string, index: number, totalSlides = 5) {
   const blocks = body
     .split(/\n\n+/)
     .map((part) => normalizeForSlide(part))
@@ -1311,31 +1364,52 @@ function polishSlideBody(body: string, index: number) {
 
   if (index === 0) return ''
 
-  if (index === 4) {
+  if (index === totalSlides - 1) {
     return blocks.slice(0, 2).join('\n\n')
   }
 
   return blocks.slice(0, 2).join('\n\n')
 }
 
-function fallbackTitleForPosition(index: number, brief: Brief) {
-  switch (index) {
-    case 0:
-      return brief.thesis
-    case 1:
-      return brief.whyItMatters
-    case 2:
-      return brief.supportPoints[0] ?? 'This is where the real shift shows up.'
-    case 3:
-      return brief.supportPoints[1] ?? 'The operating model has to change.'
-    case 4:
-      return brief.supportPoints[2] ?? 'That is where the advantage compounds.'
-    default:
-      return 'Untitled slide'
-  }
+function fallbackTitleForPosition(index: number, brief: Brief, totalSlides = 5) {
+  if (index === 0) return brief.thesis
+  if (index === 1) return brief.whyItMatters
+  if (index === totalSlides - 1) return buildClosingFallback(brief)
+  if (index === totalSlides - 2) return brief.supportPoints[1] ?? 'The operating model has to change.'
+  if (index === 2) return brief.supportPoints[0] ?? 'This is where the real shift shows up.'
+  return 'Untitled slide'
 }
 
-function ensureCarouselProgression(brief: Brief, slides: CarouselSlide[]) {
+function buildClosingFallback(brief: Brief) {
+  return pickDisplayLine(uniqueNormalized([
+    brief.supportPoints[2] ?? '',
+    brief.supportPoints[1] ?? '',
+    brief.whyItMatters,
+    brief.thesis,
+  ]), { preferredMax: 84 }) || closingReserveTitle(brief)
+}
+
+function closingReserveTitle(brief: Brief) {
+  const lead = [
+    'The edge is',
+    'Winning teams build',
+    'The moat becomes',
+    'The leverage shifts to',
+    'Strong operators need',
+  ]
+  const tail = [
+    'tighter review loops.',
+    'clearer human checkpoints.',
+    'faster escalation paths.',
+    'better supervision habits.',
+    'smarter audit rhythms.',
+    'more disciplined fallback rules.',
+  ]
+  const hash = brief.id.split('').reduce((total, char) => total + char.charCodeAt(0), 0)
+  return `${lead[hash % lead.length]} ${tail[Math.floor(hash / lead.length) % tail.length]}`
+}
+
+function ensureCarouselProgression(brief: Brief, slides: CarouselSlide[], usedBatchTitles: Set<string> = new Set()) {
   if (slides.length === 0) return slides
   const updated = [...slides]
 
@@ -1348,10 +1422,18 @@ function ensureCarouselProgression(brief: Brief, slides: CarouselSlide[]) {
       brief.supportPoints[2] ?? '',
       brief.audience.replace(/^Audience:\s*/i, ''),
     ].filter(Boolean).join('\n\n')
+    const earlierTitles = new Set(updated.slice(0, 4).map((slide) => cleanSentence(slide.title).toLowerCase()).filter(Boolean))
+    const closingTitle = pickUniqueTitle(new Set(earlierTitles), [
+      isWeakDisplayLine(updated[4].title) ? '' : updated[4].title,
+      brief.supportPoints[2] ?? '',
+      brief.supportPoints[1] ?? '',
+      buildClosingFallback(brief),
+      closingReserveTitle(brief),
+    ], usedBatchTitles)
 
     updated[4] = {
       ...updated[4],
-      title: isWeakDisplayLine(updated[4].title) ? 'That is where the advantage compounds.' : updated[4].title,
+      title: closingTitle,
       body: polishSlideBody(updated[4].body, 4) || closingBody,
     }
   }
@@ -1359,20 +1441,26 @@ function ensureCarouselProgression(brief: Brief, slides: CarouselSlide[]) {
   return updated
 }
 
-function pickUniqueTitle(usedTitles: Set<string>, candidates: string[]) {
+
+function pickUniqueTitle(usedTitles: Set<string>, candidates: string[], reservedTitles: Set<string> = new Set()) {
   const normalizedCandidates = candidates
     .map((candidate) => cleanSentence(candidate))
     .filter(Boolean)
 
   for (const candidate of normalizedCandidates) {
     const key = candidate.toLowerCase()
-    if (isWeakDisplayLine(candidate) || usedTitles.has(key)) continue
+    if (isWeakDisplayLine(candidate) || usedTitles.has(key) || reservedTitles.has(key)) continue
     usedTitles.add(key)
+    reservedTitles.add(key)
     return candidate
   }
 
-  const fallback = normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase())) || 'Untitled slide'
-  usedTitles.add(fallback.toLowerCase())
+  const fallback = normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase()) && !reservedTitles.has(candidate.toLowerCase()))
+    || normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase()))
+    || 'Untitled slide'
+  const fallbackKey = fallback.toLowerCase()
+  usedTitles.add(fallbackKey)
+  reservedTitles.add(fallbackKey)
   return fallback
 }
 
@@ -1457,10 +1545,9 @@ function extractTakeaway(primaryText: string, segments: Segment[]) {
   const candidate = [
     ...splitSentences(primaryText),
     ...segments.map((segment) => segment.hook),
-    'The edge is not knowing one workflow. It is keeping your operating model current.',
   ].find((sentence) => /\b(skill|attention|boundary|calibration|system|workflow|operators?)\b/i.test(sentence))
 
-  return candidate ?? 'The edge is keeping your operating model current.'
+  return candidate ?? ''
 }
 
 function pickDistinctThesis(candidates: string[], usedTheses: Set<string>) {
@@ -1516,7 +1603,14 @@ function inferWhyItMatters(primary: Idea, support: Idea[], thesis: string, usedW
   return fallback
 }
 
-function buildSupportPoints(primary: Idea, support: Idea[], usedSupport: Set<string>, thesis: string, whyItMatters: string) {
+function buildSupportPoints(
+  primary: Idea,
+  support: Idea[],
+  usedSupport: Set<string>,
+  usedSupportLines: string[],
+  thesis: string,
+  whyItMatters: string,
+) {
   const reserved = new Set([slugify(thesis), slugify(whyItMatters)])
   const points = uniqueNormalized([
     ...getCompleteThoughts(primary.text).slice(1),
@@ -1525,6 +1619,8 @@ function buildSupportPoints(primary: Idea, support: Idea[], usedSupport: Set<str
     titleFromSentence(primary.hook),
     extractTakeaway(primary.text, support),
   ])
+    .map((line) => sanitizeSupportCandidate(line))
+    .filter(Boolean)
     .filter((line) => !reserved.has(slugify(line)))
     .filter((line) => !isWeakDisplayLine(line))
     .filter((line) => !isWeakBriefLineCandidate(line))
@@ -1533,13 +1629,66 @@ function buildSupportPoints(primary: Idea, support: Idea[], usedSupport: Set<str
   for (const point of points) {
     const key = slugify(point)
     if (usedSupport.has(key)) continue
+    if (usedSupportLines.some((existing) => overlapScore(existing, point) >= 0.68)) continue
     usedSupport.add(key)
+    usedSupportLines.push(point)
     selected.push(point)
     if (selected.length >= 4) break
   }
 
-  if (selected.length > 0) return selected
+  if (selected.length >= 2) return selected
+
+  const backfillPoints = uniqueNormalized([
+    ...splitIntoClauses(primary.text),
+    ...splitIntoClauses(primary.hook),
+    ...splitIntoClauses(primary.titleSuggestion),
+    ...support.flatMap((idea) => splitIntoClauses(idea.text).slice(0, 2)),
+  ])
+    .map((line) => sanitizeSupportCandidate(line))
+    .filter(Boolean)
+    .filter((line) => !reserved.has(slugify(line)))
+    .filter((line) => !isWeakSupportBackfill(line))
+
+  for (const point of backfillPoints) {
+    const key = slugify(point)
+    if (usedSupport.has(key)) continue
+    if (usedSupportLines.some((existing) => overlapScore(existing, point) >= 0.68)) continue
+    if (selected.some((existing) => overlapScore(existing, point) >= 0.72)) continue
+    usedSupport.add(key)
+    usedSupportLines.push(point)
+    selected.push(point)
+    if (selected.length >= 3) break
+  }
+
+  if (selected.length > 0) return selected.slice(0, 4)
   return points.slice(0, 4)
+}
+
+function sanitizeSupportCandidate(value: string) {
+  const direct = cleanSentence(value)
+  const fragments = [
+    direct,
+    ...splitSentences(value).map((line) => cleanSentence(line)),
+    ...splitIntoClauses(value).map((line) => cleanSentence(line)),
+  ].filter(Boolean)
+
+  for (const fragment of fragments) {
+    if (isMetaNarrationLine(fragment)) continue
+    if (isWeakBriefLineCandidate(fragment)) continue
+    return fragment
+  }
+
+  return ''
+}
+
+function isWeakSupportBackfill(value: string) {
+  const line = normalizeForSlide(value)
+  if (!line) return true
+  if (line.length < 32) return true
+  if (/\?$/.test(line)) return true
+  if (/^(for|to|and|but|or|so|because)\b/i.test(line)) return true
+  if (/^(i'm|i am|we're|we are|this is where|think about|if you are)\b/i.test(line) && line.length < 80) return true
+  return false
 }
 
 function buildCarouselSlug(sourceSlug: string, segment: Segment) {
@@ -1574,6 +1723,8 @@ async function removeStalePublishedArtifacts(
   await Promise.all(staleSlugs.map(async (slug) => {
     await rm(path.resolve('carousels', slug), { recursive: true, force: true })
     await rm(path.resolve('public', 'exports', slug), { recursive: true, force: true })
+    await rm(path.resolve('.pages-serve', REPO_NAME, 'carousel', slug), { recursive: true, force: true })
+    await rm(path.resolve('out', 'carousel', slug), { recursive: true, force: true })
   }))
 }
 
