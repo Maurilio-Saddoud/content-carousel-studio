@@ -10,8 +10,8 @@
     "lineEnd": 144,
     "wordCount": 51,
     "text": "February model. And both kinds of errors are very expensive. So the skill is maintaining the calibration, not having it once. So what does this look like in practice? For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, but realizing that that same",
-    "titleSuggestion": "For a product manager,",
-    "hook": "For a product manager,",
+    "titleSuggestion": "For a product manager",
+    "hook": "For a product manager",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "has contrast/tension, which usually makes better post framing",
@@ -37,7 +37,7 @@
       "lengthPenalty": 0
     },
     "status": "published",
-    "selectionReason": "Selected for publication as one of the top 2 non-overlapping ideas.",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
   },
@@ -77,7 +77,7 @@
       "lengthPenalty": 0
     },
     "status": "published",
-    "selectionReason": "Selected for publication as one of the top 2 non-overlapping ideas.",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
   },
@@ -118,9 +118,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
   },
   {
     "id": "segment-17",
@@ -241,9 +242,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i"
   },
   {
     "id": "segment-31",
@@ -449,9 +451,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati"
   },
   {
     "id": "segment-62",
@@ -488,9 +491,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu"
   },
   {
     "id": "segment-01",
@@ -526,9 +530,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Strong candidate kept in the source package but not promoted to a published carousel in this run.",
-    "rejectionReasons": []
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "rejectionReasons": [],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt"
   },
   {
     "id": "segment-98",
@@ -541,8 +546,8 @@
     "lineEnd": 760,
     "wordCount": 57,
     "text": "organizational capability decisions of the decade to chance. And I wouldn't do that. We have seen context windows. We have seen retrieval. It is hard to overstate how much models have gained in capability between November of 2025 and February of 2026. So within the last 60 to 90 days, anyone who is deep in AI has",
-    "titleSuggestion": "We have seen context windows.",
-    "hook": "We have seen context windows.",
+    "titleSuggestion": "I wouldn't do that.",
+    "hook": "I wouldn't do that.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
       "contains enough complete thoughts to turn into multiple slides"
@@ -876,7 +881,7 @@
     "lineEnd": 614,
     "wordCount": 50,
     "text": "attention. and their output looks like what a five to 10 person team produced a couple of years ago. Not because they're working harder, but because they're delegating continuously and verifying intelligently. This is very much how AI native companies are operating around this idea that there's one person with",
-    "titleSuggestion": "Not because they're working harder,",
+    "titleSuggestion": "Not because they're working harder",
     "hook": "Not because they're working harder, but because they're delegating continuously and verifying intelligently.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -960,7 +965,7 @@
     "lineEnd": 112,
     "wordCount": 54,
     "text": "it's the first workforce skill in history that expires on a roughly quarterly cycle, which means everything we know about how to teach workforce skills doesn't work too well for this skill. So, what's inside the box? I've named it as Frontier Operations, but I'm not just going to point at it and stand",
-    "titleSuggestion": "I've named it as Frontier Operations,",
+    "titleSuggestion": "I'm not just going to point at it and stand",
     "hook": "I've named it as Frontier Operations, but I'm not just going to point at it and stand",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -1294,8 +1299,8 @@
     "lineEnd": 464,
     "wordCount": 49,
     "text": "into system defaults and prompting is moving up a level into things like intent engineering. Integration patterns are getting productized, but frontier AI operations, you can't really automate them because by definition, there's a surface of AI capability. And so when a task migrates inside the AI bubble, the",
-    "titleSuggestion": "Integration patterns are getting productized,",
-    "hook": "Integration patterns are getting productized,",
+    "titleSuggestion": "Integration patterns are getting productized",
+    "hook": "Integration patterns are getting productized",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -1377,7 +1382,7 @@
     "lineEnd": 780,
     "wordCount": 58,
     "text": "slowing down. And so if you are not in a place where these February agents are surprising you, the best thing you can do to welcome yourself to the frontier is to find a way to give your agents a job that surprises you. Whether they fail, whether they partly succeed, give them something that allows them to",
-    "titleSuggestion": "Whether they fail,",
+    "titleSuggestion": "Whether they fail, whether they partly succeed, give them something that allows them to",
     "hook": "Whether they fail, whether they partly succeed, give them something that allows them to",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -1419,8 +1424,8 @@
     "lineEnd": 692,
     "wordCount": 56,
     "text": "farther down from executive leadership than it used to. You need people who are managing four or five teams of five to be just as strategically informed as your CEO at this point. So what do you look for when you're hiring for this skill set? It's not necessarily uh a case for traditional hiring signals,",
-    "titleSuggestion": "It's not necessarily uh a case for traditional hiring signals,",
-    "hook": "It's not necessarily uh a case for traditional hiring signals,",
+    "titleSuggestion": "It's not necessarily uh a case for traditional hiring signals",
+    "hook": "It's not necessarily uh a case for traditional hiring signals",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -2296,7 +2301,7 @@
     "lineEnd": 16,
     "wordCount": 51,
     "text": "interesting work is happening right now. It's where you decide what to delegate and what to keep, how to verify agent output, where to intervene, how to structure that handoff. Working on that surface well is the most valuable professional capability in the economy today. But here's the thing, that bubble",
-    "titleSuggestion": "It's where you decide what to delegate and what to keep,",
+    "titleSuggestion": "It's where you decide what to delegate and what to keep",
     "hook": "Working on that surface well is the most valuable professional capability in the economy today.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2506,8 +2511,8 @@
     "lineEnd": 503,
     "wordCount": 46,
     "text": "who have developed the operational practice to be on the bubble and convert those tools into reliable output as AI continues to evolve. I believe that this skill set is the single largest determinant of not only which businesses tend to succeed over the next decade,",
-    "titleSuggestion": "I believe that this skill set is the single largest determinant of not only which businesses tend to succeed over the next decade,",
-    "hook": "I believe that this skill set is the single largest determinant of not only which businesses tend to succeed over the next decade,",
+    "titleSuggestion": "I believe that this skill set is the single largest determinant of not only which businesses tend to succeed over the next decade",
+    "hook": "I believe that this skill set is the single largest determinant of not only which businesses tend to succeed over the next decade",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -2799,7 +2804,7 @@
     "wordCount": 51,
     "text": "a good engineering manager thinks about system boundaries than to how an individual contributor thinks about their tasks. The person doing seam design is asking if I break this project into seven different phases, which three are fully agent executable, which two need human in the loop and which two are",
     "titleSuggestion": "The person doing seam design is asking if I break this project into seven different phases, which three are fully agent executable, which two need human in the loop and which two are",
-    "hook": "The person doing seam design is asking if I break this project into seven different phases,",
+    "hook": "The person doing seam design is asking if I break this project into seven different phases",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -3302,7 +3307,7 @@
     "wordCount": 46,
     "text": "is Y and and there's a different check for that. This might look like a corporate council that knows an agent reviewing contracts is going to catch boilerplate issues, but miss indemnification clauses or maybe miss non-standard termination language and maybe miss the interaction between a",
     "titleSuggestion": "This might look like a corporate council that knows an agent reviewing contracts is going to catch boilerplate issues, but miss indemnification clauses or maybe miss non-standard termination language and maybe miss the interaction between a",
-    "hook": "This might look like a corporate council that knows an agent reviewing contracts is going to catch boilerplate issues,",
+    "hook": "This might look like a corporate council that knows an agent reviewing contracts is going to catch boilerplate issues",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -4004,8 +4009,8 @@
     "lineEnd": 72,
     "wordCount": 48,
     "text": "certification, every training program has assumed the target stands still. This one doesn't. And the mismatch between the skill the economy needs and the infrastructure we've built is the most expensive gap I've seen in the global workforce. And I'm giving that skill a name. It's called frontier",
-    "titleSuggestion": "It's called frontier",
-    "hook": "It's called frontier",
+    "titleSuggestion": "I'm giving that skill a name.",
+    "hook": "I'm giving that skill a name.",
     "whyItCouldWork": [
       "contains enough complete thoughts to turn into multiple slides"
     ],
@@ -4085,8 +4090,8 @@
     "lineEnd": 652,
     "wordCount": 44,
     "text": "well together. So in product development, this might look like one frontier operator who owns the human agent workflow across the product surface, a couple of engineers executing heavy agent assistant development, maybe a designer running agent assistant prototyping and user research and also",
-    "titleSuggestion": "well together. So in product development, this might look like one frontier operator who owns the human agent workflow across the product surface, a couple of engineers executing heavy agent assistant development, maybe a designer running agent assistant prototyping and user research and also",
-    "hook": "well together. So in product development, this might look like one frontier operator who owns the human agent workflow across the product surface, a couple of engineers executing heavy agent assistant development, maybe a designer running agent assistant prototyping and user research and also",
+    "titleSuggestion": "together. So in product development, this might look like one frontier operator who owns the human agent workflow across the product surface, a couple of engineers executing heavy agent assistant development, maybe a designer running agent assistant prototyping and user research and also",
+    "hook": "together. So in product development, this might look like one frontier operator who owns the human agent workflow across the product surface, a couple of engineers executing heavy agent assistant development, maybe a designer running agent assistant prototyping and user research and also",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic"
     ],

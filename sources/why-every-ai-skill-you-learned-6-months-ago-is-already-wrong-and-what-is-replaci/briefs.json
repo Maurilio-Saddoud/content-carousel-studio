@@ -2,43 +2,148 @@
   {
     "id": "brief-segment-18",
     "primaryIdeaId": "segment-18",
-    "supportingIdeaIds": [
-      "segment-49",
-      "segment-69",
-      "segment-97"
-    ],
-    "thesis": "So the skill is maintaining the calibration, not having it once.",
+    "supportingIdeaIds": [],
+    "thesis": "the skill is maintaining the calibration, not having it once.",
     "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
-    "whyItMatters": "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.",
+    "whyItMatters": "If your mental model is stale, you redesign the wrong part of the workflow.",
     "supportPoints": [
-      "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.",
-      "The skill is going to be triaging your own attention in real time.",
-      "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change practitioners have to recalibrate.",
-      "If you run an organization, the question isn't are we using AI."
+      "both kinds of errors are very expensive.",
+      "the skill is maintaining the calibration",
+      "good boundary sensing looks like letting an agent draft a credible competitive analysis"
     ],
     "distinctFromBriefIds": [
-      "brief-segment-78"
+      "brief-segment-78",
+      "brief-segment-49",
+      "brief-segment-69",
+      "brief-segment-97",
+      "brief-segment-62",
+      "brief-segment-01"
     ],
     "carouselSlug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
   },
   {
     "id": "brief-segment-78",
     "primaryIdeaId": "segment-78",
-    "supportingIdeaIds": [
-      "segment-49",
-      "segment-69",
-      "segment-97"
-    ],
+    "supportingIdeaIds": [],
     "thesis": "A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.",
     "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
-    "whyItMatters": "If you have a 100 streams of agent output 8 hours a day, you cannot review everything at the same depth.",
-    "supportPoints": [
-      "A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.",
-      "It's do we have people whose job it is to know where the evolving AI agent human boundary is how we think about redesigning our workflows as it shifts."
-    ],
+    "whyItMatters": "If your mental model is stale, you redesign the wrong part of the workflow.",
+    "supportPoints": [],
     "distinctFromBriefIds": [
-      "brief-segment-18"
+      "brief-segment-18",
+      "brief-segment-49",
+      "brief-segment-69",
+      "brief-segment-97",
+      "brief-segment-62",
+      "brief-segment-01"
     ],
     "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
+  },
+  {
+    "id": "brief-segment-49",
+    "primaryIdeaId": "segment-49",
+    "supportingIdeaIds": [],
+    "thesis": "If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "The skill is going to be triaging your own attention in real time.",
+    "supportPoints": [
+      "If you have a 100 streams of agent output and 8 hours a day",
+      "you cannot review everything at the same depth.",
+      "this might look like an engineering manager overseeing agent assisted development across five teams and that person"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-18",
+      "brief-segment-78",
+      "brief-segment-69",
+      "brief-segment-97",
+      "brief-segment-62",
+      "brief-segment-01"
+    ],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
+  },
+  {
+    "id": "brief-segment-69",
+    "primaryIdeaId": "segment-69",
+    "supportingIdeaIds": [],
+    "thesis": "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change so practitioners have to recalibrate.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "This is much more practical than just looking at a bunch of slides and saying you did an AI workshop.",
+    "supportPoints": [
+      "Practice environments are where agents have different capability levels",
+      "where failure modes are realistic",
+      "where rules can change so practitioners have to recalibrate."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-18",
+      "brief-segment-78",
+      "brief-segment-49",
+      "brief-segment-97",
+      "brief-segment-62",
+      "brief-segment-01"
+    ],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i"
+  },
+  {
+    "id": "brief-segment-97",
+    "primaryIdeaId": "segment-97",
+    "supportingIdeaIds": [],
+    "thesis": "If you run an organization, the question isn't are we using AI.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "It's do we have people whose job it is to know where the evolving AI agent human boundary is and how we think about redesigning our workflows as it shifts.",
+    "supportPoints": [
+      "the question isn't are we using AI.",
+      "If the answer is you can't name someone",
+      "you are leaving one of the most consequential"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-18",
+      "brief-segment-78",
+      "brief-segment-49",
+      "brief-segment-69",
+      "brief-segment-62",
+      "brief-segment-01"
+    ],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati"
+  },
+  {
+    "id": "brief-segment-62",
+    "primaryIdeaId": "segment-62",
+    "supportingIdeaIds": [],
+    "thesis": "February and the person whose boundary sense was current last August are operating worlds apart.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments.",
+    "supportPoints": [
+      "cursor hitting stunning numbers with a small number of people"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-18",
+      "brief-segment-78",
+      "brief-segment-49",
+      "brief-segment-69",
+      "brief-segment-97",
+      "brief-segment-01"
+    ],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu"
+  },
+  {
+    "id": "brief-segment-01",
+    "primaryIdeaId": "segment-01",
+    "supportingIdeaIds": [],
+    "thesis": "Every workforce skill in history so far has had a finish line, a point where it was done.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "The air inside is everything AI agents can do reliably today.",
+    "supportPoints": [
+      "The air outside is everything that still requires a person.",
+      "Every workforce skill in history so far has had a finish line"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-18",
+      "brief-segment-78",
+      "brief-segment-49",
+      "brief-segment-69",
+      "brief-segment-97",
+      "brief-segment-62"
+    ],
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt"
   }
 ]

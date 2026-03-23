@@ -1,8 +1,8 @@
 {
   "slug": "why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci",
   "sourceType": "transcript",
-  "sourceUrl": "https://youtu.be/RnjgLlQTMf0",
-  "fetchedAt": "2026-03-22T17:31:25.918Z",
+  "sourceUrl": "https://youtu.be/RnjgLlQTMf0?si=e50jiiYKombLJWb_",
+  "fetchedAt": "2026-03-23T04:09:48.947Z",
   "transcriptMode": "official-transcript",
   "whisperModel": "base",
   "video": {
@@ -12,22 +12,27 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/RnjgLlQTMf0/hqdefault.jpg"
   },
   "transcriptLineCount": 786,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
-  "ideaCount": 102,
-  "briefCount": 2,
-  "publishedIdeaIds": [
-    "segment-18",
-    "segment-78"
-  ],
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
   "ideaRule": {
-    "publishLimit": 2,
+    "publishLimit": 8,
     "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
   },
+  "ideaCount": 102,
+  "briefCount": 7,
+  "publishedIdeaIds": [
+    "segment-18",
+    "segment-78",
+    "segment-49",
+    "segment-69",
+    "segment-97",
+    "segment-62",
+    "segment-01"
+  ],
   "briefs": [
     {
       "id": "brief-segment-18",
       "primaryIdeaId": "segment-18",
-      "thesis": "So the skill is maintaining the calibration, not having it once.",
+      "thesis": "the skill is maintaining the calibration, not having it once.",
       "slug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
     },
     {
@@ -35,13 +40,43 @@
       "primaryIdeaId": "segment-78",
       "thesis": "A single person with a very strong frontier operation skill set who runs multiple agent workflows across a domain.",
       "slug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
+    },
+    {
+      "id": "brief-segment-49",
+      "primaryIdeaId": "segment-49",
+      "thesis": "If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.",
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be"
+    },
+    {
+      "id": "brief-segment-69",
+      "primaryIdeaId": "segment-69",
+      "thesis": "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change so practitioners have to recalibrate.",
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i"
+    },
+    {
+      "id": "brief-segment-97",
+      "primaryIdeaId": "segment-97",
+      "thesis": "If you run an organization, the question isn't are we using AI.",
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati"
+    },
+    {
+      "id": "brief-segment-62",
+      "primaryIdeaId": "segment-62",
+      "thesis": "February and the person whose boundary sense was current last August are operating worlds apart.",
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu"
+    },
+    {
+      "id": "brief-segment-01",
+      "primaryIdeaId": "segment-01",
+      "thesis": "Every workforce skill in history so far has had a finish line, a point where it was done.",
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt"
     }
   ],
   "carousels": [
     {
       "slug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager",
       "segmentId": "segment-18",
-      "title": "So the skill is maintaining the calibration, not having it once.",
+      "title": "the skill is maintaining the calibration, not having it once.",
       "previewPath": "/carousel/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager",
       "carouselPath": "carousels/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager/carousel.md"
     },
@@ -51,6 +86,41 @@
       "title": "AI operating models are getting stale faster than most teams realize.",
       "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures",
       "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be",
+      "segmentId": "segment-49",
+      "title": "If you have a 100 streams of agent output and 8 hours a day, you cannot review everything at the same depth.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i",
+      "segmentId": "segment-69",
+      "title": "Practice environments are where agents have different capability levels, where failure modes are realistic, where rules can change so practitioners have to recalibrate.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati",
+      "segmentId": "segment-97",
+      "title": "If you run an organization, the question isn't are we using AI.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu",
+      "segmentId": "segment-62",
+      "title": "February and the person whose boundary sense was current last August are operating worlds apart.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu/carousel.md"
+    },
+    {
+      "slug": "why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt",
+      "segmentId": "segment-01",
+      "title": "The air inside is everything AI agents can do reliably today.",
+      "previewPath": "/carousel/why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt",
+      "carouselPath": "carousels/why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt/carousel.md"
     }
   ],
   "createdFiles": [
@@ -63,6 +133,11 @@
     "sources/why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci/summary.md",
     "carousels/why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager/carousel.md",
     "carousels/why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-49-00-14-01-the-skill-is-going-to-be/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu/carousel.md",
+    "carousels/why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt/carousel.md",
     "carousels/index.json"
   ]
 }
