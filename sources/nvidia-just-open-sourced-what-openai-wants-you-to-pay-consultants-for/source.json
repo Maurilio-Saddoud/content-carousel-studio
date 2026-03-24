@@ -1,0 +1,83 @@
+{
+  "slug": "nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for",
+  "sourceType": "transcript",
+  "sourceUrl": "https://www.youtube.com/watch?v=7AO4w4Y_L24&t=1102s&pp=ygUMbmF0ZSBiIGpvbmVz",
+  "fetchedAt": "2026-03-24T17:02:36.316Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "Nvidia Just Open-Sourced What OpenAI Wants You to Pay Consultants For.",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/7AO4w4Y_L24/hqdefault.jpg"
+  },
+  "transcriptLineCount": 739,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 8,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 96,
+  "briefCount": 3,
+  "publishedIdeaIds": [
+    "segment-01",
+    "segment-28",
+    "segment-11"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-01",
+      "primaryIdeaId": "segment-01",
+      "thesis": "If you're telling me Nate, no, no, no, they're all building agents, I'm the first to agree with you.",
+      "slug": "nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit"
+    },
+    {
+      "id": "brief-segment-28",
+      "primaryIdeaId": "segment-28",
+      "thesis": "If you're trying to build aic systems, simple scales well.",
+      "slug": "nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil"
+    },
+    {
+      "id": "brief-segment-11",
+      "primaryIdeaId": "segment-11",
+      "thesis": "Jensen's larger moves here is to go from just managing the chip layer to move into the Agentic world because in his business he needs to go from just selling chips to scaling up to sell more of the value chain.",
+      "slug": "nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit",
+      "segmentId": "segment-01",
+      "title": "Nvidia's on one side with Nemo Claw, OpenAI and Enthropic are on the other side.",
+      "previewPath": "/carousel/nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit",
+      "carouselPath": "carousels/nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit/carousel.md"
+    },
+    {
+      "slug": "nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil",
+      "segmentId": "segment-28",
+      "title": "If you're trying to build aic systems, simple scales well.",
+      "previewPath": "/carousel/nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil",
+      "carouselPath": "carousels/nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil/carousel.md"
+    },
+    {
+      "slug": "nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo",
+      "segmentId": "segment-11",
+      "title": "AI operating models are getting stale faster than most teams realize.",
+      "previewPath": "/carousel/nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo",
+      "carouselPath": "carousels/nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for/source.json",
+    "sources/nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for/raw-transcript.md",
+    "sources/nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for/clean-transcript.md",
+    "sources/nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for/segments.json",
+    "sources/nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for/ideas.json",
+    "sources/nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for/briefs.json",
+    "sources/nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for/summary.md",
+    "carousels/nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit/carousel.md",
+    "carousels/nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil/carousel.md",
+    "carousels/nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo/carousel.md",
+    "carousels/index.json"
+  ]
+}

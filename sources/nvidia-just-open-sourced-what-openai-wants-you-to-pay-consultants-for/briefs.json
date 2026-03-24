@@ -1,0 +1,53 @@
+[
+  {
+    "id": "brief-segment-01",
+    "primaryIdeaId": "segment-01",
+    "supportingIdeaIds": [],
+    "thesis": "If you're telling me Nate, no, no, no, they're all building agents, I'm the first to agree with you.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Nvidia's on one side with Nemo Claw, OpenAI and Enthropic are on the other side.",
+    "supportPoints": [
+      "OpenAI and Enthropic are on the other side.",
+      "I'm the first to agree with you."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-28",
+      "brief-segment-11"
+    ],
+    "carouselSlug": "nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit"
+  },
+  {
+    "id": "brief-segment-28",
+    "primaryIdeaId": "segment-28",
+    "supportingIdeaIds": [],
+    "thesis": "If you're trying to build aic systems, simple scales well.",
+    "audience": "Audience: product, design, and engineering leaders figuring out where AI changes the work.",
+    "whyItMatters": "Simple scales better than complex.",
+    "supportPoints": [
+      "If you're trying to build aic systems",
+      "I would add there's probably a correlary here.",
+      "this is something that may have shifted with agentic engineering because we did find for a while if we were writing algorithms that there were times at"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-11"
+    ],
+    "carouselSlug": "nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil"
+  },
+  {
+    "id": "brief-segment-11",
+    "primaryIdeaId": "segment-11",
+    "supportingIdeaIds": [],
+    "thesis": "Jensen's larger moves here is to go from just managing the chip layer to move into the Agentic world because in his business he needs to go from just selling chips to scaling up to sell more of the value chain.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "If your mental model is stale, you redesign the wrong part of the workflow.",
+    "supportPoints": [
+      "he's convinced Agentic is a big piece of it and hence Nemoclaw."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-28"
+    ],
+    "carouselSlug": "nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo"
+  }
+]
