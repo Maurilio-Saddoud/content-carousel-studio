@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { buildPagesFromArgv } from './build-pages'
-import { ingestYoutubeFromArgv, rebuildCarouselsFromSourceArgv } from './ingest-youtube'
+import { ingestYoutubeFromArgv, rebuildCarouselsFromSourceArgv, syncSourceSummaryFromArgv } from './ingest-youtube'
 import { renderAllFromArgv } from './render-all'
 import { renderCarouselFromArgv } from './render-carousel'
 import { runSelfTestFromArgv } from './self-test'
@@ -32,6 +32,9 @@ export async function runCli(argv: string[] = process.argv.slice(2)) {
     case 'render-all':
       await renderAllFromArgv(rest)
       return
+    case 'sync-summary':
+      await syncSourceSummaryFromArgv(rest)
+      return
     case 'build-pages':
       await buildPagesFromArgv(rest)
       return
@@ -51,7 +54,11 @@ Commands:
   render <slug>         Render one carousel preview route to PNG files
   render-all            Render PNG files for every carousel in the directory
   rebuild-source <slug> Rebuild published carousels from an existing local source package
+  sync-summary <slug>   Regenerate summary.md from source.json + ideas.json + briefs.json
+                        Add --repo to resync every source summary in one pass
   self-test <slug>      Audit one source package for drift, weak titles, duplicates, and stale artifacts
+                        Use --repo for one repo-wide duplicate/stale-artifact sweep, including stale .next route residue
+                        Add --prune-stale to remove repo-wide stale carousel/export/pages dirs before auditing
   build-pages           Build the static site and PNG export bundle for Pages
   help                  Show this help
 
@@ -59,7 +66,10 @@ Examples:
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID --slug my-topic
   content-carousel rebuild-source my-topic --max-segments 8
+  content-carousel sync-summary my-topic
+  content-carousel sync-summary --repo
   content-carousel self-test my-topic
+  content-carousel self-test --repo
   content-carousel render ai-memory-wall
   content-carousel build-pages
 `)

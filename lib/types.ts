@@ -16,6 +16,7 @@ export type CarouselDirectoryItem = {
   slug: string
   title: string
   description: string
+  caption?: string
   sourceType: 'transcript' | 'notes' | 'custom'
   aspectRatio: 'portrait'
   updatedAt: string

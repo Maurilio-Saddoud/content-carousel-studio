@@ -12,16 +12,487 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/b7IS4C9QALc/hqdefault.jpg"
   },
   "transcriptLineCount": 752,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
+  "ideaCount": 87,
+  "briefCount": 6,
+  "publishedIdeaIds": [
+    "segment-01",
+    "segment-05",
+    "segment-16",
+    "segment-50",
+    "segment-20",
+    "segment-29"
+  ],
   "ideaRule": {
     "publishLimit": 8,
     "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
   },
-  "ideaCount": 97,
-  "briefCount": 0,
-  "publishedIdeaIds": [],
-  "briefs": [],
-  "carousels": [],
+  "briefs": [
+    {
+      "id": "brief-segment-01",
+      "primaryIdeaId": "segment-01",
+      "thesis": "Open Claw is the most consequential meto moment in the history of AI all the way since Chad GPT which in the history of AI is a long time",
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-01-00-00-00-open-claw-is-the-most-co"
+    },
+    {
+      "id": "brief-segment-05",
+      "primaryIdeaId": "segment-05",
+      "thesis": "Even Lovable, which was the most copied product of 2025 in AI, is now becoming the copier by trying to launch something like OpenClaw.",
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-05-00-01-14-nvidia-built-nemo-claw-a"
+    },
+    {
+      "id": "brief-segment-16",
+      "primaryIdeaId": "segment-16",
+      "thesis": "You can plug in most of the modules to OpenClaw.",
+      "slug": "i-mapped-where-every-ai-agent-actual--segment-16-00-05-07-open-claw-runs-locally"
+    },
+    {
+      "id": "brief-segment-50",
+      "primaryIdeaId": "segment-50",
+      "thesis": "You can let Claude browse for you on your computer",
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-50-00-14-47-you-can-let-claude-make-"
+    },
+    {
+      "id": "brief-segment-20",
+      "primaryIdeaId": "segment-20",
+      "thesis": "Similarly, you shouldn't have to pick an LLM that's only open source.",
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-20-00-06-07-similarly-you-shouldn-t-"
+    },
+    {
+      "id": "brief-segment-29",
+      "primaryIdeaId": "segment-29",
+      "thesis": "You have to trust the way they'll evolve the product.",
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-29-00-08-33-you-have-to-trust-perple"
+    }
+  ],
+  "droppedBriefs": [
+    {
+      "id": "brief-segment-56",
+      "primaryIdeaId": "segment-56",
+      "thesis": "They decided to announce they were expanding beyond building websites and they were now more of an everything tool for complex execution.",
+      "focusScore": 0.029937500000000002,
+      "overlapWithEarlierBriefs": 0,
+      "dropReasons": [
+        "focus 0.030 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-64",
+      "primaryIdeaId": "segment-64",
+      "thesis": "Those are recipes for product death in 2026.",
+      "focusScore": 0,
+      "overlapWithEarlierBriefs": 0,
+      "dropReasons": [
+        "focus 0.000 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-35",
+      "primaryIdeaId": "segment-35",
+      "thesis": "At least that's a clear yes no rationale and I think that we can move on.",
+      "focusScore": 0.04326470588235294,
+      "overlapWithEarlierBriefs": 0,
+      "dropReasons": [
+        "focus 0.043 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-06",
+      "primaryIdeaId": "segment-06",
+      "thesis": "Open Fang pitched itself as an agent operating system.",
+      "focusScore": 0.034643939393939394,
+      "overlapWithEarlierBriefs": 0.0684931506849315,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.035 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-39",
+      "primaryIdeaId": "segment-39",
+      "thesis": "Part of what he wants is people who are spending time on agents spending time in the meta ecosystem.",
+      "focusScore": 0.06361872909698997,
+      "overlapWithEarlierBriefs": 0.014925373134328358,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.064 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-23",
+      "primaryIdeaId": "segment-23",
+      "thesis": "As we've discussed, 250,000 users, they have opinions.",
+      "focusScore": 0.008333333333333333,
+      "overlapWithEarlierBriefs": 0.029850746268656716,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.008 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-83",
+      "primaryIdeaId": "segment-83",
+      "thesis": "The one thing those 250,000 GitHub stars for OpenClaw assure me of is that this is not going anywhere.",
+      "focusScore": 0,
+      "overlapWithEarlierBriefs": 0.038461538461538464,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.000 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-24",
+      "primaryIdeaId": "segment-24",
+      "thesis": "You want to control where the model lives.",
+      "focusScore": 0.07298611111111111,
+      "overlapWithEarlierBriefs": 0,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.073 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-08",
+      "primaryIdeaId": "segment-08",
+      "thesis": "Like OpenClaw is not something that is easy to install.",
+      "focusScore": 0.08547747747747747,
+      "overlapWithEarlierBriefs": 0.10810810810810811,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.085 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-46",
+      "primaryIdeaId": "segment-46",
+      "thesis": "You're not managing multiple conversations.",
+      "focusScore": 0.03319298245614035,
+      "overlapWithEarlierBriefs": 0.015873015873015872,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.033 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-28",
+      "primaryIdeaId": "segment-28",
+      "thesis": "Perplexity says we'll take that weight off you.",
+      "focusScore": 0.03443137254901961,
+      "overlapWithEarlierBriefs": 0.05084745762711865,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.034 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-49",
+      "primaryIdeaId": "segment-49",
+      "thesis": "Please trust us and you can get what you want done.",
+      "focusScore": 0.11994444444444445,
+      "overlapWithEarlierBriefs": 0,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.120 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-02",
+      "primaryIdeaId": "segment-02",
+      "thesis": "The real story is that every major company responding to Open Claw has actually made a different bet.",
+      "focusScore": 0.09202293202293202,
+      "overlapWithEarlierBriefs": 0.18840579710144928,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.092 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-77",
+      "primaryIdeaId": "segment-77",
+      "thesis": "Everyone else is playing on this graph that openclaw defined and said we are up and to the right.",
+      "focusScore": 0.060925925925925925,
+      "overlapWithEarlierBriefs": 0.02857142857142857,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.061 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-66",
+      "primaryIdeaId": "segment-66",
+      "thesis": "Number one, ask yourself where it runs.",
+      "focusScore": 0.012903225806451613,
+      "overlapWithEarlierBriefs": 0.013333333333333334,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.013 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-12",
+      "primaryIdeaId": "segment-12",
+      "thesis": "It determines the quality of the work your agent can do.",
+      "focusScore": 0.07542424242424244,
+      "overlapWithEarlierBriefs": 0.046875,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.075 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-10",
+      "primaryIdeaId": "segment-10",
+      "thesis": "Let's actually talk about what are the axes that matter in the open claw universe",
+      "focusScore": 0.009090909090909092,
+      "overlapWithEarlierBriefs": 0.06349206349206349,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.009 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-07",
+      "primaryIdeaId": "segment-07",
+      "thesis": "The original is messy and it's powerful and it's big and it's precisely",
+      "focusScore": 0,
+      "overlapWithEarlierBriefs": 0.075,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.000 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-57",
+      "primaryIdeaId": "segment-57",
+      "thesis": "Life comes at you fast in the world of AI.",
+      "focusScore": 0.008695652173913044,
+      "overlapWithEarlierBriefs": 0.030303030303030304,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.009 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-11",
+      "primaryIdeaId": "segment-11",
+      "thesis": "It tells you who's responsible when the agent deletes your inbox.",
+      "focusScore": 0.02759090909090909,
+      "overlapWithEarlierBriefs": 0.046875,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.028 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-67",
+      "primaryIdeaId": "segment-67",
+      "thesis": "Do I trust the company that is picking the model to pick the model on my best interest",
+      "focusScore": 0.0745,
+      "overlapWithEarlierBriefs": 0.014492753623188406,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.074 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-13",
+      "primaryIdeaId": "segment-13",
+      "thesis": "It determines whether you feel locked into a vendor.",
+      "focusScore": 0,
+      "overlapWithEarlierBriefs": 0.1724137931034483,
+      "overlapWithNearestBriefId": "brief-segment-16",
+      "dropReasons": [
+        "focus 0.000 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-36",
+      "primaryIdeaId": "segment-36",
+      "thesis": "Manis the original web-based tool is already a massive win right it was the fastest 0 to$und00 million company at the time and that was before Meta bought it.",
+      "focusScore": 0.061727272727272735,
+      "overlapWithEarlierBriefs": 0.05084745762711865,
+      "overlapWithNearestBriefId": "brief-segment-05",
+      "dropReasons": [
+        "focus 0.062 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-33",
+      "primaryIdeaId": "segment-33",
+      "thesis": "It's the thing for them that's also not open claw.",
+      "focusScore": 0.037,
+      "overlapWithEarlierBriefs": 0.07936507936507936,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.037 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-47",
+      "primaryIdeaId": "segment-47",
+      "thesis": "You're not starting multiple instances with claude.",
+      "focusScore": 0.02266666666666667,
+      "overlapWithEarlierBriefs": 0.04054054054054054,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.023 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-73",
+      "primaryIdeaId": "segment-73",
+      "thesis": "You're trading that away for the enterprise to be able to manage its risk",
+      "focusScore": 0.11024725274725275,
+      "overlapWithEarlierBriefs": 0.017857142857142856,
+      "overlapWithNearestBriefId": "brief-segment-05",
+      "dropReasons": [
+        "focus 0.110 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-37",
+      "primaryIdeaId": "segment-37",
+      "thesis": "They're going to go for an internal tool that people can use to make ad creative automatically",
+      "focusScore": 0.019555555555555555,
+      "overlapWithEarlierBriefs": 0.058823529411764705,
+      "overlapWithNearestBriefId": "brief-segment-05",
+      "dropReasons": [
+        "focus 0.020 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-40",
+      "primaryIdeaId": "segment-40",
+      "thesis": "It doesn't mean he has to jump to monetization right away.",
+      "focusScore": 0.025,
+      "overlapWithEarlierBriefs": 0.046511627906976744,
+      "overlapWithNearestBriefId": "brief-segment-05",
+      "dropReasons": [
+        "focus 0.025 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-86",
+      "primaryIdeaId": "segment-86",
+      "thesis": "That is the lens we should be using to read and understand all of this agent news.",
+      "focusScore": 0.08918764568764569,
+      "overlapWithEarlierBriefs": 0.047619047619047616,
+      "overlapWithNearestBriefId": "brief-segment-50",
+      "dropReasons": [
+        "focus 0.089 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-41",
+      "primaryIdeaId": "segment-41",
+      "thesis": "Manis is unlike Perplexity not making an enterprise quality argument with this launch.",
+      "focusScore": 0.030181818181818185,
+      "overlapWithEarlierBriefs": 0.045454545454545456,
+      "overlapWithNearestBriefId": "brief-segment-05",
+      "dropReasons": [
+        "focus 0.030 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-59",
+      "primaryIdeaId": "segment-59",
+      "thesis": "Agents have gotten better and people have evolved what they want.",
+      "focusScore": 0.10600000000000001,
+      "overlapWithEarlierBriefs": 0.04,
+      "overlapWithNearestBriefId": "brief-segment-50",
+      "dropReasons": [
+        "focus 0.106 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-62",
+      "primaryIdeaId": "segment-62",
+      "thesis": "All of them are under pressure to collapse into a single conversational agent that handles all of it",
+      "focusScore": 0.0058823529411764705,
+      "overlapWithEarlierBriefs": 0.039473684210526314,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.006 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-09",
+      "primaryIdeaId": "segment-09",
+      "thesis": "he wants his mother to be able to use an OpenClaw style agent and OpenClaw itself is far too technical for his mom to use.",
+      "focusScore": 0.06474242424242424,
+      "overlapWithEarlierBriefs": 0.0547945205479452,
+      "overlapWithNearestBriefId": "brief-segment-01",
+      "dropReasons": [
+        "focus 0.065 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-78",
+      "primaryIdeaId": "segment-78",
+      "thesis": "Not everyone wants all that control.",
+      "focusScore": 0.02266666666666667,
+      "overlapWithEarlierBriefs": 0.02564102564102564,
+      "overlapWithNearestBriefId": "brief-segment-16",
+      "dropReasons": [
+        "focus 0.023 fell below focus threshold 0.140"
+      ]
+    },
+    {
+      "id": "brief-segment-85",
+      "primaryIdeaId": "segment-85",
+      "thesis": "Thousands of you ended up building Openrain because you decided that you wanted to control your data.",
+      "focusScore": 0.047619047619047616,
+      "overlapWithEarlierBriefs": 0.06666666666666667,
+      "overlapWithNearestBriefId": "brief-segment-50",
+      "dropReasons": [
+        "focus 0.048 fell below focus threshold 0.140"
+      ]
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-01-00-00-00-open-claw-is-the-most-co",
+      "segmentId": "segment-01",
+      "title": "Open Claw is the most consequential meto moment in the history of AI all the way since Chad GPT which in the history of AI is a long time",
+      "previewPath": "/carousel/i-mapped-where-every-ai-agent-actu--segment-01-00-00-00-open-claw-is-the-most-co",
+      "carouselPath": "carousels/i-mapped-where-every-ai-agent-actu--segment-01-00-00-00-open-claw-is-the-most-co/carousel.md"
+    },
+    {
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-05-00-01-14-nvidia-built-nemo-claw-a",
+      "segmentId": "segment-05",
+      "title": "The team needs a stronger handoff rule.",
+      "previewPath": "/carousel/i-mapped-where-every-ai-agent-actu--segment-05-00-01-14-nvidia-built-nemo-claw-a",
+      "carouselPath": "carousels/i-mapped-where-every-ai-agent-actu--segment-05-00-01-14-nvidia-built-nemo-claw-a/carousel.md"
+    },
+    {
+      "slug": "i-mapped-where-every-ai-agent-actual--segment-16-00-05-07-open-claw-runs-locally",
+      "segmentId": "segment-16",
+      "title": "Strong systems need explicit human decision gates.",
+      "previewPath": "/carousel/i-mapped-where-every-ai-agent-actual--segment-16-00-05-07-open-claw-runs-locally",
+      "carouselPath": "carousels/i-mapped-where-every-ai-agent-actual--segment-16-00-05-07-open-claw-runs-locally/carousel.md"
+    },
+    {
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-50-00-14-47-you-can-let-claude-make-",
+      "segmentId": "segment-50",
+      "title": "High-output teams need more disciplined supervision habits.",
+      "previewPath": "/carousel/i-mapped-where-every-ai-agent-actu--segment-50-00-14-47-you-can-let-claude-make-",
+      "carouselPath": "carousels/i-mapped-where-every-ai-agent-actu--segment-50-00-14-47-you-can-let-claude-make-/carousel.md"
+    },
+    {
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-20-00-06-07-similarly-you-shouldn-t-",
+      "segmentId": "segment-20",
+      "title": "Reliable automation needs sharper escalation rules.",
+      "previewPath": "/carousel/i-mapped-where-every-ai-agent-actu--segment-20-00-06-07-similarly-you-shouldn-t-",
+      "carouselPath": "carousels/i-mapped-where-every-ai-agent-actu--segment-20-00-06-07-similarly-you-shouldn-t-/carousel.md"
+    },
+    {
+      "slug": "i-mapped-where-every-ai-agent-actu--segment-29-00-08-33-you-have-to-trust-perple",
+      "segmentId": "segment-29",
+      "title": "Reliable automation needs a stronger handoff rule.",
+      "previewPath": "/carousel/i-mapped-where-every-ai-agent-actu--segment-29-00-08-33-you-have-to-trust-perple",
+      "carouselPath": "carousels/i-mapped-where-every-ai-agent-actu--segment-29-00-08-33-you-have-to-trust-perple/carousel.md"
+    }
+  ],
   "createdFiles": [
     "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/source.json",
     "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/raw-transcript.md",
@@ -30,6 +501,12 @@
     "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/ideas.json",
     "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/briefs.json",
     "sources/i-mapped-where-every-ai-agent-actually-sits-most-people-pick-wrong/summary.md",
+    "carousels/i-mapped-where-every-ai-agent-actu--segment-01-00-00-00-open-claw-is-the-most-co/carousel.md",
+    "carousels/i-mapped-where-every-ai-agent-actu--segment-05-00-01-14-nvidia-built-nemo-claw-a/carousel.md",
+    "carousels/i-mapped-where-every-ai-agent-actual--segment-16-00-05-07-open-claw-runs-locally/carousel.md",
+    "carousels/i-mapped-where-every-ai-agent-actu--segment-50-00-14-47-you-can-let-claude-make-/carousel.md",
+    "carousels/i-mapped-where-every-ai-agent-actu--segment-20-00-06-07-similarly-you-shouldn-t-/carousel.md",
+    "carousels/i-mapped-where-every-ai-agent-actu--segment-29-00-08-33-you-have-to-trust-perple/carousel.md",
     "carousels/index.json"
   ]
 }

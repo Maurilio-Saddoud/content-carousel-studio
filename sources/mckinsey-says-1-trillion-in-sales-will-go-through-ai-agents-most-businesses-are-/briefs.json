@@ -1,46 +1,82 @@
 [
   {
-    "id": "brief-segment-80",
-    "primaryIdeaId": "segment-80",
+    "id": "brief-segment-103",
+    "primaryIdeaId": "segment-103",
     "supportingIdeaIds": [
-      "segment-01",
-      "segment-100",
-      "segment-70"
+      "segment-102",
+      "segment-104",
+      "segment-101"
     ],
-    "thesis": "If you are waiting seeing, you are signing your own death warrant as a company because by the time you understand all of the elements of the Asian ecosystem and say we're ready, it will have passed you by and you will not be visible to most of the interactions customers have.",
+    "thesis": "They will structure their businesses and their data around agent attention.",
     "audience": "Audience: people using AI in real work, not just talking about it.",
-    "whyItMatters": "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
+    "whyItMatters": "Push to see if you can find what agent readability and writability they have.",
     "supportPoints": [
-      "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
-      "When OpenCloud went from a weekend project to 250ome thousand GitHub stars, it became what Jensen called the operating system of the future.",
-      "I make this happen?\" Well, I'm going to give you an exercise that will make you sweat a little bit.",
-      "Go to your top three competitors I want you to actually have a meaningful conversation with Claude or with Chad GPT I want you to see how far you can get on transacting with them."
+      "The companies that are going to win in this world are going to think about agent attention first.",
+      "You have all of this complex tribal knowledge that lived in marketing copy and now it's in data",
+      "I want you to start to benchmark."
     ],
     "distinctFromBriefIds": [
-      "brief-segment-45"
+      "brief-segment-80",
+      "brief-segment-45",
+      "brief-segment-01",
+      "brief-segment-100",
+      "brief-segment-70",
+      "brief-segment-63",
+      "brief-segment-24",
+      "brief-segment-23",
+      "brief-segment-25",
+      "brief-segment-41"
     ],
-    "carouselSlug": "mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s"
+    "carouselSlug": "mckinsey-says-1-trillion-in-sales--segment-103-00-27-05-they-will-structure-thei",
+    "diagnostics": {
+      "focusScore": 0.17344781144781146,
+      "overlapWithEarlierBriefs": 0,
+      "supportIdeaDistance": [
+        1,
+        1,
+        2
+      ]
+    }
   },
   {
-    "id": "brief-segment-45",
-    "primaryIdeaId": "segment-45",
+    "id": "brief-segment-63",
+    "primaryIdeaId": "segment-63",
     "supportingIdeaIds": [
-      "segment-01",
-      "segment-100",
-      "segment-70"
+      "segment-62",
+      "segment-64",
+      "segment-61"
     ],
-    "thesis": "We as humans have discovered it's really nice if we don't even have to go to clott JPT and we could just type into a little chat like WhatsApp, hey agent, can you shop for my running shoes that is 250,000 GitHub stars worth of customer validation?",
+    "thesis": "One wrong path is oh it will be agent readable writable",
     "audience": "Audience: people using AI in real work, not just talking about it.",
-    "whyItMatters": "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
+    "whyItMatters": "it's easy to say it's going to be agent readable writable and then take the wrong path.",
     "supportPoints": [
-      "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
-      "When OpenCloud went from a weekend project to 250ome thousand GitHub stars, it became what Jensen called the operating system of the future.",
-      "I make this happen?\" Well, I'm going to give you an exercise that will make you sweat a little bit.",
-      "Go to your top three competitors I want you to actually have a meaningful conversation with Claude or with Chad GPT I want you to see how far you can get on transacting with them."
+      "These are wrong ideas about how the agent readable writable future is going to work and I want to be clear about why they're wrong and what we need to do instead",
+      "An agent doesn't browse a list.",
+      "An agent doesn't browse a search results page.",
+      "These are real misconceptions I've heard execs talk about in the room with me."
     ],
     "distinctFromBriefIds": [
-      "brief-segment-80"
+      "brief-segment-80",
+      "brief-segment-45",
+      "brief-segment-01",
+      "brief-segment-100",
+      "brief-segment-70",
+      "brief-segment-103",
+      "brief-segment-24",
+      "brief-segment-23",
+      "brief-segment-25",
+      "brief-segment-41"
     ],
-    "carouselSlug": "mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov"
+    "carouselSlug": "mckinsey-says-1-trillion-in-sales-will-go--segment-63-00-16-50-no-no-no-no-no-no",
+    "diagnostics": {
+      "focusScore": 0.30790613553113555,
+      "overlapWithEarlierBriefs": 0.043478260869565216,
+      "overlapWithNearestBriefId": "brief-segment-103",
+      "supportIdeaDistance": [
+        1,
+        1,
+        2
+      ]
+    }
   }
 ]

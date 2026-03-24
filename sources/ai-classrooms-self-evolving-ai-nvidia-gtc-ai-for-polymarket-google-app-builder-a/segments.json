@@ -153,7 +153,7 @@
     "lineEnd": 1293,
     "wordCount": 65,
     "text": "on top of the LTX model. So right now it supports the latest LTX 2.3. If you scroll down a bit here it says that you do need a CUDA GPU with at least 24 GB of VRAM. 48 is recommended, but if you do have this, then here are the instructions on how to download and use this locally on your computer. The link",
-    "titleSuggestion": "48 is recommended,",
+    "titleSuggestion": "If you do have this",
     "hook": "If you scroll down a bit here it says that you do need a CUDA GPU with at least 24 GB of VRAM.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -298,8 +298,8 @@
     "lineEnd": 178,
     "wordCount": 57,
     "text": "Pinchbench and Claw Eval, which test its ability to do agentic workflows in like open claw scenarios, you can see that MIMO v2 Pro is really close to the performance of Opus 4.6, six, which is really impressive. So, here's an example of this 3D tower defense game that it has vibe coded autonomously. And as you",
-    "titleSuggestion": "Pinchbench and Claw Eval,",
-    "hook": "Pinchbench and Claw Eval,",
+    "titleSuggestion": "You can see that MIMO v2 Pro is really close to the performance of Opus 4.6",
+    "hook": "You can see that MIMO v2 Pro is really close to the performance of Opus 4.6",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
       "sounds grounded in lived or practical experience",
@@ -518,8 +518,8 @@
     "lineEnd": 776,
     "wordCount": 50,
     "text": "yet. So here's another really cool update from Nvidia called DLSS 5.0. This is Nvidia's next step toward what's called neural rendering where traditional 3D graphics and AI start to merge into a single system. You see, in a normal game, the 3D graphics engine renders every frame using geometry,",
-    "titleSuggestion": "You see, in a normal game, the 3D graphics engine renders every frame using geometry,",
-    "hook": "You see, in a normal game, the 3D graphics engine renders every frame using geometry,",
+    "titleSuggestion": "You see, in a normal game, the 3D graphics engine renders every frame using geometry",
+    "hook": "You see, in a normal game, the 3D graphics engine renders every frame using geometry",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -806,8 +806,8 @@
     "lineEnd": 1058,
     "wordCount": 48,
     "text": "achieved state-of-the-art results. Here they say that it's 40% better on interactive part segmentation than the prior state-of-the-art model and 15% better on full segmentation while only using 32% of the training data. So, not only is this more performant, but it's also a lot more efficient during",
-    "titleSuggestion": "Here they say that it's 40% better on interactive part segmentation than the prior state-of-the-art model and 15% better on full segmentation while only using 32% of the training data.",
-    "hook": "Here they say that it's 40% better on interactive part segmentation than the prior state-of-the-art model and 15% better on full segmentation while only using 32% of the training data.",
+    "titleSuggestion": "While only using 32% of the training data.",
+    "hook": "While only using 32% of the training data.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -1024,7 +1024,7 @@
     "lineEnd": 68,
     "wordCount": 54,
     "text": "but also the training code. So here's the entire data set that they used to train this. And then here's the training code. And then finally, here are the instructions on how to use it. Note that the total size of this is 42.2 GB, so you'll need a higherend GPU to run this.",
-    "titleSuggestion": "Note that the total size of this is 42.2 GB,",
+    "titleSuggestion": "Note that the total size of this is 42.2 GB",
     "hook": "Note that the total size of this is 42.2 GB, so you'll need a higherend GPU to run this.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -1204,8 +1204,8 @@
     "lineEnd": 1182,
     "wordCount": 51,
     "text": "authentication with fire store and firebase. Now, if you vibe code an app here, you can't really choose another provider, but the advantage of this is the agent would automatically set up everything for you. So, you don't need to go inside Firebase yourself and manually set things up. Anyways, if",
-    "titleSuggestion": "Now, if you vibe code an app here, you can't really choose another provider, but the advantage of this is the agent would automatically set up everything for you.",
-    "hook": "Now, if you vibe code an app here, you can't really choose another provider, but the advantage of this is the agent would automatically set up everything for you.",
+    "titleSuggestion": "You can't really choose another provider",
+    "hook": "You can't really choose another provider",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "has contrast/tension, which usually makes better post framing",
@@ -1563,8 +1563,8 @@
     "lineEnd": 800,
     "wordCount": 53,
     "text": "that look more photorealistic than what the game engine actually rendered while using far less compute. In other words, instead of drawing every pixel the hard way, the GPU starts predicting what the final image should look like. So, that's a ton of stuff, but those were the main highlights and announcements from",
-    "titleSuggestion": "In other words, instead of drawing every pixel the hard way, the GPU starts predicting what the final image should look like.",
-    "hook": "In other words, instead of drawing every pixel the hard way, the GPU starts predicting what the final image should look like.",
+    "titleSuggestion": "The GPU starts predicting what the final image should look like.",
+    "hook": "The GPU starts predicting what the final image should look like.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -1636,7 +1636,7 @@
     "lineEnd": 673,
     "wordCount": 52,
     "text": "crazy. And Nvidia claims these machines deliver the lowest cost per token ever because the whole stack from GPU to CPU to networking and storage is built as one vertically integrated supercomput. Now within the Vera Rubin platform is a really powerful component called the Gro 3 LPU which stands for language",
-    "titleSuggestion": "Now within the Vera Rubin platform is a really powerful component called the Gro 3 LPU which stands for language",
+    "titleSuggestion": "Nvidia claims these machines deliver the lowest cost per token ever",
     "hook": "Now within the Vera Rubin platform is a really powerful component called the Gro 3 LPU which stands for language",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
@@ -1742,7 +1742,7 @@
     "lineEnd": 1277,
     "wordCount": 50,
     "text": "noise. Um, >> now if you compare this with some other leading video generators, including Cling 2.6 Pro, I'm curious why they didn't use Cling 3, which is already out. You can see that in terms of voice similarity, environment sounds, and also speech manners, ID Laura wins most of",
-    "titleSuggestion": ">> now if you compare this with some other leading video generators,",
+    "titleSuggestion": "If you compare this with some other leading video generators",
     "hook": "You can see that in terms of voice similarity, environment sounds, and also speech manners, ID Laura wins most of",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -1885,7 +1885,7 @@
     "lineEnd": 1042,
     "wordCount": 61,
     "text": "here's an example where we can choose to select or deselect various parts just by clicking it. And what it does is it outputs the same 3D model but with the parts clearly segmented as a GB file. Now instead of just tediously clicking on each part one at a time, what you can also do is just upload a segmentation",
-    "titleSuggestion": "Now instead of just tediously clicking on each part one at a time,",
+    "titleSuggestion": "Now instead of just tediously clicking on each part one at a time",
     "hook": "Now instead of just tediously clicking on each part one at a time, what you can also do is just upload a segmentation",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2066,7 +2066,7 @@
     "lineEnd": 312,
     "wordCount": 49,
     "text": "learn and get better and not commit the same mistakes as before. So here it says, just talk to your agent as you normally would. Metaclaw turns every live conversation into a learning signal, enabling the agent to continuously improve. So specifically under the hood, it places your model",
-    "titleSuggestion": "Metaclaw turns every live conversation into a learning signal,",
+    "titleSuggestion": "Metaclaw turns every live conversation into a learning signal",
     "hook": "Metaclaw turns every live conversation into a learning signal, enabling the agent to continuously improve.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -2139,7 +2139,7 @@
     "lineEnd": 416,
     "wordCount": 48,
     "text": "magnets, and deploy landing pages, all without writing a single line of code yourself. You get 12 readytouse prompts to help you unlock Claude Code's full potential for marketing tasks. From researching competitors to writing email sequences that actually convert, use them to eliminate the guesswork and get",
-    "titleSuggestion": "From researching competitors to writing email sequences that actually convert,",
+    "titleSuggestion": "From researching competitors to writing email sequences that actually convert",
     "hook": "You get 12 readytouse prompts to help you unlock Claude Code's full potential for marketing tasks.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2389,7 +2389,7 @@
     "lineEnd": 665,
     "wordCount": 50,
     "text": "terabyte per second links allowing huge AI models to share data instantly. The system can easily do training, inference, and agentic workflows and other tasks at very low costs per token. In fact, Jensen says demand for these Blackwell and Vera Rubin systems could reach a trillion dollars, which is",
-    "titleSuggestion": "The system can easily do training,",
+    "titleSuggestion": "The system can easily do training",
     "hook": "The system can easily do training, inference, and agentic workflows and other tasks at very low costs per token.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
@@ -2641,7 +2641,7 @@
     "lineEnd": 1110,
     "wordCount": 57,
     "text": "this, it's basically an AI powered Figma, so you can just prompt it on what you want to design, and it can generate complete UI designs for multiple pages for your app or site. Now, I've already gone over Stitch several times on my channel, but this week, they've added even more cooler features. You can now",
-    "titleSuggestion": "I've already gone over Stitch several times on my channel,",
+    "titleSuggestion": "I've already gone over Stitch several times on my channel",
     "hook": "Now, I've already gone over Stitch several times on my channel, but this week, they've added even more cooler features.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -3035,7 +3035,7 @@
     "lineEnd": 513,
     "wordCount": 47,
     "text": "are some examples of AI videos that were generated with this model. Notice that all the buildings and the streets, everything resembles what it looks like in real life. Here it says this world model can generate videos over multicometer trajectories without accumulating errors. So essentially this",
-    "titleSuggestion": "Notice that all the buildings and the streets,",
+    "titleSuggestion": "Everything resembles what it looks like in real life.",
     "hook": "Here it says this world model can generate videos over multicometer trajectories without accumulating errors.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -3357,8 +3357,8 @@
     "lineEnd": 1166,
     "wordCount": 56,
     "text": "you can also connect it to databases or payment processors and the agent will securely store your API credentials for you. For example, here is a fully functional multiplayer game where you need to guess the location of the other player via their photo which was pulled from Google Maps. So you can see you can",
-    "titleSuggestion": "For example, here is a fully functional multiplayer game where you need to guess the location of the other player via their photo which was pulled from Google Maps.",
-    "hook": "For example, here is a fully functional multiplayer game where you need to guess the location of the other player via their photo which was pulled from Google Maps.",
+    "titleSuggestion": "Here is a fully functional multiplayer game",
+    "hook": "Where you need to guess the location of the other player via their photo which was pulled from Google Maps.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
       "contains enough complete thoughts to turn into multiple slides"
@@ -3570,7 +3570,7 @@
     "lineEnd": 225,
     "wordCount": 59,
     "text": "autonomously operate a browser for you. So it can like analyze your screen and then decide on next steps or where to click next. Here's another example where we can get V2 Omni to autonomously upload a video on Tik Tok. So not only does it just upload the video, but it also detects like where to input the",
-    "titleSuggestion": "Here's another example where we can get V2 Omni to autonomously upload a video on Tik Tok.",
+    "titleSuggestion": "Where we can get V2 Omni to autonomously upload a video on Tik Tok.",
     "hook": "Here's another example where we can get V2 Omni to autonomously upload a video on Tik Tok.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -3922,8 +3922,8 @@
     "lineEnd": 617,
     "wordCount": 54,
     "text": "outputs one if it has and if it has then it basically terminates the response early. Now, especially if you're using Open Claw or other agentic systems, which tend to keep yapping on and on, this Terminator add-on might be a good option to cut its responses early and reduce your costs. Now, unfortunately,",
-    "titleSuggestion": "Now, unfortunately,",
-    "hook": "Now, unfortunately,",
+    "titleSuggestion": "Now, unfortunately",
+    "hook": "Now, unfortunately",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
       "contains enough complete thoughts to turn into multiple slides"
@@ -4064,7 +4064,7 @@
     "wordCount": 50,
     "text": "feedback elements. So as he moves his hand, every robotic hand in the room mimics him in real time. The robotic hands perform complex individual finger movements showing that they aren't just simple grippers but possess humanlike degrees of freedom. And then similarly we have another hand demo. This time",
     "titleSuggestion": "The robotic hands perform complex individual finger movements showing that they aren't just simple grippers but possess humanlike degrees of freedom.",
-    "hook": "The robotic hands perform complex individual finger movements showing that they aren't just simple grippers but possess humanlike degrees of freedom.",
+    "hook": "The robotic hands perform complex individual finger movements showing that they aren't just simple grippers",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "sounds grounded in lived or practical experience",
@@ -4169,8 +4169,8 @@
     "lineEnd": 61,
     "wordCount": 37,
     "text": "they have released the code to this already. So if you click on this code button and you scroll down a bit here, you can see that they've released not only the inference code and the models,",
-    "titleSuggestion": "they have released the code to this already. So if you click on this code button and you scroll down a bit here, you can see that they've released not only the inference code and the models,",
-    "hook": "they have released the code to this already. So if you click on this code button and you scroll down a bit here, you can see that they've released not only the inference code and the models,",
+    "titleSuggestion": "they have released the code to this already. So if you click on this code button and you scroll down a bit here, you can see that they've released not only the inference code and the models",
+    "hook": "they have released the code to this already. So if you click on this code button and you scroll down a bit here, you can see that they've released not only the inference code and the models",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -5089,8 +5089,8 @@
     "lineEnd": 696,
     "wordCount": 48,
     "text": "high-speed links. The idea is that the Reuben GPUs will handle the training whereas these LPUs will handle the non-stop stream of prompts from users around the world and they say that this will ship in Q3 of this year. Now in addition to the Vera Rubin platform,",
-    "titleSuggestion": "Now in addition to the Vera Rubin platform,",
-    "hook": "Now in addition to the Vera Rubin platform,",
+    "titleSuggestion": "Now in addition to the Vera Rubin platform",
+    "hook": "Now in addition to the Vera Rubin platform",
     "whyItCouldWork": [
       "contains enough complete thoughts to turn into multiple slides"
     ],
@@ -5473,7 +5473,7 @@
     "lineEnd": 408,
     "wordCount": 41,
     "text": "prompts to ship campaigns fast by HubSpot. This bundle includes four workflows that are like a cheat code for building and deploying entire marketing campaigns from your terminal. You'll learn how to conduct competitor research, craft differentiated positioning, build interactive lead",
-    "titleSuggestion": "You'll learn how to conduct competitor research,",
+    "titleSuggestion": "You'll learn how to conduct competitor research",
     "hook": "You'll learn how to conduct competitor research, craft differentiated positioning, build interactive lead",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
@@ -5508,7 +5508,7 @@
     "lineEnd": 489,
     "wordCount": 39,
     "text": "And the font also looks pretty accurate. The awesome thing is at the top of the page, they've already released the code to this. So if you click on this button, it takes you to their GitHub repo. And",
-    "titleSuggestion": "The awesome thing is at the top of the page,",
+    "titleSuggestion": "The awesome thing is at the top of the page",
     "hook": "The awesome thing is at the top of the page, they've already released the code to this.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -5543,8 +5543,8 @@
     "lineEnd": 1094,
     "wordCount": 29,
     "text": "the code is coming soon. In fact, not only are they going to release the model, but they're also going to release the training data set and training code.",
-    "titleSuggestion": "In fact, not only are they going to release the model, but they're also going to release the training data set and training code.",
-    "hook": "In fact, not only are they going to release the model, but they're also going to release the training data set and training code.",
+    "titleSuggestion": "Not only are they going to release the model",
+    "hook": "Not only are they going to release the model",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic"
@@ -5783,7 +5783,7 @@
     "lineEnd": 476,
     "wordCount": 37,
     "text": "looks like the input images. Or in addition, you can also enter this glyph or font and display that on this paper. And indeed, it's able to actually follow the font that you input very well. Or",
-    "titleSuggestion": "Or in addition, you can also enter this glyph or font and display that on this paper.",
+    "titleSuggestion": "You can also enter this glyph or font and display that on this paper.",
     "hook": "Or in addition, you can also enter this glyph or font and display that on this paper.",
     "whyItCouldWork": [
       "sounds grounded in lived or practical experience",
@@ -5888,8 +5888,8 @@
     "lineEnd": 1034,
     "wordCount": 28,
     "text": "separate pieces. So, how this works is it would take a 3D object and you would click on various parts and it would automatically segment that part. So,",
-    "titleSuggestion": "separate pieces. So, how this works is it would take a 3D object and you would click on various parts and it would automatically segment that part. So,",
-    "hook": "separate pieces. So, how this works is it would take a 3D object and you would click on various parts and it would automatically segment that part. So,",
+    "titleSuggestion": "separate pieces. So, how this works is it would take a 3D object and you would click on various parts and it would automatically segment that part. So",
+    "hook": "separate pieces. So, how this works is it would take a 3D object and you would click on various parts and it would automatically segment that part. So",
     "whyItCouldWork": [
       "is structurally clean enough to be edited into a tighter post"
     ],

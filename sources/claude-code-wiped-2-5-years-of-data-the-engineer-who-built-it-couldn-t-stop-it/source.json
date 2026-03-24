@@ -12,113 +12,29 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/8lwnJZy4cO0/hqdefault.jpg"
   },
   "transcriptLineCount": 622,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
+  "ideaCount": 81,
+  "briefCount": 1,
+  "publishedIdeaIds": [
+    "segment-69"
+  ],
   "ideaRule": {
     "publishLimit": 8,
     "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
   },
-  "ideaCount": 81,
-  "briefCount": 7,
-  "publishedIdeaIds": [
-    "segment-11",
-    "segment-26",
-    "segment-30",
-    "segment-59",
-    "segment-01",
-    "segment-05",
-    "segment-69"
-  ],
   "briefs": [
-    {
-      "id": "brief-segment-11",
-      "primaryIdeaId": "segment-11",
-      "thesis": "You have to think like that.",
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t"
-    },
-    {
-      "id": "brief-segment-26",
-      "primaryIdeaId": "segment-26",
-      "thesis": "Now, they were able to recover.",
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re"
-    },
-    {
-      "id": "brief-segment-30",
-      "primaryIdeaId": "segment-30",
-      "thesis": "The simplest fix is to start fresh.",
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s"
-    },
-    {
-      "id": "brief-segment-59",
-      "primaryIdeaId": "segment-59",
-      "thesis": "If your app doesn't handle these gracefully, your customer sees like a white page or a just a crash screen.",
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti"
-    },
-    {
-      "id": "brief-segment-01",
-      "primaryIdeaId": "segment-01",
-      "thesis": "Vibe coders everywhere are hitting a wall.",
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a"
-    },
-    {
-      "id": "brief-segment-05",
-      "primaryIdeaId": "segment-05",
-      "thesis": "Maybe you have hours of work lost to a single bad change.",
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-"
-    },
     {
       "id": "brief-segment-69",
       "primaryIdeaId": "segment-69",
-      "thesis": "Now, I would advise you here to get deeper on technical details than you might think you need to.",
+      "thesis": "You should be telling that expectation to your agent",
       "slug": "claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re"
     }
   ],
   "carousels": [
     {
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t",
-      "segmentId": "segment-11",
-      "title": "You have to think like that.",
-      "previewPath": "/carousel/claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t",
-      "carouselPath": "carousels/claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t/carousel.md"
-    },
-    {
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re",
-      "segmentId": "segment-26",
-      "title": "Now, they were able to recover.",
-      "previewPath": "/carousel/claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re",
-      "carouselPath": "carousels/claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re/carousel.md"
-    },
-    {
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s",
-      "segmentId": "segment-30",
-      "title": "The simplest fix is to start fresh.",
-      "previewPath": "/carousel/claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s",
-      "carouselPath": "carousels/claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s/carousel.md"
-    },
-    {
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti",
-      "segmentId": "segment-59",
-      "title": "Tell your agent every time the app communicates with a server.",
-      "previewPath": "/carousel/claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti",
-      "carouselPath": "carousels/claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti/carousel.md"
-    },
-    {
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a",
-      "segmentId": "segment-01",
-      "title": "Vibe coders everywhere are hitting a wall.",
-      "previewPath": "/carousel/claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a",
-      "carouselPath": "carousels/claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a/carousel.md"
-    },
-    {
-      "slug": "claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-",
-      "segmentId": "segment-05",
-      "title": "Maybe you have hours of work lost to a single bad change.",
-      "previewPath": "/carousel/claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-",
-      "carouselPath": "carousels/claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-/carousel.md"
-    },
-    {
       "slug": "claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re",
       "segmentId": "segment-69",
-      "title": "This is a video about the skill of learning to manage the agent that codes for you.",
+      "title": "Clear fallback rules prevent expensive automation drift.",
       "previewPath": "/carousel/claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re",
       "carouselPath": "carousels/claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re/carousel.md"
     }
@@ -131,12 +47,6 @@
     "sources/claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it/ideas.json",
     "sources/claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it/briefs.json",
     "sources/claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it/summary.md",
-    "carousels/claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t/carousel.md",
-    "carousels/claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re/carousel.md",
-    "carousels/claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s/carousel.md",
-    "carousels/claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti/carousel.md",
-    "carousels/claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a/carousel.md",
-    "carousels/claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-/carousel.md",
     "carousels/claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re/carousel.md",
     "carousels/index.json"
   ]

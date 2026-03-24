@@ -1,100 +1,297 @@
 # content-carousel-studio
 
-Next.js-powered carousel studio for transcript-driven social content, with a markdown-first publish layer.
+This repo is the **actual transcript-to-carousel system** Maurilio and I built and iterated in production.
 
-## CLI
+It is not just a Next.js preview app.
+It is a full workflow pipeline for:
 
-The repo now exposes a first-class CLI:
+- ingesting YouTube videos
+- extracting transcript/source artifacts
+- ranking and filtering candidate ideas
+- turning those ideas into **post-ready Twitter/X-style carousels**
+- previewing them in Next.js
+- exporting slide PNGs
+- publishing everything to GitHub Pages
 
-```bash
-./content-carousel <command>
-```
+If I ever disappear, this README is meant to let another operator recreate the workflow with minimal guesswork.
 
-Primary commands:
+---
 
-```bash
-./content-carousel youtube <youtube-url>
-./content-carousel rebuild-source <source-slug>
-./content-carousel render <slug>
-./content-carousel render-all
-./content-carousel self-test <source-slug>
-./content-carousel build-pages
-```
+## What this system is supposed to do
 
-If you install or link the package as a binary, the same commands are available as `content-carousel ...`.
+Given a YouTube link, the intended workflow is:
 
-The existing `pnpm ingest:youtube`, `pnpm render`, `pnpm render:all`, and `pnpm build:pages` scripts still work. They now delegate to the same CLI entrypoint.
+1. ingest the video
+2. create a source package with transcript + ranked ideas + briefs
+3. generate draft carousels
+4. reject weak / overlapping / garbage ideas
+5. polish the survivors into publishable copy
+6. build the Next.js preview + PNG exports
+7. commit and push the batch
+8. wait for the GitHub Pages deploy to go green
+9. send the live preview links
 
-`./content-carousel rebuild-source <source-slug>` reuses the source package's stored publish limit by default, so a quick rebuild does not silently fan out from a curated 2-post package to the CLI fallback of 8 posts. You can still override it explicitly with `--max-segments`.
+That is the operating behavior we converged on.
 
-## What this repo does now
+---
 
-- ingest a YouTube video into source artifacts, ranked ideas, and published carousel markdown
-- author carousel copy in a single markdown file per carousel
-- preview every carousel locally in Next.js
-- export the site as a static GitHub Pages bundle
-- render every carousel slide to PNG files
-- publish both the live preview pages **and** PNG batches on GitHub Pages
+## Core repo idea
 
-So the repo stays Next-based, but the output is Pages-safe.
+The repo has **three layers**:
 
-## Important URL pattern
+### 1. Source packages
+Raw and semi-structured artifacts for each video.
 
-Once GitHub Pages is enabled for this repo, every carousel preview lives at:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/carousel/<slug>/
-```
-
-And every PNG batch lives at:
+Lives in:
 
 ```text
-https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/
+sources/<source-slug>/
 ```
 
-There is also a batch index page at:
+Typical files:
 
 ```text
-https://maurilio-saddoud.github.io/content-carousel-studio/exports/
+source.json
+raw-transcript.md
+clean-transcript.md
+segments.json
+ideas.json
+briefs.json
+summary.md
 ```
+
+### 2. Published carousel source of truth
+Human-editable markdown files for the carousels that actually matter.
+
+Lives in:
+
+```text
+carousels/<carousel-slug>/carousel.md
+```
+
+This markdown is the real source of truth for:
+
+- preview pages
+- export rendering
+- indexing
+- Pages deployment
+
+### 3. Rendered/public artifacts
+Generated site and image output.
+
+Lives in:
+
+```text
+public/exports/<slug>/
+out/
+```
+
+---
 
 ## Repo structure
 
-- `app/` — Next.js App Router pages
-- `components/` — reusable carousel presentation components
-- `carousels/` — one folder per published carousel, with `carousel.md` as the source of truth
-- `sources/` — raw source material, ranked transcript segments, candidate ideas, and ingest summaries
-- `lib/` — shared data loaders and types
-- `scripts/` — ingest, Pages build, and PNG rendering scripts
-- `public/exports/` — generated PNG batches + manifests + simple download pages
-- `out/` — static export produced for GitHub Pages deployment
+```text
+app/                    Next.js App Router pages
+components/             UI components for carousel rendering
+carousels/              Published carousel markdown (source of truth)
+sources/                Per-video source packages
+lib/                    Loaders, types, indexing helpers
+scripts/                Ingest/build/render/self-test pipeline code
+public/exports/         Generated slide PNG batches + gallery pages
+out/                    Static export used by GitHub Pages
+bin/content-carousel.js CLI entrypoint
+content-carousel        local convenience wrapper
+```
 
-## Install
+---
+
+## The most important commands
+
+Always run from the repo root.
+
+### Ingest a YouTube video
+
+```bash
+./content-carousel youtube '<youtube-url>'
+```
+
+Optional:
+
+```bash
+./content-carousel youtube '<youtube-url>' --slug <source-slug>
+./content-carousel youtube '<youtube-url>' --max-segments 6
+```
+
+### Rebuild an existing source package
+
+```bash
+./content-carousel rebuild-source <source-slug>
+```
+
+`rebuild-source` now prefers `sources/<slug>/raw-transcript.md` as the canonical upstream input for segmentation refresh. In other words: if segmentation heuristics change, a rebuild will re-cut/rerank `segments.json` from the stored transcript instead of blindly trusting an old segment snapshot.
+
+### Render one carousel to PNGs
+
+```bash
+./content-carousel render <slug>
+```
+
+### Render all carousels to PNGs
+
+```bash
+./content-carousel render-all
+```
+
+### Self-test a source package
+
+```bash
+./content-carousel self-test <source-slug>
+```
+
+This now audits more than titles/exports. It also checks whether `summary.md` drifted from the real source artifacts (`source.json`, `ideas.json`, `briefs.json`), so a stale narrative file cannot quietly pretend a source still has published ideas when the canonical package no longer does.
+
+When a source intentionally gates down to zero carousels, `self-test` now includes the top dropped brief attempts from `source.json` (thesis + focus/overlap reason) so a fresh agent can see *why* it gated out without rerunning the whole brief builder first.
+
+### Self-test the whole repo
+
+```bash
+./content-carousel self-test --repo
+```
+
+Repo mode now also checks for stale local Next route artifacts under `.next/server/app/carousel/*`. If those show up while canonical source packages are already clean, the fix is usually just a fresh:
+
+```bash
+./content-carousel build-pages
+```
+
+Also: duplicate slide-title warnings are now resilient even when a thin brief burns through the normal fallback pools. The generator keeps a final reserve title path so one weak carousel cannot silently collapse back into the exact same generic heading on every middle slide.
+
+### Resync derived source summaries
+
+Useful when `self-test` catches `summary.md` drift but the canonical package files (`source.json`, `ideas.json`, `briefs.json`) are already correct.
+
+```bash
+./content-carousel sync-summary <source-slug>
+./content-carousel sync-summary --repo
+```
+
+### Prune stale repo artifacts, then self-test again
+
+Useful when a source package now publishes zero carousels but old markdown/export/Pages directories are still hanging around.
+
+```bash
+./content-carousel self-test --repo --prune-stale
+```
+
+### Build the Pages artifact + exports
+
+```bash
+./content-carousel build-pages
+```
+
+`build-pages` now starts each Next build from a clean `.next/` + `out/` state so stale manifest references from previously published carousels do not leak into the staged Pages artifact after a source later gates down to zero outputs.
+
+---
+
+## Exact environment assumptions
+
+This project currently assumes:
+
+- Node + pnpm
+- Next.js static export workflow
+- Playwright installed for screenshot rendering
+- local shell access
+- GitHub repo + GitHub Pages configured
+
+Install dependencies:
 
 ```bash
 pnpm install
 ```
 
+Useful scripts from `package.json`:
+
+```bash
+pnpm dev
+pnpm lint
+pnpm build:pages
+pnpm ingest:youtube '<youtube-url>'
+```
+
+---
+
+## Local development workflow
+
+### Start preview app
+
+```bash
+pnpm dev
+```
+
+Open:
+
+- `http://localhost:3000/`
+- `http://localhost:3000/carousel/<slug>`
+
+### Build static Pages bundle
+
+```bash
+./content-carousel build-pages
+```
+
+This does the important full pass:
+
+1. build static Next.js site
+2. serve it locally for rendering
+3. render PNGs for carousels
+4. write export manifests/gallery pages
+5. rebuild static export with those assets included
+
+---
+
+## Public URL patterns
+
+Preview page:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/carousel/<slug>/
+```
+
+Export gallery:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/
+```
+
+Direct PNG example:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/01.png
+```
+
+Global export index:
+
+```text
+https://maurilio-saddoud.github.io/content-carousel-studio/exports/
+```
+
+---
+
 ## Markdown carousel format
 
-The content layer is now **markdown-first**.
-
-Each carousel lives in:
+Each published carousel lives at:
 
 ```text
 carousels/<slug>/carousel.md
 ```
 
-Format:
+Structure:
 
-1. YAML frontmatter for carousel-level metadata
-2. slide sections separated by a line containing exactly `---`
-3. each slide starts with an optional `eyebrow: ...` line
-4. the slide title is the first markdown heading
-5. the rest of the slide is markdown-ish body copy
-6. do not add `variant:` lines — they are intentionally unsupported now; the markdown itself should drive the slide
-   - paragraphs work out of the box
-   - simple unordered lists (`- item`) also render
+1. YAML frontmatter
+2. slides separated by a line containing exactly `---`
+3. optional `eyebrow: ...`
+4. slide title as first markdown heading
+5. body copy below
 
 Example:
 
@@ -114,251 +311,392 @@ theme:
 ---
 
 eyebrow: AI DEPLOYMENTS
-
 # AI agents are getting better.
 
 The people deploying them are not.
 
-The capability curve is real.
-
 ---
 
 eyebrow: THE REAL WALL
-
 # The wall isn’t just intelligence.
 
 It’s memory.
-
-- Agents can do impressive work in short bursts.
-- Real work has continuity, history, and trade-offs.
 ```
 
-### Notes on parsing
+---
 
-- The loader prefers `carousel.md`.
-- If a carousel still only has `carousel.json`, the app falls back to that legacy format.
-- The markdown body is intentionally simple right now so it stays human-editable and predictable in screenshots.
+## The workflow behavior we actually learned
 
-## Workflow 1: ingest a YouTube video
+This section matters more than the mechanics.
+It captures the real operating rules we discovered while using the system.
 
-Basic usage:
+### 1. A YouTube link is an implicit request to run the pipeline
+Do **not** treat a supplied video as just “context” unless Maurilio says otherwise.
 
-```bash
-./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID'
-```
+Default assumption:
 
-Optional explicit slug:
+**YouTube link → generate the batch.**
 
-```bash
-./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --slug my-topic-slug
-```
+### 2. The real deliverable is not “segments generated”
+Raw segments are not the finish line.
+The expected output is:
 
-Optional segment limit:
+- post-ready carousels
+- Pages previews
+- working links after deploy
 
-```bash
-./content-carousel youtube 'https://www.youtube.com/watch?v=VIDEO_ID' --max-segments 6
-```
+If the system says “7 segments generated” but the copy is still transcript sludge, the job is **not done**.
 
-### What ingest creates
+### 3. Preserve old outputs by default
+Do **not** clean old carousel outputs or preview batches unless Maurilio explicitly asks for a specific cleanup.
 
-One command now does the practical first pass:
+### 4. Do not lie about live links
+A local build is not a live deploy.
+Only send Pages links as “live” after the GitHub Actions Pages deployment is actually green.
 
-1. fetches the official YouTube transcript first
-2. falls back to local Whisper transcription if captions are missing
-3. writes source artifacts into `sources/<source-slug>/`
-4. ranks transcript segments into idea candidates
-5. rejects weak or overlapping ideas
-6. promotes the strongest surviving ideas into distinct editorial briefs
-7. publishes up to `--max-segments` briefs as markdown carousels
-8. removes superseded carousel/export artifacts from earlier ingests of the same source
-9. refreshes `carousels/index.json` as a generated compatibility artifact
+### 5. Do not force everything into 5 slides
+The system historically leaned on 5-slide drafts.
+That is no longer a hard rule.
 
-Created files look like this:
+Current rule:
+
+- use more or fewer slides when the idea needs it
+- optimize for strongest post structure
+- do not worship fixed slide count
+
+### 6. Reject garbage instead of polishing garbage
+Specificity alone is not enough.
+
+Reject by default if the source angle is mostly:
+
+- repo tour
+- install/setup walkthrough
+- hardware/spec dump
+- “for your reference” narration
+- dead informational sludge with no payoff
+
+### 7. Avoid overlapping carousels
+Maurilio does **not** want five paraphrases of the same point.
+Prefer a **small set of distinct theses** over maximal batch size.
+
+### 8. Source from the whole transcript when needed
+This was a major correction.
+
+The system should **not** assume every carousel must come from one clean 15-second chunk.
+If segment-level selection is weak, overlapping, or yields zero good outputs:
+
+- step back
+- read the whole transcript
+- identify the real high-level themes
+- create a small set of non-overlapping big-picture carousels
+
+This is critical.
+
+The best carousels sometimes come from the **whole-video thesis**, not from one tidy transcript window.
+
+---
+
+## Current editorial heuristics
+
+When evaluating whether an idea should become a carousel, use this hierarchy:
+
+### Strong signals
+
+- sharp thesis
+- strong contrast or tension
+- practical payoff
+- distinct strategic angle
+- clean non-overlap with sibling carousels
+- can be stated in one sentence without transcript goo
+
+### Weak signals
+
+- specific numbers without payoff
+- fragmented transcript chunk
+- product demo narration
+- “another angle” that is really the same thesis again
+- good sentence, bad post
+
+### Kill criteria
+
+Kill the idea if it is mostly:
+
+- fragmentary
+- mushy
+- recap without viewpoint
+- repetitive with an already better carousel
+- impossible to sharpen into a clear thesis quickly
+
+---
+
+## How the pipeline currently works
+
+### Ingest stage
+Implemented mainly in:
 
 ```text
-sources/<source-slug>/source.json
-sources/<source-slug>/raw-transcript.md
-sources/<source-slug>/clean-transcript.md
-sources/<source-slug>/segments.json
+scripts/ingest-youtube.ts
+```
+
+What it does:
+
+- get official transcript first
+- fallback to Whisper-style transcription if needed
+- segment transcript
+- rank candidate ideas
+- reject weak ideas
+- build briefs
+- generate markdown carousels for surviving ideas
+
+Important brief-selection behavior:
+
+- brief generation should inspect the full viable idea pool (`status !== rejected`), not only the first `published` slots from segment ranking
+- reason: a top-ranked segment can still fail overlap/focus gating, and the pipeline should keep looking for later cleaner territory instead of concluding the whole source is empty too early
+- if a source still lands on `INFO [no-publishable-briefs]` after that, the remaining bottleneck is upstream claim/segment quality, not brief-seed starvation
+- dropped-brief diagnostics now also flag obvious segment-shape residue (`primary segment starts mid-thought` / `ends mid-thought`). If those repeat, stop fiddling with Pages/export/title fallout and inspect chunk boundaries first.
+
+### Important limitation
+The automated segment picker is useful, but it is **not perfect**.
+It can:
+
+- over-trust transcript fragments
+- kill usable ideas for being mid-thought
+- over-filter a whole batch to zero
+- miss the bigger video thesis
+
+That means the pipeline should be treated as:
+
+**draft generation + filtration + editorial assist**
+
+not as a fully autonomous truth machine.
+
+---
+
+## Variable slide count change
+
+We explicitly patched the generator so draft carousels are **not hard-coded to 5 slides anymore**.
+
+Code area:
+
+```text
+scripts/ingest-youtube.ts
+```
+
+Current behavior:
+
+- draft generation can flex to different slide counts
+- polish/progression logic no longer assumes slide 5 is always the ending
+
+This is intentional and should be preserved.
+
+---
+
+## Theme-sourced carousel behavior
+
+We also explicitly learned that some videos should be sourced from the **whole transcript**, not only top-ranked micro-segments.
+
+Example successful pattern:
+
+Instead of forcing transcript-literal segment carousels, create 3 distinct theme-level posts like:
+
+- category-defining thesis
+- practical evaluation framework
+- strategic market takeaway
+
+That is often much better than 7 noisy segment-based drafts.
+
+If future operators forget this, quality will drop fast.
+
+---
+
+## Recreating the exact human workflow we used
+
+If you want to recreate the actual working system, do this:
+
+### Step 1: ingest the video
+
+```bash
+./content-carousel youtube '<youtube-url>'
+```
+
+### Step 2: inspect the source package
+Look at:
+
+```text
+sources/<source-slug>/summary.md
 sources/<source-slug>/ideas.json
 sources/<source-slug>/briefs.json
-sources/<source-slug>/summary.md
-carousels/<carousel-slug>/carousel.md
-carousels/index.json
+sources/<source-slug>/clean-transcript.md
 ```
 
-Slug pattern for generated carousels:
+Ask:
 
-```text
-<source-slug>--segment-02-00-03-41-<angle-slug>
-<source-slug>--segment-05-00-08-12-<angle-slug>
-<source-slug>--segment-11-00-14-09-<angle-slug>
-```
+- are the surviving ideas actually good?
+- are they overlapping?
+- did the pipeline produce zero carousels because of over-filtering?
+- is there a bigger whole-video thesis hiding in the transcript?
 
-So each carousel slug is tied to the selected transcript segment itself (`segment id + start timestamp`), not just the fanout order from one run.
+### Step 3: decide sourcing mode
 
-Selection and publishing rules:
+#### Use raw segment output if:
+- the generated ideas are already sharp
+- the angles are distinct
+- transcript chunks are clean enough
 
-- every ranked segment becomes an idea record in `sources/<source-slug>/ideas.json`
-- weak ideas are rejected with explicit reasons
-- overlapping ideas are filtered against stronger ideas
-- the strongest surviving ideas become published markdown carousels
-- only published markdown carousels appear in the app TOC and Pages export indexes
+#### Use manual/theme-level sourcing if:
+- output is zero or near-zero
+- ideas overlap too much
+- transcript chunks are fragmentary
+- the best value lives in the video’s broader themes
 
-That means one source package can fan out into multiple previewable/exportable carousels without leaking non-published ideas into the site.
+### Step 4: edit or write `carousel.md`
+For each winning idea, produce real post-ready copy.
+Do **not** leave transcript scaffolding pretending to be a finished post.
 
-### Published output behavior
-
-Published carousels live only in:
-
-- `carousels/<carousel-slug>/carousel.md`
-- `carousels/index.json`
-
-That markdown is the source of truth for anything user-facing:
-
-- the site table of contents
-- static carousel routes
-- the PNG export index
-- the GitHub Pages export bundle
-
-Re-ingesting the same source replaces the published set for that source and removes stale carousel/export directories so old slugs do not linger.
-
-## Pages-first sharing
-
-After `./content-carousel build-pages` and a push, share the GitHub Pages preview URL first:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/carousel/<slug>/
-```
-
-Use the PNG batch as the secondary operational link:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/
-```
-
-The repo no longer auto-pushes on ingest. Build, review, and push deliberately after the published set looks right.
-
-## Workflow 2: preview locally while editing
-
-Run the app:
-
-```bash
-pnpm dev
-```
-
-Open:
-
-- `http://localhost:3000/` — carousel table of contents
-- `http://localhost:3000/carousel/<slug>` — a single carousel preview
-
-## Workflow 3: build the GitHub Pages site + PNG outputs
-
-Run:
+### Step 5: build Pages
 
 ```bash
 ./content-carousel build-pages
 ```
 
-What this does:
-
-1. builds a static Next export into `out/`
-2. serves that static export locally for rendering
-3. renders PNGs for every carousel into `public/exports/<slug>/`
-4. writes `manifest.json` and a tiny batch gallery page for each slug
-5. rebuilds the static site so the PNG files are included in `out/`
-
-After that you have:
-
-- `out/` — the exact GitHub Pages artifact
-- `public/exports/<slug>/01.png`, `02.png`, etc.
-- `public/exports/<slug>/manifest.json`
-- `public/exports/<slug>/index.html`
-- `public/exports/index.html`
-- `public/exports/index.json`
-
-## Workflow 4: get the public GitHub Pages preview
-
-This repo includes `.github/workflows/deploy-pages.yml`.
-
-On every push to `main`, GitHub Actions now:
-
-1. installs dependencies
-2. installs Playwright Chromium
-3. runs `pnpm build:pages`
-4. uploads `out/`
-5. deploys to GitHub Pages
-
-So the public preview URL pattern is always:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/carousel/<slug>/
-```
-
-Example if the slug is `ai-memory-wall`:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/carousel/ai-memory-wall/
-```
-
-## Workflow 5: get the PNGs
-
-### Local files
-
-After `pnpm build:pages`, the easiest local location is:
-
-```text
-public/exports/<slug>/
-```
-
-You will find:
-
-- numbered slide PNGs like `01.png`, `02.png`, `03.png`
-- `manifest.json` with the file list
-- `index.html` with a dead-simple gallery/download page
-
-### Public URLs
-
-After the Pages deploy finishes, the PNGs are publicly reachable at:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/
-```
-
-Direct file pattern:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/01.png
-```
-
-Manifest pattern:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/exports/<slug>/manifest.json
-```
-
-Global batch index:
-
-```text
-https://maurilio-saddoud.github.io/content-carousel-studio/exports/
-```
-
-## Type-checking
+### Step 6: commit and push
 
 ```bash
-pnpm lint
+git add .
+git commit -m "publish <description> carousel batch"
+git push
 ```
 
-## Notes / tradeoffs
+### Step 7: wait for Pages deploy to turn green
+Check the GitHub Actions Pages workflow.
+Only after that send live links.
 
-- GitHub Pages is static-only, so the app is configured for `next export` output.
-- Carousel routes are generated from the markdown carousel files on disk.
-- PNG generation uses Playwright screenshots of the rendered Pages-safe site.
-- The markdown parser intentionally supports a narrow authoring format right now: frontmatter + slide separators + paragraphs/lists.
-- `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
-- `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, brief quality/overlap, weak/duplicate titles, and export drift before you bother publishing.
-- Use `./content-carousel self-test <source-slug> --strict-global` only when you intentionally want to audit the whole workspace for leftover preview/export directories. The default check assumes preserving older batches is normal.
-- `pnpm exec tsx scripts/self-test.ts <source-slug>` now works too when you want to iterate on the audit logic directly without going through the bundled CLI.
-- In the current operator workflow, a newly supplied video link should usually be treated as an implicit request to generate a fresh preview batch from that source, not as a prompt for another round of clarification.
-- Preserve existing preview batches by default. Only wipe/delete old previews when the user explicitly asks for replacement or cleanup.
-- If you add a carousel and want it public, it still needs to be committed and pushed to `main`. Pages is public, not magical.
+---
+
+## If something breaks, check these places first
+
+### 1. No carousels published
+Look at:
+
+- `sources/<slug>/ideas.json`
+- `sources/<slug>/summary.md`
+
+Most likely causes:
+
+- fragment filter too aggressive
+- overlap/focus filtering zeroed the batch
+- source is transcript-messy and needs theme-level sourcing
+
+### 2. Links 404
+Usually one of these:
+
+- Pages deploy failed
+- build-critical change was only local and not pushed
+- stale assumption that local build == public deploy
+
+### 3. Carousels are weak
+Likely causes:
+
+- transcript chunk was intrinsically bad
+- segment picker overvalued specificity
+- too much transcript literalism
+- editorial pass was skipped or too shallow
+
+### 4. Too many similar carousels
+Likely causes:
+
+- overlap filter too weak
+- operator did not consolidate to top-level distinct theses
+- system sourced from many near-identical segments instead of full-video themes
+
+### 5. Preview ordering is weird
+The Next.js index now sorts by creation timestamp derived from source package `fetchedAt`.
+If ordering is wrong, inspect:
+
+- `lib/carousels.ts`
+- `carousels/index.json`
+- `sources/<slug>/source.json`
+
+---
+
+## Important files to know
+
+### Pipeline logic
+
+```text
+scripts/ingest-youtube.ts
+scripts/build-pages.ts
+scripts/render-all.ts
+scripts/render-carousel.ts
+scripts/self-test.ts
+scripts/content-carousel.ts
+```
+
+### Data loading / indexing
+
+```text
+lib/carousels.ts
+lib/types.ts
+```
+
+### Preview UI
+
+```text
+app/page.tsx
+app/layout.tsx
+components/CarouselSlide.tsx
+```
+
+### CLI entrypoint
+
+```text
+bin/content-carousel.js
+content-carousel
+```
+
+---
+
+## GitHub Pages deployment
+
+This repo includes a Pages deployment workflow.
+
+On push to `main`, GitHub Actions should:
+
+1. install dependencies
+2. install Playwright Chromium
+3. run Pages build
+4. upload `out/`
+5. deploy to GitHub Pages
+
+If preview links do not work, check the latest Pages action run before doing anything else.
+
+---
+
+## What another operator should not change casually
+
+Do not casually undo these behaviors:
+
+- preserve old outputs by default
+- wait for green deploy before sharing links
+- variable slide count support
+- strong rejection of spec-dump / reference sludge
+- preference for non-overlapping carousels
+- repo-aware title reservation during generation (new rebuilds should avoid reusing existing carousel/slide titles from other published packages)
+- permission to source from full-transcript themes when chunk-level sourcing sucks
+
+Those are not random preferences.
+They were learned the hard way.
+
+---
+
+## Blunt summary
+
+This system works best when treated like this:
+
+- the code handles ingestion, structure, preview, rendering, and publishing
+- the editorial layer decides what is actually worth posting
+- the best batches come from **distinct strategic ideas**, not maximum transcript extraction
+
+If you recreate only the code and forget the editorial rules, you will rebuild a worse version of the system.
+
+If you recreate both the code **and** the editorial rules in this README, you’ll be very close to the actual working setup we built.

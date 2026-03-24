@@ -19,8 +19,10 @@ export async function getCarouselDirectory(): Promise<CarouselDirectoryItem[]> {
 }
 
 export async function syncCarouselDirectoryIndex() {
-  const items = sortDirectoryItems((await loadCarouselsFromFiles()).map(toDirectoryItem))
+  const carousels = await loadCarouselsFromFiles()
+  const items = sortDirectoryItems(carousels.map(toDirectoryItem))
   await writeFile(carouselIndexPath, `${JSON.stringify(items, null, 2)}\n`, 'utf8')
+  await syncSourceManifestCarouselMetadata(carousels)
   return items
 }
 
@@ -64,6 +66,7 @@ function parseMarkdownCarousel(raw: string, fallbackSlug: string, sourceCreatedA
   const slug = getString(data.slug) || fallbackSlug
   const title = requireString(data.title, 'title')
   const description = requireString(data.description, 'description')
+  const caption = getString(data.caption) || undefined
   const sourceTypeValue = getString(data.sourceType) || 'custom'
   const sourceType = SUPPORTED_SOURCE_TYPES.has(sourceTypeValue) ? sourceTypeValue as CarouselDirectoryItem['sourceType'] : 'custom'
   const aspectRatio = (getString(data.aspectRatio) || 'portrait') as CarouselDirectoryItem['aspectRatio']
@@ -76,6 +79,7 @@ function parseMarkdownCarousel(raw: string, fallbackSlug: string, sourceCreatedA
     slug,
     title,
     description,
+    caption,
     sourceType,
     aspectRatio,
     updatedAt,
@@ -160,6 +164,7 @@ function toDirectoryItem(carousel: Carousel): CarouselDirectoryItem {
     slug: carousel.slug,
     title: carousel.title,
     description: carousel.description,
+    caption: carousel.caption,
     sourceType: carousel.sourceType,
     aspectRatio: carousel.aspectRatio,
     updatedAt: carousel.updatedAt,
@@ -219,6 +224,64 @@ async function loadSourceCreatedAtByCarouselSlug() {
   }
 
   return createdAtBySlug
+}
+
+async function syncSourceManifestCarouselMetadata(carousels: Carousel[]) {
+  const carouselBySlug = new Map(carousels.map((carousel) => [carousel.slug, carousel]))
+
+  try {
+    const entries = await readdir(sourcesDir, { withFileTypes: true })
+    const sourceDirs = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name)
+
+    await Promise.all(sourceDirs.map(async (sourceSlug) => {
+      const sourcePath = path.join(sourcesDir, sourceSlug, 'source.json')
+
+      try {
+        const raw = await readFile(sourcePath, 'utf8')
+        const data = JSON.parse(raw) as {
+          carousels?: Array<{ slug?: string; title?: string; caption?: string; previewPath?: string; carouselPath?: string }>
+        }
+
+        if (!Array.isArray(data.carousels) || data.carousels.length === 0) {
+          return
+        }
+
+        let changed = false
+        data.carousels = data.carousels.map((entry) => {
+          const slug = getString(entry.slug)
+          const carousel = slug ? carouselBySlug.get(slug) : undefined
+          if (!carousel) return entry
+
+          const nextEntry = {
+            ...entry,
+            title: carousel.title,
+            caption: carousel.caption,
+            previewPath: `/carousel/${carousel.slug}`,
+            carouselPath: `carousels/${carousel.slug}/carousel.md`,
+          }
+
+          if (
+            getString(entry.title) !== nextEntry.title
+            || getString(entry.caption) !== (nextEntry.caption ?? '')
+            || getString(entry.previewPath) !== nextEntry.previewPath
+            || getString(entry.carouselPath) !== nextEntry.carouselPath
+          ) {
+            changed = true
+          }
+
+          return nextEntry
+        })
+
+        if (changed) {
+          await writeFile(sourcePath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
+        }
+      } catch {
+        // Ignore malformed or partial source packages.
+      }
+    }))
+  } catch {
+    // Ignore missing sources directory in partial builds.
+  }
 }
 
 type LegacyCarousel = Omit<Carousel, 'slides'> & {

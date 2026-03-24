@@ -7,6 +7,7 @@ type DirectoryItem = {
   slug: string
   title: string
   description: string
+  caption?: string
   updatedAt: string
 }
 
@@ -14,9 +15,11 @@ type ExportIndexItem = {
   slug: string
   title: string
   description: string
+  caption?: string
   updatedAt: string
   manifestPath: string
   batchPath: string
+  pdfPath: string
   previewPath: string
 }
 
@@ -46,9 +49,11 @@ export async function renderAllFromArgv(argv: string[] = process.argv.slice(2)) 
     slug: item.slug,
     title: item.title,
     description: item.description,
+    caption: item.caption,
     updatedAt: item.updatedAt,
     manifestPath: `${basePath}/exports/${item.slug}/manifest.json`,
     batchPath: `${basePath}/exports/${item.slug}/`,
+    pdfPath: `${basePath}/exports/${item.slug}/${item.slug}.pdf`,
     previewPath: `${basePath}/carousel/${item.slug}/`,
   }))
 
@@ -78,7 +83,8 @@ function buildExportsIndexHtml(items: ExportIndexItem[]) {
         <li>
           <h2>${escapeHtml(item.title)}</h2>
           <p>${escapeHtml(item.description)}</p>
-          <p><a href="${item.previewPath}">Preview</a> · <a href="${item.batchPath}">PNG batch</a> · <a href="${item.manifestPath}">manifest.json</a></p>
+          ${item.caption ? `<div class="caption"><p>Suggested caption</p><pre>${escapeHtml(item.caption)}</pre></div>` : ''}
+          <p><a href="${item.previewPath}">Preview</a> · <a href="${item.batchPath}">PNG batch</a> · <a href="${item.pdfPath}">PDF</a> · <a href="${item.manifestPath}">manifest.json</a></p>
         </li>`,
     )
     .join('')
@@ -97,6 +103,9 @@ function buildExportsIndexHtml(items: ExportIndexItem[]) {
       ul { list-style: none; padding: 0; display: grid; gap: 16px; }
       li { background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 18px; padding: 18px; }
       p { color: #cbd5e1; }
+      .caption { margin: 16px 0; padding: 14px; border-radius: 14px; background: rgba(2, 6, 23, 0.65); border: 1px solid rgba(148, 163, 184, 0.16); }
+      .caption p { margin: 0 0 8px; color: #7dd3fc; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+      .caption pre { margin: 0; white-space: pre-wrap; font: inherit; color: #e2e8f0; line-height: 1.55; }
     </style>
   </head>
   <body>
