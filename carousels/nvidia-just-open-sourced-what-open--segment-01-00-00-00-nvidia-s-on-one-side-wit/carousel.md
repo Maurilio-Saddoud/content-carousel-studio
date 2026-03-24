@@ -1,6 +1,6 @@
 ---
 slug: "nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit"
-title: "Nvidia's on one side with Nemo Claw, OpenAI and Enthropic are on the other side."
+title: "The agent market is splitting into two very different games."
 description: "AI News & Strategy Daily | Nate B Jones on nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for: 00:00:00 → 00:00:12."
 sourceType: transcript
 aspectRatio: portrait
@@ -12,34 +12,46 @@ theme:
   muted: "#71767B"
 ---
 
-# Nvidia's on one side with Nemo Claw, OpenAI and Enthropic are on the other side.
+# The agent market is splitting into two very different games.
 
 ---
 
-# If you're telling me Nate, no, no, no, they're all building agents, I'm the first to agree with you.
+# One side wants to own the model.
 
-Nvidia's on one side with Nemo Claw, OpenAI and Enthropic are on the other side.
+OpenAI and Anthropic keep pushing upward on capability.
 
-Most people are still acting on an old picture of what AI can and cannot do.
+Better reasoning. Better tooling. Better default experience.
 
----
-
-# OpenAI and Enthropic are on the other side.
-
-> OpenAI and Enthropic are on the other side.
-
-What worked as a rule of thumb a few months ago can already be wrong now.
+That game is about becoming the brain everyone rents.
 
 ---
 
-# I'm the first to agree with you.
+# The other side wants to own the stack around the model.
 
-The workflow needs clearer review boundaries.
+Nvidia is not just trying to sell compute.
 
-1. OpenAI and Enthropic are on the other side. 2. I'm the first to agree with you. 3. Update your mental model before you update the workflow.
+Nemo Claw is a clue that they also want a bigger role in how agent systems are built, deployed, and controlled.
+
+That is a very different play.
 
 ---
 
-# The moat becomes smarter audit rhythms.
+# Most people still talk about “AI” like it is one market.
 
-people using AI in real work, not just talking about it.
+It isn’t.
+
+There is a fight over models.
+There is a fight over infrastructure.
+There is a fight over the operating layer around agents.
+
+Those are related — but not the same.
+
+---
+
+# If you miss that split, you misread where the leverage is moving.
+
+The companies that win may not be the ones with the smartest model alone.
+
+They may be the ones that control how agent systems actually run in production.
+
+That’s the part worth watching.

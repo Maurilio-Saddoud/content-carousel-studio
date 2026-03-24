@@ -1,6 +1,6 @@
 ---
 slug: "nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo"
-title: "AI operating models are getting stale faster than most teams realize."
+title: "The real power move in AI right now is local control."
 description: "AI News & Strategy Daily | Nate B Jones on nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for: 00:02:47 → 00:03:02."
 sourceType: transcript
 aspectRatio: portrait
@@ -12,34 +12,46 @@ theme:
   muted: "#71767B"
 ---
 
-# AI operating models are getting stale faster than most teams realize.
+# The real power move in AI right now is local control.
 
 ---
 
-# If your mental model is stale, you redesign the wrong part of the workflow.
+# “It runs locally” is not a nerd detail.
 
-If your mental model is stale, you redesign the wrong part of the workflow.
+It changes the trust model.
 
-Most people are still acting on an old picture of what AI can and cannot do.
+When the system runs on your hardware, with your keys, inside your environment, you stop depending on someone else’s defaults for everything.
 
----
-
-# he's convinced Agentic is a big piece of it and hence Nemoclaw.
-
-> he's convinced Agentic is a big piece of it and hence Nemoclaw.
-
-What worked as a rule of thumb a few months ago can already be wrong now.
+That matters more than people admit.
 
 ---
 
-# The operating model has to change.
+# Hosted AI always comes with a trade.
 
-The workflow needs clearer review boundaries.
+Sometimes that trade is worth it.
 
-1. he's convinced Agentic is a big piece of it and hence Nemoclaw. 2. Update your mental model before you update the workflow. 3. Decide what deserves human review and what can safely flow through.
+But you are still accepting somebody else’s infrastructure, policies, limits, and product roadmap as part of your workflow.
+
+Convenience is never free.
 
 ---
 
-# The leverage shifts to smarter audit rhythms.
+# Local-first tools shift the balance back to the operator.
 
-people using AI in real work, not just talking about it.
+You get more control over:
+- data exposure
+- model choice
+- execution logic
+- how much authority the system actually has
+
+That is a different category of product.
+
+---
+
+# This is why local agent infrastructure matters.
+
+Not because it sounds technical.
+
+Because serious teams eventually care about control, not just demos.
+
+And control becomes a moat once AI touches real work.

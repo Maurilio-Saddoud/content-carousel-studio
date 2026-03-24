@@ -1,6 +1,6 @@
 ---
 slug: "nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil"
-title: "If you're trying to build aic systems, simple scales well."
+title: "Most teams are overcomplicating agent systems way too early."
 description: "AI News & Strategy Daily | Nate B Jones on nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for: 00:07:38 → 00:07:55."
 sourceType: transcript
 aspectRatio: portrait
@@ -12,36 +12,44 @@ theme:
   muted: "#71767B"
 ---
 
-# If you're trying to build aic systems, simple scales well.
+# Most teams are overcomplicating agent systems way too early.
 
 ---
 
-# Simple scales better than complex.
+# Simple usually scales better than clever.
 
-Simple scales better than complex.
+Especially in agent workflows.
 
-Most people are still acting on an old picture of what AI can and cannot do.
-
----
-
-# If you're trying to build aic systems
-
-> If you're trying to build aic systems
-
-What worked as a rule of thumb a few months ago can already be wrong now.
+The more moving parts you introduce too early, the harder it gets to debug failures, review outputs, and trust what the system is actually doing.
 
 ---
 
-# I would add there's probably a correlary here.
+# Complexity feels sophisticated.
 
-The workflow needs clearer review boundaries.
+But in practice, it often just hides bad assumptions.
 
-1. If you're trying to build aic systems 2. I would add there's probably a correlary here. 3. this is something that may have shifted with agentic engineering because we did find for a while if we were writing algorithms that there were times at
+More chains, more orchestration, more abstractions, more magic.
+
+Cool demo. Terrible operating model.
 
 ---
 
-# Winning teams build tighter review loops.
+# Start with the smallest workflow that can prove value.
 
-this is something that may have shifted with agentic engineering because we did find for a while if we were writing algorithms that there were times at
+Make the path obvious.
+Make the checkpoints obvious.
+Make failure visible.
 
-product, design, and engineering leaders figuring out where AI changes the work.
+Then add complexity only when the simple version is clearly the bottleneck.
+
+---
+
+# The teams that win are not the ones with the fanciest architecture.
+
+They are the ones that can:
+- ship faster
+- understand failures faster
+- improve the system faster
+
+Simple is not naive.
+Simple is leverage.
