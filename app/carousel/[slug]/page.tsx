@@ -25,24 +25,23 @@ export default async function CarouselPage({ params }: Props) {
   return (
     <main className="page-shell">
       <div className="carousel-header">
-        <div>
+        <div className="carousel-header-main">
           <p className="eyebrow">{carousel.sourceType.toUpperCase()}</p>
           <h1>{carousel.title}</h1>
           <p>{carousel.description}</p>
-          <p>
-            <a href={`${basePath}/exports/${carousel.slug}/${carousel.slug}.zip`} download>
-              Download PNG batch (.zip)
-            </a>
-            {' · '}
-            <a href={`${basePath}/exports/${carousel.slug}/${carousel.slug}.pdf`} download>
-              Download PDF
-            </a>
-          </p>
-          <p>
+          <p className="preview-toolbar-note">
             Or open any slide below and save it directly on your phone.
           </p>
         </div>
-        <Link href="/">← Back</Link>
+        <div className="carousel-header-actions">
+          <Link href="/" className="preview-button preview-button-ghost">← Back</Link>
+          <a href={`${basePath}/exports/${carousel.slug}/${carousel.slug}.zip`} download className="preview-button preview-button-primary">
+            Download PNG
+          </a>
+          <a href={`${basePath}/exports/${carousel.slug}/${carousel.slug}.pdf`} download className="preview-button preview-button-secondary">
+            Download PDF
+          </a>
+        </div>
       </div>
 
       <div className="slides-stack">
@@ -55,8 +54,13 @@ export default async function CarouselPage({ params }: Props) {
               total={carousel.slides.length}
             />
             <div className="preview-slide-actions">
-              <a href={`${basePath}/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`} target="_blank" rel="noreferrer">
-                Open image (then Save Image to Photos)
+              <a
+                className="preview-button preview-button-inline"
+                href={`${basePath}/exports/${carousel.slug}/${String(index + 1).padStart(2, '0')}.png`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open full-size PNG
               </a>
             </div>
           </div>
