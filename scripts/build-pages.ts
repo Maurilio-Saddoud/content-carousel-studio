@@ -20,7 +20,6 @@ export async function buildPagesFromArgv(argv: string[] = process.argv.slice(2))
     PUBLIC_SITE_URL: publicSiteUrl,
   }
 
-  await cleanNextBuildArtifacts()
   await run('pnpm', ['exec', 'next', 'build'], sharedEnv)
   await prepareServeRoot()
 
@@ -50,13 +49,7 @@ export async function buildPagesFromArgv(argv: string[] = process.argv.slice(2))
     await run('pnpm', ['render:all', '--index-only'], sharedEnv)
   }
 
-  await cleanNextBuildArtifacts()
   await run('pnpm', ['exec', 'next', 'build'], sharedEnv)
-}
-
-async function cleanNextBuildArtifacts() {
-  await rm(path.resolve('.next'), { recursive: true, force: true })
-  await rm(path.resolve('out'), { recursive: true, force: true })
 }
 
 async function prepareServeRoot() {

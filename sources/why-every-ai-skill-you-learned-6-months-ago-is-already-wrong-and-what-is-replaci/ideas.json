@@ -11,7 +11,7 @@
     "wordCount": 51,
     "text": "February model. And both kinds of errors are very expensive. So the skill is maintaining the calibration, not having it once. So what does this look like in practice? For a product manager, good boundary sensing looks like letting an agent draft a credible competitive analysis, but realizing that that same",
     "titleSuggestion": "For a product manager",
-    "hook": "Good boundary sensing looks like letting an agent draft a credible competitive analysis",
+    "hook": "For a product manager",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "has contrast/tension, which usually makes better post framing",
@@ -36,8 +36,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-mont--segment-18-00-05-13-for-a-product-manager"
   },
@@ -76,8 +76,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-78-00-21-59-i-ve-seen-two-structures"
   },
@@ -242,8 +242,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-69-00-19-20-this-is-much-much-more-i"
   },
@@ -467,7 +467,7 @@
     "lineEnd": 488,
     "wordCount": 46,
     "text": "February and the person whose boundary sense was current last August are operating worlds apart. This is really the mechanism behind those gigantic leverage numbers that keep appearing in production deployments. When you see, you know, cursor hitting stunning numbers with a small number of people",
-    "titleSuggestion": "Cursor hitting stunning numbers with a small number of people",
+    "titleSuggestion": "When you see, you know, cursor hitting stunning numbers with a small number of people",
     "hook": "February and the person whose boundary sense was current last August are operating worlds apart.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -491,10 +491,10 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
-    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-cursor-hitting-stunning-"
+    "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-62-00-17-33-when-you-see-you-know-cu"
   },
   {
     "id": "segment-01",
@@ -530,8 +530,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "why-every-ai-skill-you-learned-6-m--segment-01-00-00-00-the-air-inside-is-everyt"
   },
@@ -881,7 +881,7 @@
     "lineEnd": 614,
     "wordCount": 50,
     "text": "attention. and their output looks like what a five to 10 person team produced a couple of years ago. Not because they're working harder, but because they're delegating continuously and verifying intelligently. This is very much how AI native companies are operating around this idea that there's one person with",
-    "titleSuggestion": "This is very much how AI native companies are operating around this idea that there's one person with",
+    "titleSuggestion": "Not because they're working harder",
     "hook": "Not because they're working harder, but because they're delegating continuously and verifying intelligently.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -1048,8 +1048,8 @@
     "lineEnd": 660,
     "wordCount": 54,
     "text": "committing code, and maybe a data scientist managing the analytics pipeline. They ship at the pace of a 20 person team because the operator keeps the seams really current and the failure modes calibrated. And oh by the way, the operator shipping too and the rest of the pod has enough frontier skill to",
-    "titleSuggestion": "They ship at the pace of a 20 person team",
-    "hook": "They ship at the pace of a 20 person team",
+    "titleSuggestion": "They ship at the pace of a 20 person team because the operator keeps the seams really current and the failure modes calibrated.",
+    "hook": "They ship at the pace of a 20 person team because the operator keeps the seams really current and the failure modes calibrated.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "includes enough specificity to avoid sounding generic",
@@ -1173,7 +1173,7 @@
     "lineEnd": 668,
     "wordCount": 55,
     "text": "execute without supervision. So you might wonder, how does this ladder up? I think the simplest way to think about this is to think about where you want to double down on your bets. If teams of one are able to effectively discover opportunities for deeper engagement and teams of five are able to build",
-    "titleSuggestion": "I think the simplest way to think about this is to think about",
+    "titleSuggestion": "I think the simplest way to think about this is to think about where you want to double down on your bets.",
     "hook": "If teams of one are able to effectively discover opportunities for deeper engagement and teams of five are able to build",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -1382,7 +1382,7 @@
     "lineEnd": 780,
     "wordCount": 58,
     "text": "slowing down. And so if you are not in a place where these February agents are surprising you, the best thing you can do to welcome yourself to the frontier is to find a way to give your agents a job that surprises you. Whether they fail, whether they partly succeed, give them something that allows them to",
-    "titleSuggestion": "Give them something that allows them to",
+    "titleSuggestion": "Whether they fail, whether they partly succeed, give them something that allows them to",
     "hook": "Whether they fail, whether they partly succeed, give them something that allows them to",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -2259,8 +2259,8 @@
     "lineEnd": 676,
     "wordCount": 56,
     "text": "meaningful products, a team that ladders up from there is really focused on one of two areas. Either you have a portfolio of bets you're managing as a leader and you're farming that out across four or five teams of five or you're in a position where you're looking for one big win and you pick",
-    "titleSuggestion": "Where you're looking for one big win and you pick",
-    "hook": "Where you're looking for one big win and you pick",
+    "titleSuggestion": "Either you have a portfolio of bets you're managing as a leader and you're farming that out across four or five teams of five or you're in a position where you're looking for one big win and you pick",
+    "hook": "Either you have a portfolio of bets you're managing as a leader and you're farming that out across four or five teams of five or you're in a position where you're looking for one big win and you pick",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
       "sounds grounded in lived or practical experience",
@@ -2301,7 +2301,7 @@
     "lineEnd": 16,
     "wordCount": 51,
     "text": "interesting work is happening right now. It's where you decide what to delegate and what to keep, how to verify agent output, where to intervene, how to structure that handoff. Working on that surface well is the most valuable professional capability in the economy today. But here's the thing, that bubble",
-    "titleSuggestion": "Where you decide what to delegate and what to keep",
+    "titleSuggestion": "It's where you decide what to delegate and what to keep",
     "hook": "Working on that surface well is the most valuable professional capability in the economy today.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2803,8 +2803,8 @@
     "lineEnd": 192,
     "wordCount": 51,
     "text": "a good engineering manager thinks about system boundaries than to how an individual contributor thinks about their tasks. The person doing seam design is asking if I break this project into seven different phases, which three are fully agent executable, which two need human in the loop and which two are",
-    "titleSuggestion": "If I break this project into seven different phases",
-    "hook": "If I break this project into seven different phases",
+    "titleSuggestion": "The person doing seam design is asking if I break this project into seven different phases, which three are fully agent executable, which two need human in the loop and which two are",
+    "hook": "The person doing seam design is asking if I break this project into seven different phases",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -2887,8 +2887,8 @@
     "lineEnd": 358,
     "wordCount": 50,
     "text": "generate compound returns or it can look like ignoring developments until you're forced to catch up. Most commonly, it tends to look like investing heavily in learning a particular platform and then that platform's advantage might evaporate when the next model shifts and either deletes that part of the workflow",
-    "titleSuggestion": "When the next model shifts and either deletes that part of the workflow",
-    "hook": "When the next model shifts and either deletes that part of the workflow",
+    "titleSuggestion": "Most commonly, it tends to look like investing heavily in learning a particular platform and then that platform's advantage might evaporate when the next model shifts and either deletes that part of the workflow",
+    "hook": "Most commonly, it tends to look like investing heavily in learning a particular platform and then that platform's advantage might evaporate when the next model shifts and either deletes that part of the workflow",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "includes enough specificity to avoid sounding generic",

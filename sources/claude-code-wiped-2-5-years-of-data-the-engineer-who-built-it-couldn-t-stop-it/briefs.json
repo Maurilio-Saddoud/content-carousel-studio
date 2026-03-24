@@ -1,19 +1,166 @@
 [
   {
+    "id": "brief-segment-11",
+    "primaryIdeaId": "segment-11",
+    "supportingIdeaIds": [
+      "segment-28",
+      "segment-27"
+    ],
+    "thesis": "You have to think like that.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "30, 40 or 56 minutes as Chad GPT 5.4 did during a recent eval I ran, then you are working with an agent and you have to act like that.",
+    "supportPoints": [
+      "Literally, agents have a fixed amount of text.",
+      "It makes the right changes and then somewhere around message 30, it just starts ignoring things you've told it three times.",
+      "The edge is not knowing one workflow. It is keeping your operating model current."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-26",
+      "brief-segment-10",
+      "brief-segment-30",
+      "brief-segment-59",
+      "brief-segment-01",
+      "brief-segment-05",
+      "brief-segment-69"
+    ],
+    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t"
+  },
+  {
+    "id": "brief-segment-26",
+    "primaryIdeaId": "segment-26",
+    "supportingIdeaIds": [
+      "segment-28",
+      "segment-27"
+    ],
+    "thesis": "Now, they were able to recover.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Skill two, learn when to start fresh.",
+    "supportPoints": [
+      "Let's say your agent is brilliant for the first 20 minutes or 40 minutes or hour of the project."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-11",
+      "brief-segment-10",
+      "brief-segment-30",
+      "brief-segment-59",
+      "brief-segment-01",
+      "brief-segment-05",
+      "brief-segment-69"
+    ],
+    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re"
+  },
+  {
+    "id": "brief-segment-30",
+    "primaryIdeaId": "segment-30",
+    "supportingIdeaIds": [
+      "segment-28",
+      "segment-27"
+    ],
+    "thesis": "The simplest fix is to start fresh.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Starting fresh, everyone understands how to do that.",
+    "supportPoints": [
+      "You just start it over again.",
+      "Sometimes the job is so big you're going to run into this issue again."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-11",
+      "brief-segment-26",
+      "brief-segment-10",
+      "brief-segment-59",
+      "brief-segment-01",
+      "brief-segment-05",
+      "brief-segment-69"
+    ],
+    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s"
+  },
+  {
+    "id": "brief-segment-59",
+    "primaryIdeaId": "segment-59",
+    "supportingIdeaIds": [
+      "segment-28",
+      "segment-27"
+    ],
+    "thesis": "If your app doesn't handle these gracefully, your customer sees like a white page or a just a crash screen.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Tell your agent every time the app communicates with a server.",
+    "supportPoints": [
+      "It has to handle failure with a very clear and friendly message, never a blank screen.",
+      "your customer sees like a white page or a just a crash screen."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-11",
+      "brief-segment-26",
+      "brief-segment-10",
+      "brief-segment-30",
+      "brief-segment-01",
+      "brief-segment-05",
+      "brief-segment-69"
+    ],
+    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti"
+  },
+  {
+    "id": "brief-segment-01",
+    "primaryIdeaId": "segment-01",
+    "supportingIdeaIds": [
+      "segment-28",
+      "segment-27"
+    ],
+    "thesis": "Vibe coders everywhere are hitting a wall.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "They know how to build stuff.",
+    "supportPoints": [
+      "We can use really any textbased tool to build stuff now.",
+      "They're getting into Claude Code.",
+      "They're getting into codecs."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-11",
+      "brief-segment-26",
+      "brief-segment-10",
+      "brief-segment-30",
+      "brief-segment-59",
+      "brief-segment-05",
+      "brief-segment-69"
+    ],
+    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a"
+  },
+  {
+    "id": "brief-segment-05",
+    "primaryIdeaId": "segment-05",
+    "supportingIdeaIds": [
+      "segment-28",
+      "segment-27"
+    ],
+    "thesis": "Maybe you have hours of work lost to a single bad change.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Maybe you've hit the wall between building a product with AI and running one.",
+    "supportPoints": [
+      "Literally, agents have a fixed amount of text.",
+      "It makes the right changes and then somewhere around message 30, it just starts ignoring things you've told it three times."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-11",
+      "brief-segment-26",
+      "brief-segment-10",
+      "brief-segment-30",
+      "brief-segment-59",
+      "brief-segment-01",
+      "brief-segment-69"
+    ],
+    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-"
+  },
+  {
     "id": "brief-segment-69",
     "primaryIdeaId": "segment-69",
     "supportingIdeaIds": [
-      "segment-68",
-      "segment-70",
-      "segment-71"
+      "segment-28",
+      "segment-27"
     ],
-    "thesis": "You should be telling that expectation to your agent",
-    "audience": "Audience: product, design, and engineering leaders figuring out where AI changes the work.",
-    "whyItMatters": "The key thing to do is to set the expectation before the agent builds something so that the agent",
+    "thesis": "Now, I would advise you here to get deeper on technical details than you might think you need to.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "If you expect your app to eventually get to a serious size, you should be telling that expectation to your agent because you will help it to build accordingly.",
     "supportPoints": [
-      "The key thing to do is to set the expectation before the agent builds something",
-      "You don't want to leave scaling to chance.",
-      "Finally, part of being good is knowing where to stop.",
       "I would advise you here to get deeper on technical details than you might think you need to."
     ],
     "distinctFromBriefIds": [
@@ -23,19 +170,8 @@
       "brief-segment-30",
       "brief-segment-59",
       "brief-segment-01",
-      "brief-segment-05",
-      "brief-segment-28",
-      "brief-segment-27"
+      "brief-segment-05"
     ],
-    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re",
-    "diagnostics": {
-      "focusScore": 0.17333333333333334,
-      "overlapWithEarlierBriefs": 0,
-      "supportIdeaDistance": [
-        1,
-        1,
-        2
-      ]
-    }
+    "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re"
   }
 ]

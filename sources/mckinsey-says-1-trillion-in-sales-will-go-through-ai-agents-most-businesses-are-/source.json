@@ -12,97 +12,45 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/BE4RclIGDmY/hqdefault.jpg"
   },
   "transcriptLineCount": 809,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
-  "ideaCount": 105,
-  "briefCount": 2,
-  "publishedIdeaIds": [
-    "segment-103",
-    "segment-63"
-  ],
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
   "ideaRule": {
     "publishLimit": 2,
     "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
   },
-  "briefs": [
-    {
-      "id": "brief-segment-103",
-      "primaryIdeaId": "segment-103",
-      "thesis": "They will structure their businesses and their data around agent attention.",
-      "slug": "mckinsey-says-1-trillion-in-sales--segment-103-00-27-05-they-will-structure-thei"
-    },
-    {
-      "id": "brief-segment-63",
-      "primaryIdeaId": "segment-63",
-      "thesis": "One wrong path is oh it will be agent readable writable",
-      "slug": "mckinsey-says-1-trillion-in-sales-will-go--segment-63-00-16-50-no-no-no-no-no-no"
-    }
+  "ideaCount": 105,
+  "briefCount": 2,
+  "publishedIdeaIds": [
+    "segment-80",
+    "segment-45"
   ],
-  "droppedBriefs": [
+  "briefs": [
     {
       "id": "brief-segment-80",
       "primaryIdeaId": "segment-80",
-      "thesis": "You are signing your own death warrant as a company",
-      "focusScore": 0,
-      "overlapWithEarlierBriefs": 0,
-      "dropReasons": [
-        "focus 0.000 fell below focus threshold 0.140"
-      ]
+      "thesis": "If you are waiting seeing, you are signing your own death warrant as a company because by the time you understand all of the elements of the Asian ecosystem and say we're ready, it will have passed you by and you will not be visible to most of the interactions customers have.",
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s"
     },
     {
       "id": "brief-segment-45",
       "primaryIdeaId": "segment-45",
-      "thesis": "We as humans have discovered it's really nice",
-      "focusScore": 0,
-      "overlapWithEarlierBriefs": 0,
-      "dropReasons": [
-        "focus 0.000 fell below focus threshold 0.140"
-      ]
-    },
-    {
-      "id": "brief-segment-01",
-      "primaryIdeaId": "segment-01",
-      "thesis": "The fences that we spent 20 years building to keep bots out are now the things that are keeping our most valuable customers out.",
-      "focusScore": 0.0037735849056603774,
-      "overlapWithEarlierBriefs": 0,
-      "dropReasons": [
-        "focus 0.004 fell below focus threshold 0.140"
-      ]
-    },
-    {
-      "id": "brief-segment-100",
-      "primaryIdeaId": "segment-100",
-      "thesis": "I make this happen?\" Well, I'm going to give you an exercise that will make you sweat a little bit.",
-      "focusScore": 0.008,
-      "overlapWithEarlierBriefs": 0,
-      "dropReasons": [
-        "focus 0.008 fell below focus threshold 0.140"
-      ]
-    },
-    {
-      "id": "brief-segment-70",
-      "primaryIdeaId": "segment-70",
-      "thesis": "then you get to the end and what you find is it's a series of data reads and writes",
-      "focusScore": 0,
-      "overlapWithEarlierBriefs": 0,
-      "dropReasons": [
-        "focus 0.000 fell below focus threshold 0.140"
-      ]
+      "thesis": "We as humans have discovered it's really nice if we don't even have to go to clott JPT and we could just type into a little chat like WhatsApp, hey agent, can you shop for my running shoes that is 250,000 GitHub stars worth of customer validation?",
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov"
     }
   ],
   "carousels": [
     {
-      "slug": "mckinsey-says-1-trillion-in-sales--segment-103-00-27-05-they-will-structure-thei",
-      "segmentId": "segment-103",
-      "title": "A better model does not remove the need for supervision.",
-      "previewPath": "/carousel/mckinsey-says-1-trillion-in-sales--segment-103-00-27-05-they-will-structure-thei",
-      "carouselPath": "carousels/mckinsey-says-1-trillion-in-sales--segment-103-00-27-05-they-will-structure-thei/carousel.md"
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s",
+      "segmentId": "segment-80",
+      "title": "The internet was built to block bots.",
+      "previewPath": "/carousel/mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s",
+      "carouselPath": "carousels/mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s/carousel.md"
     },
     {
-      "slug": "mckinsey-says-1-trillion-in-sales-will-go--segment-63-00-16-50-no-no-no-no-no-no",
-      "segmentId": "segment-63",
-      "title": "Operators need a named owner for the checkpoint.",
-      "previewPath": "/carousel/mckinsey-says-1-trillion-in-sales-will-go--segment-63-00-16-50-no-no-no-no-no-no",
-      "carouselPath": "carousels/mckinsey-says-1-trillion-in-sales-will-go--segment-63-00-16-50-no-no-no-no-no-no/carousel.md"
+      "slug": "mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov",
+      "segmentId": "segment-45",
+      "title": "Go try to buy from your competitors with AI.",
+      "previewPath": "/carousel/mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov",
+      "carouselPath": "carousels/mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov/carousel.md"
     }
   ],
   "createdFiles": [
@@ -113,8 +61,8 @@
     "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/ideas.json",
     "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/briefs.json",
     "sources/mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-/summary.md",
-    "carousels/mckinsey-says-1-trillion-in-sales--segment-103-00-27-05-they-will-structure-thei/carousel.md",
-    "carousels/mckinsey-says-1-trillion-in-sales-will-go--segment-63-00-16-50-no-no-no-no-no-no/carousel.md",
+    "carousels/mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s/carousel.md",
+    "carousels/mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov/carousel.md",
     "carousels/index.json"
   ]
 }

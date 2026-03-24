@@ -12,19 +12,36 @@
     "thumbnailUrl": "https://i.ytimg.com/vi/HCVkBC1Vhcw/hqdefault.jpg"
   },
   "transcriptLineCount": 1315,
-  "defaultBehavior": "creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs",
-  "ideaCount": 170,
-  "briefCount": 3,
-  "publishedIdeaIds": [
-    "segment-74",
-    "segment-47",
-    "segment-103"
-  ],
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
   "ideaRule": {
     "publishLimit": 8,
     "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
   },
+  "ideaCount": 170,
+  "briefCount": 8,
+  "publishedIdeaIds": [
+    "segment-14",
+    "segment-130",
+    "segment-74",
+    "segment-47",
+    "segment-23",
+    "segment-88",
+    "segment-82",
+    "segment-21"
+  ],
   "briefs": [
+    {
+      "id": "brief-segment-14",
+      "primaryIdeaId": "segment-14",
+      "thesis": "M2.5 and it's also quite close to the top closed models out there including Gemini 3.1 Pro and also Opus 4.6 GBT 5.4 and then this benchmark GDP val is also really important.",
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite"
+    },
+    {
+      "id": "brief-segment-130",
+      "primaryIdeaId": "segment-130",
+      "thesis": "If you click on this GitHub repo, it contains all the instructions on how to download and run this.",
+      "slug": "ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs"
+    },
     {
       "id": "brief-segment-74",
       "primaryIdeaId": "segment-74",
@@ -34,37 +51,90 @@
     {
       "id": "brief-segment-47",
       "primaryIdeaId": "segment-47",
-      "thesis": "2.3 using fast video has by far the lowest latency",
+      "thesis": "2.3 using fast video has by far the lowest latency, like more than 10 times lower than the standard LTX 2.3.",
       "slug": "ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you"
     },
     {
-      "id": "brief-segment-103",
-      "primaryIdeaId": "segment-103",
-      "thesis": "Of course, there's like hours and hours of keynotes and other presentations, so I only scratched the surface.",
-      "slug": "ai-classrooms-self-evolving-ai-nv--segment-103-00-29-47-in-humanoid-robot-news-h"
+      "id": "brief-segment-23",
+      "primaryIdeaId": "segment-23",
+      "thesis": "Pinchbench and Claw Eval, which test its ability to do agentic workflows in like open claw scenarios, you can see that MIMO v2 Pro is really close to the performance of Opus 4.6, six, which is really impressive.",
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval"
+    },
+    {
+      "id": "brief-segment-88",
+      "primaryIdeaId": "segment-88",
+      "thesis": "Gro 3 LPUs, is optimized to handle all these requests.",
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-88-00-25-13-gro-3-lpus-is-optimized-"
+    },
+    {
+      "id": "brief-segment-82",
+      "primaryIdeaId": "segment-82",
+      "thesis": "This is Nvidia's idea of what a full AI supercomput should look like.",
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-82-00-23-17-this-is-nvidia-s-idea-of"
+    },
+    {
+      "id": "brief-segment-21",
+      "primaryIdeaId": "segment-21",
+      "thesis": "They've actually released an incredibly powerful series of AI models.",
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-21-00-05-53-they-ve-actually-release"
     }
   ],
   "carousels": [
     {
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite",
+      "segmentId": "segment-14",
+      "title": "AI operating models are getting stale faster than most teams realize.",
+      "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite",
+      "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite/carousel.md"
+    },
+    {
+      "slug": "ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs",
+      "segmentId": "segment-130",
+      "title": "Here are some more specs for your reference.",
+      "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs",
+      "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs/carousel.md"
+    },
+    {
       "slug": "ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week",
       "segmentId": "segment-74",
-      "title": "You see, the problem with large reasoning models is that they usually overthink and they end up spending a lot of tokens.",
+      "title": "AI operating models are getting stale faster than most teams realize.",
       "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week",
       "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week/carousel.md"
     },
     {
       "slug": "ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you",
       "segmentId": "segment-47",
-      "title": "Review discipline becomes the operating advantage.",
+      "title": "The awesome thing is you can try this online.",
       "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you",
       "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you/carousel.md"
     },
     {
-      "slug": "ai-classrooms-self-evolving-ai-nv--segment-103-00-29-47-in-humanoid-robot-news-h",
-      "segmentId": "segment-103",
-      "title": "Of course, there's like hours and hours of keynotes and other presentations, so I only scratched the surface.",
-      "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nv--segment-103-00-29-47-in-humanoid-robot-news-h",
-      "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nv--segment-103-00-29-47-in-humanoid-robot-news-h/carousel.md"
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval",
+      "segmentId": "segment-23",
+      "title": "AI operating models are getting stale faster than most teams realize.",
+      "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval",
+      "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval/carousel.md"
+    },
+    {
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-88-00-25-13-gro-3-lpus-is-optimized-",
+      "segmentId": "segment-88",
+      "title": "Gro 3 LPUs, is optimized to handle all these requests.",
+      "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nvi--segment-88-00-25-13-gro-3-lpus-is-optimized-",
+      "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nvi--segment-88-00-25-13-gro-3-lpus-is-optimized-/carousel.md"
+    },
+    {
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-82-00-23-17-this-is-nvidia-s-idea-of",
+      "segmentId": "segment-82",
+      "title": "This is Nvidia's idea of what a full AI supercomput should look like.",
+      "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nvi--segment-82-00-23-17-this-is-nvidia-s-idea-of",
+      "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nvi--segment-82-00-23-17-this-is-nvidia-s-idea-of/carousel.md"
+    },
+    {
+      "slug": "ai-classrooms-self-evolving-ai-nvi--segment-21-00-05-53-they-ve-actually-release",
+      "segmentId": "segment-21",
+      "title": "They've actually released an incredibly powerful series of AI models.",
+      "previewPath": "/carousel/ai-classrooms-self-evolving-ai-nvi--segment-21-00-05-53-they-ve-actually-release",
+      "carouselPath": "carousels/ai-classrooms-self-evolving-ai-nvi--segment-21-00-05-53-they-ve-actually-release/carousel.md"
     }
   ],
   "createdFiles": [
@@ -75,9 +145,14 @@
     "sources/ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a/ideas.json",
     "sources/ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a/briefs.json",
     "sources/ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a/summary.md",
+    "carousels/ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite/carousel.md",
+    "carousels/ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs/carousel.md",
     "carousels/ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week/carousel.md",
     "carousels/ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you/carousel.md",
-    "carousels/ai-classrooms-self-evolving-ai-nv--segment-103-00-29-47-in-humanoid-robot-news-h/carousel.md",
+    "carousels/ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval/carousel.md",
+    "carousels/ai-classrooms-self-evolving-ai-nvi--segment-88-00-25-13-gro-3-lpus-is-optimized-/carousel.md",
+    "carousels/ai-classrooms-self-evolving-ai-nvi--segment-82-00-23-17-this-is-nvidia-s-idea-of/carousel.md",
+    "carousels/ai-classrooms-self-evolving-ai-nvi--segment-21-00-05-53-they-ve-actually-release/carousel.md",
     "carousels/index.json"
   ]
 }

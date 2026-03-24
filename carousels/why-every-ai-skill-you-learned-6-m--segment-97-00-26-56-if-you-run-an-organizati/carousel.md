@@ -1,63 +1,51 @@
 ---
 slug: "why-every-ai-skill-you-learned-6-m--segment-97-00-26-56-if-you-run-an-organizati"
-title: "AI workflows are shifting faster than most teams realize."
-description: "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:26:56 → 00:27:13."
+title: "If you run an organization, the real AI question is: who owns boundary sense?"
+description: "Post-ready carousel distilled from the source video segment at 00:26:56 → 00:27:13."
 sourceType: transcript
 aspectRatio: portrait
-updatedAt: 2026-03-24
+updatedAt: 2026-03-23
 theme:
   accent: "#1D9BF0"
   background: "#000000"
   foreground: "#E7E9EA"
   muted: "#71767B"
-caption: |
-  A lot of teams are redesigning workflows around a mental model that expired 90 days ago.
-  
-  That’s the trap. AI capability is moving fast enough that old assumptions turn into bad org design. The question isn’t whether you use AI. It’s whether anyone on your team actually knows where the human/agent boundary should sit now.
 ---
 
-# AI workflows are shifting faster than most teams realize.
+eyebrow: LEADERSHIP
+# If you run an organization,
+the real AI question is:
 
----
-
-# If the mental model is wrong, the workflow redesign is wrong too.
-
-Where the evolving AI agent human boundary is and how we think about redesigning our workflows as it shifts.
-
-Is there a bottleneck that's masquerading as due diligence?
+who owns boundary sense?
 
 ---
 
-# The constraint is review depth, not agent volume.
+eyebrow: THE WRONG QUESTION
+# “Are we using AI?”
 
-> The question isn't are we using AI.
-
-It is hard to overstate how much models have gained in capability between November of 2025 and February of 2026.
-
----
-
-# The team needs explicit escalation paths before the workload spikes.
-
-It's do we have people whose job it is to know where the evolving AI agent human boundary is and how we think about redesigning our workflows as it shifts.
-
-Where the evolving AI agent human boundary is and how we think about redesigning our workflows as it shifts.
+Too shallow.
+That tells you almost nothing.
 
 ---
 
-# Operators need clearer review checkpoints.
-
-Are they reviewing everything at the same depth?
-
-Where the evolving AI agent human boundary is and how we think about redesigning our workflows as it shifts.
-
----
-
-# You are leaving one of the most consequential
-
-The workflow needs clearer review boundaries.
-
-1. The question isn't are we using AI. 2. The right answer is going to be differentiated based on your domain, but it's up to you to figure out 3. Felt the difference and you feel it whether you're touching Opus 4.6 versus 4.5
+eyebrow: THE BETTER QUESTION
+# Who is responsible for knowing
+where the human/agent boundary is,
+and how workflows should change as that boundary shifts?
 
 ---
 
-# The moat becomes clearer human checkpoints.
+eyebrow: WHY THIS MATTERS
+# If nobody owns that,
+your org drifts.
+
+You keep old process,
+old review habits,
+and stale assumptions.
+
+---
+
+eyebrow: TAKEAWAY
+# AI adoption is not just tool usage.
+
+It’s organizational boundary management.

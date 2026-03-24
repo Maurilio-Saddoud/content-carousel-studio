@@ -33,8 +33,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t"
   },
@@ -73,8 +73,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re"
   },
@@ -90,7 +90,7 @@
     "wordCount": 53,
     "text": "Cursor, OpenAI's Codeex, GitHub Copilot, they don't just suggest code, they go ahead and execute it. They read your files. They make changes directly. They run commands. They install things. They iterate against their own mistakes. If you give a task and the agent works autonomously for a long time for 10, 20,",
     "titleSuggestion": "They read your files.",
-    "hook": "If you give a task and the agent works autonomously for a long time for 10, 20",
+    "hook": "If you give a task and the agent works autonomously for a long time for 10, 20,",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "includes enough specificity to avoid sounding generic",
@@ -114,7 +114,7 @@
       "lengthPenalty": 0
     },
     "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief-overlap filtering.",
     "rejectionReasons": [],
     "carouselSlug": "claude-code-wiped-2-5-years-of-data-th--segment-10-00-02-34-they-read-your-files"
   },
@@ -278,8 +278,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s"
   },
@@ -361,8 +361,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti"
   },
@@ -483,8 +483,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a"
   },
@@ -565,8 +565,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-"
   },
@@ -665,7 +665,7 @@
     "lineEnd": 534,
     "wordCount": 57,
     "text": "If you expect your app to eventually get to a serious size, you should be telling that expectation to your agent because you will help it to build accordingly. Now, I would advise you here to get deeper on technical details than you might think you need to. It is worth getting a response from the agent,",
-    "titleSuggestion": "It is worth getting a response from the agent",
+    "titleSuggestion": "It is worth getting a response from the agent,",
     "hook": "Now, I would advise you here to get deeper on technical details than you might think you need to.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
@@ -704,7 +704,7 @@
     "lineEnd": 606,
     "wordCount": 57,
     "text": "coding is management skills. And they are habits that you can practice. And if you start to practice them, a lot of what makes agents feel mysterious is going to evaporate. It's going to disappear because what we built in 2025 was good for the agents and the skills and the models of 2025. But the agents",
-    "titleSuggestion": "It's going to disappear",
+    "titleSuggestion": "It's going to disappear because what we built in 2025 was good for the agents and the skills and the models of 2025.",
     "hook": "It's going to disappear because what we built in 2025 was good for the agents and the skills and the models of 2025.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -1319,7 +1319,7 @@
     "lineEnd": 72,
     "wordCount": 60,
     "text": "the Mac Mini and unplug it to save even a part of her email archive. Agents are not as easy as vibe coding and you need to think differently when you manage agents. So, let's get into it. The first thing to realize is that your vibe coding tool may have become agentic when you weren't looking. So, Claude Code,",
-    "titleSuggestion": "The first thing to realize is that your vibe coding tool may have become agentic",
+    "titleSuggestion": "Agents are not as easy as vibe coding and you need to think differently when you manage agents.",
     "hook": "Agents are not as easy as vibe coding and you need to think differently when you manage agents.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -1867,7 +1867,7 @@
     "lineEnd": 64,
     "wordCount": 49,
     "text": "researcher, ended up in trouble because OpenClaw accidentally deleted a large portion of her email inbox in February 2026. Despite explicit instructions to confirm before acting, the agent decided to speedrun deleting emails. and that continued after she sent commands to stop and she described having to run to",
-    "titleSuggestion": "Despite explicit instructions to confirm before acting",
+    "titleSuggestion": "Despite explicit instructions to confirm before acting,",
     "hook": "Despite explicit instructions to confirm before acting, the agent decided to speedrun deleting emails.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
@@ -1992,8 +1992,8 @@
     "lineEnd": 436,
     "wordCount": 64,
     "text": "works for me and it really works for my customers who use it in all of the wild and woolly ways that humans use apps. That's where products go to die in that chasm in between. I cannot tell you how many times I've had a developer tell me, \"Well, it works on my machine.\" Well, that's not the point. So, here's how to",
-    "titleSuggestion": "I cannot tell you how many times I've had a developer tell me",
-    "hook": "I cannot tell you how many times I've had a developer tell me",
+    "titleSuggestion": "I cannot tell you how many times I've had a developer tell me,",
+    "hook": "I cannot tell you how many times I've had a developer tell me,",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "sounds grounded in lived or practical experience",
@@ -2323,7 +2323,7 @@
     "lineEnd": 243,
     "wordCount": 44,
     "text": "agent, which means you have to have a workflow file where the agent knows what it's doing and has logged that as a workflow. A planning file potentially, a context file where the agent can read the context of what it's trying to do",
-    "titleSuggestion": "Where the agent can read the context of what it's trying to do",
+    "titleSuggestion": "A planning file potentially,",
     "hook": "A planning file potentially, a context file where the agent can read the context of what it's trying to do",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
@@ -2364,7 +2364,7 @@
     "lineEnd": 511,
     "wordCount": 61,
     "text": "because you don't want to be doing that. You want to be in a world where payment is handled via like Stripe or API or something and you're not touching it. You want to be in a world where customer emails are not something you have to keep in a database securely and worry about whether or not you encrypted them",
-    "titleSuggestion": "You want to be in a world",
+    "titleSuggestion": "You want to be in a world where payment is handled via like Stripe or API or something and you're not touching it.",
     "hook": "You want to be in a world where payment is handled via like Stripe or API or something and you're not touching it.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2784,7 +2784,7 @@
     "wordCount": 64,
     "text": "technical competency to learn what git is and figure out how to use it so you can save a snapshot. You have got to use a tool that gives you a save point and yes it exists and I am asking you if you are working on something make this a priority ahead of the next feature request you want to build before your",
     "titleSuggestion": "You have got to use a tool that gives you a save point and yes it exists and I am asking you if you are working on something make this a priority ahead of the next feature request you want to build before your",
-    "hook": "If you are working on something make this a priority ahead of the next feature request you want to build before your",
+    "hook": "You have got to use a tool that gives you a save point and yes it exists and I am asking you if you are working on something make this a priority ahead of the next feature request you want to build before your",
     "whyItCouldWork": [
       "contains enough complete thoughts to turn into multiple slides"
     ],
@@ -3149,8 +3149,8 @@
     "lineEnd": 463,
     "wordCount": 32,
     "text": "data safe. Your agent, again, may not assume that they need to do that, but it's critically important, especially if you're dealing with paying customers on your app. Frankly, it's really important",
-    "titleSuggestion": "If you're dealing with paying customers on your app.",
-    "hook": "If you're dealing with paying customers on your app.",
+    "titleSuggestion": "Your agent, again, may not assume that they need to do that, but it's critically important, especially if you're dealing with paying customers on your app.",
+    "hook": "Your agent, again, may not assume that they need to do that, but it's critically important, especially if you're dealing with paying customers on your app.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -3192,8 +3192,8 @@
     "lineEnd": 388,
     "wordCount": 45,
     "text": "If it's medium, like adding a whole new feature, you may want to tell the agent to plan it into multiple features and ask the agent to execute it in pieces and validate completeness and hit a save point before going to the next feature.",
-    "titleSuggestion": "Like adding a whole new feature",
-    "hook": "Like adding a whole new feature",
+    "titleSuggestion": "If it's medium, like adding a whole new feature, you may want to tell the agent to plan it into multiple features and ask the agent to execute it in pieces and validate completeness and hit a save point before going to the next feature.",
+    "hook": "If it's medium, like adding a whole new feature, you may want to tell the agent to plan it into multiple features and ask the agent to execute it in pieces and validate completeness and hit a save point before going to the next feature.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic"
     ],

@@ -1,163 +1,222 @@
 [
   {
-    "id": "brief-segment-74",
-    "primaryIdeaId": "segment-74",
+    "id": "brief-segment-14",
+    "primaryIdeaId": "segment-14",
     "supportingIdeaIds": [
-      "segment-75",
-      "segment-73",
-      "segment-72"
+      "segment-117",
+      "segment-120",
+      "segment-103"
     ],
-    "thesis": "You see, the problem with large reasoning models is that they usually overthink and they end up spending a lot of tokens.",
+    "thesis": "M2.5 and it's also quite close to the top closed models out there including Gemini 3.1 Pro and also Opus 4.6 GBT 5.4 and then this benchmark GDP val is also really important.",
     "audience": "Audience: people using AI in real work, not just talking about it.",
-    "whyItMatters": "It says they are undergoing internal review and they do plan to release the models as well as the training data.",
+    "whyItMatters": "Unitere G1 robot in real life.",
     "supportPoints": [
-      "The problem with large reasoning models is that they usually overthink and they end up spending a lot of tokens.",
-      "A ton of these models just continue thinking and yapping all day and overexlaining things.",
-      "Then it's going to cost you a ton of money.",
-      "Most of the time it's not actually necessary."
+      "If you're interested in reading further, I'll link to this page in the description below.",
+      "Here you can see the full chat.",
+      "Of course, there's like hours and hours of keynotes and other presentations, so I only scratched the surface.",
+      "In humanoid robot news, here's just a video of an average day in Beijing."
     ],
     "distinctFromBriefIds": [
-      "brief-segment-14",
+      "brief-segment-130",
+      "brief-segment-74",
       "brief-segment-47",
       "brief-segment-23",
       "brief-segment-88",
       "brief-segment-82",
-      "brief-segment-21",
-      "brief-segment-117",
-      "brief-segment-120",
-      "brief-segment-103",
-      "brief-segment-147",
-      "brief-segment-163",
-      "brief-segment-26",
-      "brief-segment-156",
-      "brief-segment-65",
-      "brief-segment-161",
-      "brief-segment-124",
-      "brief-segment-20",
-      "brief-segment-72",
-      "brief-segment-164",
-      "brief-segment-141",
-      "brief-segment-01",
-      "brief-segment-39",
-      "brief-segment-58"
+      "brief-segment-21"
     ],
-    "carouselSlug": "ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week",
-    "diagnostics": {
-      "focusScore": 0.3274867485455721,
-      "overlapWithEarlierBriefs": 0,
-      "supportIdeaDistance": [
-        1,
-        1,
-        2
-      ]
-    }
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite"
+  },
+  {
+    "id": "brief-segment-130",
+    "primaryIdeaId": "segment-130",
+    "supportingIdeaIds": [
+      "segment-147",
+      "segment-163",
+      "segment-26"
+    ],
+    "thesis": "If you click on this GitHub repo, it contains all the instructions on how to download and run this.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Here are some more specs for your reference.",
+    "supportPoints": [
+      "If I click on the hugging face folder, this 1.7 model is 470 GB.",
+      "You can first get Stitch to design some wireframes and then send this markdown file over to an actual coding agent to code it up following these guidelines.",
+      "Anyways, Stitch has been one of my favorite free tools from Google.",
+      ">> Snugs, listen up everyone."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-14",
+      "brief-segment-74",
+      "brief-segment-47",
+      "brief-segment-23",
+      "brief-segment-88",
+      "brief-segment-82",
+      "brief-segment-21"
+    ],
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs"
+  },
+  {
+    "id": "brief-segment-74",
+    "primaryIdeaId": "segment-74",
+    "supportingIdeaIds": [
+      "segment-156",
+      "segment-65",
+      "segment-161"
+    ],
+    "thesis": "You see, the problem with large reasoning models is that they usually overthink and they end up spending a lot of tokens.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "You need to clone that person's voice and then generate that voice speaking out the new transcript.",
+    "supportPoints": [
+      "I'll link to this page in the description below.",
+      "Next up, this AI is quite fascinating.",
+      ">> So, indeed, it was able to clone her voice and make her speak this out.",
+      "Plus, also get the tree to collapse in the background."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-14",
+      "brief-segment-130",
+      "brief-segment-47",
+      "brief-segment-23",
+      "brief-segment-88",
+      "brief-segment-82",
+      "brief-segment-21"
+    ],
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week"
   },
   {
     "id": "brief-segment-47",
     "primaryIdeaId": "segment-47",
     "supportingIdeaIds": [
-      "segment-48",
-      "segment-46",
-      "segment-45"
+      "segment-124",
+      "segment-20",
+      "segment-72"
     ],
-    "thesis": "2.3 using fast video has by far the lowest latency",
+    "thesis": "2.3 using fast video has by far the lowest latency, like more than 10 times lower than the standard LTX 2.3.",
     "audience": "Audience: people using AI in real work, not just talking about it.",
-    "whyItMatters": "Fast video has the lowest latency.",
+    "whyItMatters": "The awesome thing is you can try this online.",
     "supportPoints": [
-      "I'm not even going to pause the video so you can see how quick this is.",
-      ">> You can see in just a few seconds it was",
-      "Like more than 10 times lower than the standard LTX 2.3.",
-      "The awesome thing is you can try this online."
+      "Kendrick Lamar and indeed at the Grammys almost a month later he won five awards.",
+      "Anyways, if you're interested in reading further, I'll link to this main page in the description below.",
+      "I said, currently they've only trained this on the streets of Soul, Korea, but, this is a really fascinating idea.",
+      "We could extrapolate this to other places in the world to build like a digital twin of Earth where you can explore around."
     ],
     "distinctFromBriefIds": [
       "brief-segment-14",
+      "brief-segment-130",
       "brief-segment-74",
       "brief-segment-23",
       "brief-segment-88",
       "brief-segment-82",
-      "brief-segment-21",
-      "brief-segment-117",
-      "brief-segment-120",
-      "brief-segment-103",
-      "brief-segment-147",
-      "brief-segment-163",
-      "brief-segment-26",
-      "brief-segment-156",
-      "brief-segment-65",
-      "brief-segment-161",
-      "brief-segment-124",
-      "brief-segment-20",
-      "brief-segment-72",
-      "brief-segment-164",
-      "brief-segment-141",
-      "brief-segment-01",
-      "brief-segment-39",
-      "brief-segment-58"
+      "brief-segment-21"
     ],
-    "carouselSlug": "ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you",
-    "diagnostics": {
-      "focusScore": 0.15163970588235295,
-      "overlapWithEarlierBriefs": 0,
-      "overlapWithNearestBriefId": "brief-segment-74",
-      "supportIdeaDistance": [
-        1,
-        1,
-        2
-      ]
-    }
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you"
   },
   {
-    "id": "brief-segment-103",
-    "primaryIdeaId": "segment-103",
+    "id": "brief-segment-23",
+    "primaryIdeaId": "segment-23",
     "supportingIdeaIds": [
-      "segment-102",
-      "segment-104",
-      "segment-101"
+      "segment-164",
+      "segment-141",
+      "segment-37"
     ],
-    "thesis": "Of course, there's like hours and hours of keynotes and other presentations, so I only scratched the surface.",
-    "audience": "Audience: people using AI in real work, not just talking about it.",
-    "whyItMatters": "In other words, instead of drawing every pixel the hard way, the GPU starts predicting what the final image should look like.",
+    "thesis": "Pinchbench and Claw Eval, which test its ability to do agentic workflows in like open claw scenarios, you can see that MIMO v2 Pro is really close to the performance of Opus 4.6, six, which is really impressive.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "A lot of my baby hotties are still in high school, so I wanted to answer a few questions from there.",
     "supportPoints": [
-      "I only scratched the surface.",
-      "The GPU starts predicting what the final image should look like.",
-      "These robotics companies are like training their robots for the event.",
-      "By fusing them together, the system can produce images"
+      "Here's the skeleton and here's the generation.",
+      "Here are some additional and very diverse examples.",
+      "You can run it locally on your computer and you just need to enter a topic and it can generate all the learning materials for you.",
+      "Anyways, here it contains all the instructions on how to set this up locally on your computer."
     ],
     "distinctFromBriefIds": [
       "brief-segment-14",
+      "brief-segment-130",
+      "brief-segment-74",
+      "brief-segment-47",
+      "brief-segment-88",
+      "brief-segment-82",
+      "brief-segment-21"
+    ],
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval"
+  },
+  {
+    "id": "brief-segment-88",
+    "primaryIdeaId": "segment-88",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-39",
+      "segment-58"
+    ],
+    "thesis": "Gro 3 LPUs, is optimized to handle all these requests.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "It's ultra low latency, so AI agents can respond almost instantly instead of working alone.",
+    "supportPoints": [
+      "AI never sleeps and this week has been absolutely insane.",
+      "This is basically a framework that takes your normal conversations and then it automatically adds skills which are saved in its library of skills.",
+      "Whereas for the rest of these competitors, there are some errors with the characters.",
+      "A lot of them are like missing some strokes."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-14",
+      "brief-segment-130",
+      "brief-segment-74",
+      "brief-segment-47",
+      "brief-segment-23",
+      "brief-segment-82",
+      "brief-segment-21"
+    ],
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nvi--segment-88-00-25-13-gro-3-lpus-is-optimized-"
+  },
+  {
+    "id": "brief-segment-82",
+    "primaryIdeaId": "segment-82",
+    "supportingIdeaIds": [
+      "segment-117",
+      "segment-120",
+      "segment-103"
+    ],
+    "thesis": "This is Nvidia's idea of what a full AI supercomput should look like.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "Instead of building one single chip, they designed an entire computing system from the ground up.",
+    "supportPoints": [
+      "This system is optimized to run AI agents at a massive scale.",
+      "It's made of seven new chips that work together like one team.",
+      "Unitere G1 robot in real life."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-14",
+      "brief-segment-130",
       "brief-segment-74",
       "brief-segment-47",
       "brief-segment-23",
       "brief-segment-88",
-      "brief-segment-82",
-      "brief-segment-21",
-      "brief-segment-117",
-      "brief-segment-120",
-      "brief-segment-147",
-      "brief-segment-163",
-      "brief-segment-26",
-      "brief-segment-156",
-      "brief-segment-65",
-      "brief-segment-161",
-      "brief-segment-124",
-      "brief-segment-20",
-      "brief-segment-72",
-      "brief-segment-164",
-      "brief-segment-141",
-      "brief-segment-01",
-      "brief-segment-39",
-      "brief-segment-58"
+      "brief-segment-21"
     ],
-    "carouselSlug": "ai-classrooms-self-evolving-ai-nv--segment-103-00-29-47-in-humanoid-robot-news-h",
-    "diagnostics": {
-      "focusScore": 0.2353333333333333,
-      "overlapWithEarlierBriefs": 0.021739130434782608,
-      "overlapWithNearestBriefId": "brief-segment-47",
-      "supportIdeaDistance": [
-        1,
-        1,
-        2
-      ]
-    }
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nvi--segment-82-00-23-17-this-is-nvidia-s-idea-of"
+  },
+  {
+    "id": "brief-segment-21",
+    "primaryIdeaId": "segment-21",
+    "supportingIdeaIds": [
+      "segment-117",
+      "segment-120",
+      "segment-103"
+    ],
+    "thesis": "They've actually released an incredibly powerful series of AI models.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Here are some specs on its architecture.",
+    "supportPoints": [
+      "The edge is not knowing one workflow. It is keeping your operating model current."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-14",
+      "brief-segment-130",
+      "brief-segment-74",
+      "brief-segment-47",
+      "brief-segment-23",
+      "brief-segment-88",
+      "brief-segment-82"
+    ],
+    "carouselSlug": "ai-classrooms-self-evolving-ai-nvi--segment-21-00-05-53-they-ve-actually-release"
   }
 ]

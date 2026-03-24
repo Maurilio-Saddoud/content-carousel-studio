@@ -37,8 +37,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh"
   },
@@ -78,8 +78,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-"
   },
@@ -205,8 +205,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl"
   },
@@ -245,8 +245,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens"
   },
@@ -284,8 +284,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma"
   },
@@ -323,7 +323,7 @@
       "lengthPenalty": 0
     },
     "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief-overlap filtering.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-block-d--segment-63-00-18-33-thank-you-very-much"
   },
@@ -362,8 +362,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "candidate",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped after brief overlap/focus filtering.",
+    "status": "published",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
     "rejectionReasons": [],
     "carouselSlug": "4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys"
   },
@@ -463,8 +463,8 @@
     "lineEnd": 123,
     "wordCount": 54,
     "text": "not exist before. Now, if your ratio looks anything like the research suggests, you spend roughly 60% of your time on those first two categories and 40% on the third if you're lucky. So, 60% of your time goes into meetings and goes into creating documents to coordinate with people and only 40% goes",
-    "titleSuggestion": "If your ratio looks anything like the research suggests",
-    "hook": "You spend roughly 60% of your time on those first two categories and 40% on the third",
+    "titleSuggestion": "Now, if your ratio looks anything like the research suggests, you spend roughly 60% of your time on those first two categories and 40% on the third if you're lucky.",
+    "hook": "Now, if your ratio looks anything like the research suggests, you spend roughly 60% of your time on those first two categories and 40% on the third if you're lucky.",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "includes enough specificity to avoid sounding generic",
@@ -504,7 +504,7 @@
     "lineEnd": 169,
     "wordCount": 50,
     "text": "because it's a direct path to value. If you could snap your fingers and have everyone share perfect context with zero latency and zero translation loss, you would delete most of our roles overnight. Not because the people are unnecessary, but because the problem they solve would not exist anymore.",
-    "titleSuggestion": "You would delete most of our roles overnight.",
+    "titleSuggestion": "Not because the people are unnecessary,",
     "hook": "Not because the people are unnecessary, but because the problem they solve would not exist anymore.",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
@@ -1249,8 +1249,8 @@
     "lineEnd": 497,
     "wordCount": 63,
     "text": "artifacts that just go to make more meetings and it's not and that's not the reason the company is there and the company is there to produce value. I recognize that this is a massive change and as much as I am excited because it asks us to have a deeper vision of work and the value that we can bring to the",
-    "titleSuggestion": "I recognize that this is a massive change and as much as I am excited",
-    "hook": "I recognize that this is a massive change and as much as I am excited",
+    "titleSuggestion": "I recognize that this is a massive change and as much as I am excited because it asks us to have a deeper vision of work and the value that we can bring to the",
+    "hook": "I recognize that this is a massive change and as much as I am excited because it asks us to have a deeper vision of work and the value that we can bring to the",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
       "contains enough complete thoughts to turn into multiple slides"
@@ -2075,8 +2075,8 @@
     "lineEnd": 193,
     "wordCount": 48,
     "text": "codebase, reads the progress file and the git history full context in seconds. The onboarding tax, the coordination tax, neither of those exist because the problem that onboarding solves, transferring institutional context from human brains to a new human brain, that just doesn't exist for the agent. You",
-    "titleSuggestion": "Transferring institutional context from human brains to a new human brain",
-    "hook": "Transferring institutional context from human brains to a new human brain",
+    "titleSuggestion": "The onboarding tax,",
+    "hook": "The onboarding tax,",
     "whyItCouldWork": [
       "contains strong hook language instead of bland exposition",
       "includes enough specificity to avoid sounding generic",
@@ -2117,7 +2117,7 @@
     "lineEnd": 107,
     "wordCount": 43,
     "text": "creating documents, creating artifacts whose primary purpose was translating your knowledge into a form someone else could do something about. PRDS are this, specs are this, decks are this, tickets are this, handoff documents are this. That email you drafted for 45 minutes",
-    "titleSuggestion": "Handoff documents are this.",
+    "titleSuggestion": "PRDS are this, specs are this, decks are this, tickets are this, handoff documents are this.",
     "hook": "PRDS are this, specs are this, decks are this, tickets are this, handoff documents are this.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
@@ -2199,8 +2199,8 @@
     "lineEnd": 24,
     "wordCount": 59,
     "text": "am I affected?\" And it's sort of this cycle of panic, right? The implicit assumption is that the organization is a fixed structure, which is wrong by the way, and that it's a set of roles performing a set of tasks, also wrong by the way, and that AI is a force that acts on that structure, automating some",
-    "titleSuggestion": "The implicit assumption is that the organization is a fixed structure",
-    "hook": "The implicit assumption is that the organization is a fixed structure",
+    "titleSuggestion": "The implicit assumption is that the organization is a fixed structure,",
+    "hook": "The implicit assumption is that the organization is a fixed structure,",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic",
       "contains enough complete thoughts to turn into multiple slides"
@@ -2281,7 +2281,7 @@
     "lineEnd": 369,
     "wordCount": 52,
     "text": "changes the structure of work the entire distribution ution of work changes with it. Most tasks that exist today are coordination tasks and coordination tasks exist because the execution layer is human. If you change the execution layer and you don't just automate tasks inside that org chart, you are going to",
-    "titleSuggestion": "Most tasks that exist today are coordination tasks and coordination tasks exist",
+    "titleSuggestion": "If you change the execution layer and you don't just automate tasks inside that org chart, you are going to",
     "hook": "If you change the execution layer and you don't just automate tasks inside that org chart, you are going to",
     "whyItCouldWork": [
       "has contrast/tension, which usually makes better post framing",
@@ -2857,8 +2857,8 @@
     "lineEnd": 584,
     "wordCount": 50,
     "text": "curiosity. How you learn, how you start to scale up, how you start to think deliberately about your job so you're proactive as you look at pieces of your work that are going to disappear, where you identify coordination taxes, how you start to bring agents in on your terms.",
-    "titleSuggestion": "How you start to think deliberately about your job",
-    "hook": "How you start to think deliberately about your job",
+    "titleSuggestion": "How you learn, how you start to scale up, how you start to think deliberately about your job so you're proactive as you look at pieces of your work that are going to disappear, where you identify coordination taxes, how you start to bring agents in on your terms.",
+    "hook": "How you learn, how you start to scale up, how you start to think deliberately about your job so you're proactive as you look at pieces of your work that are going to disappear, where you identify coordination taxes, how you start to bring agents in on your terms.",
     "whyItCouldWork": [
       "includes enough specificity to avoid sounding generic"
     ],
