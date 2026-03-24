@@ -1,7 +1,8 @@
 import { execFile } from 'node:child_process'
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { access, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import { promisify } from 'node:util'
 import path from 'node:path'
+import matter from 'gray-matter'
 import { syncCarouselDirectoryIndex } from '@/lib/carousels'
 
 type TranscriptLine = {
@@ -87,6 +88,22 @@ type Carousel = {
 
 type CarouselDirectoryItem = Omit<Carousel, 'slides'>
 
+type BriefScorecard = {
+  themeStrength: number
+  authorityPotential: number
+  clarity: number
+  distinctness: number
+  commercialRelevance: number
+  fidelity: number
+  total: number
+}
+
+type EditorialCritique = {
+  status: 'accept' | 'rewrite'
+  reasons: string[]
+  rewriteGoals: string[]
+}
+
 type Brief = {
   id: string
   primaryIdeaId: string
@@ -96,6 +113,8 @@ type Brief = {
   whyItMatters: string
   supportPoints: string[]
   distinctFromBriefIds: string[]
+  scorecard: BriefScorecard
+  critique: EditorialCritique
   carouselSlug?: string
 }
 
@@ -103,6 +122,7 @@ type CarouselBundle = {
   brief: Brief
   idea: Idea
   carousel: Carousel
+  critique: EditorialCritique
 }
 
 type ExistingSlugMap = Record<string, string>
@@ -123,10 +143,10 @@ type SourceManifest = {
   ideaCount?: number
   briefCount?: number
   publishedIdeaIds?: string[]
+  createdFiles?: string[]
   selectedSegmentIds?: string[]
   briefs?: Array<{ id?: string; primaryIdeaId?: string; thesis?: string; slug?: string }>
   carousels?: Array<{ segmentId?: string; slug?: string; title?: string; previewPath?: string; carouselPath?: string }>
-  createdFiles?: string[]
 }
 
 const TRANSCRIPT_TOOL_PATH = path.resolve('../youtube-transcript-v1/yt_transcript.py')
@@ -343,6 +363,160 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
   await writeFile(path.join(sourceDir, 'summary.md'), buildSummary(metadata, sourceSlug, carouselBundles, ideas, briefs), 'utf8')
 
   console.log(`Rebuilt ${carouselBundles.length} carousel${carouselBundles.length === 1 ? '' : 's'} for ${sourceSlug}`)
+}
+
+
+export async function syncSourceManifestFromArgv(argv: string[] = process.argv.slice(2)) {
+  const args = parseSyncSourceArgs(argv)
+  const targetSlugs = args.repo
+    ? await listSourceSlugs()
+    : args.sourceSlug
+      ? [args.sourceSlug]
+      : []
+
+  if (targetSlugs.length === 0) {
+    throw new Error('Usage: content-carousel sync-source <source-slug> | content-carousel sync-source --repo')
+  }
+
+  for (const sourceSlug of targetSlugs) {
+    await syncSourceManifest(sourceSlug)
+  }
+}
+
+async function syncSourceManifest(sourceSlug: string) {
+  const sourceDir = path.resolve('sources', sourceSlug)
+  const sourceManifestRaw = await readFile(path.join(sourceDir, 'source.json'), 'utf8')
+  const sourceManifest = JSON.parse(sourceManifestRaw) as SourceManifest
+  const metadata = sourceManifest.video
+
+  if (!metadata?.title) {
+    throw new Error(`Source package ${sourceSlug} is missing video metadata in sources/${sourceSlug}/source.json`)
+  }
+
+  const ideas = JSON.parse(await readFile(path.join(sourceDir, 'ideas.json'), 'utf8')) as Idea[]
+  const briefs = JSON.parse(await readFile(path.join(sourceDir, 'briefs.json'), 'utf8')) as Brief[]
+  const survivingCarouselEntries = await Promise.all((sourceManifest.carousels ?? []).map(async (entry) => {
+    const slug = entry.slug
+    if (!slug) return undefined
+    const markdown = await readCarouselMarkdown(slug)
+    if (!markdown) return undefined
+    return {
+      slug,
+      segmentId: entry.segmentId,
+      title: markdown.title,
+      previewPath: `/carousel/${slug}`,
+      carouselPath: `carousels/${slug}/carousel.md`,
+    }
+  }))
+  const carousels = survivingCarouselEntries.filter((entry): entry is NonNullable<typeof entry> => Boolean(entry))
+  const survivingSlugs = new Set(carousels.map((entry) => entry.slug))
+  const survivingSegmentIds = new Set(carousels.map((entry) => entry.segmentId).filter((id): id is string => Boolean(id)))
+  const syncedBriefs = briefs.filter((brief) => brief.carouselSlug && survivingSlugs.has(brief.carouselSlug))
+  const syncedBriefEntries = syncedBriefs.map((brief) => ({
+    id: brief.id,
+    primaryIdeaId: brief.primaryIdeaId,
+    thesis: brief.thesis,
+    slug: brief.carouselSlug,
+  }))
+  const syncedPublishedIdeaIds = syncedBriefs
+    .map((brief) => brief.primaryIdeaId)
+    .filter((ideaId) => survivingSegmentIds.has(ideaId))
+  const syncedPublishedIdeaIdSet = new Set(syncedPublishedIdeaIds)
+  const syncedIdeas = ideas.map((idea) => syncedPublishedIdeaIdSet.has(idea.id)
+    ? { ...idea, status: 'published' as const }
+    : idea.status === 'published'
+      ? { ...idea, status: 'candidate' as const, selectionReason: `${idea.selectionReason} Dropped during sync-source because the published carousel markdown no longer exists.`.trim() }
+      : idea)
+  const carouselBundles = syncedBriefs.flatMap((brief) => {
+    const idea = ideas.find((entry) => entry.id === brief.primaryIdeaId)
+    if (!idea || !brief.carouselSlug) return []
+    return [{
+      brief,
+      idea,
+      carousel: { slug: brief.carouselSlug },
+    }]
+  })
+
+  const nextManifest: SourceManifest = {
+    ...sourceManifest,
+    defaultBehavior: sourceManifest.defaultBehavior ?? 'creates source artifacts, ranks candidate ideas, promotes distinct briefs, and publishes markdown carousels from those briefs',
+    ideaCount: syncedIdeas.length,
+    briefCount: syncedBriefs.length,
+    publishedIdeaIds: syncedPublishedIdeaIds,
+    briefs: syncedBriefEntries,
+    carousels,
+    createdFiles: [
+      `sources/${sourceSlug}/source.json`,
+      `sources/${sourceSlug}/raw-transcript.md`,
+      `sources/${sourceSlug}/clean-transcript.md`,
+      `sources/${sourceSlug}/segments.json`,
+      `sources/${sourceSlug}/ideas.json`,
+      `sources/${sourceSlug}/briefs.json`,
+      `sources/${sourceSlug}/summary.md`,
+      ...carousels.map((entry) => `carousels/${entry.slug}/carousel.md`),
+      'carousels/index.json',
+    ],
+  }
+
+  await writeFile(path.join(sourceDir, 'source.json'), `${JSON.stringify(nextManifest, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(sourceDir, 'ideas.json'), `${JSON.stringify(syncedIdeas, null, 2)}\n`, 'utf8')
+  await writeFile(path.join(sourceDir, 'summary.md'), buildSummary(metadata, sourceSlug, carouselBundles as CarouselBundle[], syncedIdeas, syncedBriefs), 'utf8')
+
+  console.log(`Synced source manifest for ${sourceSlug} (${carousels.length} surviving carousel${carousels.length === 1 ? '' : 's'})`)
+}
+
+function parseSyncSourceArgs(argv: string[]) {
+  const args: { sourceSlug?: string; repo?: boolean } = {}
+
+  for (let i = 0; i < argv.length; i++) {
+    const current = argv[i]
+    if (!current) continue
+
+    if (current === '--repo') {
+      args.repo = true
+      continue
+    }
+
+    if (!args.sourceSlug && !current.startsWith('--')) {
+      args.sourceSlug = current
+      continue
+    }
+
+    throw new Error(`Unknown argument: ${current}`)
+  }
+
+  if (args.repo && args.sourceSlug) {
+    throw new Error('Usage: content-carousel sync-source <source-slug> | content-carousel sync-source --repo')
+  }
+
+  if (!args.repo && !args.sourceSlug) {
+    throw new Error('Usage: content-carousel sync-source <source-slug> | content-carousel sync-source --repo')
+  }
+
+  return args
+}
+
+async function listSourceSlugs() {
+  try {
+    const names = await readdir(path.resolve('sources'), { withFileTypes: true })
+    return names.filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort((a, b) => a.localeCompare(b))
+  } catch {
+    return []
+  }
+}
+
+async function readCarouselMarkdown(slug: string) {
+  const filePath = path.resolve('carousels', slug, 'carousel.md')
+  try {
+    await access(filePath)
+    const raw = await readFile(filePath, 'utf8')
+    const parsed = matter(raw)
+    return {
+      title: String(parsed.data.title ?? slug).trim(),
+    }
+  } catch {
+    return undefined
+  }
 }
 
 function parseArgs(argv: string[]) {
@@ -1053,6 +1227,7 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
     const whyItMatters = inferWhyItMatters(idea, supportingIdeas, thesis, usedWhy)
     const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport, usedSupportLines, thesis, whyItMatters)
 
+    const scorecard = scoreBriefAngle(idea, supportingIdeas, thesis, whyItMatters, supportPoints)
     const brief: Brief = {
       id: `brief-${idea.id}`,
       primaryIdeaId: idea.id,
@@ -1062,6 +1237,8 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
       whyItMatters,
       supportPoints,
       distinctFromBriefIds: publishedIdeas.filter((entry) => entry.id !== idea.id).map((entry) => `brief-${entry.id}`),
+      scorecard,
+      critique: buildBriefCritique(scorecard, thesis, whyItMatters, supportPoints),
       carouselSlug: existingSlugs[idea.id] || buildCarouselSlug(sourceSlug, idea),
     }
 
@@ -1091,6 +1268,8 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
     'The old operating model is already expiring.',
   ], new Set())
   const fallbackWhy = inferWhyItMatters(fallbackIdea, [], fallbackThesis, new Set())
+  const fallbackSupportPoints = buildSupportPoints(fallbackIdea, [], new Set(), [], fallbackThesis, fallbackWhy)
+  const fallbackScorecard = scoreBriefAngle(fallbackIdea, [], fallbackThesis, fallbackWhy, fallbackSupportPoints)
 
   return [{
     id: `brief-${fallbackIdea.id}`,
@@ -1099,10 +1278,98 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
     thesis: fallbackThesis,
     audience: inferAudience(fallbackIdea.text, []),
     whyItMatters: fallbackWhy,
-    supportPoints: buildSupportPoints(fallbackIdea, [], new Set(), [], fallbackThesis, fallbackWhy),
+    supportPoints: fallbackSupportPoints,
     distinctFromBriefIds: [],
+    scorecard: fallbackScorecard,
+    critique: buildBriefCritique(fallbackScorecard, fallbackThesis, fallbackWhy, fallbackSupportPoints),
     carouselSlug: existingSlugs[fallbackIdea.id] || buildCarouselSlug(sourceSlug, fallbackIdea),
   }]
+}
+
+function scoreBriefAngle(primary: Idea, support: Idea[], thesis: string, whyItMatters: string, supportPoints: string[]): BriefScorecard {
+  const sourceText = [primary.text, primary.hook, primary.titleSuggestion, thesis, whyItMatters, ...supportPoints, ...support.map((idea) => idea.text)].join(' ')
+  const lowered = sourceText.toLowerCase()
+  const themeStrength = Math.max(1, Math.min(5,
+    (thesis.length >= 48 ? 2 : 1)
+    + (supportPoints.length >= 2 ? 1 : 0)
+    + (/(system|workflow|boundary|market|strategy|moat|operating|trust|distribution|review|agent)/i.test(sourceText) ? 1 : 0)
+    + (supportPoints.some((point) => point.length >= 52) ? 1 : 0),
+  ))
+  const authorityPotential = Math.max(1, Math.min(5,
+    2
+    + (/(most teams|smart teams|operators?|leaders?|founders?|organizations?|companies)/i.test(sourceText) ? 1 : 0)
+    + (/(overcomplicating|wrong question|real question|real story|actually|not just)/i.test(sourceText) ? 1 : 0)
+    + (supportPoints.length >= 2 ? 1 : 0),
+  ))
+  const clarity = Math.max(1, Math.min(5,
+    2
+    + (thesis.length <= 90 ? 1 : 0)
+    + (whyItMatters.length <= 110 ? 1 : 0)
+    + (supportPoints.every((point) => point.length <= 120) ? 1 : 0),
+  ))
+  const distinctness = Math.max(1, Math.min(5,
+    2
+    + (support.length === 0 ? 1 : 0)
+    + (new Set(supportPoints.map((point) => slugify(point))).size === supportPoints.length ? 1 : 0)
+    + (!/(everyone|everything|nothing|always|never)/i.test(thesis) ? 1 : 0),
+  ))
+  const commercialRelevance = Math.max(1, Math.min(5,
+    1
+    + (/(company|teams|operators?|leaders?|organizations?|buyers?|market|workflow|process)/i.test(sourceText) ? 2 : 0)
+    + (/(cost|speed|trust|review|margin|delivery|adoption|sales)/i.test(lowered) ? 1 : 0)
+    + (/(engineer|product|manager|founder)/i.test(lowered) ? 1 : 0),
+  ))
+  const fidelity = Math.max(1, Math.min(5,
+    2
+    + (primary.wordCount >= 38 ? 1 : 0)
+    + (supportPoints.length >= 2 ? 1 : 0)
+    + (!/(must|guarantee|everyone|nobody|always|never)/i.test(thesis) ? 1 : 0),
+  ))
+
+  return {
+    themeStrength,
+    authorityPotential,
+    clarity,
+    distinctness,
+    commercialRelevance,
+    fidelity,
+    total: themeStrength + authorityPotential + clarity + distinctness + commercialRelevance + fidelity,
+  }
+}
+
+function buildBriefCritique(scorecard: BriefScorecard, thesis: string, whyItMatters: string, supportPoints: string[]): EditorialCritique {
+  const reasons: string[] = []
+  const rewriteGoals: string[] = []
+
+  if (scorecard.themeStrength <= 3) {
+    reasons.push('Angle feels thinner than the best concept-led carousels.')
+    rewriteGoals.push('Center the strongest underlying theme, not just the most quotable line.')
+  }
+  if (scorecard.authorityPotential <= 3) {
+    reasons.push('Voice risks sounding descriptive instead of sharp and opinionated.')
+    rewriteGoals.push('Make the framing feel more like a real point of view with operator conviction.')
+  }
+  if (scorecard.clarity <= 3 || thesis.length > 96) {
+    reasons.push('Hook or slide spine is carrying too much verbal clutter.')
+    rewriteGoals.push('Compress the lead and make the slide progression cleaner.')
+  }
+  if (scorecard.fidelity <= 3) {
+    reasons.push('Claim strength is getting too close to overreach.')
+    rewriteGoals.push('Keep the claim sharp, but anchor it more tightly to what the source actually supports.')
+  }
+  if (supportPoints.length < 2) {
+    reasons.push('Not enough support to justify a padded multi-slide carousel.')
+    rewriteGoals.push('Ship fewer slides or tighten every supporting point.')
+  }
+  if (!rewriteGoals.length) {
+    rewriteGoals.push('Preserve the real theme, keep the voice sharp, and avoid filler.')
+  }
+
+  return {
+    status: reasons.length > 0 ? 'rewrite' : 'accept',
+    reasons,
+    rewriteGoals,
+  }
 }
 
 function buildCarouselBundles(metadata: VideoMetadata, sourceSlug: string, briefs: Brief[], ideas: Idea[]): CarouselBundle[] {
@@ -1112,11 +1379,16 @@ function buildCarouselBundles(metadata: VideoMetadata, sourceSlug: string, brief
     const idea = ideas.find((entry) => entry.id === brief.primaryIdeaId)
     if (!idea) return []
     const carouselSlug = brief.carouselSlug || idea.carouselSlug || buildCarouselSlug(sourceSlug, idea)
-    const carousel = buildCarousel(metadata, sourceSlug, carouselSlug, brief, idea, ideas, usedBatchTitles)
+    const draftCarousel = buildCarousel(metadata, sourceSlug, carouselSlug, brief, idea, ideas, usedBatchTitles)
+    const critique = critiqueCarouselDraft(draftCarousel, brief, idea)
+    const carousel = critique.status === 'rewrite'
+      ? rewriteCarouselFromCritique(draftCarousel, brief, idea, critique, usedBatchTitles)
+      : draftCarousel
     return [{
       brief: { ...brief, carouselSlug },
       idea: { ...idea, carouselSlug },
       carousel,
+      critique,
     }]
   })
 }
@@ -1127,11 +1399,11 @@ function buildSummary(metadata: VideoMetadata, sourceSlug: string, carouselBundl
   const rejected = ideas.filter((idea) => idea.status === 'rejected').slice(0, 5)
   return `# Source Summary\n\n## Video\n- Title: ${metadata.title}\n- Creator: ${metadata.authorName ?? 'Unknown'}\n\n## Carousels created automatically\n- Source slug: ${sourceSlug}\n- Carousel count: ${carouselBundles.length}\n${carouselBundles
     .map(
-      (bundle) => `- ${bundle.carousel.slug} → /carousel/${bundle.carousel.slug} (brief ${bundle.brief.id} from ${bundle.idea.id}, ${bundle.idea.start} → ${bundle.idea.end}, score ${bundle.idea.score})`,
+      (bundle) => `- ${bundle.carousel.slug} → /carousel/${bundle.carousel.slug} (brief ${bundle.brief.id} from ${bundle.idea.id}, ${bundle.idea.start} → ${bundle.idea.end}, score ${bundle.idea.score}, editorial ${bundle.critique.status})`,
     )
     .join('\n')}\n\n## Published briefs\n${briefs
     .map(
-      (brief, index) => `\n### #${index + 1} — ${brief.thesis}\n- Brief: ${brief.id}\n- Primary idea: ${brief.primaryIdeaId}\n- Audience: ${brief.audience}\n- Why it matters: ${brief.whyItMatters}\n- Support:\n${brief.supportPoints.map((point) => `  - ${point}`).join('\n')}\n- Distinct from: ${brief.distinctFromBriefIds.join(', ') || 'n/a'}\n`,
+      (brief, index) => `\n### #${index + 1} — ${brief.thesis}\n- Brief: ${brief.id}\n- Primary idea: ${brief.primaryIdeaId}\n- Audience: ${brief.audience}\n- Why it matters: ${brief.whyItMatters}\n- Angle score: ${brief.scorecard.total}/30 (theme ${brief.scorecard.themeStrength}, authority ${brief.scorecard.authorityPotential}, clarity ${brief.scorecard.clarity}, distinctness ${brief.scorecard.distinctness}, commercial ${brief.scorecard.commercialRelevance}, fidelity ${brief.scorecard.fidelity})\n- Brief critique: ${brief.critique.status}\n- Rewrite goals:\n${brief.critique.rewriteGoals.map((goal) => `  - ${goal}`).join('\n')}\n- Support:\n${brief.supportPoints.map((point) => `  - ${point}`).join('\n')}\n- Distinct from: ${brief.distinctFromBriefIds.join(', ') || 'n/a'}\n`,
     )
     .join('\n')}\n\n## Published ideas\n${published
     .map(
@@ -1344,6 +1616,146 @@ function editorialPolishCarousel(brief: Brief, carousel: Carousel, usedBatchTitl
 
 function titleBaseFromSlides(slides: CarouselSlide[]) {
   return slides[0]?.title?.trim() || 'Untitled carousel'
+}
+
+function critiqueCarouselDraft(carousel: Carousel, brief: Brief, idea: Idea): EditorialCritique {
+  const reasons: string[] = [...brief.critique.reasons]
+  const rewriteGoals: string[] = [...brief.critique.rewriteGoals]
+  const firstSlide = carousel.slides[0]
+  const lastSlide = carousel.slides[carousel.slides.length - 1]
+  const weakBodies = carousel.slides.filter((slide, index) => index > 0 && slide.body.trim().length < 45)
+  const repeatedTitles = new Set<string>()
+  const seenTitles = new Set<string>()
+
+  for (const slide of carousel.slides) {
+    const key = cleanSentence(slide.title).toLowerCase()
+    if (!key) continue
+    if (seenTitles.has(key)) repeatedTitles.add(key)
+    seenTitles.add(key)
+  }
+
+  if (!firstSlide || firstSlide.title.trim().length < 24) {
+    reasons.push('Opening claim is too thin to carry the carousel.')
+    rewriteGoals.push('Strengthen slide one so it states the real theme immediately.')
+  }
+  if (firstSlide && isWeakDisplayLine(firstSlide.title)) {
+    reasons.push('Opening hook still feels generic.')
+    rewriteGoals.push('Replace the lead with a sharper, more opinionated framing.')
+  }
+  if (weakBodies.length >= 2) {
+    reasons.push('Too many slides are running on fumes instead of real support.')
+    rewriteGoals.push('Trim or rewrite weak middle slides so each one earns its place.')
+  }
+  if (repeatedTitles.size > 0) {
+    reasons.push('Slide titles are stepping on each other.')
+    rewriteGoals.push('Make each slide advance the idea instead of repeating the same claim.')
+  }
+  if (lastSlide && lastSlide.title.trim().length < 18) {
+    reasons.push('Closing payoff is not landing cleanly enough.')
+    rewriteGoals.push('End with a sharper takeaway or operator-level implication.')
+  }
+  if (idea.wordCount < 42 && carousel.slides.length > 5) {
+    reasons.push('The source segment is not rich enough to justify this many slides.')
+    rewriteGoals.push('Compress the carousel to the strongest surviving spine.')
+  }
+
+  const uniqueGoals = uniqueNormalized(rewriteGoals)
+  return {
+    status: reasons.length > 0 ? 'rewrite' : 'accept',
+    reasons: uniqueNormalized(reasons),
+    rewriteGoals: uniqueGoals.length ? uniqueGoals : ['Preserve the strongest angle and keep the writing sharp.'],
+  }
+}
+
+function rewriteCarouselFromCritique(
+  carousel: Carousel,
+  brief: Brief,
+  idea: Idea,
+  critique: EditorialCritique,
+  usedBatchTitles: Set<string> = new Set(),
+): Carousel {
+  const totalSlides = Math.min(carousel.slides.length, idea.wordCount < 56 ? 5 : 6)
+  const trimmedSlides = carousel.slides.slice(0, totalSlides).map((slide) => ({ ...slide }))
+  const slides = trimmedSlides.map((slide, index) => {
+    const rewrittenTitle = rewriteSlideTitle(slide.title, brief, critique, index, totalSlides)
+    const rewrittenBody = rewriteSlideBody(slide.body, brief, critique, index, totalSlides)
+    return {
+      ...slide,
+      title: rewrittenTitle,
+      body: rewrittenBody,
+    }
+  })
+
+  return editorialPolishCarousel(brief, {
+    ...carousel,
+    title: titleBaseFromSlides(slides),
+    slides,
+  }, usedBatchTitles)
+}
+
+function rewriteSlideTitle(title: string, brief: Brief, critique: EditorialCritique, index: number, totalSlides: number) {
+  if (index === 0) {
+    return chooseOpeningTitle([
+      brief.thesis,
+      title,
+      brief.whyItMatters,
+    ])
+  }
+  if (index === 1) {
+    return pickDisplayLine(uniqueNormalized([
+      brief.whyItMatters,
+      title,
+      brief.supportPoints[0] ?? '',
+    ]), { preferredMax: 84 }) || fallbackTitleForPosition(index, brief, totalSlides)
+  }
+  if (index === totalSlides - 1) {
+    return pickDisplayLine(uniqueNormalized([
+      buildClosingFallback(brief),
+      titleFromSentence(brief.supportPoints[2] ?? ''),
+      titleFromSentence(brief.supportPoints[1] ?? ''),
+      brief.supportPoints[2] ?? '',
+      brief.supportPoints[1] ?? '',
+      title,
+    ]), { preferredMax: 84 }) || buildClosingFallback(brief)
+  }
+
+  const supportIndex = Math.max(0, index - 2)
+  return pickDisplayLine(uniqueNormalized([
+    titleFromSentence(brief.supportPoints[supportIndex] ?? ''),
+    brief.supportPoints[supportIndex] ?? '',
+    title,
+    fallbackTitleForPosition(index, brief, totalSlides),
+  ]), { preferredMax: 84 }) || titleFromSentence(brief.supportPoints[supportIndex] ?? '') || fallbackTitleForPosition(index, brief, totalSlides) || 'The workflow changes here.'
+}
+
+function rewriteSlideBody(body: string, brief: Brief, critique: EditorialCritique, index: number, totalSlides: number) {
+  const cleaned = splitSlideBodyLines(polishSlideBody(body, index, totalSlides))
+  if (index === 0) return ''
+  if (index === 1) {
+    return buildBodyLines([
+      brief.whyItMatters,
+      cleaned[0] ?? brief.supportPoints[0] ?? '',
+    ])
+  }
+  if (index === totalSlides - 1) {
+    return buildBodyLines([
+      brief.supportPoints[Math.min(2, brief.supportPoints.length - 1)] ?? cleaned[0] ?? '',
+      'The edge is better judgment, not louder tooling.',
+    ])
+  }
+
+  const supportIndex = Math.max(0, index - 2)
+  return buildBodyLines([
+    brief.supportPoints[supportIndex] ?? cleaned[0] ?? '',
+    cleaned[0] ?? brief.whyItMatters,
+  ])
+}
+
+function splitSlideBodyLines(body: string) {
+  return uniqueNormalized(body
+    .split(/\n\n+/)
+    .flatMap((part) => part.split(/\n+/))
+    .map((part) => part.replace(/^>\s*/, '').replace(/^\d+\.\s*/, '').trim()))
 }
 
 function buildBodyLines(lines: string[]) {

@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { buildPagesFromArgv } from './build-pages'
-import { ingestYoutubeFromArgv, rebuildCarouselsFromSourceArgv } from './ingest-youtube'
+import { ingestYoutubeFromArgv, rebuildCarouselsFromSourceArgv, syncSourceManifestFromArgv } from './ingest-youtube'
 import { renderAllFromArgv } from './render-all'
 import { renderCarouselFromArgv } from './render-carousel'
 import { runSelfTestFromArgv } from './self-test'
@@ -29,6 +29,9 @@ export async function runCli(argv: string[] = process.argv.slice(2)) {
     case 'rebuild-source':
       await rebuildCarouselsFromSourceArgv(rest)
       return
+    case 'sync-source':
+      await syncSourceManifestFromArgv(rest)
+      return
     case 'render-all':
       await renderAllFromArgv(rest)
       return
@@ -51,7 +54,10 @@ Commands:
   render <slug>         Render one carousel preview route to PNG files
   render-all            Render PNG files for every carousel in the directory
   rebuild-source <slug> Rebuild published carousels from an existing local source package
+  sync-source <slug>    Reconcile source.json/summary.md with surviving briefs + carousel markdown
   self-test <slug>      Audit one source package for drift, weak titles, duplicates, and stale artifacts
+  self-test --repo      Audit every source package plus repo-wide duplicate/stale artifact drift
+                        Add --json for machine-readable output in either mode
   build-pages           Build the static site and PNG export bundle for Pages
   help                  Show this help
 
@@ -59,7 +65,11 @@ Examples:
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID
   content-carousel youtube https://www.youtube.com/watch?v=VIDEO_ID --slug my-topic
   content-carousel rebuild-source my-topic --max-segments 8
+  content-carousel sync-source my-topic
   content-carousel self-test my-topic
+  content-carousel self-test my-topic --json
+  content-carousel self-test --repo
+  content-carousel self-test --repo --json
   content-carousel render ai-memory-wall
   content-carousel build-pages
 `)

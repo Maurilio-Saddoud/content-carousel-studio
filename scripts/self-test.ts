@@ -1,4 +1,4 @@
-import { readdir, readFile } from 'node:fs/promises'
+import { access, readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
 import { isDirectExecution } from './direct-execution'
@@ -30,24 +30,33 @@ type AuditIssue = {
   message: string
 }
 
+type AuditReport = {
+  label: string
+  issues: AuditIssue[]
+}
+
 export async function runSelfTestFromArgv(argv: string[] = process.argv.slice(2)) {
   const args = parseArgs(argv)
-  const issues = await auditSource(args.sourceSlug, { strictGlobal: args.strictGlobal })
+  const report: AuditReport = args.repo
+    ? await auditRepo()
+    : { label: args.sourceSlug, issues: await auditSource(args.sourceSlug, { strictGlobal: args.strictGlobal }) }
 
-  const counts = issues.reduce(
-    (acc, issue) => {
-      acc[issue.level] += 1
-      return acc
-    },
-    { error: 0, warn: 0, info: 0 },
-  )
+  const counts = countIssues(report.issues)
 
-  console.log(`Self-test: ${args.sourceSlug}`)
-  console.log(`Errors: ${counts.error}  Warnings: ${counts.warn}  Notes: ${counts.info}`)
+  if (args.json) {
+    console.log(JSON.stringify({
+      label: report.label,
+      counts,
+      issues: report.issues,
+    }, null, 2))
+  } else {
+    console.log(`Self-test: ${report.label}`)
+    console.log(`Errors: ${counts.error}  Warnings: ${counts.warn}  Notes: ${counts.info}`)
 
-  for (const issue of issues) {
-    const prefix = issue.level === 'error' ? 'ERROR' : issue.level === 'warn' ? 'WARN ' : 'INFO '
-    console.log(`${prefix} [${issue.code}] ${issue.message}`)
+    for (const issue of report.issues) {
+      const prefix = issue.level === 'error' ? 'ERROR' : issue.level === 'warn' ? 'WARN ' : 'INFO '
+      console.log(`${prefix} [${issue.code}] ${issue.message}`)
+    }
   }
 
   if (counts.error > 0) {
@@ -64,10 +73,19 @@ async function auditSource(sourceSlug: string, options: { strictGlobal?: boolean
   const carousels = await Promise.all(
     (source.carousels ?? [])
       .filter((entry): entry is { segmentId?: string; slug: string; title?: string } => Boolean(entry.slug))
-      .map(async (entry) => ({
-        sourceEntry: entry,
-        markdown: await readCarousel(entry.slug),
-      })),
+      .map(async (entry) => {
+        try {
+          return {
+            sourceEntry: entry,
+            markdown: await readCarousel(entry.slug),
+          }
+        } catch {
+          return {
+            sourceEntry: entry,
+            markdown: null,
+          }
+        }
+      }),
   )
 
   const issues: AuditIssue[] = []
@@ -104,7 +122,28 @@ async function auditSource(sourceSlug: string, options: { strictGlobal?: boolean
   const carouselTitles = new Map<string, string[]>()
   const slideTitles = new Map<string, string[]>()
 
-  for (const { sourceEntry, markdown } of carousels) {
+  for (const carousel of carousels) {
+    if (!carousel.markdown) {
+      const artifactState = await inspectCarouselArtifacts(carousel.sourceEntry.slug)
+      const artifactHint = describeArtifactState(carousel.sourceEntry.slug, artifactState)
+
+      issues.push({
+        level: 'error',
+        code: 'missing-carousel-markdown',
+        message: `${carousel.sourceEntry.slug} is referenced in source.json but carousels/${carousel.sourceEntry.slug}/carousel.md is missing.${artifactHint}`,
+      })
+
+      if (!artifactState.carouselDirExists && !artifactState.exportDirExists) {
+        issues.push({
+          level: 'warn',
+          code: 'orphan-source-carousel-ref',
+          message: `${carousel.sourceEntry.slug} is referenced in source.json but no carousel/ or public/exports artifacts exist. This usually means the source manifest still points at a dropped segment.`,
+        })
+      }
+      continue
+    }
+
+    const { sourceEntry, markdown } = carousel
     carouselTitles.set(markdown.title.toLowerCase(), [...(carouselTitles.get(markdown.title.toLowerCase()) ?? []), markdown.slug])
 
     if (isWeakTitle(markdown.title)) {
@@ -218,6 +257,90 @@ async function readExportManifest(slug: string) {
   }
 }
 
+async function auditRepo() {
+  const sourceSlugs = await listDirectoryNames(path.resolve('sources'))
+  const repoIssues: AuditIssue[] = []
+  const carouselOwners = new Map<string, string[]>()
+  const slideOwners = new Map<string, string[]>()
+  const expectedCarouselSlugs = new Set<string>()
+  const expectedExportSlugs = new Set<string>()
+  const nextRouteSlugs = await listDirectoryNames(path.resolve('.next', 'server', 'app', 'carousel'))
+
+  for (const sourceSlug of sourceSlugs.filter((slug) => slug !== '.DS_Store').sort()) {
+    const issues = await auditSource(sourceSlug)
+    for (const issue of issues) {
+      repoIssues.push({
+        ...issue,
+        message: `[${sourceSlug}] ${issue.message}`,
+      })
+    }
+
+    const source = await readSourceManifest(sourceSlug)
+    for (const entry of source.carousels ?? []) {
+      if (!entry.slug) continue
+      expectedCarouselSlugs.add(entry.slug)
+      expectedExportSlugs.add(entry.slug)
+
+      try {
+        const carousel = await readCarousel(entry.slug)
+        const carouselKey = normalize(carousel.title)
+        if (carouselKey) {
+          carouselOwners.set(carouselKey, [...(carouselOwners.get(carouselKey) ?? []), carousel.slug])
+        }
+
+        for (const slide of carousel.slides) {
+          const slideKey = normalize(slide.title)
+          if (!slideKey) continue
+          slideOwners.set(slideKey, [...(slideOwners.get(slideKey) ?? []), `${carousel.slug}#${slide.id}`])
+        }
+      } catch {
+        // per-source audit already reports the missing markdown; repo mode should keep going
+      }
+    }
+  }
+
+  for (const [title, refs] of carouselOwners) {
+    if (title && refs.length > 1) {
+      repoIssues.push({ level: 'error', code: 'repo-duplicate-carousel-title', message: `Duplicate carousel title across repo: ${refs.join(', ')}` })
+    }
+  }
+
+  for (const [title, refs] of slideOwners) {
+    if (title && refs.length > 1) {
+      repoIssues.push({ level: 'warn', code: 'repo-duplicate-slide-title', message: `Duplicate slide title across repo: "${title}" -> ${refs.join(', ')}` })
+    }
+  }
+
+  const carouselDirSlugs = await listDirectoryNames(path.resolve('carousels'))
+  for (const slug of carouselDirSlugs) {
+    if (slug === '.DS_Store' || expectedCarouselSlugs.has(slug)) continue
+    repoIssues.push({ level: 'info', code: 'stale-carousel-dir', message: `carousels/${slug} exists but is not referenced by any source package.` })
+  }
+
+  const exportDirSlugs = await listDirectoryNames(path.resolve('public', 'exports'))
+  for (const slug of exportDirSlugs) {
+    if (slug === '.DS_Store' || expectedExportSlugs.has(slug)) continue
+    repoIssues.push({ level: 'info', code: 'stale-export-dir', message: `public/exports/${slug} exists but is not referenced by any source package.` })
+  }
+
+  for (const slug of nextRouteSlugs) {
+    if (slug === '.DS_Store' || slug === '[slug]' || expectedCarouselSlugs.has(slug)) continue
+    repoIssues.push({ level: 'info', code: 'stale-next-route-dir', message: `.next/server/app/carousel/${slug} exists but is not referenced by any source package. Rebuild Pages if this is the only repo note.` })
+  }
+
+  if (repoIssues.length === 0) {
+    repoIssues.push({ level: 'info', code: 'clean', message: 'No obvious repo-wide source/markdown/export drift detected.' })
+  }
+
+  return { label: 'repo', issues: dedupeIssues(repoIssues) }
+}
+
+async function readSourceManifest(sourceSlug: string) {
+  const sourceDir = path.resolve('sources', sourceSlug)
+  const rawSource = await readFile(path.join(sourceDir, 'source.json'), 'utf8')
+  return JSON.parse(rawSource) as SourceManifest
+}
+
 async function readBriefs(sourceDir: string) {
   try {
     const raw = await readFile(path.join(sourceDir, 'briefs.json'), 'utf8')
@@ -288,6 +411,52 @@ function auditBriefs(briefs: BriefRecord[], issues: AuditIssue[]) {
   }
 }
 
+type CarouselArtifactState = {
+  carouselDirExists: boolean
+  exportDirExists: boolean
+  exportManifestExists: boolean
+}
+
+async function inspectCarouselArtifacts(slug: string): Promise<CarouselArtifactState> {
+  const carouselDir = path.resolve('carousels', slug)
+  const exportDir = path.resolve('public', 'exports', slug)
+
+  return {
+    carouselDirExists: await pathExists(carouselDir),
+    exportDirExists: await pathExists(exportDir),
+    exportManifestExists: await pathExists(path.join(exportDir, 'manifest.json')),
+  }
+}
+
+function describeArtifactState(slug: string, state: CarouselArtifactState) {
+  if (!state.carouselDirExists && !state.exportDirExists) {
+    return ' No local carousel or export artifacts exist for that slug.'
+  }
+
+  if (state.carouselDirExists && !state.exportDirExists) {
+    return ` The carousel directory still exists, but public/exports/${slug} does not.`
+  }
+
+  if (!state.carouselDirExists && state.exportDirExists) {
+    return state.exportManifestExists
+      ? ` public/exports/${slug}/manifest.json still exists, so the source likely points at a render-only leftover or deleted markdown package.`
+      : ` public/exports/${slug} still exists without a manifest, so the source likely points at a partial leftover artifact.`
+  }
+
+  return state.exportManifestExists
+    ? ` public/exports/${slug}/manifest.json still exists, so the source likely points at a partially deleted carousel package.`
+    : ` Both carousel/ and public/exports/${slug} directories exist, but the markdown entrypoint is gone.`
+}
+
+async function pathExists(target: string) {
+  try {
+    await access(target)
+    return true
+  } catch {
+    return false
+  }
+}
+
 async function listDirectoryNames(dir: string) {
   try {
     const entries = await readdir(dir, { withFileTypes: true })
@@ -298,11 +467,29 @@ async function listDirectoryNames(dir: string) {
 }
 
 function parseArgs(argv: string[]) {
+  const repo = argv.includes('--repo')
+  const json = argv.includes('--json')
   const sourceSlug = argv.find((arg) => !arg.startsWith('--'))
-  if (!sourceSlug) {
-    throw new Error('Usage: content-carousel self-test <source-slug> [--strict-global]')
+
+  if (repo && sourceSlug) {
+    throw new Error('Usage: content-carousel self-test <source-slug> [--strict-global] [--json] | content-carousel self-test --repo [--json]')
   }
-  return { sourceSlug, strictGlobal: argv.includes('--strict-global') }
+
+  if (!repo && !sourceSlug) {
+    throw new Error('Usage: content-carousel self-test <source-slug> [--strict-global] [--json] | content-carousel self-test --repo [--json]')
+  }
+
+  return { repo, json, sourceSlug: sourceSlug ?? '', strictGlobal: argv.includes('--strict-global') }
+}
+
+function countIssues(issues: AuditIssue[]) {
+  return issues.reduce(
+    (acc, issue) => {
+      acc[issue.level] += 1
+      return acc
+    },
+    { error: 0, warn: 0, info: 0 },
+  )
 }
 
 function isWeakTitle(value: string) {
@@ -360,6 +547,18 @@ const STOP_WORDS = new Set([
 
 function normalize(value: string) {
   return value.trim().replace(/^"|"$/g, '').toLowerCase()
+}
+
+function dedupeIssues(issues: AuditIssue[]) {
+  const seen = new Set<string>()
+  return issues.filter((issue) => {
+    const key = `${issue.level}:${issue.code}:${issue.message}`
+    if (seen.has(key)) {
+      return false
+    }
+    seen.add(key)
+    return true
+  })
 }
 
 if (isDirectExecution(import.meta.url) && /self-test\.(t|j)sx?$/.test(process.argv[1] ?? '')) {

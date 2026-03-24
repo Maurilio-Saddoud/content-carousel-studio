@@ -6,9 +6,8 @@
 
 ## Carousels created automatically
 - Source slug: ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a
-- Carousel count: 8
+- Carousel count: 7
 - ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite → /carousel/ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite (brief brief-segment-14 from segment-14, 00:03:46 → 00:04:05, score 26)
-- ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs → /carousel/ai-classrooms-self-evolving-ai-nv--segment-130-00-37-32-here-are-some-more-specs (brief brief-segment-130 from segment-130, 00:37:32 → 00:37:50, score 20)
 - ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week → /carousel/ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week (brief brief-segment-74 from segment-74, 00:20:59 → 00:21:14, score 16)
 - ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you → /carousel/ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you (brief brief-segment-47 from segment-47, 00:13:35 → 00:13:52, score 15)
 - ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval → /carousel/ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval (brief brief-segment-23 from segment-23, 00:06:28 → 00:06:46, score 13)
@@ -31,20 +30,7 @@
 - Distinct from: brief-segment-130, brief-segment-74, brief-segment-47, brief-segment-23, brief-segment-88, brief-segment-82, brief-segment-21
 
 
-### #2 — If you click on this GitHub repo, it contains all the instructions on how to download and run this.
-- Brief: brief-segment-130
-- Primary idea: segment-130
-- Audience: Audience: people using AI in real work, not just talking about it.
-- Why it matters: Here are some more specs for your reference.
-- Support:
-  - If I click on the hugging face folder, this 1.7 model is 470 GB.
-  - You can first get Stitch to design some wireframes and then send this markdown file over to an actual coding agent to code it up following these guidelines.
-  - Anyways, Stitch has been one of my favorite free tools from Google.
-  - >> Snugs, listen up everyone.
-- Distinct from: brief-segment-14, brief-segment-74, brief-segment-47, brief-segment-23, brief-segment-88, brief-segment-82, brief-segment-21
-
-
-### #3 — You see, the problem with large reasoning models is that they usually overthink and they end up spending a lot of tokens.
+### #2 — You see, the problem with large reasoning models is that they usually overthink and they end up spending a lot of tokens.
 - Brief: brief-segment-74
 - Primary idea: segment-74
 - Audience: Audience: people using AI in real work, not just talking about it.
@@ -57,7 +43,7 @@
 - Distinct from: brief-segment-14, brief-segment-130, brief-segment-47, brief-segment-23, brief-segment-88, brief-segment-82, brief-segment-21
 
 
-### #4 — 2.3 using fast video has by far the lowest latency, like more than 10 times lower than the standard LTX 2.3.
+### #3 — 2.3 using fast video has by far the lowest latency, like more than 10 times lower than the standard LTX 2.3.
 - Brief: brief-segment-47
 - Primary idea: segment-47
 - Audience: Audience: people using AI in real work, not just talking about it.
@@ -70,7 +56,7 @@
 - Distinct from: brief-segment-14, brief-segment-130, brief-segment-74, brief-segment-23, brief-segment-88, brief-segment-82, brief-segment-21
 
 
-### #5 — Pinchbench and Claw Eval, which test its ability to do agentic workflows in like open claw scenarios, you can see that MIMO v2 Pro is really close to the performance of Opus 4.6, six, which is really impressive.
+### #4 — Pinchbench and Claw Eval, which test its ability to do agentic workflows in like open claw scenarios, you can see that MIMO v2 Pro is really close to the performance of Opus 4.6, six, which is really impressive.
 - Brief: brief-segment-23
 - Primary idea: segment-23
 - Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
@@ -83,7 +69,7 @@
 - Distinct from: brief-segment-14, brief-segment-130, brief-segment-74, brief-segment-47, brief-segment-88, brief-segment-82, brief-segment-21
 
 
-### #6 — Gro 3 LPUs, is optimized to handle all these requests.
+### #5 — Gro 3 LPUs, is optimized to handle all these requests.
 - Brief: brief-segment-88
 - Primary idea: segment-88
 - Audience: Audience: people using AI in real work, not just talking about it.
@@ -96,7 +82,7 @@
 - Distinct from: brief-segment-14, brief-segment-130, brief-segment-74, brief-segment-47, brief-segment-23, brief-segment-82, brief-segment-21
 
 
-### #7 — This is Nvidia's idea of what a full AI supercomput should look like.
+### #6 — This is Nvidia's idea of what a full AI supercomput should look like.
 - Brief: brief-segment-82
 - Primary idea: segment-82
 - Audience: Audience: operators, team leads, and founders redesigning AI-assisted workflows.
@@ -108,7 +94,7 @@
 - Distinct from: brief-segment-14, brief-segment-130, brief-segment-74, brief-segment-47, brief-segment-23, brief-segment-88, brief-segment-21
 
 
-### #8 — They've actually released an incredibly powerful series of AI models.
+### #7 — They've actually released an incredibly powerful series of AI models.
 - Brief: brief-segment-21
 - Primary idea: segment-21
 - Audience: Audience: people using AI in real work, not just talking about it.
@@ -128,16 +114,6 @@
 - Why it could work:
   - includes enough specificity to avoid sounding generic
   - sounds grounded in lived or practical experience
-  - contains enough complete thoughts to turn into multiple slides
-
-
-### #3 — Here are some more specs for your reference.
-- Status: published
-- Score: 20
-- Time: 00:37:32 → 00:37:50
-- Hook: If you click on this GitHub repo, it contains all the instructions on how to download and run this.
-- Why it could work:
-  - includes enough specificity to avoid sounding generic
   - contains enough complete thoughts to turn into multiple slides
 
 
@@ -210,6 +186,12 @@
 
 ## Candidate ideas not published this run
 
+### #3 — Here are some more specs for your reference.
+- Status: candidate
+- Reason: Selected for publication as one of the top 8 non-overlapping ideas. Dropped during sync-source because the published carousel markdown no longer exists.
+- Time: 00:37:32 → 00:37:50
+
+
 ### #19 — Unitere G1 robot in real life.
 - Status: candidate
 - Reason: Strong candidate kept in the source package but not promoted to a published carousel in this run.
@@ -232,12 +214,6 @@
 - Status: candidate
 - Reason: Strong candidate kept in the source package but not promoted to a published carousel in this run.
 - Time: 00:41:59 → 00:42:13
-
-
-### #24 — >> Snugs, listen up everyone.
-- Status: candidate
-- Reason: Strong candidate kept in the source package but not promoted to a published carousel in this run.
-- Time: 00:46:21 → 00:46:33
 
 ## Rejected ideas
 
