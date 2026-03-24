@@ -33,6 +33,10 @@ export default async function CarouselPage({ params }: Props) {
             <a href={`${basePath}/exports/${carousel.slug}/${carousel.slug}.zip`} download>
               Download PNG batch (.zip)
             </a>
+            {' · '}
+            <a href={`${basePath}/exports/${carousel.slug}/${carousel.slug}.pdf`} download>
+              Download PDF
+            </a>
           </p>
           <p>
             Or open any slide below and save it directly on your phone.

@@ -17,6 +17,7 @@ type ExportIndexItem = {
   updatedAt: string
   manifestPath: string
   batchPath: string
+  pdfPath: string
   previewPath: string
 }
 
@@ -49,6 +50,7 @@ export async function renderAllFromArgv(argv: string[] = process.argv.slice(2)) 
     updatedAt: item.updatedAt,
     manifestPath: `${basePath}/exports/${item.slug}/manifest.json`,
     batchPath: `${basePath}/exports/${item.slug}/`,
+    pdfPath: `${basePath}/exports/${item.slug}/${item.slug}.pdf`,
     previewPath: `${basePath}/carousel/${item.slug}/`,
   }))
 
@@ -78,7 +80,7 @@ function buildExportsIndexHtml(items: ExportIndexItem[]) {
         <li>
           <h2>${escapeHtml(item.title)}</h2>
           <p>${escapeHtml(item.description)}</p>
-          <p><a href="${item.previewPath}">Preview</a> · <a href="${item.batchPath}">PNG batch</a> · <a href="${item.manifestPath}">manifest.json</a></p>
+          <p><a href="${item.previewPath}">Preview</a> · <a href="${item.batchPath}">PNG batch</a> · <a href="${item.pdfPath}">PDF</a> · <a href="${item.manifestPath}">manifest.json</a></p>
         </li>`,
     )
     .join('')

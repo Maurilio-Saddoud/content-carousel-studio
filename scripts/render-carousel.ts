@@ -18,6 +18,9 @@ type RenderManifest = {
   description: string
   previewPath: string
   publicPreviewUrl?: string
+  pdfFileName?: string
+  pdfPath?: string
+  publicPdfUrl?: string
   exportedAt: string
   slideCount: number
   files: Array<{
@@ -90,7 +93,9 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
   }
 
   const zipFileName = `${slug}.zip`
+  const pdfFileName = `${slug}.pdf`
   await createZipBundle(outDir, zipFileName, files.map((file) => file.fileName))
+  await createPdfBundle(outDir, pdfFileName, files.map((file) => file.fileName))
 
   const manifest: RenderManifest = {
     slug,
@@ -98,6 +103,9 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
     description: carousel.description,
     previewPath,
     publicPreviewUrl: publicSiteUrl ? `${publicSiteUrl}/carousel/${slug}/` : undefined,
+    pdfFileName,
+    pdfPath: `${basePath}/exports/${slug}/${pdfFileName}`,
+    publicPdfUrl: publicSiteUrl ? `${publicSiteUrl}/exports/${slug}/${pdfFileName}` : undefined,
     exportedAt: new Date().toISOString(),
     slideCount: files.length,
     files,
@@ -153,6 +161,26 @@ async function createZipBundle(outDir: string, zipFileName: string, fileNames: s
   await execFileAsync('zip', ['-jq', zipPath, ...fileNames], { cwd: outDir })
 }
 
+async function createPdfBundle(outDir: string, pdfFileName: string, fileNames: string[]) {
+  if (fileNames.length === 0) return
+
+  const html = buildPdfHtml(outDir, fileNames)
+  const browser = await chromium.launch()
+
+  try {
+    const page = await browser.newPage()
+    await page.setContent(html, { waitUntil: 'load' })
+    await page.pdf({
+      path: path.join(outDir, pdfFileName),
+      printBackground: true,
+      preferCSSPageSize: true,
+      margin: { top: '0', right: '0', bottom: '0', left: '0' },
+    })
+  } finally {
+    await browser.close()
+  }
+}
+
 function buildBatchHtml(manifest: RenderManifest) {
   const zipFileName = `${manifest.slug}.zip`
   const items = manifest.files
@@ -187,14 +215,40 @@ function buildBatchHtml(manifest: RenderManifest) {
       <p><a href="${manifest.previewPath}">← Open live preview</a></p>
       <h1>${escapeHtml(manifest.title)} PNG batch</h1>
       <p class="meta">${escapeHtml(manifest.description)}</p>
-      <p class="meta"><a href="./${zipFileName}" download>Download all slides as .zip</a></p>
-      <p class="meta">Download every card below, or use <code>manifest.json</code> for automation.</p>
+      <p class="meta"><a href="./${zipFileName}" download>Download all slides as .zip</a> · <a href="./${manifest.pdfFileName}" download>Download PDF</a></p>
+      <p class="meta">Download every card below, grab the PDF, or use <code>manifest.json</code> for automation.</p>
       <ul>${items}
       </ul>
     </main>
   </body>
 </html>
 `
+}
+
+function buildPdfHtml(outDir: string, fileNames: string[]) {
+  const pages = fileNames
+    .map((fileName, index) => `
+      <section class="page">
+        <img src="file://${path.join(outDir, fileName)}" alt="Slide ${index + 1}" />
+      </section>`)
+    .join('')
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Carousel PDF export</title>
+    <style>
+      @page { size: 430px 932px; margin: 0; }
+      html, body { margin: 0; padding: 0; background: #000; }
+      .page { width: 430px; height: 932px; page-break-after: always; break-after: page; }
+      .page:last-child { page-break-after: auto; break-after: auto; }
+      img { width: 430px; height: 932px; display: block; object-fit: cover; }
+    </style>
+  </head>
+  <body>${pages}
+  </body>
+</html>`
 }
 
 function escapeHtml(text: string) {
