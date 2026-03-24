@@ -36,6 +36,8 @@ const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carous
 const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.env.BASE_PATH ?? '')
 const publicSiteUrl = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL)
 const execFileAsync = promisify(execFile)
+const EXPORT_WIDTH = 1200
+const EXPORT_HEIGHT = 1500
 
 export async function renderCarouselFromArgv(argv: string[] = process.argv.slice(2)) {
   const options = parseArgs(argv)
@@ -57,14 +59,31 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
 
   try {
     context = await browser.newContext({
-      viewport: { width: 430, height: 932 },
-      screen: { width: 430, height: 932 },
-      deviceScaleFactor: 3,
-      isMobile: true,
-      hasTouch: true,
+      viewport: { width: EXPORT_WIDTH + 200, height: EXPORT_HEIGHT + 200 },
+      screen: { width: EXPORT_WIDTH + 200, height: EXPORT_HEIGHT + 200 },
+      deviceScaleFactor: 1,
+      isMobile: false,
+      hasTouch: false,
     })
     const page = await context.newPage()
     await page.goto(`${stripTrailingSlash(baseUrl)}${previewPath}`, { waitUntil: 'networkidle' })
+    await page.addStyleTag({
+      content: `
+        body { min-width: ${EXPORT_WIDTH + 200}px; }
+        .page-shell { width: ${EXPORT_WIDTH + 200}px !important; max-width: none !important; }
+        .slides-stack { justify-items: center; }
+        .preview-slide-group { justify-items: center; }
+        .carousel-slide {
+          width: ${EXPORT_WIDTH}px !important;
+          min-width: ${EXPORT_WIDTH}px !important;
+          max-width: ${EXPORT_WIDTH}px !important;
+          height: ${EXPORT_HEIGHT}px !important;
+          min-height: ${EXPORT_HEIGHT}px !important;
+          max-height: ${EXPORT_HEIGHT}px !important;
+          margin: 0 auto !important;
+        }
+      `,
+    })
 
     const slidesLocator = page.locator('.carousel-slide')
     const slideCount = await slidesLocator.count()
@@ -246,11 +265,26 @@ function buildPdfHtml(slides: Array<{ index: number; dataUrl: string }>) {
     <meta charset="utf-8" />
     <title>Carousel PDF export</title>
     <style>
-      @page { size: 430px 932px; margin: 0; }
+      @page { size: ${EXPORT_WIDTH}px ${EXPORT_HEIGHT}px; margin: 0; }
       html, body { margin: 0; padding: 0; background: #000; }
-      .page { width: 430px; height: 932px; page-break-after: always; break-after: page; }
+      .page {
+        width: ${EXPORT_WIDTH}px;
+        height: ${EXPORT_HEIGHT}px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        page-break-after: always;
+        break-after: page;
+        background: #000;
+      }
       .page:last-child { page-break-after: auto; break-after: auto; }
-      img { width: 430px; height: 932px; display: block; object-fit: cover; }
+      img {
+        width: ${EXPORT_WIDTH}px;
+        height: ${EXPORT_HEIGHT}px;
+        display: block;
+        object-fit: contain;
+        object-position: center center;
+      }
     </style>
   </head>
   <body>${pages}
