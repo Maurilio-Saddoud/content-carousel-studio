@@ -45,23 +45,8 @@
     }
   },
   {
-    "slug": "do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y",
-    "title": "It basically saves a snapshot of your code in a certain state.",
-    "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:29:58 → 00:30:14.",
-    "sourceType": "transcript",
-    "aspectRatio": "portrait",
-    "updatedAt": "2026-03-24",
-    "createdAt": "2026-03-24",
-    "theme": {
-      "accent": "#1D9BF0",
-      "background": "#000000",
-      "foreground": "#E7E9EA",
-      "muted": "#71767B"
-    }
-  },
-  {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us",
-    "title": ">> Open Claw is the number one opensource project in the history of humanity.",
+    "title": "Serious agent stacks are multi-model by default.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:08:32 → 00:08:48.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -75,23 +60,8 @@
     }
   },
   {
-    "slug": "do-this-with-openclaw-so-you-don-t--segment-67-00-19-30-i-want-to-show-some-tips",
-    "title": "I want to show some tips and tricks that I use to harden my system even further.",
-    "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:19:30 → 00:19:45.",
-    "sourceType": "transcript",
-    "aspectRatio": "portrait",
-    "updatedAt": "2026-03-24",
-    "createdAt": "2026-03-24",
-    "theme": {
-      "accent": "#1D9BF0",
-      "background": "#000000",
-      "foreground": "#E7E9EA",
-      "muted": "#71767B"
-    }
-  },
-  {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible",
-    "title": "I take the best possible model that can be GPT 5.4 or Opus 4.6.",
+    "title": "Prompt-injection defense should be layered, not hopeful.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:20:45 → 00:21:04.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -105,38 +75,8 @@
     }
   },
   {
-    "slug": "do-this-with-openclaw-so-you-don-t--segment-92-00-27-03-openclaw-which-is-basica",
-    "title": "OpenClaw, which is basically the same thing.",
-    "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:27:03 → 00:27:17.",
-    "sourceType": "transcript",
-    "aspectRatio": "portrait",
-    "updatedAt": "2026-03-24",
-    "createdAt": "2026-03-24",
-    "theme": {
-      "accent": "#1D9BF0",
-      "background": "#000000",
-      "foreground": "#E7E9EA",
-      "muted": "#71767B"
-    }
-  },
-  {
-    "slug": "do-this-with-openclaw-so-you-don-t--segment-93-00-27-19-openai-and-explicitly-sa",
-    "title": "Every single enterprise company",
-    "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:27:19 → 00:27:35.",
-    "sourceType": "transcript",
-    "aspectRatio": "portrait",
-    "updatedAt": "2026-03-24",
-    "createdAt": "2026-03-24",
-    "theme": {
-      "accent": "#1D9BF0",
-      "background": "#000000",
-      "foreground": "#E7E9EA",
-      "muted": "#71767B"
-    }
-  },
-  {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-",
-    "title": "If anything is about to have a destructive action",
+    "title": "Documentation is not paperwork anymore. It is runtime infrastructure.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:28:32 → 00:28:46.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -151,7 +91,7 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory",
-    "title": "It can read files from Box, but it can't delete files.",
+    "title": "Most agent memory problems are really thread problems.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:00:55 → 00:01:07.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",

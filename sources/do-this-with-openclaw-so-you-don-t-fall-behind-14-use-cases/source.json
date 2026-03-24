@@ -1,0 +1,98 @@
+{
+  "slug": "do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases",
+  "sourceType": "transcript",
+  "sourceUrl": "https://www.youtube.com/watch?v=M-3w1wEv0M0&list=LL&index=3",
+  "fetchedAt": "2026-03-24T19:39:40.457Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "Do THIS with OpenClaw so you don't fall behind... (14 Use Cases)",
+    "authorName": "Matthew Berman",
+    "authorUrl": "https://www.youtube.com/@matthew_berman",
+    "thumbnailUrl": "https://i.ytimg.com/vi/M-3w1wEv0M0/hqdefault.jpg"
+  },
+  "transcriptLineCount": 903,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 8,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 116,
+  "briefCount": 4,
+  "publishedIdeaIds": [
+    "segment-71",
+    "segment-31",
+    "segment-04",
+    "segment-97"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-71",
+      "primaryIdeaId": "segment-71",
+      "thesis": "Just in case someone crafty gets past that deterministic layer, I now have a non-deterministic layer to review it.",
+      "slug": "do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible"
+    },
+    {
+      "id": "brief-segment-31",
+      "primaryIdeaId": "segment-31",
+      "thesis": "For my embeddings I'm using Nomic.",
+      "slug": "do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us"
+    },
+    {
+      "id": "brief-segment-04",
+      "primaryIdeaId": "segment-04",
+      "thesis": "OpenClaw would just forget things all the time and I literally never had that problem once and I was using the default OpenClaw memory system and I couldn't figure out why everybody else was having issues and I wasn't.",
+      "slug": "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory"
+    },
+    {
+      "id": "brief-segment-97",
+      "primaryIdeaId": "segment-97",
+      "thesis": "PRD, which is a product requirements document, basically explaining all of the different functionality I have in OpenClaw.",
+      "slug": "do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible",
+      "segmentId": "segment-71",
+      "title": "Prompt-injection defense should be layered, not hopeful.",
+      "previewPath": "/carousel/do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible",
+      "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible/carousel.md"
+    },
+    {
+      "slug": "do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us",
+      "segmentId": "segment-31",
+      "title": "Serious agent stacks are multi-model by default.",
+      "previewPath": "/carousel/do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us",
+      "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us/carousel.md"
+    },
+    {
+      "slug": "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory",
+      "segmentId": "segment-04",
+      "title": "Most agent memory problems are really thread problems.",
+      "previewPath": "/carousel/do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory",
+      "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory/carousel.md"
+    },
+    {
+      "slug": "do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-",
+      "segmentId": "segment-97",
+      "title": "Documentation is not paperwork anymore. It is runtime infrastructure.",
+      "previewPath": "/carousel/do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-",
+      "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/source.json",
+    "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/raw-transcript.md",
+    "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/clean-transcript.md",
+    "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/segments.json",
+    "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/ideas.json",
+    "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/briefs.json",
+    "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/summary.md",
+    "carousels/do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible/carousel.md",
+    "carousels/do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us/carousel.md",
+    "carousels/do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory/carousel.md",
+    "carousels/do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-/carousel.md",
+    "carousels/index.json"
+  ]
+}
