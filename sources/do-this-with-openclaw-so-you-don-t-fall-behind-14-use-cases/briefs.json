@@ -1,0 +1,371 @@
+[
+  {
+    "id": "brief-segment-71",
+    "primaryIdeaId": "segment-71",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "Just in case someone crafty gets past that deterministic layer, I now have a non-deterministic layer to review it.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "I take the best possible model that can be GPT 5.4 or Opus 4.6.",
+    "supportPoints": [
+      "You always want to use the best possible model because those are going to be the most resilient to prompt injection.",
+      ">> Open Claw is the number one opensource project in the history of humanity.",
+      "It can read files from Box, but it can't delete files.",
+      "OpenClaw, you're probably not getting the most out of it."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-31",
+      "brief-segment-93",
+      "brief-segment-67",
+      "brief-segment-92",
+      "brief-segment-04",
+      "brief-segment-102",
+      "brief-segment-97"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 4,
+      "commercialRelevance": 4,
+      "fidelity": 5,
+      "total": 25
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Hook or slide spine is carrying too much verbal clutter."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Compress the lead and make the slide progression cleaner."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible"
+  },
+  {
+    "id": "brief-segment-31",
+    "primaryIdeaId": "segment-31",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "For my embeddings I'm using Nomic.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": ">> Open Claw is the number one opensource project in the history of humanity.",
+    "supportPoints": [
+      "I have spent over 200 hours and billions of tokens perfecting my OpenClaw setup.",
+      "you can see I'm using a mixture of different models and this list is"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-71",
+      "brief-segment-93",
+      "brief-segment-67",
+      "brief-segment-92",
+      "brief-segment-04",
+      "brief-segment-102",
+      "brief-segment-97"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 3,
+      "clarity": 5,
+      "distinctness": 4,
+      "commercialRelevance": 3,
+      "fidelity": 5,
+      "total": 24
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us"
+  },
+  {
+    "id": "brief-segment-93",
+    "primaryIdeaId": "segment-93",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "OpenAI and explicitly said using the codeex OOTH for OpenAI models is totally okay and that uses your ChachiPT subscription.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Every single enterprise company, every single software company in the world need an agent strategy.",
+    "supportPoints": [
+      "you're paying a flat fee every month and you get a pretty large quota that you can use rather than paying for every single API call which can be multiple times more"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-71",
+      "brief-segment-31",
+      "brief-segment-67",
+      "brief-segment-92",
+      "brief-segment-04",
+      "brief-segment-102",
+      "brief-segment-97"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 2,
+      "clarity": 3,
+      "distinctness": 4,
+      "commercialRelevance": 3,
+      "fidelity": 4,
+      "total": 20
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Hook or slide spine is carrying too much verbal clutter.",
+        "Not enough support to justify a padded multi-slide carousel."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Compress the lead and make the slide progression cleaner.",
+        "Ship fewer slides or tighten every supporting point."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don-t--segment-93-00-27-19-openai-and-explicitly-sa"
+  },
+  {
+    "id": "brief-segment-67",
+    "primaryIdeaId": "segment-67",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "Peter Seberger and the OpenClaw team have been releasing security updates, security fixes non-stop.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "I want to show some tips and tricks that I use to harden my system even further.",
+    "supportPoints": [
+      "Peter Seberger and the OpenClaw team have been releasing security updates",
+      "it's still vulnerable to things like prompt injection."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-71",
+      "brief-segment-31",
+      "brief-segment-93",
+      "brief-segment-92",
+      "brief-segment-04",
+      "brief-segment-102",
+      "brief-segment-97"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 4,
+      "commercialRelevance": 3,
+      "fidelity": 5,
+      "total": 24
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Hook or slide spine is carrying too much verbal clutter."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Compress the lead and make the slide progression cleaner."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don-t--segment-67-00-19-30-i-want-to-show-some-tips"
+  },
+  {
+    "id": "brief-segment-92",
+    "primaryIdeaId": "segment-92",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "OpenClaw, which is basically the same thing.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "You need to have an open claw strategy.",
+    "supportPoints": [
+      "which is basically the same thing.",
+      "if you don't already have it installed",
+      "then you are using your subscription and it's within Anthropics terms of service."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-71",
+      "brief-segment-31",
+      "brief-segment-93",
+      "brief-segment-67",
+      "brief-segment-04",
+      "brief-segment-102",
+      "brief-segment-97"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 3,
+      "clarity": 5,
+      "distinctness": 4,
+      "commercialRelevance": 3,
+      "fidelity": 5,
+      "total": 24
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don-t--segment-92-00-27-03-openclaw-which-is-basica"
+  },
+  {
+    "id": "brief-segment-04",
+    "primaryIdeaId": "segment-04",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "OpenClaw would just forget things all the time and I literally never had that problem once and I was using the default OpenClaw memory system and I couldn't figure out why everybody else was having issues and I wasn't.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "It can read files from Box, but it can't delete files.",
+    "supportPoints": [
+      ">> Open Claw is the number one opensource project in the history of humanity.",
+      "OpenClaw, you're probably not getting the most out of it.",
+      "I have spent over 200 hours and billions of tokens perfecting my OpenClaw setup."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-71",
+      "brief-segment-31",
+      "brief-segment-93",
+      "brief-segment-67",
+      "brief-segment-92",
+      "brief-segment-102",
+      "brief-segment-97"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 3,
+      "commercialRelevance": 3,
+      "fidelity": 4,
+      "total": 22
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Hook or slide spine is carrying too much verbal clutter."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Compress the lead and make the slide progression cleaner."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory"
+  },
+  {
+    "id": "brief-segment-102",
+    "primaryIdeaId": "segment-102",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "It basically saves a snapshot of your code in a certain state.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "You can go to previous versions.",
+    "supportPoints": [
+      "You can also see every single feature that you've added over time."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-71",
+      "brief-segment-31",
+      "brief-segment-93",
+      "brief-segment-67",
+      "brief-segment-92",
+      "brief-segment-04",
+      "brief-segment-97"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 2,
+      "clarity": 5,
+      "distinctness": 4,
+      "commercialRelevance": 3,
+      "fidelity": 4,
+      "total": 22
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Not enough support to justify a padded multi-slide carousel."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Ship fewer slides or tighten every supporting point."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y"
+  },
+  {
+    "id": "brief-segment-97",
+    "primaryIdeaId": "segment-97",
+    "supportingIdeaIds": [
+      "segment-01",
+      "segment-77",
+      "segment-02"
+    ],
+    "thesis": "PRD, which is a product requirements document, basically explaining all of the different functionality I have in OpenClaw.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "If anything is about to have a destructive action, I always get notified first for approval.",
+    "supportPoints": [
+      "which is a product requirements document",
+      "basically explaining all of the different functionality I have in OpenClaw.",
+      "it doesn't have to go and search through the code to figure out what features I have."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-71",
+      "brief-segment-31",
+      "brief-segment-93",
+      "brief-segment-67",
+      "brief-segment-92",
+      "brief-segment-04",
+      "brief-segment-102"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 4,
+      "commercialRelevance": 4,
+      "fidelity": 5,
+      "total": 25
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Hook or slide spine is carrying too much verbal clutter."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Compress the lead and make the slide progression cleaner."
+      ]
+    },
+    "carouselSlug": "do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-"
+  }
+]

@@ -18,6 +18,10 @@ Primary commands:
 ./content-carousel render <slug>
 ./content-carousel render-all
 ./content-carousel self-test <source-slug>
+./content-carousel self-test <source-slug> --json
+./content-carousel self-test --repo
+./content-carousel self-test --repo --json
+./content-carousel sync-source <source-slug>
 ./content-carousel build-pages
 ```
 
@@ -26,6 +30,8 @@ If you install or link the package as a binary, the same commands are available 
 The existing `pnpm ingest:youtube`, `pnpm render`, `pnpm render:all`, and `pnpm build:pages` scripts still work. They now delegate to the same CLI entrypoint.
 
 `./content-carousel rebuild-source <source-slug>` reuses the source package's stored publish limit by default, so a quick rebuild does not silently fan out from a curated 2-post package to the CLI fallback of 8 posts. You can still override it explicitly with `--max-segments`.
+
+`./content-carousel sync-source <source-slug>` is the lightweight repair path when `ideas.json` / `briefs.json` / surviving `carousel.md` files are the canonical truth but `source.json` drifted after dropped segments or partial cleanup. It rewrites `source.json`, regenerates `summary.md`, and demotes orphaned `published` ideas whose markdown no longer exists.
 
 ## What this repo does now
 
@@ -357,7 +363,11 @@ pnpm lint
 - The markdown parser intentionally supports a narrow authoring format right now: frontmatter + slide separators + paragraphs/lists.
 - `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
 - `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, brief quality/overlap, weak/duplicate titles, and export drift before you bother publishing.
-- Use `./content-carousel self-test <source-slug> --strict-global` only when you intentionally want to audit the whole workspace for leftover preview/export directories. The default check assumes preserving older batches is normal.
+- `./content-carousel self-test --repo` is the repo-wide repeatability sweep. It runs every source audit, then checks cross-package duplicate carousel/slide titles plus stale `carousels/`, `public/exports/`, and `.next/server/app/carousel/` residue.
+- Add `--json` when you want to persist the audit result, diff hourly runs, or hand the same issue set to another agent without scraping console text.
+- Missing markdown refs are now triaged more explicitly: the self-test tells you whether the slug still has leftover export artifacts or whether the source manifest points at a slug with no local artifacts at all (usually a dropped segment that never got cleaned out of `source.json`).
+- When that orphaned-manifest state is real, `./content-carousel sync-source <source-slug>` is now the deliberate repair path. It keeps surviving briefs/carousels, rewrites `source.json`, refreshes `summary.md`, and demotes stale `published` ideas in `ideas.json` so self-test stops reporting fake publication drift.
+- Use `./content-carousel self-test <source-slug> --strict-global` only when you intentionally want to compare one source package against the rest of the workspace. The default source check assumes preserving older batches is normal.
 - `pnpm exec tsx scripts/self-test.ts <source-slug>` now works too when you want to iterate on the audit logic directly without going through the bundled CLI.
 - In the current operator workflow, a newly supplied video link should usually be treated as an implicit request to generate a fresh preview batch from that source, not as a prompt for another round of clarification.
 - Preserve existing preview batches by default. Only wipe/delete old previews when the user explicitly asks for replacement or cleanup.
