@@ -1,5 +1,5 @@
 import { execFile } from 'node:child_process'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { promisify } from 'node:util'
 import path from 'node:path'
 import { chromium } from 'playwright'
@@ -164,7 +164,14 @@ async function createZipBundle(outDir: string, zipFileName: string, fileNames: s
 async function createPdfBundle(outDir: string, pdfFileName: string, fileNames: string[]) {
   if (fileNames.length === 0) return
 
-  const html = buildPdfHtml(outDir, fileNames)
+  const slides = await Promise.all(
+    fileNames.map(async (fileName, index) => ({
+      index: index + 1,
+      dataUrl: `data:image/png;base64,${(await readFile(path.join(outDir, fileName))).toString('base64')}`,
+    })),
+  )
+
+  const html = buildPdfHtml(slides)
   const browser = await chromium.launch()
 
   try {
@@ -225,11 +232,11 @@ function buildBatchHtml(manifest: RenderManifest) {
 `
 }
 
-function buildPdfHtml(outDir: string, fileNames: string[]) {
-  const pages = fileNames
-    .map((fileName, index) => `
+function buildPdfHtml(slides: Array<{ index: number; dataUrl: string }>) {
+  const pages = slides
+    .map((slide) => `
       <section class="page">
-        <img src="file://${path.join(outDir, fileName)}" alt="Slide ${index + 1}" />
+        <img src="${slide.dataUrl}" alt="Slide ${slide.index}" />
       </section>`)
     .join('')
 
