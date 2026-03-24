@@ -36,8 +36,11 @@ const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carous
 const basePath = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH ?? process.env.BASE_PATH ?? '')
 const publicSiteUrl = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL)
 const execFileAsync = promisify(execFile)
-const EXPORT_WIDTH = 1200
-const EXPORT_HEIGHT = 1500
+const DESIGN_WIDTH = 400
+const DESIGN_HEIGHT = 500
+const EXPORT_SCALE = 3
+const EXPORT_WIDTH = DESIGN_WIDTH * EXPORT_SCALE
+const EXPORT_HEIGHT = DESIGN_HEIGHT * EXPORT_SCALE
 
 export async function renderCarouselFromArgv(argv: string[] = process.argv.slice(2)) {
   const options = parseArgs(argv)
@@ -59,27 +62,27 @@ export async function renderCarouselFromArgv(argv: string[] = process.argv.slice
 
   try {
     context = await browser.newContext({
-      viewport: { width: EXPORT_WIDTH + 200, height: EXPORT_HEIGHT + 200 },
-      screen: { width: EXPORT_WIDTH + 200, height: EXPORT_HEIGHT + 200 },
-      deviceScaleFactor: 1,
-      isMobile: false,
-      hasTouch: false,
+      viewport: { width: DESIGN_WIDTH + 120, height: DESIGN_HEIGHT + 220 },
+      screen: { width: DESIGN_WIDTH + 120, height: DESIGN_HEIGHT + 220 },
+      deviceScaleFactor: EXPORT_SCALE,
+      isMobile: true,
+      hasTouch: true,
     })
     const page = await context.newPage()
     await page.goto(`${stripTrailingSlash(baseUrl)}${previewPath}`, { waitUntil: 'networkidle' })
     await page.addStyleTag({
       content: `
-        body { min-width: ${EXPORT_WIDTH + 200}px; }
-        .page-shell { width: ${EXPORT_WIDTH + 200}px !important; max-width: none !important; }
+        body { min-width: ${DESIGN_WIDTH + 120}px; }
+        .page-shell { width: ${DESIGN_WIDTH + 120}px !important; max-width: none !important; }
         .slides-stack { justify-items: center; }
         .preview-slide-group { justify-items: center; }
         .carousel-slide {
-          width: ${EXPORT_WIDTH}px !important;
-          min-width: ${EXPORT_WIDTH}px !important;
-          max-width: ${EXPORT_WIDTH}px !important;
-          height: ${EXPORT_HEIGHT}px !important;
-          min-height: ${EXPORT_HEIGHT}px !important;
-          max-height: ${EXPORT_HEIGHT}px !important;
+          width: ${DESIGN_WIDTH}px !important;
+          min-width: ${DESIGN_WIDTH}px !important;
+          max-width: ${DESIGN_WIDTH}px !important;
+          height: ${DESIGN_HEIGHT}px !important;
+          min-height: ${DESIGN_HEIGHT}px !important;
+          max-height: ${DESIGN_HEIGHT}px !important;
           margin: 0 auto !important;
         }
       `,
