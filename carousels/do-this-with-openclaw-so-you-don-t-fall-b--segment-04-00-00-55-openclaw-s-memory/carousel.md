@@ -1,7 +1,7 @@
 ---
 slug: "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory"
-title: "Most agent memory problems are really thread problems."
-description: "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: topic-threading beats one giant chat."
+title: "Agent safety starts with smaller permissions, not better vibes."
+description: "Post-ready carousel distilled from the source video segment at 00:00:55 → 00:01:07."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-24
@@ -12,48 +12,52 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AGENT UX
-# Most agent memory problems are really thread problems.
-
-People blame memory first.
-
-Usually the real failure is that they stuffed five topics into one chat.
+eyebrow: SAFETY
+# Agent safety starts with
+smaller permissions,
+not better vibes.
 
 ---
 
-eyebrow: THE ACTUAL BUG
-# One giant thread creates context pollution.
+eyebrow: LEAST PRIVILEGE
+# Give the agent exactly what it needs.
 
-CRM, research, product, ops, random questions.
+Read inbox?
+Maybe.
+Send email?
+Not by default.
 
-Then people wonder why the agent feels fuzzy.
-
----
-
-eyebrow: BETTER DEFAULT
-# One thread should mean one topic.
-
-Separate sessions give the model a cleaner context window
-and give the human a cleaner place to think.
-
-Both sides win.
+Read Box files?
+Maybe.
+Delete them?
+Absolutely not.
 
 ---
 
-eyebrow: PRACTICAL PAYOFF
-# This is not just for the model.
+eyebrow: HUMAN CHECKPOINT
+# Add approval before destructive actions.
 
-You stop saying:
-“hold that thought”
-“go back to the earlier topic”
-“ignore the last 20 messages”
-
-You just reopen the right lane.
+Yes, it adds friction.
+That friction is cheaper than
+getting hacked
+or wiping your own data.
 
 ---
 
-eyebrow: THE REFRAME
-# Better agent performance often starts with better conversation architecture.
+eyebrow: OPERATOR MINDSET
+# Most people talk about agent capability.
 
-Before you bolt on another memory system,
-fix how the work is segmented.
+Serious operators design
+agent boundaries.
+
+That is the real difference
+between a demo
+and a system you trust.
+
+---
+
+eyebrow: TAKEAWAY
+# The safest agent is not the smartest one.
+
+It is the one that cannot do much damage
+without your explicit permission.

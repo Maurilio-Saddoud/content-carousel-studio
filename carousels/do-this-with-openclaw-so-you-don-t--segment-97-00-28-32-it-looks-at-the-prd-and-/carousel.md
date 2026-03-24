@@ -1,7 +1,7 @@
 ---
 slug: "do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-"
-title: "Documentation is not paperwork anymore. It is runtime infrastructure."
-description: "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: PRDs and system docs make agents materially better."
+title: "If your agent has to rediscover the product every session, your setup is sloppy."
+description: "Post-ready carousel distilled from the source video segment at 00:28:32 → 00:28:46."
 sourceType: transcript
 aspectRatio: portrait
 updatedAt: 2026-03-24
@@ -12,47 +12,49 @@ theme:
   muted: "#71767B"
 ---
 
-eyebrow: AGENT OPS
-# Documentation is not paperwork anymore.
-
-It is runtime infrastructure.
-
----
-
-eyebrow: WHY THIS CHANGES
-# In an agent stack, docs are operating context.
-
-They tell the system what exists,
-where it lives,
-and how it is supposed to work.
+eyebrow: DOCUMENTATION
+# If your agent has to rediscover the product
+every session,
+your setup is sloppy.
 
 ---
 
-eyebrow: THE PRACTICAL WIN
-# Good docs reduce stupid work.
+eyebrow: THE FIX
+# Give it a real PRD.
 
-Less codebase wandering.
-Less re-discovery.
-Less guesswork.
-
-More direct execution.
-
----
-
-eyebrow: WHERE MOST TEAMS BLEED
-# Undocumented systems relearn themselves every week.
-
-That is not just messy.
-
-It is expensive.
-Slow.
-And unnecessary.
+Not vague notes.
+A real document explaining
+what the product does,
+where features live,
+and how the system works.
 
 ---
 
-eyebrow: THE REAL REFRAME
-# Better agent output starts with better system docs.
+eyebrow: WHY IT MATTERS
+# Good docs shrink search.
 
-Stop treating documentation like admin.
+The agent spends less time
+groping through code
+and more time making useful decisions.
 
-Treat it like part of the stack.
+---
+
+eyebrow: COMPOUNDING EFFECT
+# The best agent memory
+is often externalized context.
+
+PRDs.
+Workflows.
+Tooling docs.
+Learned mistakes.
+
+That is how you stop repeating yourself.
+
+---
+
+eyebrow: TAKEAWAY
+# Vibe coding gets expensive
+when the system has no map.
+
+Write the map once.
+Let the agent use it every day.

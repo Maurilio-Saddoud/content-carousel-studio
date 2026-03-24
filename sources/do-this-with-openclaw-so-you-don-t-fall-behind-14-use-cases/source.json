@@ -2,7 +2,7 @@
   "slug": "do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases",
   "sourceType": "transcript",
   "sourceUrl": "https://www.youtube.com/watch?v=M-3w1wEv0M0&list=LL&index=3",
-  "fetchedAt": "2026-03-24T19:39:40.457Z",
+  "fetchedAt": "2026-03-24T20:17:19.597Z",
   "transcriptMode": "official-transcript",
   "whisperModel": "base",
   "video": {
@@ -21,8 +21,8 @@
   "briefCount": 4,
   "publishedIdeaIds": [
     "segment-71",
-    "segment-31",
     "segment-04",
+    "segment-102",
     "segment-97"
   ],
   "briefs": [
@@ -33,16 +33,16 @@
       "slug": "do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible"
     },
     {
-      "id": "brief-segment-31",
-      "primaryIdeaId": "segment-31",
-      "thesis": "For my embeddings I'm using Nomic.",
-      "slug": "do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us"
-    },
-    {
       "id": "brief-segment-04",
       "primaryIdeaId": "segment-04",
       "thesis": "OpenClaw would just forget things all the time and I literally never had that problem once and I was using the default OpenClaw memory system and I couldn't figure out why everybody else was having issues and I wasn't.",
       "slug": "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory"
+    },
+    {
+      "id": "brief-segment-102",
+      "primaryIdeaId": "segment-102",
+      "thesis": "It basically saves a snapshot of your code in a certain state.",
+      "slug": "do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y"
     },
     {
       "id": "brief-segment-97",
@@ -60,23 +60,23 @@
       "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible/carousel.md"
     },
     {
-      "slug": "do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us",
-      "segmentId": "segment-31",
-      "title": "Serious agent stacks are multi-model by default.",
-      "previewPath": "/carousel/do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us",
-      "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us/carousel.md"
-    },
-    {
       "slug": "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory",
       "segmentId": "segment-04",
-      "title": "Most agent memory problems are really thread problems.",
+      "title": "Agent safety starts with smaller permissions, not better vibes.",
       "previewPath": "/carousel/do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory",
       "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory/carousel.md"
     },
     {
+      "slug": "do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y",
+      "segmentId": "segment-102",
+      "title": "If you are building with agents and not versioning everything, you are being reckless.",
+      "previewPath": "/carousel/do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y",
+      "carouselPath": "carousels/do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y/carousel.md"
+    },
+    {
       "slug": "do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-",
       "segmentId": "segment-97",
-      "title": "Documentation is not paperwork anymore. It is runtime infrastructure.",
+      "title": "If your agent has to rediscover the product every session, your setup is sloppy.",
       "previewPath": "/carousel/do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-",
       "carouselPath": "carousels/do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-/carousel.md"
     }
@@ -90,8 +90,8 @@
     "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/briefs.json",
     "sources/do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases/summary.md",
     "carousels/do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible/carousel.md",
-    "carousels/do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us/carousel.md",
     "carousels/do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory/carousel.md",
+    "carousels/do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y/carousel.md",
     "carousels/do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-/carousel.md",
     "carousels/index.json"
   ]
