@@ -1,6 +1,6 @@
 ---
 slug: "agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei"
-title: "Once you have a real dev team, lone-wolf AI workflows stop scaling."
+title: "AI doesn’t break teams by writing bad code. It breaks them by exploding coordination."
 description: "AI News & Strategy Daily | Nate B Jones on agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need: 00:13:07 → 00:13:25."
 sourceType: transcript
 aspectRatio: portrait
@@ -11,45 +11,48 @@ theme:
   foreground: "#E7E9EA"
   muted: "#71767B"
 ---
+eyebrow: TEAM-SCALE AI
+# AI doesn’t break teams by writing bad code. It breaks them by exploding coordination.
 
-# Once you have a real dev team,
-# lone-wolf AI workflows stop scaling.
-
----
-
-# A lot of AI coding advice is still built for individuals.
-
-One developer.
-One repo.
-One flow.
-One set of assumptions.
-
-That breaks fast when the project gets real.
+That’s the part a lot of “everyone gets a copilot” advice ignores.
 
 ---
+eyebrow: WHAT CHANGES
+# Once 8, 16, or 20 developers touch the same system, individual AI speed stops being the bottleneck.
 
-# Team complexity changes the game.
+Now the real problem is:
 
-When 8, 16, or 20 developers are touching the same system, you need more than “everyone use AI however they want.”
-
-You need harnesses, conventions, checkpoints, and shared operating rules.
-
----
-
-# Otherwise the speed boost turns into coordination debt.
-
-You get:
-- inconsistent output
-- harder reviews
-- weird repo drift
-- more hidden risk
-
-Faster code is not the same as better team throughput.
+- review load
+- task handoffs
+- repo drift
+- hidden conflicts
+- managers drowning in parallel work
 
 ---
+eyebrow: THE WRONG MENTAL MODEL
+# Giving every engineer 4 AI assistants is not team architecture.
 
-# The win is not “give every engineer a chatbot.”
+It just speeds up the humans while keeping the old bottlenecks in place.
 
-The win is designing a coding system the team can actually operate together.
+Sometimes it makes them worse.
+Because now the team produces more change than the system around it can absorb.
 
-That’s when AI becomes leverage instead of noise.
+---
+eyebrow: THE BETTER MODEL
+# At project scale, you have to design for the agent system — not just the human.
+
+That means planner logic.
+Shared conventions.
+Clear decomposition.
+Memory.
+Eval gates.
+A harness the whole team can operate.
+
+---
+eyebrow: OPERATOR TAKE
+# The upgrade is not “more copilots.”
+
+The upgrade is moving from **individual AI assistance**
+to **project-level AI architecture**.
+
+That’s where leverage starts looking like throughput instead of chaos.

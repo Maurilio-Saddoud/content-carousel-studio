@@ -18,12 +18,10 @@
     "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
   },
   "ideaCount": 103,
-  "briefCount": 4,
+  "briefCount": 2,
   "publishedIdeaIds": [
     "segment-45",
-    "segment-01",
-    "segment-78",
-    "segment-58"
+    "segment-01"
   ],
   "briefs": [
     {
@@ -37,48 +35,22 @@
       "primaryIdeaId": "segment-01",
       "thesis": "We want agents, but we don't know what we really want.",
       "slug": "agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do"
-    },
-    {
-      "id": "brief-segment-78",
-      "primaryIdeaId": "segment-78",
-      "thesis": "It's not both.\" Okay, now we come to orchestration.",
-      "slug": "agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w"
-    },
-    {
-      "id": "brief-segment-58",
-      "primaryIdeaId": "segment-58",
-      "thesis": "If you're an enterprise, you're typically having a human look at the code just to make sure there's some accountability there.",
-      "slug": "agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise"
     }
   ],
   "carousels": [
     {
       "slug": "agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei",
       "segmentId": "segment-45",
-      "title": "Developers working something makes stale coordination visible.",
+      "title": "AI doesn’t break teams by writing bad code. It breaks them by exploding coordination.",
       "previewPath": "/carousel/agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei",
       "carouselPath": "carousels/agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei/carousel.md"
     },
     {
       "slug": "agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do",
       "segmentId": "segment-01",
-      "title": "Simplistic belongs changes where human judgment belongs.",
+      "title": "The word ‘agent’ is hiding four different buying decisions.",
       "previewPath": "/carousel/agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do",
       "carouselPath": "carousels/agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do/carousel.md"
-    },
-    {
-      "slug": "agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w",
-      "segmentId": "segment-78",
-      "title": "Saved orchestration probably makes stale coordination visible.",
-      "previewPath": "/carousel/agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w",
-      "carouselPath": "carousels/agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w/carousel.md"
-    },
-    {
-      "slug": "agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise",
-      "segmentId": "segment-58",
-      "title": "The edge shifts when model capability changes faster than the old playbook.",
-      "previewPath": "/carousel/agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise",
-      "carouselPath": "carousels/agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise/carousel.md"
     }
   ],
   "createdFiles": [
@@ -91,8 +63,6 @@
     "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/summary.md",
     "carousels/agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei/carousel.md",
     "carousels/agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do/carousel.md",
-    "carousels/agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w/carousel.md",
-    "carousels/agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise/carousel.md",
     "carousels/index.json"
   ]
 }

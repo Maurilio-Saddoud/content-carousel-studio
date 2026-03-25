@@ -323,8 +323,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "published",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "status": "candidate",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped during sync-source because the published carousel markdown no longer exists.",
     "rejectionReasons": [],
     "carouselSlug": "agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w"
   },
@@ -1652,8 +1652,8 @@
       "introOutroPenalty": 0,
       "lengthPenalty": 0
     },
-    "status": "published",
-    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas.",
+    "status": "candidate",
+    "selectionReason": "Selected for publication as one of the top 8 non-overlapping ideas. Dropped during sync-source because the published carousel markdown no longer exists.",
     "rejectionReasons": [],
     "carouselSlug": "agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise"
   },

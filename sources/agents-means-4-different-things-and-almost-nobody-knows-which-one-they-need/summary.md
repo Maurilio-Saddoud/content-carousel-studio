@@ -6,11 +6,9 @@
 
 ## Carousels created automatically
 - Source slug: agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need
-- Carousel count: 4
+- Carousel count: 2
 - agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei → /carousel/agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei (brief brief-segment-45 from segment-45, 00:13:07 → 00:13:25, score 13, editorial rewrite)
 - agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do → /carousel/agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do (brief brief-segment-01 from segment-01, 00:00:00 → 00:00:18, score 10, editorial rewrite)
-- agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w → /carousel/agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w (brief brief-segment-78 from segment-78, 00:22:38 → 00:22:52, score 8, editorial rewrite)
-- agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise → /carousel/agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise (brief brief-segment-58 from segment-58, 00:16:51 → 00:17:02, score 4, editorial rewrite)
 
 ## Published briefs
 
@@ -45,37 +43,6 @@
 - Distinct from: brief-segment-45, brief-segment-78, brief-segment-58
 
 
-### #3 — It's not both." Okay, now we come to orchestration.
-- Brief: brief-segment-78
-- Primary idea: segment-78
-- Audience: Audience: people using AI in real work, not just talking about it.
-- Why it matters: I've saved orchestration for the end because it's probably the most complicated one to set up and manage.
-- Angle score: 19/30 (theme 3, authority 2, clarity 4, distinctness 5, commercial 1, fidelity 4)
-- Brief critique: rewrite
-- Rewrite goals:
-  - Center the strongest underlying theme, not just the most quotable line.
-  - Make the framing feel more like a real point of view with operator conviction.
-  - Ship fewer slides or tighten every supporting point.
-- Support:
-  - that's one of the reasons there's lots of startups in the space cuz they're basically trying to optimize away that complexity for you.
-- Distinct from: brief-segment-45, brief-segment-01, brief-segment-58
-
-
-### #4 — If you're an enterprise, you're typically having a human look at the code just to make sure there's some accountability there.
-- Brief: brief-segment-58
-- Primary idea: segment-58
-- Audience: Audience: product, design, and engineering leaders figuring out where AI changes the work.
-- Why it matters: If your mental model is stale, you redesign the wrong part of the workflow.
-- Angle score: 26/30 (theme 5, authority 4, clarity 3, distinctness 5, commercial 4, fidelity 5)
-- Brief critique: rewrite
-- Rewrite goals:
-  - Compress the lead and make the slide progression cleaner.
-- Support:
-  - you're typically having a human look at the code just to make sure there's some accountability there.
-  - It's actually something Amazon learned the hard way recently when they called a bunch of their uh senior engineers and their principal engineers into Seattle to talk
-- Distinct from: brief-segment-45, brief-segment-01, brief-segment-78
-
-
 ## Published ideas
 
 ### #1 — If you have a team of eight or 16 or 20 developers working on something
@@ -101,29 +68,18 @@
   - contains enough complete thoughts to turn into multiple slides
 
 
+## Candidate ideas not published this run
+
 ### #8 — It's not both." Okay, now we come to orchestration.
-- Status: published
-- Score: 8
+- Status: candidate
+- Reason: Selected for publication as one of the top 8 non-overlapping ideas. Dropped during sync-source because the published carousel markdown no longer exists.
 - Time: 00:22:38 → 00:22:52
-- Hook: It's not both." Okay, now we come to orchestration.
-- Why it could work:
-  - has contrast/tension, which usually makes better post framing
-  - contains enough complete thoughts to turn into multiple slides
 
 
 ### #40 — If you're an enterprise
-- Status: published
-- Score: 4
+- Status: candidate
+- Reason: Selected for publication as one of the top 8 non-overlapping ideas. Dropped during sync-source because the published carousel markdown no longer exists.
 - Time: 00:16:51 → 00:17:02
-- Hook: If you're an enterprise
-- Why it could work:
-  - sounds grounded in lived or practical experience
-  - contains enough complete thoughts to turn into multiple slides
-
-
-## Candidate ideas not published this run
-
-No additional candidate ideas survived beyond the published set.
 
 ## Rejected ideas
 
