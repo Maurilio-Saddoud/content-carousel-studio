@@ -126,6 +126,9 @@ type CarouselBundle = {
 }
 
 type ExistingSlugMap = Record<string, string>
+type TitleReservationOptions = {
+  excludeCarouselSlugs?: Set<string>
+}
 type SourceManifest = {
   slug?: string
   sourceType?: string
@@ -153,6 +156,9 @@ const TRANSCRIPT_TOOL_PATH = path.resolve('../youtube-transcript-v1/yt_transcrip
 const RAW_TRANSCRIPT_RE = /^\[(\d{2}):(\d{2}):(\d{2})\]\s+(.*)$/
 const execFileAsync = promisify(execFile)
 const REPO_NAME = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carousel-studio'
+const MIN_CAROUSEL_SLIDES = 5
+const MAX_CAROUSEL_SLIDES = 8
+const TARGET_BODY_LINES = 3
 const DEFAULT_THEME = {
   accent: '#1D9BF0',
   background: '#000000',
@@ -195,7 +201,10 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
   }
 
   const briefs = buildBriefs(publishedIdeas, ideas, sourceSlug, existingSlugs)
-  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas)
+  const repoTitleReservations = await collectRepoTitleReservations(sourceSlug, {
+    excludeCarouselSlugs: new Set(Object.values(existingSlugs)),
+  })
+  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas, repoTitleReservations)
   const acceptedIdeaIds = carouselBundles.map((bundle) => bundle.idea.id)
   const normalizedIdeas: Idea[] = ideas.map((idea) => acceptedIdeaIds.includes(idea.id)
     ? idea
@@ -208,6 +217,7 @@ export async function ingestYoutubeFromArgv(argv: string[] = process.argv.slice(
     await mkdir(path.resolve('carousels', bundle.carousel.slug), { recursive: true })
     await writeFile(path.resolve('carousels', bundle.carousel.slug, 'carousel.md'), renderCarouselMarkdown(bundle.carousel), 'utf8')
   }
+  await invalidateRenderedArtifacts(carouselBundles.map((bundle) => bundle.carousel.slug))
   await syncCarouselDirectoryIndex()
 
   const summary = buildSummary(metadata, sourceSlug, carouselBundles, normalizedIdeas, briefs)
@@ -301,7 +311,10 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
   const ideas = buildIdeas(segments, sourceSlug, publishLimit, existingSlugs)
   const publishedIdeas = ideas.filter((idea) => idea.status === 'published')
   const briefs = buildBriefs(publishedIdeas, ideas, sourceSlug, existingSlugs)
-  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas)
+  const repoTitleReservations = await collectRepoTitleReservations(sourceSlug, {
+    excludeCarouselSlugs: new Set(Object.values(existingSlugs)),
+  })
+  const carouselBundles = buildCarouselBundles(metadata, sourceSlug, briefs, ideas, repoTitleReservations)
   const acceptedIdeaIds = carouselBundles.map((bundle) => bundle.idea.id)
   const normalizedIdeas: Idea[] = ideas.map((idea) => acceptedIdeaIds.includes(idea.id)
     ? idea
@@ -317,6 +330,7 @@ export async function rebuildCarouselsFromSourceArgv(argv: string[] = process.ar
     await mkdir(path.resolve('carousels', bundle.carousel.slug), { recursive: true })
     await writeFile(path.resolve('carousels', bundle.carousel.slug, 'carousel.md'), renderCarouselMarkdown(bundle.carousel), 'utf8')
   }
+  await invalidateRenderedArtifacts(carouselBundles.map((bundle) => bundle.carousel.slug))
   await syncCarouselDirectoryIndex()
   await writeFile(path.join(sourceDir, 'source.json'), `${JSON.stringify({
     slug: sourceSlug,
@@ -411,7 +425,29 @@ async function syncSourceManifest(sourceSlug: string) {
   const carousels = survivingCarouselEntries.filter((entry): entry is NonNullable<typeof entry> => Boolean(entry))
   const survivingSlugs = new Set(carousels.map((entry) => entry.slug))
   const survivingSegmentIds = new Set(carousels.map((entry) => entry.segmentId).filter((id): id is string => Boolean(id)))
-  const syncedBriefs = briefs.filter((brief) => brief.carouselSlug && survivingSlugs.has(brief.carouselSlug))
+  const syncedBriefs = briefs
+    .filter((brief) => brief.carouselSlug && survivingSlugs.has(brief.carouselSlug))
+    .map((brief) => ({
+      ...brief,
+      audience: brief.audience ?? 'Operators building AI-enabled products or workflows.',
+      whyItMatters: brief.whyItMatters ?? 'Recovered during sync-source from surviving carousel markdown.',
+      supportPoints: Array.isArray(brief.supportPoints) ? brief.supportPoints : [],
+      distinctFromBriefIds: Array.isArray(brief.distinctFromBriefIds) ? brief.distinctFromBriefIds : [],
+      scorecard: brief.scorecard ?? {
+        themeStrength: 0,
+        authorityPotential: 0,
+        clarity: 0,
+        distinctness: 0,
+        commercialRelevance: 0,
+        fidelity: 0,
+        total: 0,
+      },
+      critique: brief.critique ?? {
+        status: 'accept' as const,
+        reasons: ['Recovered during sync-source from surviving carousel markdown.'],
+        rewriteGoals: ['Rebuild this source package if you want a fresh editorial critique.'],
+      },
+    }))
   const syncedBriefEntries = syncedBriefs.map((brief) => ({
     id: brief.id,
     primaryIdeaId: brief.primaryIdeaId,
@@ -429,11 +465,27 @@ async function syncSourceManifest(sourceSlug: string) {
       : idea)
   const carouselBundles = syncedBriefs.flatMap((brief) => {
     const idea = ideas.find((entry) => entry.id === brief.primaryIdeaId)
-    if (!idea || !brief.carouselSlug) return []
+    const carouselEntry = carousels.find((entry) => entry.slug === brief.carouselSlug)
+    if (!idea || !brief.carouselSlug || !carouselEntry) return []
     return [{
       brief,
       idea,
-      carousel: { slug: brief.carouselSlug },
+      critique: brief.critique ?? { status: 'accept', reasons: [], rewriteGoals: ['Recovered during sync-source from surviving carousel markdown.'] },
+      carousel: {
+        slug: brief.carouselSlug,
+        title: carouselEntry.title,
+        description: '',
+        sourceType: 'transcript' as const,
+        aspectRatio: 'portrait' as const,
+        updatedAt: sourceManifest.fetchedAt ?? new Date().toISOString(),
+        theme: {
+          accent: '#7c3aed',
+          background: '#0f172a',
+          foreground: '#f8fafc',
+          muted: '#cbd5e1',
+        },
+        slides: [],
+      },
     }]
   })
 
@@ -511,12 +563,62 @@ async function readCarouselMarkdown(slug: string) {
     await access(filePath)
     const raw = await readFile(filePath, 'utf8')
     const parsed = matter(raw)
+    const slides = parsed.content
+      .split(/^---\s*$/m)
+      .map((section) => section.trim())
+      .filter(Boolean)
+      .map((section, index) => {
+        const heading = section
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .find((line) => /^#{1,6}\s+/.test(line))
+
+        return {
+          id: String(index + 1).padStart(2, '0'),
+          title: heading ? heading.replace(/^#{1,6}\s+/, '').trim() : '',
+        }
+      })
+
     return {
       title: String(parsed.data.title ?? slug).trim(),
+      slides,
     }
   } catch {
     return undefined
   }
+}
+
+async function collectRepoTitleReservations(sourceSlug: string, options: TitleReservationOptions = {}) {
+  const reservations = new Set<string>()
+  const sourceSlugs = await listSourceSlugs()
+
+  for (const slug of sourceSlugs) {
+    if (!slug || slug === '.DS_Store' || slug === sourceSlug) continue
+
+    try {
+      const manifest = await readSourceManifest(path.resolve('sources', slug))
+      if (!manifest) continue
+      for (const entry of manifest.carousels ?? []) {
+        if (!entry.slug || options.excludeCarouselSlugs?.has(entry.slug)) continue
+        const carousel = await readCarouselMarkdown(entry.slug)
+        const title = cleanSentence(carousel?.title ?? entry.title ?? '')
+        if (title) {
+          reservations.add(title.toLowerCase())
+        }
+
+        for (const slide of carousel?.slides ?? []) {
+          const slideTitle = cleanSentence(slide.title)
+          if (slideTitle) {
+            reservations.add(slideTitle.toLowerCase())
+          }
+        }
+      }
+    } catch {
+      continue
+    }
+  }
+
+  return reservations
 }
 
 function parseArgs(argv: string[]) {
@@ -1053,6 +1155,42 @@ function overlapScore(left: string, right: string) {
   return union === 0 ? 0 : intersection / union
 }
 
+function scoreSupportIdeaAffinity(primary: Idea, candidate: Idea) {
+  const primaryLines = uniqueNormalized([
+    primary.hook,
+    primary.titleSuggestion,
+    primary.text,
+    ...getCompleteThoughts(primary.text),
+  ])
+  const candidateLines = uniqueNormalized([
+    candidate.hook,
+    candidate.titleSuggestion,
+    candidate.text,
+    ...getCompleteThoughts(candidate.text),
+  ])
+
+  const directOverlap = Math.max(
+    overlapScore(primary.text, candidate.text),
+    overlapScore(primary.hook, candidate.hook),
+    overlapScore(primary.titleSuggestion, candidate.titleSuggestion),
+  )
+
+  const lineOverlap = primaryLines.reduce((best, primaryLine) => {
+    const current = candidateLines.reduce((innerBest, candidateLine) => Math.max(innerBest, overlapScore(primaryLine, candidateLine)), 0)
+    return Math.max(best, current)
+  }, 0)
+
+  const sharedTokens = [...new Set(tokenizeForOverlap(primaryLines.join(' ')))].filter((token) => tokenizeForOverlap(candidateLines.join(' ')).includes(token))
+  const topicalBonus = sharedTokens.filter((token) => token.length >= 6).length >= 2 ? 0.08 : 0
+
+  return Math.max(directOverlap, lineOverlap) + topicalBonus
+}
+
+function isSupportIdeaAligned(primary: Idea, candidate: Idea) {
+  const affinity = scoreSupportIdeaAffinity(primary, candidate)
+  return affinity >= 0.18 || (affinity >= 0.12 && primary.scoreBreakdown.specificity + candidate.scoreBreakdown.specificity >= 3)
+}
+
 function tokenizeForOverlap(value: string) {
   return value
     .toLowerCase()
@@ -1122,6 +1260,7 @@ function getCompleteThoughts(text: string) {
 
 function cleanSentence(text: string) {
   return text
+    .replace(/^\s*(?:>{1,3}|>>?)\s*/, '')
     .replace(/^[-–—:;,\s]+/, '')
     .replace(/\s+/g, ' ')
     .replace(/^(?:and|but|so|because|well)\b\s+/i, '')
@@ -1131,6 +1270,30 @@ function cleanSentence(text: string) {
     .trim()
 }
 
+function stripWeakLeadIn(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return ''
+
+  const stripped = cleaned
+    .replace(/^not because [^,]{4,80}, but because\s+/i, '')
+    .replace(/^i know that\s+/i, '')
+    .replace(/^this is where\s+/i, '')
+    .replace(/^if you are in any\s+/i, '')
+    .replace(/^if you(?:'|’)re in any\s+/i, '')
+    .replace(/^there are many\s+/i, '')
+    .replace(/^it(?:'|’)s one of the most important [^.?!,]{6,80}(?:that i think i(?:'|’)m going to make this year)?[,:]?\s*/i, '')
+    .trim()
+
+  return cleanSentence(stripped)
+}
+
+function isWeakLeadInLine(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return true
+
+  return /^(?:i know that|this is where|if you(?:'|’)re? in any|there are many|it(?:'|’)s one of the most important structural arguments|not because [^,]{4,80}, but because)\b/i.test(cleaned)
+}
+
 function isWeakDisplayLine(text: string) {
   const cleaned = cleanSentence(text)
   if (!cleaned) return true
@@ -1138,6 +1301,7 @@ function isWeakDisplayLine(text: string) {
   if (/,$/.test(cleaned)) return true
   if (/^(for|to|and|but|or)\b/i.test(cleaned)) return true
   if (/\b(this|that|it) is (much )?more important\b/i.test(cleaned)) return true
+  if (isWeakLeadInLine(cleaned)) return true
   if (isMetaNarrationLine(cleaned)) return true
   if (isWeakBriefLineCandidate(cleaned)) return true
   return false
@@ -1150,6 +1314,7 @@ function isWeakBriefLineCandidate(text: string) {
   if (/,$/.test(cleaned)) return true
   if (/\?$/.test(cleaned)) return true
   if (/^(i('| a)?m going to|get into|we are going to|i('| a)?ve seen|the first is|do you love|thank you very much|here('| i)?s what|right now|for \d+ years|a lot of people|if you are waiting and seeing|now|now,|starting fresh)\b/i.test(cleaned)) return true
+  if (isWeakLeadInLine(cleaned)) return true
   if (isMetaNarrationLine(cleaned)) return true
   if (/^(this|that|it)\b/i.test(cleaned) && cleaned.length < 48) return true
   if (/^(there('| i)?s|here('| i)?s)\b/i.test(cleaned) && cleaned.length < 54) return true
@@ -1160,7 +1325,18 @@ function isWeakBriefLineCandidate(text: string) {
 function isMetaNarrationLine(text: string) {
   const cleaned = cleanSentence(text)
   if (!cleaned) return true
-  return /^(this is (a )?(video|podcast|episode) about|in this (video|podcast|episode)|the point of this (video|podcast|episode)|this is not about learning to code|that is the skill of \d{4})\b/i.test(cleaned)
+  if (/^(this is (a )?(video|podcast|episode) about|in this (video|podcast|episode)|the point of this (video|podcast|episode)|this is not about learning to code|that is the skill of \d{4})\b/i.test(cleaned)) {
+    return true
+  }
+
+  return isCallToActionOrBanterLine(cleaned)
+}
+
+function isCallToActionOrBanterLine(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return true
+
+  return /^(here you can see|here are some|i(?:'| a)?ll link|if you(?:'|’)re interested in|check out|go (?:watch|read|try)|subscribe|smash that like|thanks for watching|thank you(?: very much)?|listen up everyone|all right|alright|baby hotties|in humanoid robot news|this week in|unitree g1 robot in real life)\b/i.test(cleaned)
 }
 
 function trimSentence(text: string, max: number) {
@@ -1172,8 +1348,9 @@ function pickDisplayLine(candidates: string[], options: { preferredMax: number }
     .map((candidate) => cleanSentence(candidate))
     .filter(Boolean)
 
-  const directFit = normalized.find((candidate) => candidate.length <= options.preferredMax)
-  if (directFit) return directFit
+  const directFits = normalized.filter((candidate) => candidate.length <= options.preferredMax)
+  const strongDirectFit = rankDisplayCandidates(directFits).find((candidate) => !isWeakDisplayLine(candidate))
+  if (strongDirectFit) return strongDirectFit
 
   const clauseFits = normalized
     .flatMap((candidate) => splitIntoClauses(candidate))
@@ -1182,11 +1359,46 @@ function pickDisplayLine(candidates: string[], options: { preferredMax: number }
     .filter((candidate) => !/^[a-z]/.test(candidate))
     .filter((candidate) => !/^(and|but|so|because|which|that|then)\b/i.test(candidate))
 
-  if (clauseFits.length > 0) {
-    return clauseFits.sort((a, b) => b.length - a.length)[0]
+  const strongClauseFit = rankDisplayCandidates(clauseFits).find((candidate) => !isWeakDisplayLine(candidate))
+  if (strongClauseFit) return strongClauseFit
+
+  if (directFits.length > 0) {
+    return rankDisplayCandidates(directFits)[0]
   }
 
-  return normalized.sort((a, b) => a.length - b.length)[0]
+  if (clauseFits.length > 0) {
+    return rankDisplayCandidates(clauseFits)[0]
+  }
+
+  return rankDisplayCandidates(normalized)[0]
+}
+
+function rankDisplayCandidates(candidates: string[]) {
+  return [...new Set(candidates)]
+    .sort((a, b) => scoreDisplayCandidate(b) - scoreDisplayCandidate(a))
+}
+
+function scoreDisplayCandidate(candidate: string) {
+  const cleaned = cleanSentence(candidate)
+  if (!cleaned) return Number.NEGATIVE_INFINITY
+
+  let score = 0
+  const length = cleaned.length
+  if (length >= 34 && length <= 82) score += 8
+  else if (length >= 28 && length <= 90) score += 5
+  else if (length < 24) score -= 12
+  else score -= Math.max(0, length - 90) * 0.08
+
+  if (!isWeakDisplayLine(cleaned)) score += 18
+  if (/[.!?]$/.test(cleaned)) score += 1
+  if (/\b(you|your|teams?|operators?|founders?|workflow|system|model|trust|review|handoff|bottleneck|context|agents?)\b/i.test(cleaned)) score += 3
+  if (/^(if|when|once|instead|but)\b/i.test(cleaned)) score += 2
+  if (/^(more|better|planning|compute|save early|ask instead|better question)\b/i.test(cleaned)) score -= 6
+  if (/^(for|to|and|but|or)\b/i.test(cleaned)) score -= 8
+  if (/^(most people ask|don'?t ask|better question|ask instead)[:]?$/i.test(cleaned)) score -= 10
+  if (/^(in|for)\b/i.test(cleaned) && length < 40) score -= 5
+
+  return score
 }
 
 function splitIntoClauses(text: string) {
@@ -1210,12 +1422,15 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
       .filter((candidate) => candidate.status === 'candidate')
       .filter((candidate) => !areNearDuplicates(candidate, idea))
       .filter((candidate) => getCompleteThoughts(candidate.text).some((line) => !isWeakBriefLineCandidate(line)))
+      .map((candidate) => ({ candidate, affinity: scoreSupportIdeaAffinity(idea, candidate) }))
+      .filter(({ candidate, affinity }) => isSupportIdeaAligned(idea, candidate) || affinity >= 0.1)
       .sort((a, b) => {
-        const aFresh = usedSupportingIdeaIds.has(a.id) ? 1 : 0
-        const bFresh = usedSupportingIdeaIds.has(b.id) ? 1 : 0
-        return aFresh - bFresh || b.score - a.score
+        const aFresh = usedSupportingIdeaIds.has(a.candidate.id) ? 1 : 0
+        const bFresh = usedSupportingIdeaIds.has(b.candidate.id) ? 1 : 0
+        return aFresh - bFresh || b.affinity - a.affinity || b.candidate.score - a.candidate.score
       })
       .slice(0, 3)
+      .map(({ candidate }) => candidate)
 
     const thesis = pickDistinctThesis([
       idea.hook,
@@ -1372,8 +1587,14 @@ function buildBriefCritique(scorecard: BriefScorecard, thesis: string, whyItMatt
   }
 }
 
-function buildCarouselBundles(metadata: VideoMetadata, sourceSlug: string, briefs: Brief[], ideas: Idea[]): CarouselBundle[] {
-  const usedBatchTitles = new Set<string>()
+function buildCarouselBundles(
+  metadata: VideoMetadata,
+  sourceSlug: string,
+  briefs: Brief[],
+  ideas: Idea[],
+  reservedRepoTitles: Set<string> = new Set(),
+): CarouselBundle[] {
+  const usedBatchTitles = new Set<string>(reservedRepoTitles)
 
   return briefs.flatMap((brief) => {
     const idea = ideas.find((entry) => entry.id === brief.primaryIdeaId)
@@ -1452,7 +1673,7 @@ function buildCarousel(
     support[5] ?? 'Update your mental model before you update the workflow.',
     support[8] ?? 'Decide what deserves human review and what can safely flow through.',
     extractTakeaway(primary.text, companionSegments),
-  ]).slice(0, 3)
+  ]).slice(0, 4)
 
   const usedTitles = new Set<string>()
   const takeTitle = (...candidates: string[]) => pickUniqueTitle(usedTitles, candidates, usedBatchTitles)
@@ -1499,7 +1720,7 @@ function buildCarousel(
     closingFallbackTitle,
   )
 
-  const slide4Intro = uniqueNormalized([
+  const slide4BodyLead = uniqueNormalized([
     titleFromSentence(support[7] ?? ''),
     support[6] ?? '',
     'The workflow needs clearer review boundaries.',
@@ -1528,7 +1749,10 @@ function buildCarousel(
     },
     {
       title: slide4Title,
-      body: buildFrameworkBody(slide4Intro, frameworkItems),
+      body: buildBodyLines([
+        slide4BodyLead,
+        frameworkItems[0] ?? brief.supportPoints[1] ?? 'Operators need a cleaner decision path.',
+      ]),
     },
     {
       title: slide5Title,
@@ -1541,6 +1765,9 @@ function buildCarousel(
   ]
 
   const extraSlides = uniqueNormalized([
+    frameworkItems[1] ?? '',
+    frameworkItems[2] ?? '',
+    frameworkItems[3] ?? '',
     support[0] ?? '',
     support[1] ?? '',
     support[4] ?? '',
@@ -1551,18 +1778,21 @@ function buildCarousel(
     brief.supportPoints[2] ?? '',
     extractTakeaway(primary.text, companionSegments),
   ])
-    .filter((line) => line.length >= 32)
+    .filter((line) => line.length >= 24)
     .filter((line) => !draftSlides.some((slide) => slide.title.toLowerCase() === line.toLowerCase() || slide.body.toLowerCase().includes(line.toLowerCase())))
-    .slice(0, 2)
-    .map((line) => ({
+    .slice(0, MAX_CAROUSEL_SLIDES - MIN_CAROUSEL_SLIDES)
+    .map((line, index) => ({
       title: takeTitle(line, titleFromSentence(line), 'This is where the workflow really changes.'),
-      body: buildBodyLines([line, brief.whyItMatters]),
+      body: buildBodyLines([
+        line,
+        index % 2 === 0 ? brief.whyItMatters : extractTakeaway(primary.text, companionSegments),
+      ]),
     }))
 
-  const targetSlideCount = Math.max(4, Math.min(7, 5 + extraSlides.length))
+  const targetSlideCount = Math.max(MIN_CAROUSEL_SLIDES, Math.min(MAX_CAROUSEL_SLIDES, MIN_CAROUSEL_SLIDES + extraSlides.length))
   const middleSlides = [...draftSlides.slice(1, -1)]
-  if (targetSlideCount > 5) {
-    middleSlides.splice(Math.max(1, middleSlides.length - 1), 0, ...extraSlides.slice(0, targetSlideCount - 5))
+  if (targetSlideCount > MIN_CAROUSEL_SLIDES) {
+    middleSlides.splice(Math.max(1, middleSlides.length - 1), 0, ...extraSlides.slice(0, targetSlideCount - MIN_CAROUSEL_SLIDES))
   }
 
   const assembledSlides = [draftSlides[0], ...middleSlides, draftSlides[draftSlides.length - 1]].slice(0, targetSlideCount)
@@ -1615,7 +1845,28 @@ function editorialPolishCarousel(brief: Brief, carousel: Carousel, usedBatchTitl
 }
 
 function titleBaseFromSlides(slides: CarouselSlide[]) {
-  return slides[0]?.title?.trim() || 'Untitled carousel'
+  const cleaned = slides
+    .map((slide) => cleanSentence(slide.title))
+    .filter(Boolean)
+
+  const preferred = cleaned.find((title, index) => index > 0 && !isGenericReserveTitle(title) && !isSyntheticReserveTitle(title))
+  if (preferred) return preferred
+
+  const fallback = cleaned.find((title) => !isGenericReserveTitle(title))
+  return fallback || cleaned[0] || 'Untitled carousel'
+}
+
+function isGenericReserveTitle(title: string) {
+  return /^(agent workflow pressure|model progress|team redesign|buyer behavior|product demo velocity|capability shift)\b/i.test(cleanSentence(title))
+}
+
+function isSyntheticReserveTitle(title: string) {
+  const cleaned = cleanSentence(title)
+  if (!cleaned) return true
+  if (/^untitled (slide|carousel)\b/i.test(cleaned)) return true
+  if (/\(\d+\)$/.test(cleaned)) return true
+  if (/\b(for operators|in production|when context drifts|once the workflow shifts|before the next handoff|under real load)\b/i.test(cleaned)) return true
+  return false
 }
 
 function critiqueCarouselDraft(carousel: Carousel, brief: Brief, idea: Idea): EditorialCritique {
@@ -1654,7 +1905,7 @@ function critiqueCarouselDraft(carousel: Carousel, brief: Brief, idea: Idea): Ed
     reasons.push('Closing payoff is not landing cleanly enough.')
     rewriteGoals.push('End with a sharper takeaway or operator-level implication.')
   }
-  if (idea.wordCount < 42 && carousel.slides.length > 5) {
+  if (idea.wordCount < 42 && carousel.slides.length > MIN_CAROUSEL_SLIDES) {
     reasons.push('The source segment is not rich enough to justify this many slides.')
     rewriteGoals.push('Compress the carousel to the strongest surviving spine.')
   }
@@ -1674,7 +1925,8 @@ function rewriteCarouselFromCritique(
   critique: EditorialCritique,
   usedBatchTitles: Set<string> = new Set(),
 ): Carousel {
-  const totalSlides = Math.min(carousel.slides.length, idea.wordCount < 56 ? 5 : 6)
+  const richnessBonus = idea.wordCount >= 96 ? 2 : idea.wordCount >= 64 ? 1 : 0
+  const totalSlides = Math.max(MIN_CAROUSEL_SLIDES, Math.min(carousel.slides.length, Math.min(MAX_CAROUSEL_SLIDES, MIN_CAROUSEL_SLIDES + richnessBonus)))
   const trimmedSlides = carousel.slides.slice(0, totalSlides).map((slide) => ({ ...slide }))
   const slides = trimmedSlides.map((slide, index) => {
     const rewrittenTitle = rewriteSlideTitle(slide.title, brief, critique, index, totalSlides)
@@ -1755,13 +2007,25 @@ function splitSlideBodyLines(body: string) {
   return uniqueNormalized(body
     .split(/\n\n+/)
     .flatMap((part) => part.split(/\n+/))
-    .map((part) => part.replace(/^>\s*/, '').replace(/^\d+\.\s*/, '').trim()))
+    .map((part) => part.replace(/^>\s*/, '').replace(/^\d+\.\s*/, '').replace(/^[-*]\s*/, '').trim()))
+}
+
+function shortenBodyLine(line: string) {
+  const cleaned = normalizeForSlide(line)
+  if (!cleaned) return ''
+
+  const concise = pickDisplayLine([
+    cleaned,
+    ...splitIntoClauses(cleaned),
+  ], { preferredMax: 72 })
+
+  return normalizeForSlide(concise || cleaned)
 }
 
 function buildBodyLines(lines: string[]) {
-  return uniqueNormalized(lines)
+  return uniqueNormalized(lines.map((line) => shortenBodyLine(line)))
     .filter((line) => !/[.…]$/.test(line) || /[.!?]$/.test(line))
-    .slice(0, 2)
+    .slice(0, TARGET_BODY_LINES)
     .join('\n\n')
 }
 
@@ -1867,13 +2131,227 @@ function pickUniqueTitle(usedTitles: Set<string>, candidates: string[], reserved
     return candidate
   }
 
-  const fallback = normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase()) && !reservedTitles.has(candidate.toLowerCase()))
-    || normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase()))
-    || 'Untitled slide'
-  const fallbackKey = fallback.toLowerCase()
+  const uniqueFallback = normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase()) && !reservedTitles.has(candidate.toLowerCase()))
+  if (uniqueFallback) {
+    const fallbackKey = uniqueFallback.toLowerCase()
+    usedTitles.add(fallbackKey)
+    reservedTitles.add(fallbackKey)
+    return uniqueFallback
+  }
+
+  const base = normalizedCandidates[0] || 'Untitled slide'
+  const synthesizedFallback = synthesizeUniqueTitleVariant(base, normalizedCandidates.slice(1), usedTitles, reservedTitles)
+  const fallbackKey = synthesizedFallback.toLowerCase()
   usedTitles.add(fallbackKey)
   reservedTitles.add(fallbackKey)
-  return fallback
+  return synthesizedFallback
+}
+
+function synthesizeUniqueTitleVariant(
+  base: string,
+  alternates: string[],
+  usedTitles: Set<string>,
+  reservedTitles: Set<string>,
+) {
+  const disallowed = new Set([...usedTitles, ...reservedTitles])
+  const baseStem = buildDistinctTitleStem([base, ...alternates], disallowed)
+  const strategicVariants = buildStrategicReserveTitleVariants(baseStem, alternates)
+
+  for (const variant of strategicVariants) {
+    const cleaned = cleanSentence(variant)
+    const key = cleaned.toLowerCase()
+    if (!cleaned || isWeakDisplayLine(cleaned) || disallowed.has(key)) continue
+    return cleaned
+  }
+
+  const reserveSuffixes = [
+    'for operators',
+    'in production',
+    'when context drifts',
+    'once the workflow shifts',
+    'before the next handoff',
+    'under real load',
+  ]
+
+  for (const suffix of reserveSuffixes) {
+    const variant = cleanSentence(`${baseStem} — ${suffix}`)
+    const key = variant.toLowerCase()
+    if (!variant || isWeakDisplayLine(variant) || disallowed.has(key)) continue
+    return variant
+  }
+
+  let counter = 2
+  while (counter < 20) {
+    const variant = cleanSentence(`${baseStem} (${counter})`)
+    const key = variant.toLowerCase()
+    if (!disallowed.has(key)) return variant
+    counter += 1
+  }
+
+  return `${baseStem} (${Date.now()})`
+}
+
+function buildStrategicReserveTitleVariants(baseStem: string, alternates: string[]) {
+  const combined = uniqueNormalized([baseStem, ...alternates]).join(' ')
+  const topic = inferReserveTitleTopic(combined)
+  const emphasis = inferReserveTitleEmphasis(combined)
+  const strategic = extractStrategicFallbackThesis([baseStem, ...alternates])
+  const subject = topic.articleless
+  const subjectWithArticle = topic.withArticle
+  const topicLabel = topic.label
+  const anchor = inferReserveTitleAnchor(combined)
+  const anchorLabel = anchor ? capitalize(anchor) : ''
+
+  return uniqueNormalized([
+    anchor ? `${anchorLabel} changes where human judgment belongs.` : '',
+    anchor ? `${anchorLabel} makes stale coordination visible.` : '',
+    anchor ? `${anchorLabel} gets expensive when review stays lazy.` : '',
+    anchor ? `${anchorLabel} is where the workflow starts to break.` : '',
+    `${subjectWithArticle} changes where human judgment belongs.`,
+    `${subject} puts the old workflow under pressure.`,
+    `${subject} makes the review layer more valuable.`,
+    `${subject} exposes where coordination is still leaking time.`,
+    `${subjectWithArticle} changes what deserves a human checkpoint.`,
+    `${subject} raises the cost of stale operating assumptions.`,
+    `${subject} rewards teams that update supervision faster.`,
+    `${capitalize(topicLabel)} shifts the bottleneck toward ${emphasis}.`,
+    `${capitalize(topicLabel)} now punishes lazy handoffs.`,
+    `${capitalize(topicLabel)} gets expensive when the workflow stays stale.`,
+    strategic,
+    baseStem,
+  ])
+}
+
+function inferReserveTitleAnchor(text: string) {
+  const tokens = tokenizeReserveTitleAnchor(text)
+  if (tokens.length === 0) return ''
+
+  const preferredPhrase = findPreferredReserveAnchorPhrase(tokens)
+  if (preferredPhrase) return preferredPhrase
+
+  const viableSingle = tokens.find((token) => scoreReserveAnchorToken(token) > 0)
+  return viableSingle ?? ''
+}
+
+function tokenizeReserveTitleAnchor(text: string) {
+  return cleanSentence(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, ' ')
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 4)
+    .filter((token) => !RESERVE_TITLE_STOP_WORDS.has(token))
+}
+
+function findPreferredReserveAnchorPhrase(tokens: string[]) {
+  const candidates: Array<{ phrase: string; score: number; length: number }> = []
+
+  for (let index = 0; index < tokens.length; index += 1) {
+    for (let size = 3; size >= 2; size -= 1) {
+      const window = tokens.slice(index, index + size)
+      if (window.length !== size) continue
+      const score = scoreReserveAnchorPhrase(window)
+      if (score <= 0) continue
+      candidates.push({ phrase: window.join(' '), score, length: window.length })
+    }
+  }
+
+  candidates.sort((left, right) => right.score - left.score || right.length - left.length)
+  return candidates[0]?.phrase ?? ''
+}
+
+function scoreReserveAnchorPhrase(tokens: string[]) {
+  if (tokens.length < 2) return Number.NEGATIVE_INFINITY
+  if (new Set(tokens).size !== tokens.length) return Number.NEGATIVE_INFINITY
+  if (tokens.some((token) => RESERVE_TITLE_ANCHOR_BANNED.has(token))) return Number.NEGATIVE_INFINITY
+
+  let score = 0
+  let domainHits = 0
+
+  for (const token of tokens) {
+    const tokenScore = scoreReserveAnchorToken(token)
+    if (tokenScore <= -4) return Number.NEGATIVE_INFINITY
+    if (tokenScore > 0) domainHits += 1
+    score += tokenScore
+  }
+
+  if (domainHits === 0) return Number.NEGATIVE_INFINITY
+  if (domainHits >= 2) score += 4
+  if (tokens.length === 3) score += 1
+
+  return score
+}
+
+function scoreReserveAnchorToken(token: string) {
+  if (!token) return Number.NEGATIVE_INFINITY
+  if (RESERVE_TITLE_ANCHOR_BANNED.has(token)) return -10
+  if (RESERVE_TITLE_ANCHOR_WEAK.has(token)) return -6
+  if (RESERVE_TITLE_ANCHOR_DOMAIN.test(token)) return 4
+  if (/(tion|sion|ment|ness|ship|ware|graph|proof|bench|guard|scope|stack|trace|queue|cache|token|trust|sales|buyer|agent|model|prompt|memory|context|review|audit|deploy|robot|voice|class|teach|student|build|checkpoint)$/i.test(token)) return 3
+  if (token.length >= 8) return 1
+  return 0
+}
+
+function inferReserveTitleTopic(text: string) {
+  const normalized = cleanSentence(text).toLowerCase()
+  if (/\b(agent|workflow|review|memory|handoff|context|prompt|supervis)\w*\b/.test(normalized)) {
+    return { label: 'agent workflow', articleless: 'Agent workflow pressure', withArticle: 'Agent workflow pressure' }
+  }
+  if (/\b(model|eval|benchmark|inference|training|compute|gpu|token|latency)\w*\b/.test(normalized)) {
+    return { label: 'model progress', articleless: 'Model progress', withArticle: 'Model progress' }
+  }
+  if (/\b(product|engineering|designer|manager|org|team|company|operator|software)\w*\b/.test(normalized)) {
+    return { label: 'team redesign', articleless: 'Team redesign', withArticle: 'Team redesign' }
+  }
+  if (/\b(sales|buyer|customer|market|enterprise|consult)\w*\b/.test(normalized)) {
+    return { label: 'buyer behavior', articleless: 'Buyer behavior', withArticle: 'Buyer behavior' }
+  }
+  if (/\b(robot|robotics|classroom|teacher|student|voice|video|demo)\w*\b/.test(normalized)) {
+    return { label: 'product demo velocity', articleless: 'Product demo velocity', withArticle: 'Product demo velocity' }
+  }
+  return { label: 'capability shift', articleless: 'Capability shift', withArticle: 'Capability shift' }
+}
+
+function inferReserveTitleEmphasis(text: string) {
+  const normalized = cleanSentence(text).toLowerCase()
+  if (/\b(review|checkpoint|approve|audit|supervis)\w*\b/.test(normalized)) return 'human review'
+  if (/\b(memory|context|docs|prd|history|snapshot)\w*\b/.test(normalized)) return 'context quality'
+  if (/\b(sales|buyer|customer|market|enterprise)\w*\b/.test(normalized)) return 'buyer trust'
+  if (/\b(model|eval|benchmark|latency|compute|gpu)\w*\b/.test(normalized)) return 'system design'
+  return 'operator judgment'
+}
+
+function capitalize(value: string) {
+  return value ? `${value[0].toUpperCase()}${value.slice(1)}` : value
+}
+
+function buildDistinctTitleStem(candidates: string[], disallowed: Set<string>) {
+  const cleanedCandidates = uniqueNormalized(candidates)
+    .map((candidate) => stripReserveSuffixes(candidate))
+    .map((candidate) => trimSentence(candidate.replace(/[.!?]+$/g, ''), 62) || '')
+    .filter(Boolean)
+
+  for (const candidate of cleanedCandidates) {
+    const key = candidate.toLowerCase()
+    if (key && !disallowed.has(key) && !isWeakDisplayLine(candidate)) {
+      return candidate
+    }
+  }
+
+  const strategic = extractStrategicFallbackThesis(cleanedCandidates)
+  const cleanedStrategic = trimSentence(stripReserveSuffixes(strategic), 62) || ''
+  if (cleanedStrategic && !disallowed.has(cleanedStrategic.toLowerCase()) && !isWeakDisplayLine(cleanedStrategic)) {
+    return cleanedStrategic
+  }
+
+  return trimSentence(stripReserveSuffixes(cleanedCandidates[0] ?? ''), 62) || 'Untitled slide'
+}
+
+function stripReserveSuffixes(value: string) {
+  return cleanSentence(value)
+    .replace(/(?:\s*[—–-]\s*(?:for operators|in production|when context drifts|once the workflow shifts|before the next handoff|under real load))+$/i, '')
+    .replace(/(?:\s*\(\d+\))+$/g, '')
+    .trim()
 }
 
 function chooseOpeningTitle(candidates: string[]) {
@@ -1918,6 +2396,20 @@ function uniqueNormalized(lines: string[]) {
   return result
 }
 
+const RESERVE_TITLE_STOP_WORDS = new Set([
+  'about', 'after', 'again', 'already', 'because', 'before', 'being', 'changes', 'closer', 'context', 'could', 'deserves', 'every', 'faster', 'human', 'judgment', 'layer', 'makes', 'model', 'operators', 'pressure', 'really', 'review', 'shifts', 'stale', 'still', 'teams', 'than', 'that', 'their', 'there', 'these', 'they', 'this', 'those', 'under', 'workflow', 'where', 'with', 'your',
+])
+
+const RESERVE_TITLE_ANCHOR_BANNED = new Set([
+  'agent', 'agents', 'capability', 'company', 'coordination', 'faster', 'human', 'judgment', 'layer', 'model', 'operators', 'pressure', 'review', 'shift', 'shifts', 'stale', 'supervision', 'teams', 'workflow',
+])
+
+const RESERVE_TITLE_ANCHOR_WEAK = new Set([
+  'about', 'after', 'before', 'being', 'better', 'build', 'changes', 'closer', 'deserves', 'edge', 'every', 'getting', 'going', 'happens', 'important', 'keeps', 'making', 'people', 'puts', 'raises', 'really', 'rewards', 'starts', 'still', 'thing', 'things', 'update', 'visible', 'what', 'when', 'where', 'which', 'winning', 'works',
+])
+
+const RESERVE_TITLE_ANCHOR_DOMAIN = /^(memory|context|prompt|injection|snapshot|version|eval|benchmark|latency|compute|gpu|token|browser|spreadsheet|robot|robotics|classroom|teacher|student|buyer|customer|market|sales|trust|handoff|handoffs|checkpoint|approval|audit|docs|prd|history|deployment|deployments|operator|operators|founder|founders|manager|managers|engineering|engineer|design|designer|product|security|sandbox|permission|permissions|transcript|transcripts|carousel|carousels|voice|audio|video|modeling|inference|training)$/i
+
 function normalizeForSlide(text: string) {
   return text
     .replace(/\s+/g, ' ')
@@ -1934,12 +2426,51 @@ function titleFromSentence(text: string) {
   if (!cleaned) return ''
 
   const clauses = splitIntoClauses(cleaned)
+    .flatMap((part) => {
+      const normalized = cleanSentence(part)
+      const stripped = stripWeakLeadIn(normalized)
+      return uniqueNormalized([normalized, stripped, compressTitleCandidate(normalized), compressTitleCandidate(stripped)])
+    })
+    .filter(Boolean)
+    .filter((part) => !isWeakDisplayLine(part))
+    .sort((a, b) => scoreDisplayCandidate(b) - scoreDisplayCandidate(a) || b.length - a.length)
+
+  const strippedSentence = compressTitleCandidate(stripWeakLeadIn(cleaned))
+  if (strippedSentence && !isWeakDisplayLine(strippedSentence)) {
+    return strippedSentence
+  }
+
+  return clauses[0] ?? compressTitleCandidate(cleaned)
+}
+
+function compressTitleCandidate(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return ''
+
+  const direct = pickDisplayLine([cleaned], { preferredMax: 84 })
+  if (direct && !isWeakDisplayLine(direct)) return direct
+
+  const clauses = splitIntoClauses(cleaned)
     .map((part) => cleanSentence(part))
     .filter(Boolean)
     .filter((part) => !isWeakDisplayLine(part))
-    .sort((a, b) => b.length - a.length)
+    .sort((a, b) => scoreDisplayCandidate(b) - scoreDisplayCandidate(a) || b.length - a.length)
 
-  return clauses[0] ?? cleaned
+  return clauses[0] ?? trimmedMeaningfulWindow(cleaned)
+}
+
+function trimmedMeaningfulWindow(text: string) {
+  const tokens = cleanSentence(text).split(/\s+/).filter(Boolean)
+  if (tokens.length <= 14) return cleanSentence(text)
+
+  for (let start = 0; start <= Math.max(0, tokens.length - 8); start += 1) {
+    const window = cleanSentence(tokens.slice(start, Math.min(tokens.length, start + 12)).join(' '))
+    if (window && !isWeakDisplayLine(window) && window.length <= 84) {
+      return window
+    }
+  }
+
+  return trimSentence(text, 84)
 }
 
 function titleFromIdea(idea: Idea, fallback: string) {
@@ -1963,7 +2494,13 @@ function extractTakeaway(primaryText: string, segments: Segment[]) {
 }
 
 function pickDistinctThesis(candidates: string[], usedTheses: Set<string>) {
-  const normalized = candidates.map((candidate) => cleanSentence(candidate)).filter(Boolean)
+  const normalized = candidates
+    .flatMap((candidate) => {
+      const cleaned = cleanSentence(candidate)
+      const stripped = stripWeakLeadIn(cleaned)
+      return uniqueNormalized([cleaned, stripped])
+    })
+    .filter(Boolean)
   for (const candidate of normalized) {
     const key = slugify(candidate)
     if (!isWeakDisplayLine(candidate) && !isWeakBriefLineCandidate(candidate) && !usedTheses.has(key)) {
@@ -1972,11 +2509,44 @@ function pickDistinctThesis(candidates: string[], usedTheses: Set<string>) {
     }
   }
 
-  const fallback = normalized.find((candidate) => !isWeakBriefLineCandidate(candidate))
-    ?? normalized[0]
-    ?? 'A stronger operating model beats a stale workflow.'
-  usedTheses.add(slugify(fallback))
-  return fallback
+  const viableFallback = normalized.find((candidate) => !isWeakBriefLineCandidate(candidate) && !usedTheses.has(slugify(candidate)))
+  if (viableFallback) {
+    usedTheses.add(slugify(viableFallback))
+    return viableFallback
+  }
+
+  const reserveFallbacks = [
+    extractStrategicFallbackThesis(normalized),
+    'A stronger operating model beats a stale workflow.',
+    'The workflow changed faster than most org charts did.',
+    'The real bottleneck is no longer where most teams think it is.',
+  ].map((candidate) => cleanSentence(candidate)).filter(Boolean)
+
+  for (const fallback of reserveFallbacks) {
+    const key = slugify(fallback)
+    if (!usedTheses.has(key)) {
+      usedTheses.add(key)
+      return fallback
+    }
+  }
+
+  const lastResort = reserveFallbacks[0] ?? 'A stronger operating model beats a stale workflow.'
+  usedTheses.add(slugify(lastResort))
+  return lastResort
+}
+
+function extractStrategicFallbackThesis(candidates: string[]) {
+  const combined = candidates.join(' ')
+  if (/\b(product|engineering|design|operator|manager|software)\b/i.test(combined)) {
+    return 'As AI gets closer to the product, coordination overhead becomes easier to spot.'
+  }
+  if (/\b(agent|workflow|review|handoff|context|memory)\b/i.test(combined)) {
+    return 'When the workflow changes, the review layer becomes the real operating leverage.'
+  }
+  if (/\b(model|compute|inference|gpu|training|eval)\b/i.test(combined)) {
+    return 'The edge shifts when model capability changes faster than the old playbook.'
+  }
+  return 'A stronger operating model beats a stale workflow.'
 }
 
 function briefClaimOverlap(left: Brief, right: Brief) {
@@ -2085,9 +2655,16 @@ function sanitizeSupportCandidate(value: string) {
   ].filter(Boolean)
 
   for (const fragment of fragments) {
-    if (isMetaNarrationLine(fragment)) continue
-    if (isWeakBriefLineCandidate(fragment)) continue
-    return fragment
+    const variants = uniqueNormalized([
+      fragment,
+      stripWeakLeadIn(fragment),
+    ])
+
+    for (const candidate of variants) {
+      if (isMetaNarrationLine(candidate)) continue
+      if (isWeakBriefLineCandidate(candidate)) continue
+      return candidate
+    }
   }
 
   return ''
@@ -2134,6 +2711,16 @@ async function removeStalePublishedArtifacts(
 
   await Promise.all(staleSlugs.map(async (slug) => {
     await rm(path.resolve('carousels', slug), { recursive: true, force: true })
+    await rm(path.resolve('public', 'exports', slug), { recursive: true, force: true })
+    await rm(path.resolve('.pages-serve', REPO_NAME, 'carousel', slug), { recursive: true, force: true })
+    await rm(path.resolve('out', 'carousel', slug), { recursive: true, force: true })
+  }))
+}
+
+async function invalidateRenderedArtifacts(slugs: string[]) {
+  const uniqueSlugs = [...new Set(slugs.filter(Boolean))]
+
+  await Promise.all(uniqueSlugs.map(async (slug) => {
     await rm(path.resolve('public', 'exports', slug), { recursive: true, force: true })
     await rm(path.resolve('.pages-serve', REPO_NAME, 'carousel', slug), { recursive: true, force: true })
     await rm(path.resolve('out', 'carousel', slug), { recursive: true, force: true })

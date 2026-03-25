@@ -21,6 +21,9 @@ Primary commands:
 ./content-carousel self-test <source-slug> --json
 ./content-carousel self-test --repo
 ./content-carousel self-test --repo --json
+./content-carousel audit-snapshot
+./content-carousel cleanup-artifacts
+./content-carousel cleanup-artifacts --apply
 ./content-carousel sync-source <source-slug>
 ./content-carousel build-pages
 ```
@@ -31,7 +34,17 @@ The existing `pnpm ingest:youtube`, `pnpm render`, `pnpm render:all`, and `pnpm 
 
 `./content-carousel rebuild-source <source-slug>` reuses the source package's stored publish limit by default, so a quick rebuild does not silently fan out from a curated 2-post package to the CLI fallback of 8 posts. You can still override it explicitly with `--max-segments`.
 
+Both `youtube` ingest and `rebuild-source` now invalidate any previously rendered `public/exports/<slug>/` batch for the carousels they rewrite. That keeps stale PNG manifests from pretending they still match the new markdown after thesis/title/slide-count changes; the expected next step is `./content-carousel build-pages` (or `render-all`) to regenerate fresh export bundles.
+
+Title/thesis selection now also strips a small set of weak transcript lead-ins before falling back to reserve titles. Examples: `I know that...`, `This is where...`, `If you are in any...`, and `Not because X, but because Y...` are treated as scaffolding, so the generator prefers the actual claim-bearing clause (`because Y`, later full thoughts, or another stronger sentence) instead of publishing the setup phrase as a thesis/title stem.
+
+Fallback title synthesis now also strips inherited reserve junk before retrying (`(2) (2)`, repeated reserve suffix tails) and seeds reserve variants with transcript-specific anchor phrases before the generic suffix ladder. Those anchor phrases are now scored across 2-3 token windows instead of picking the first acceptable bigram, which helps reject pseudo-specific junk like `winning build` / `what checkpoint` and keeps reserve titles closer to real domain nouns (`prompt injection`, `buyer trust`, `GPU latency`, etc.). Practical effect: rebuilds are less likely to converge on the same cross-repo `capability shift / for operators` sludge when concise direct titles run out.
+
 `./content-carousel sync-source <source-slug>` is the lightweight repair path when `ideas.json` / `briefs.json` / surviving `carousel.md` files are the canonical truth but `source.json` drifted after dropped segments or partial cleanup. It rewrites `source.json`, regenerates `summary.md`, and demotes orphaned `published` ideas whose markdown no longer exists.
+
+`./content-carousel audit-snapshot` is the repo-level continuity path for hourly reviews. It runs `self-test --repo --json`, writes a timestamped JSON + markdown snapshot into `docs/audit-history/`, refreshes `docs/audit-history/latest.json`, and includes a diff versus the prior snapshot so a fresh agent can see what actually changed instead of re-parsing a wall of warnings from scratch.
+
+`./content-carousel cleanup-artifacts` is the deliberate stale-artifact cleanup path. Dry-run mode lists unreferenced directories across `carousels/`, `public/exports/`, `.next/server/app/carousel/`, `.pages-serve/<repo>/carousel/`, and `out/carousel/`. Add `--apply` to actually delete those leftovers and refresh `carousels/index.json`.
 
 ## What this repo does now
 
@@ -176,8 +189,9 @@ One command now does the practical first pass:
 5. rejects weak or overlapping ideas
 6. promotes the strongest surviving ideas into distinct editorial briefs
 7. publishes up to `--max-segments` briefs as markdown carousels
-8. removes superseded carousel/export artifacts from earlier ingests of the same source
-9. refreshes `carousels/index.json` as a generated compatibility artifact
+8. defaults those generated carousels toward **5-8 slides** with **1-3 short lines per slide** (splitting list-y ideas into more slides when possible)
+9. removes superseded carousel/export artifacts from earlier ingests of the same source
+10. refreshes `carousels/index.json` as a generated compatibility artifact
 
 Created files look like this:
 
@@ -362,9 +376,11 @@ pnpm lint
 - PNG generation uses Playwright screenshots of the rendered Pages-safe site.
 - The markdown parser intentionally supports a narrow authoring format right now: frontmatter + slide separators + paragraphs/lists.
 - `pnpm start` is still there, but the real deploy target is GitHub Pages, not a Node server.
-- `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, brief quality/overlap, weak/duplicate titles, and export drift before you bother publishing.
+- `./content-carousel self-test <source-slug>` is the quickest repeatability check after ingest/rebuild/render. It audits source.json ↔ ideas.json consistency, brief quality/overlap, weak/duplicate titles, fallback-title residue (`synthetic-slide-title` / `synthetic-carousel-title`), and export drift before you bother publishing.
 - `./content-carousel self-test --repo` is the repo-wide repeatability sweep. It runs every source audit, then checks cross-package duplicate carousel/slide titles plus stale `carousels/`, `public/exports/`, and `.next/server/app/carousel/` residue.
+- `./content-carousel cleanup-artifacts` is the boring repair follow-up after repo self-test. Use it in dry-run mode first to inspect stale artifact scope, then `--apply` when you intentionally want repo state to match currently referenced source packages.
 - Add `--json` when you want to persist the audit result, diff hourly runs, or hand the same issue set to another agent without scraping console text.
+- `pnpm audit:snapshot` is the boring hourly-review helper: it runs the repo JSON audit, writes a timestamped snapshot under `docs/audit-history/`, refreshes `docs/audit-history/latest.json`, records an added/removed issue diff against the previous snapshot, and now also summarizes the top issue codes + source-package hotspots so a fresh agent can see what changed and where to look first.
 - Missing markdown refs are now triaged more explicitly: the self-test tells you whether the slug still has leftover export artifacts or whether the source manifest points at a slug with no local artifacts at all (usually a dropped segment that never got cleaned out of `source.json`).
 - When that orphaned-manifest state is real, `./content-carousel sync-source <source-slug>` is now the deliberate repair path. It keeps surviving briefs/carousels, rewrites `source.json`, refreshes `summary.md`, and demotes stale `published` ideas in `ideas.json` so self-test stops reporting fake publication drift.
 - Use `./content-carousel self-test <source-slug> --strict-global` only when you intentionally want to compare one source package against the rest of the workspace. The default source check assumes preserving older batches is normal.

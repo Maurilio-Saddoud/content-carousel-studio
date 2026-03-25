@@ -35,6 +35,9 @@ Default batch target:
 - publish **2-4 carousels** by default
 - choose only the strongest, sharpest, most distinct angles
 - if the source only really supports 1-2 strong ideas, ship fewer rather than padding the batch
+- each carousel should usually land in the **5-8 slide** range
+- default slide density should be **1-3 short lines per slide**
+- if a bullet list starts to form, strongly prefer breaking the bullets into separate slides instead of stacking them on one slide
 
 Do not stop after rough drafts unless Maurilio explicitly tells you to stop early.
 
@@ -63,6 +66,9 @@ Donald should:
 - preserve the strongest core idea even when restructuring heavily
 - default to **2-4** carousels backing the most powerful and sharpest angles/insights
 - treat a missing `eyebrow:` kicker as a quality failure unless there is a very strong reason not to use one
+- write slides in a short, tweet-style rhythm: punchy, skimmable, low-bloat
+- aim for **1-3 short lines per slide**; if a slide needs more, split it into more slides instead of stuffing the card
+- avoid multi-bullet pileups unless the structure genuinely demands it
 
 Donald must prioritize editorial goals in this order:
 1. powerful theme / concept clarity
