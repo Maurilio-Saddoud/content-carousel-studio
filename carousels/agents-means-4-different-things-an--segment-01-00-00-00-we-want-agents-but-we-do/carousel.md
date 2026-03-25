@@ -12,47 +12,48 @@ theme:
   muted: "#71767B"
 ---
 eyebrow: POSITIONING PROBLEM
-# The word “agent” is hiding four different buying decisions.
+# “We need agents” is usually a bad brief.
 
-That’s why so many teams sound confident and still build the wrong thing.
-
----
-eyebrow: THE ACTUAL PROBLEM
-# “Agent” is not a category.
-
-It’s an umbrella label people use for very different systems.
-
-When you treat them as the same thing,
-you blur architecture, workflow, risk, and ROI into one fuzzy debate.
+It sounds clear.
+It isn’t.
 
 ---
-eyebrow: THE 4 SPECIES
-# Most teams are actually choosing between four different jobs.
+eyebrow: THE REAL ISSUE
+# “Agent” is not one thing.
 
-- **Coding harness** — an agent helping a human build software
-- **Dark factory** — a system that runs from spec to eval with minimal human touch
-- **Auto research** — an agent optimizing against a metric
-- **Orchestration** — agents handing work across specialized steps
+It is four different system choices.
 
 ---
-eyebrow: WHY THIS MATTERS
-# If you name the wrong species, you buy the wrong system.
+eyebrow: TYPE 1
+# Coding harness
 
-You end up using workflow tools for coding problems.
-Or metric optimizers for product work.
-Or orchestration when you really just needed one solid agent loop.
+AI helps a human build software.
 
-Then people say “agents don’t work.”
+---
+eyebrow: TYPE 2 + 3
+# Dark factory vs. auto research
 
-Usually the framing was the failure.
+One ships from spec.
+One optimizes to a metric.
+
+---
+eyebrow: TYPE 4
+# Orchestration
+
+Multiple agents hand work across roles.
+
+---
+eyebrow: WHY TEAMS MISS
+# Same word.
+Different architecture.
+Different risk.
+
+That’s how teams buy the wrong thing.
 
 ---
 eyebrow: OPERATOR TAKE
-# Don’t ask, “Which agent platform should we use?”
+# Don’t ask,
+“Which agent platform?”
 
 Ask:
-
-**What job are we trying to make the system do?**
-
-That question is boring.
-It also saves an absurd amount of wasted effort.
+What job should this system do?

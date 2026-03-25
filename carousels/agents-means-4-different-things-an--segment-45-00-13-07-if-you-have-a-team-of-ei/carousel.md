@@ -12,47 +12,44 @@ theme:
   muted: "#71767B"
 ---
 eyebrow: TEAM-SCALE AI
-# AI doesn’t break teams by writing bad code. It breaks them by exploding coordination.
+# AI does not break teams at the code level.
 
-That’s the part a lot of “everyone gets a copilot” advice ignores.
-
----
-eyebrow: WHAT CHANGES
-# Once 8, 16, or 20 developers touch the same system, individual AI speed stops being the bottleneck.
-
-Now the real problem is:
-
-- review load
-- task handoffs
-- repo drift
-- hidden conflicts
-- managers drowning in parallel work
+It breaks them at the coordination level.
 
 ---
-eyebrow: THE WRONG MENTAL MODEL
-# Giving every engineer 4 AI assistants is not team architecture.
+eyebrow: THE SHIFT
+# Copilots feel magical at 2 engineers.
 
-It just speeds up the humans while keeping the old bottlenecks in place.
-
-Sometimes it makes them worse.
-Because now the team produces more change than the system around it can absorb.
+At 20 engineers,
+coordination is the bottleneck.
 
 ---
-eyebrow: THE BETTER MODEL
-# At project scale, you have to design for the agent system — not just the human.
+eyebrow: WHAT BLOWS UP
+# More AI output means more:
 
-That means planner logic.
+reviews
+handoffs
+repo drift
+hidden conflicts
+
+---
+eyebrow: THE BAD UPGRADE
+# Giving every dev 4 assistants
+is not team architecture.
+
+It is just faster chaos.
+
+---
+eyebrow: THE REAL UPGRADE
+# Design for the agent system.
+
 Shared conventions.
-Clear decomposition.
 Memory.
 Eval gates.
-A harness the whole team can operate.
+A real harness.
 
 ---
 eyebrow: OPERATOR TAKE
-# The upgrade is not “more copilots.”
+# The win is not “more copilots.”
 
-The upgrade is moving from **individual AI assistance**
-to **project-level AI architecture**.
-
-That’s where leverage starts looking like throughput instead of chaos.
+The win is project-level AI architecture.
