@@ -1,0 +1,98 @@
+{
+  "slug": "agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need",
+  "sourceType": "transcript",
+  "sourceUrl": "https://youtu.be/YpPcDHc3e9U?si=6WKDqLZ00-bxHLob",
+  "fetchedAt": "2026-03-25T15:21:10.512Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "\"Agents\" Means 4 Different Things and Almost Nobody Knows Which One They Need.",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/YpPcDHc3e9U/hqdefault.jpg"
+  },
+  "transcriptLineCount": 805,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 8,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 103,
+  "briefCount": 4,
+  "publishedIdeaIds": [
+    "segment-45",
+    "segment-01",
+    "segment-78",
+    "segment-58"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-45",
+      "primaryIdeaId": "segment-45",
+      "thesis": "You should be looking at project level coding architectures rather than individual level.",
+      "slug": "agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei"
+    },
+    {
+      "id": "brief-segment-01",
+      "primaryIdeaId": "segment-01",
+      "thesis": "We want agents, but we don't know what we really want.",
+      "slug": "agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do"
+    },
+    {
+      "id": "brief-segment-78",
+      "primaryIdeaId": "segment-78",
+      "thesis": "It's not both.\" Okay, now we come to orchestration.",
+      "slug": "agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w"
+    },
+    {
+      "id": "brief-segment-58",
+      "primaryIdeaId": "segment-58",
+      "thesis": "If you're an enterprise, you're typically having a human look at the code just to make sure there's some accountability there.",
+      "slug": "agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei",
+      "segmentId": "segment-45",
+      "title": "Developers working something makes stale coordination visible.",
+      "previewPath": "/carousel/agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei",
+      "carouselPath": "carousels/agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei/carousel.md"
+    },
+    {
+      "slug": "agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do",
+      "segmentId": "segment-01",
+      "title": "Simplistic belongs changes where human judgment belongs.",
+      "previewPath": "/carousel/agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do",
+      "carouselPath": "carousels/agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do/carousel.md"
+    },
+    {
+      "slug": "agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w",
+      "segmentId": "segment-78",
+      "title": "Saved orchestration probably makes stale coordination visible.",
+      "previewPath": "/carousel/agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w",
+      "carouselPath": "carousels/agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w/carousel.md"
+    },
+    {
+      "slug": "agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise",
+      "segmentId": "segment-58",
+      "title": "The edge shifts when model capability changes faster than the old playbook.",
+      "previewPath": "/carousel/agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise",
+      "carouselPath": "carousels/agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/source.json",
+    "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/raw-transcript.md",
+    "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/clean-transcript.md",
+    "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/segments.json",
+    "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/ideas.json",
+    "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/briefs.json",
+    "sources/agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need/summary.md",
+    "carousels/agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei/carousel.md",
+    "carousels/agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do/carousel.md",
+    "carousels/agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w/carousel.md",
+    "carousels/agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise/carousel.md",
+    "carousels/index.json"
+  ]
+}

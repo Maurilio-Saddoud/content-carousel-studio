@@ -1,0 +1,150 @@
+[
+  {
+    "id": "brief-segment-45",
+    "primaryIdeaId": "segment-45",
+    "supportingIdeaIds": [],
+    "thesis": "You should be looking at project level coding architectures rather than individual level.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "If you have a team of eight or 16 or 20 developers working on something, you have too much complexity in the room to not have a coding harness like cursor used.",
+    "supportPoints": [
+      "If you have a team of eight or 16 or 20 developers working on something",
+      "you have too much complexity in the room to not have a coding harness like cursor used.",
+      "that is one of the biggest unlocks and it's very"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-78",
+      "brief-segment-58"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 5,
+      "commercialRelevance": 1,
+      "fidelity": 5,
+      "total": 22
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei"
+  },
+  {
+    "id": "brief-segment-01",
+    "primaryIdeaId": "segment-01",
+    "supportingIdeaIds": [],
+    "thesis": "We want agents, but we don't know what we really want.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "When we say agents, it is too simplistic to say agents are just like an AI plus tools in a loop.",
+    "supportPoints": [
+      "Like that's true, but we are missing the point.",
+      "We are missing the fact that sophisticated agents diverge into at least four different types."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-45",
+      "brief-segment-78",
+      "brief-segment-58"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 5,
+      "distinctness": 5,
+      "commercialRelevance": 1,
+      "fidelity": 5,
+      "total": 24
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do"
+  },
+  {
+    "id": "brief-segment-78",
+    "primaryIdeaId": "segment-78",
+    "supportingIdeaIds": [],
+    "thesis": "It's not both.\" Okay, now we come to orchestration.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "I've saved orchestration for the end because it's probably the most complicated one to set up and manage.",
+    "supportPoints": [
+      "that's one of the reasons there's lots of startups in the space cuz they're basically trying to optimize away that complexity for you."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-45",
+      "brief-segment-01",
+      "brief-segment-58"
+    ],
+    "scorecard": {
+      "themeStrength": 3,
+      "authorityPotential": 2,
+      "clarity": 4,
+      "distinctness": 5,
+      "commercialRelevance": 1,
+      "fidelity": 4,
+      "total": 19
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Angle feels thinner than the best concept-led carousels.",
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Not enough support to justify a padded multi-slide carousel."
+      ],
+      "rewriteGoals": [
+        "Center the strongest underlying theme, not just the most quotable line.",
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Ship fewer slides or tighten every supporting point."
+      ]
+    },
+    "carouselSlug": "agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w"
+  },
+  {
+    "id": "brief-segment-58",
+    "primaryIdeaId": "segment-58",
+    "supportingIdeaIds": [],
+    "thesis": "If you're an enterprise, you're typically having a human look at the code just to make sure there's some accountability there.",
+    "audience": "Audience: product, design, and engineering leaders figuring out where AI changes the work.",
+    "whyItMatters": "If your mental model is stale, you redesign the wrong part of the workflow.",
+    "supportPoints": [
+      "you're typically having a human look at the code just to make sure there's some accountability there.",
+      "It's actually something Amazon learned the hard way recently when they called a bunch of their uh senior engineers and their principal engineers into Seattle to talk"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-45",
+      "brief-segment-01",
+      "brief-segment-78"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 4,
+      "clarity": 3,
+      "distinctness": 5,
+      "commercialRelevance": 4,
+      "fidelity": 5,
+      "total": 26
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Hook or slide spine is carrying too much verbal clutter."
+      ],
+      "rewriteGoals": [
+        "Compress the lead and make the slide progression cleaner."
+      ]
+    },
+    "carouselSlug": "agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise"
+  }
+]
