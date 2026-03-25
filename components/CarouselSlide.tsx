@@ -68,6 +68,20 @@ function formatViews(value: number) {
   return value.toString()
 }
 
+function formatPreviewDate(value: string) {
+  const normalized = value?.trim()
+  if (!normalized) return 'Mar 21'
+
+  const parsed = new Date(`${normalized}T12:00:00Z`)
+  if (Number.isNaN(parsed.getTime())) return normalized
+
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(parsed)
+}
+
 function getTextProfile(slide: Slide) {
   const blocks = parseBodyBlocks(slide.body)
   const kickerLength = slide.eyebrow?.trim().length ?? 0
@@ -290,6 +304,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
   }
   const textProfile = getTextProfile(slide)
   const stats = getSeededStats(carousel.slug, index)
+  const previewDate = formatPreviewDate(carousel.updatedAt)
 
   return (
     <article
@@ -315,7 +330,7 @@ export function CarouselSlide({ carousel, slide, index, total }: Props) {
             <div className="tweet-handle-row">
               <span className="tweet-handle">@Maurili007</span>
               <span className="tweet-dot">·</span>
-              <span className="tweet-label">Mar 21</span>
+              <span className="tweet-label">{previewDate}</span>
             </div>
           </div>
 
