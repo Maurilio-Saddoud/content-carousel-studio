@@ -38,7 +38,7 @@ Both `youtube` ingest and `rebuild-source` now invalidate any previously rendere
 
 Title/thesis selection now also strips a small set of weak transcript lead-ins before falling back to reserve titles. Examples: `I know that...`, `This is where...`, `If you are in any...`, and `Not because X, but because Y...` are treated as scaffolding, so the generator prefers the actual claim-bearing clause (`because Y`, later full thoughts, or another stronger sentence) instead of publishing the setup phrase as a thesis/title stem.
 
-Fallback title synthesis now also strips inherited reserve junk before retrying (`(2) (2)`, repeated reserve suffix tails) and seeds reserve variants with transcript-specific anchor phrases before the generic suffix ladder. Those anchor phrases are now scored across 2-3 token windows instead of picking the first acceptable bigram, which helps reject pseudo-specific junk like `winning build` / `what checkpoint` and keeps reserve titles closer to real domain nouns (`prompt injection`, `buyer trust`, `GPU latency`, etc.). Practical effect: rebuilds are less likely to converge on the same cross-repo `capability shift / for operators` sludge when concise direct titles run out.
+Fallback title synthesis now also strips inherited reserve junk before retrying (`(2) (2)`, repeated reserve suffix tails) and seeds reserve variants with transcript-specific anchor phrases before the generic suffix ladder. Those anchor phrases are scored across 2-3 token windows and now only qualify when the phrase itself clears a minimum credibility threshold; the generator no longer falls back to single-token anchors for the strategic sentence templates. Practical effect: rebuilds are less likely to publish malformed strategic titles like `Temporary describing makes stale coordination visible.` just because one stray token looked specific enough.
 
 `./content-carousel sync-source <source-slug>` is the lightweight repair path when `ideas.json` / `briefs.json` / surviving `carousel.md` files are the canonical truth but `source.json` drifted after dropped segments or partial cleanup. It rewrites `source.json`, regenerates `summary.md`, and demotes orphaned `published` ideas whose markdown no longer exists.
 
@@ -189,7 +189,7 @@ One command now does the practical first pass:
 5. rejects weak or overlapping ideas
 6. promotes the strongest surviving ideas into distinct editorial briefs
 7. publishes up to `--max-segments` briefs as markdown carousels
-8. defaults those generated carousels toward **5-8 slides** with **1-3 short lines per slide** (splitting list-y ideas into more slides when possible)
+8. defaults those generated carousels toward **5-8 slides** with a **concise-but-complete** rhythm: usually **1-3 short lines per slide**, but with room for an extra sentence or two when clarity/payoff would otherwise get lost (and splitting list-y ideas into more slides when possible)
 9. removes superseded carousel/export artifacts from earlier ingests of the same source
 10. refreshes `carousels/index.json` as a generated compatibility artifact
 

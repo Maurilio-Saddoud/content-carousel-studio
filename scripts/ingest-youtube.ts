@@ -158,7 +158,7 @@ const execFileAsync = promisify(execFile)
 const REPO_NAME = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carousel-studio'
 const MIN_CAROUSEL_SLIDES = 5
 const MAX_CAROUSEL_SLIDES = 8
-const TARGET_BODY_LINES = 3
+const TARGET_BODY_LINES = 4
 const DEFAULT_THEME = {
   accent: '#1D9BF0',
   background: '#000000',
@@ -2226,11 +2226,7 @@ function inferReserveTitleAnchor(text: string) {
   const tokens = tokenizeReserveTitleAnchor(text)
   if (tokens.length === 0) return ''
 
-  const preferredPhrase = findPreferredReserveAnchorPhrase(tokens)
-  if (preferredPhrase) return preferredPhrase
-
-  const viableSingle = tokens.find((token) => scoreReserveAnchorToken(token) > 0)
-  return viableSingle ?? ''
+  return findPreferredReserveAnchorPhrase(tokens)
 }
 
 function tokenizeReserveTitleAnchor(text: string) {
@@ -2251,7 +2247,7 @@ function findPreferredReserveAnchorPhrase(tokens: string[]) {
       const window = tokens.slice(index, index + size)
       if (window.length !== size) continue
       const score = scoreReserveAnchorPhrase(window)
-      if (score <= 0) continue
+      if (score < 6) continue
       candidates.push({ phrase: window.join(' '), score, length: window.length })
     }
   }
