@@ -1,11 +1,56 @@
 [
   {
+    "slug": "the-ai-job-market-split-in-two-one--segment-32-00-07-56-whereas-humans-when-we-r",
+    "title": "There's a lot of tells we have that we're used to hearing and seeing in other people that don't show up with AI",
+    "description": "AI News & Strategy Daily | Nate B Jones on the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough: 00:07:56 → 00:08:09.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-26",
+    "createdAt": "2026-03-26",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "the-ai-job-market-split-in-two-one--segment-40-00-10-00-i-can-even-use-cloud-cod",
+    "title": "Agent workflow shifts the real bottleneck toward human review.",
+    "description": "AI News & Strategy Daily | Nate B Jones on the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough: 00:10:00 → 00:10:16.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-26",
+    "createdAt": "2026-03-26",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "the-ai-job-market-split-in-two-one--segment-57-00-14-25-accenture-is-rolling-thi",
+    "title": "Checkpoint claude certified makes stale coordination visible.",
+    "description": "AI News & Strategy Daily | Nate B Jones on the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough: 00:14:25 → 00:14:39.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-26",
+    "createdAt": "2026-03-26",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
     "slug": "agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do",
-    "title": "The word ‘agent’ is hiding four different buying decisions.",
+    "title": "Agent workflow makes weak supervision painfully visible",
     "description": "AI News & Strategy Daily | Nate B Jones on agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need: 00:00:00 → 00:00:18.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-25T15:21:10.512Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -16,11 +61,41 @@
   },
   {
     "slug": "agents-means-4-different-things-an--segment-45-00-13-07-if-you-have-a-team-of-ei",
-    "title": "AI doesn’t break teams by writing bad code. It breaks them by exploding coordination.",
+    "title": "If you have a team of eight or 16 or 20 developers working on something, you have too much complexity in the room to not have a coding harness like cursor used",
     "description": "AI News & Strategy Daily | Nate B Jones on agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need: 00:13:07 → 00:13:25.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
+    "createdAt": "2026-03-25T15:21:10.512Z",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "agents-means-4-different-things-an--segment-78-00-22-38-it-s-not-both-okay-now-w",
+    "title": "I've saved orchestration for the end because it's probably the most complicated one to set up and manage",
+    "description": "AI News & Strategy Daily | Nate B Jones on agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need: 00:22:38 → 00:22:52.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-26",
+    "createdAt": "2026-03-25T15:21:10.512Z",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "agents-means-4-different-things-and--segment-58-00-16-51-if-you-re-an-enterprise",
+    "title": "Have sophisticated engineering breaks faster than most teams expect.",
+    "description": "AI News & Strategy Daily | Nate B Jones on agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need: 00:16:51 → 00:17:02.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-25T15:21:10.512Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -31,11 +106,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don--segment-102-00-29-58-it-is-a-way-to-version-y",
-    "title": "Previous versions makes stale coordination visible.",
+    "title": "Opensource project history breaks faster than most teams expect.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:29:58 → 00:30:14.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -46,11 +121,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-31-00-08-32-for-my-embeddings-i-m-us",
-    "title": "Stronger operating beats gets expensive when review stays lazy.",
+    "title": "Research training pipeline is what stale operators miss first.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:08:32 → 00:08:48.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -61,11 +136,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-67-00-19-30-i-want-to-show-some-tips",
-    "title": "Been releasing security gets expensive when review stays lazy.",
+    "title": "Security fixes non-stop breaks faster than most teams expect.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:19:30 → 00:19:45.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -76,11 +151,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-71-00-20-45-i-take-the-best-possible",
-    "title": "Deterministic have non-deterministic makes stale coordination visible.",
+    "title": "Just in case someone crafty gets past that deterministic layer",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:20:45 → 00:21:04.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -91,11 +166,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-92-00-27-03-openclaw-which-is-basica",
-    "title": "Basically same is where the workflow starts to break.",
+    "title": "Re-emphasize using subscription breaks faster than most teams expect.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:27:03 → 00:27:17.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -106,11 +181,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-93-00-27-19-openai-and-explicitly-sa",
-    "title": "If your mental model is stale",
+    "title": "Uses chachipt subscription breaks faster than most teams expect.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:27:19 → 00:27:35.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -121,11 +196,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t--segment-97-00-28-32-it-looks-at-the-prd-and-",
-    "title": "Product requirements document is where the workflow starts to break.",
+    "title": "Product requirements document breaks faster than most teams expect.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:28:32 → 00:28:46.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -136,11 +211,11 @@
   },
   {
     "slug": "do-this-with-openclaw-so-you-don-t-fall-b--segment-04-00-00-55-openclaw-s-memory",
-    "title": "Agent workflow shifts the bottleneck toward operator judgment.",
+    "title": "Default openclaw memory breaks faster than most teams expect.",
     "description": "Matthew Berman on do-this-with-openclaw-so-you-don-t-fall-behind-14-use-cases: 00:00:55 → 00:01:07.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T20:17:19.597Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -151,11 +226,11 @@
   },
   {
     "slug": "nvidia-just-open-sourced-what-open--segment-01-00-00-00-nvidia-s-on-one-side-wit",
-    "title": "Telling nate building makes stale coordination visible.",
+    "title": "Most people are still acting on an old picture of what AI can and cannot do.",
     "description": "AI News & Strategy Daily | Nate B Jones on nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for: 00:00:00 → 00:00:12.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T17:02:36.316Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -166,11 +241,11 @@
   },
   {
     "slug": "nvidia-just-open-sourced-what-open--segment-11-00-02-47-nemoclaw-also-runs-on-lo",
-    "title": "Hence nemoclaw convinced makes stale coordination visible.",
+    "title": "Leverage smarter audit changes where human judgment belongs.",
     "description": "AI News & Strategy Daily | Nate B Jones on nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for: 00:02:47 → 00:03:02.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T17:02:36.316Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -181,11 +256,11 @@
   },
   {
     "slug": "nvidia-just-open-sourced-what-open--segment-28-00-07-38-if-you-re-trying-to-buil",
-    "title": "Would probably correlary makes stale coordination visible.",
+    "title": "When the workflow changes, the review layer becomes the real operating leverage.",
     "description": "AI News & Strategy Daily | Nate B Jones on nvidia-just-open-sourced-what-openai-wants-you-to-pay-consultants-for: 00:07:38 → 00:07:55.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-24T17:02:36.316Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -200,7 +275,7 @@
     "description": "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:21:59 → 00:22:13.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-23T04:09:48.947Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -215,7 +290,7 @@
     "description": "AI News & Strategy Daily | Nate B Jones on why-every-ai-skill-you-learned-6-months-ago-is-already-wrong-and-what-is-replaci: 00:05:13 → 00:05:29.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-23T04:09:48.947Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -226,11 +301,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nv--segment-117-00-33-43-unitere-g1-robot-in-real",
-    "title": "Unitere robot real changes where human judgment belongs.",
+    "title": "Clearer checkpoint product changes where human judgment belongs.",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:33:43 → 00:33:59.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -241,11 +316,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nvi--segment-14-00-03-46-m2-5-and-it-s-also-quite",
-    "title": "Such creating spreadsheets makes stale coordination visible.",
+    "title": "M2.5 and it's also quite close to the top closed models out",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:03:46 → 00:04:05.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -256,11 +331,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nvi--segment-21-00-05-53-they-ve-actually-release",
-    "title": "Like birds crustations makes stale coordination visible.",
+    "title": "This even works with like birds or crustations or mecha robots, spaceships",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:05:53 → 00:06:10.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -271,11 +346,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nvi--segment-23-00-06-28-pinchbench-and-claw-eval",
-    "title": "Ability agentic workflows makes stale coordination visible.",
+    "title": "Pinchbench claw eval breaks faster than most teams expect.",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:06:28 → 00:06:46.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -286,11 +361,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nvi--segment-47-00-13-35-the-awesome-thing-is-you",
-    "title": "Video lowest latency gets expensive when review stays lazy.",
+    "title": "Video lowest latency breaks faster than most teams expect.",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:13:35 → 00:13:52.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -301,11 +376,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nvi--segment-82-00-23-17-this-is-nvidia-s-idea-of",
-    "title": "Full supercomput should makes stale coordination visible.",
+    "title": "Instead of building one single chip, they designed an entire computing system from the ground up.",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:23:17 → 00:23:33.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -316,11 +391,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nvi--segment-88-00-25-13-gro-3-lpus-is-optimized-",
-    "title": "Ultra latency belongs changes where human judgment belongs.",
+    "title": "Latency lpus optimized is where the workflow starts to break.",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:25:13 → 00:25:30.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -331,11 +406,11 @@
   },
   {
     "slug": "ai-classrooms-self-evolving-ai-nvidia--segment-74-00-20-59-terminator-this-week",
-    "title": "Week been absolutely makes stale coordination visible.",
+    "title": "Progress clearer checkpoint changes where human judgment belongs.",
     "description": "AI Search on ai-classrooms-self-evolving-ai-nvidia-gtc-ai-for-polymarket-google-app-builder-a: 00:20:59 → 00:21:14.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T21:04:30.121Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -346,11 +421,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-dat--segment-01-00-00-00-vibe-coders-everywhere-a",
-    "title": "Textbased tool changes where human judgment belongs.",
+    "title": "Agent workflow shifts the real bottleneck toward human review when teams have to ship it.",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:00:00 → 00:00:12.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -361,11 +436,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-dat--segment-05-00-01-04-maybe-you-have-hours-of-",
-    "title": "Between building product gets expensive when review stays lazy.",
+    "title": "If you're someone who described what you wanted and AI built it and you shipped it, maybe you have real customers now and maybe things are starting to break in ways that better prompting alone can't fix.",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:01:04 → 00:01:19.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -376,11 +451,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-dat--segment-11-00-02-52-you-have-to-think-like-t",
-    "title": "During recent eval gets expensive when review stays lazy.",
+    "title": "40 or 56 minutes as Chad GPT 5.4 did during a",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:02:52 → 00:03:02.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -391,11 +466,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-dat--segment-26-00-06-42-now-they-were-able-to-re",
-    "title": "Brilliant first minutes makes stale coordination visible.",
+    "title": "Production database breaks faster than most teams expect.",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:06:42 → 00:06:56.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -406,11 +481,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-dat--segment-30-00-07-42-the-simplest-fix-is-to-s",
-    "title": "Simplest start fresh makes stale coordination visible.",
+    "title": "You just start it over again",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:07:42 → 00:07:56.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -421,11 +496,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-dat--segment-59-00-15-29-tell-your-agent-every-ti",
-    "title": "Handle gracefully customer makes stale coordination visible.",
+    "title": "If your app doesn't handle these gracefully, your customer sees like a",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:15:29 → 00:15:47.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -436,11 +511,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-dat--segment-69-00-18-14-it-is-worth-getting-a-re",
-    "title": "Should telling expectation gets expensive when review stays lazy.",
+    "title": "Bottleneck toward operator is where the workflow starts to break",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:18:14 → 00:18:31.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -451,11 +526,11 @@
   },
   {
     "slug": "claude-code-wiped-2-5-years-of-data-th--segment-10-00-02-34-they-read-your-files",
-    "title": "Iterate against mistakes makes stale coordination visible.",
+    "title": "Cursor, OpenAI's Codeex, GitHub Copilot, they don't just suggest code, they go ahead and execute it",
     "description": "AI News & Strategy Daily | Nate B Jones on claude-code-wiped-2-5-years-of-data-the-engineer-who-built-it-couldn-t-stop-it: 00:02:34 → 00:02:49.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:41:01.159Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -466,11 +541,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh",
-    "title": "Think lessons learning changes where human judgment belongs.",
+    "title": "Most people are still acting on an old picture of what AI",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:00:00 → 00:00:14.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -481,11 +556,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o",
-    "title": "Producing value execution makes stale coordination visible.",
+    "title": "Everything else is the cost of producing that value with an execution layer made out of humans",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:02:28 → 00:02:49.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -496,11 +571,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-19-00-05-23-an-em-s-job-is-sprint-pl",
-    "title": "Sprint planning belongs changes where human judgment belongs.",
+    "title": "Redesign clearer checkpoint changes where human judgment belongs.",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:05:23 → 00:05:41.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -511,11 +586,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens",
-    "title": "Scattered documents decision makes stale coordination visible.",
+    "title": "Harness starting task breaks faster than most teams expect.",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:06:37 → 00:06:51.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -526,11 +601,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma",
-    "title": "Prds informing engineers gets expensive when review stays lazy.",
+    "title": "The workflow changed faster than most org charts did",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:11:32 → 00:11:49.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -541,11 +616,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
-    "title": "Playbook mental redesign makes stale coordination visible.",
+    "title": "If your mental model is stale",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:12:11 → 00:12:30.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -556,11 +631,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys",
-    "title": "Mental redesign wrong is where the workflow starts to break.",
+    "title": "Toward buyer trust changes where human judgment belongs.",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:12:33 → 00:12:48.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -571,11 +646,11 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-block-d--segment-63-00-18-33-thank-you-very-much",
-    "title": "Mental redesign wrong changes where human judgment belongs.",
+    "title": "Most people are still acting on an old picture of what AI can and cannot do",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:18:33 → 00:18:49.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T20:08:27.144Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -586,11 +661,11 @@
   },
   {
     "slug": "mckinsey-says-1-trillion-in-sales--segment-45-00-11-58-we-as-humans-have-discov",
-    "title": "Go try to buy from your competitors with AI.",
+    "title": "Lose relationship customer is what stale operators miss first.",
     "description": "AI News & Strategy Daily | Nate B Jones on mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-: 00:11:58 → 00:12:13.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T19:20:55.332Z",
     "theme": {
       "accent": "#1D9BF0",
@@ -601,11 +676,11 @@
   },
   {
     "slug": "mckinsey-says-1-trillion-in-sales--segment-80-00-21-11-if-you-are-waiting-and-s",
-    "title": "The internet was built to block bots.",
+    "title": "Agent workflow now punishes lazy handoffs.",
     "description": "AI News & Strategy Daily | Nate B Jones on mckinsey-says-1-trillion-in-sales-will-go-through-ai-agents-most-businesses-are-: 00:21:11 → 00:21:26.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
-    "updatedAt": "2026-03-25",
+    "updatedAt": "2026-03-26",
     "createdAt": "2026-03-22T19:20:55.332Z",
     "theme": {
       "accent": "#1D9BF0",

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "brief-segment-57",
+    "primaryIdeaId": "segment-57",
+    "supportingIdeaIds": [],
+    "thesis": "Accenture is rolling this out to hundreds of thousands of people.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "Claude certified architect program, which recently launched, tests for this failure mode specifically because it's so important to building sustainable agentic systems.",
+    "supportPoints": [
+      "Claude certified architect program",
+      "The most dangerous failure of all I kept for last.",
+      "Tools are something that probably deserve an entire deep dive on their own, but I will say here that the ability to diagnose tool problems is one of the markers of an AI fluent person."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-40",
+      "brief-segment-32"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 3,
+      "distinctness": 5,
+      "commercialRelevance": 1,
+      "fidelity": 5,
+      "total": 22
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Hook or slide spine is carrying too much verbal clutter."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Compress the lead and make the slide progression cleaner."
+      ]
+    },
+    "carouselSlug": "the-ai-job-market-split-in-two-one--segment-57-00-14-25-accenture-is-rolling-thi"
+  },
+  {
+    "id": "brief-segment-40",
+    "primaryIdeaId": "segment-40",
+    "supportingIdeaIds": [],
+    "thesis": "Fundamentally, the skill of working with multiple agents is the skill of decomposing tasks and delegating.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "If your mental model is stale, you redesign the wrong part of the workflow.",
+    "supportPoints": [
+      "I can even use cloud code but when you say multi-ent like go white at the roots",
+      "I've had people who say I can use chat GPT",
+      "Agents work so differently from people."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-57",
+      "brief-segment-32"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 5,
+      "commercialRelevance": 4,
+      "fidelity": 5,
+      "total": 26
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated.",
+        "Hook or slide spine is carrying too much verbal clutter."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction.",
+        "Compress the lead and make the slide progression cleaner."
+      ]
+    },
+    "carouselSlug": "the-ai-job-market-split-in-two-one--segment-40-00-10-00-i-can-even-use-cloud-cod"
+  },
+  {
+    "id": "brief-segment-32",
+    "primaryIdeaId": "segment-32",
+    "supportingIdeaIds": [],
+    "thesis": "Whereas humans, when we're wrong, we tend to stumble.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "AI is often confidently wrong.",
+    "supportPoints": [
+      "There's a lot of tells we have that we're used to hearing and seeing in other people that don't show up with AI.",
+      "I get why people are pushing back on taste because when you talk about this as taste, it just feels vague and unactionable and it just strokes the ego.",
+      "AI has really different failure modes from human failure modes."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-57",
+      "brief-segment-40"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 5,
+      "commercialRelevance": 1,
+      "fidelity": 5,
+      "total": 22
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "the-ai-job-market-split-in-two-one--segment-32-00-07-56-whereas-humans-when-we-r"
+  }
+]

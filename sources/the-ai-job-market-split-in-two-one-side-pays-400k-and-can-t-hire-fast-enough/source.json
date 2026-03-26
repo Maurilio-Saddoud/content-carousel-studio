@@ -1,0 +1,83 @@
+{
+  "slug": "the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough",
+  "sourceType": "transcript",
+  "sourceUrl": "https://youtu.be/4cuT-LKcmWs?si=H2R53Cu8iqIIh6Rp",
+  "fetchedAt": "2026-03-26T20:15:51.009Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "The AI Job Market Split in Two. One Side Pays $400K and Can't Hire Fast Enough.",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/4cuT-LKcmWs/hqdefault.jpg"
+  },
+  "transcriptLineCount": 788,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 4,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 101,
+  "briefCount": 3,
+  "publishedIdeaIds": [
+    "segment-57",
+    "segment-40",
+    "segment-32"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-57",
+      "primaryIdeaId": "segment-57",
+      "thesis": "Accenture is rolling this out to hundreds of thousands of people.",
+      "slug": "the-ai-job-market-split-in-two-one--segment-57-00-14-25-accenture-is-rolling-thi"
+    },
+    {
+      "id": "brief-segment-40",
+      "primaryIdeaId": "segment-40",
+      "thesis": "Fundamentally, the skill of working with multiple agents is the skill of decomposing tasks and delegating.",
+      "slug": "the-ai-job-market-split-in-two-one--segment-40-00-10-00-i-can-even-use-cloud-cod"
+    },
+    {
+      "id": "brief-segment-32",
+      "primaryIdeaId": "segment-32",
+      "thesis": "Whereas humans, when we're wrong, we tend to stumble.",
+      "slug": "the-ai-job-market-split-in-two-one--segment-32-00-07-56-whereas-humans-when-we-r"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "the-ai-job-market-split-in-two-one--segment-57-00-14-25-accenture-is-rolling-thi",
+      "segmentId": "segment-57",
+      "title": "Real AI fluency shows up when systems fail, not when demos work.",
+      "previewPath": "/carousel/the-ai-job-market-split-in-two-one--segment-57-00-14-25-accenture-is-rolling-thi",
+      "carouselPath": "carousels/the-ai-job-market-split-in-two-one--segment-57-00-14-25-accenture-is-rolling-thi/carousel.md"
+    },
+    {
+      "slug": "the-ai-job-market-split-in-two-one--segment-40-00-10-00-i-can-even-use-cloud-cod",
+      "segmentId": "segment-40",
+      "title": "The real multi-agent skill is task decomposition, not prompt magic.",
+      "previewPath": "/carousel/the-ai-job-market-split-in-two-one--segment-40-00-10-00-i-can-even-use-cloud-cod",
+      "carouselPath": "carousels/the-ai-job-market-split-in-two-one--segment-40-00-10-00-i-can-even-use-cloud-cod/carousel.md"
+    },
+    {
+      "slug": "the-ai-job-market-split-in-two-one--segment-32-00-07-56-whereas-humans-when-we-r",
+      "segmentId": "segment-32",
+      "title": "AI is fluently wrong. That’s why weak reviewers get fooled.",
+      "previewPath": "/carousel/the-ai-job-market-split-in-two-one--segment-32-00-07-56-whereas-humans-when-we-r",
+      "carouselPath": "carousels/the-ai-job-market-split-in-two-one--segment-32-00-07-56-whereas-humans-when-we-r/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough/source.json",
+    "sources/the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough/raw-transcript.md",
+    "sources/the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough/clean-transcript.md",
+    "sources/the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough/segments.json",
+    "sources/the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough/ideas.json",
+    "sources/the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough/briefs.json",
+    "sources/the-ai-job-market-split-in-two-one-side-pays-400k-and-can-t-hire-fast-enough/summary.md",
+    "carousels/the-ai-job-market-split-in-two-one--segment-57-00-14-25-accenture-is-rolling-thi/carousel.md",
+    "carousels/the-ai-job-market-split-in-two-one--segment-40-00-10-00-i-can-even-use-cloud-cod/carousel.md",
+    "carousels/the-ai-job-market-split-in-two-one--segment-32-00-07-56-whereas-humans-when-we-r/carousel.md",
+    "carousels/index.json"
+  ]
+}
