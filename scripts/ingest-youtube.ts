@@ -157,6 +157,8 @@ const RAW_TRANSCRIPT_RE = /^\[(\d{2}):(\d{2}):(\d{2})\]\s+(.*)$/
 const execFileAsync = promisify(execFile)
 const REPO_NAME = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'content-carousel-studio'
 const MIN_CAROUSEL_SLIDES = 5
+const DEFAULT_CAROUSEL_SLIDES = 5
+const SOFT_MAX_CAROUSEL_SLIDES = 7
 const MAX_CAROUSEL_SLIDES = 8
 const TARGET_BODY_LINES = 4
 const DEFAULT_THEME = {
@@ -601,15 +603,15 @@ async function collectRepoTitleReservations(sourceSlug: string, options: TitleRe
       for (const entry of manifest.carousels ?? []) {
         if (!entry.slug || options.excludeCarouselSlugs?.has(entry.slug)) continue
         const carousel = await readCarouselMarkdown(entry.slug)
-        const title = cleanSentence(carousel?.title ?? entry.title ?? '')
-        if (title) {
-          reservations.add(title.toLowerCase())
+        const titleKey = normalizeTitleReservationKey(carousel?.title ?? entry.title ?? '')
+        if (titleKey) {
+          reservations.add(titleKey)
         }
 
         for (const slide of carousel?.slides ?? []) {
-          const slideTitle = cleanSentence(slide.title)
-          if (slideTitle) {
-            reservations.add(slideTitle.toLowerCase())
+          const slideTitleKey = normalizeTitleReservationKey(slide.title)
+          if (slideTitleKey) {
+            reservations.add(slideTitleKey)
           }
         }
       }
@@ -1266,6 +1268,7 @@ function cleanSentence(text: string) {
     .replace(/^(?:and|but|so|because|well)\b\s+/i, '')
     .replace(/^(?:really|honestly|frankly),?\s+/i, '')
     .replace(/^["'“”]+|["'“”]+$/g, '')
+    .replace(/\b([A-Za-z][A-Za-z0-9']{2,})\s+\1\b/i, '$1')
     .replace(/[,:;\-–—]+$/g, '')
     .trim()
 }
@@ -1277,10 +1280,23 @@ function stripWeakLeadIn(text: string) {
   const stripped = cleaned
     .replace(/^not because [^,]{4,80}, but because\s+/i, '')
     .replace(/^i know that\s+/i, '')
+    .replace(/^i(?:'| a)?m describing\s+/i, '')
+    .replace(/^i think one of the lessons that we(?:'|’)re learning\s*/i, '')
     .replace(/^this is where\s+/i, '')
+    .replace(/^think about what happens when\s+/i, '')
     .replace(/^if you are in any\s+/i, '')
     .replace(/^if you(?:'|’)re in any\s+/i, '')
     .replace(/^there are many\s+/i, '')
+    .replace(/^you may be at a point where\s+/i, '')
+    .replace(/^the thing i want you to recognize is that\s+/i, '')
+    .replace(/^the awesome thing is\s+/i, '')
+    .replace(/^also,? this week,?\s+/i, '')
+    .replace(/^next up,?\s+/i, '')
+    .replace(/^plus,?\s+/i, '')
+    .replace(/^literally,?\s+/i, '')
+    .replace(/^i said\s+/i, '')
+    .replace(/^i only scratched the surface\s*/i, '')
+    .replace(/^sometimes the job is so big\s+/i, '')
     .replace(/^it(?:'|’)s one of the most important [^.?!,]{6,80}(?:that i think i(?:'|’)m going to make this year)?[,:]?\s*/i, '')
     .trim()
 
@@ -1291,7 +1307,7 @@ function isWeakLeadInLine(text: string) {
   const cleaned = cleanSentence(text)
   if (!cleaned) return true
 
-  return /^(?:i know that|this is where|if you(?:'|’)re? in any|there are many|it(?:'|’)s one of the most important structural arguments|not because [^,]{4,80}, but because)\b/i.test(cleaned)
+  return /^(?:i know that|i(?:'| a)?m describing|i think one of the lessons that we(?:'|’)re learning|this is where|think about what happens when|if you(?:'|’)re? in any|there are many|you may be at a point where|the thing i want you to recognize is that|the awesome thing is|also,? this week|next up|plus|literally|i said|i only scratched the surface|sometimes the job is so big|it(?:'|’)s one of the most important structural arguments|not because\b|not because [^,]{4,80}, but because)\b/i.test(cleaned)
 }
 
 function isWeakDisplayLine(text: string) {
@@ -1299,6 +1315,7 @@ function isWeakDisplayLine(text: string) {
   if (!cleaned) return true
   if (cleaned.length < 24) return true
   if (/,$/.test(cleaned)) return true
+  if (/^[a-z]/.test(cleaned)) return true
   if (/^(for|to|and|but|or)\b/i.test(cleaned)) return true
   if (/\b(this|that|it) is (much )?more important\b/i.test(cleaned)) return true
   if (isWeakLeadInLine(cleaned)) return true
@@ -1313,7 +1330,8 @@ function isWeakBriefLineCandidate(text: string) {
   if (cleaned.length < 28) return true
   if (/,$/.test(cleaned)) return true
   if (/\?$/.test(cleaned)) return true
-  if (/^(i('| a)?m going to|get into|we are going to|i('| a)?ve seen|the first is|do you love|thank you very much|here('| i)?s what|right now|for \d+ years|a lot of people|if you are waiting and seeing|now|now,|starting fresh)\b/i.test(cleaned)) return true
+  if (/^[a-z]/.test(cleaned)) return true
+  if (/^(i('| a)?m going to|get into|we are going to|i('| a)?ve seen|i('| a)?ll be honest|i did a whole video on this|the first is|do you love|thank you very much|here('| i)?s what|right now|for \d+ years|a lot of people|if you are waiting and seeing|now|now,|starting fresh|which\b|then\b|because\b|currently\b|basically\b|maybe\b|also\b)\b/i.test(cleaned)) return true
   if (isWeakLeadInLine(cleaned)) return true
   if (isMetaNarrationLine(cleaned)) return true
   if (/^(this|that|it)\b/i.test(cleaned) && cleaned.length < 48) return true
@@ -1432,6 +1450,28 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
       .slice(0, 3)
       .map(({ candidate }) => candidate)
 
+    const adjacentSupportIdeas = allIdeas
+      .filter((candidate) => candidate.id !== idea.id)
+      .filter((candidate) => !supportingIdeas.some((entry) => entry.id === candidate.id))
+      .filter((candidate) => isAdjacentIdeaCandidate(idea, candidate))
+      .filter((candidate) => !areNearDuplicates(candidate, idea))
+      .filter((candidate) => {
+        const adjacentEvidence = uniqueNormalized([
+          ...getCompleteThoughts(candidate.text),
+          ...buildMergedSupportBackfills(candidate.text).slice(0, 2),
+          ...buildSupportClaimScaffolds(candidate.text).slice(0, 2),
+          extractTakeaway(candidate.text, [idea]),
+        ])
+          .map((line) => sanitizeSupportCandidate(line))
+          .filter(Boolean)
+
+        return adjacentEvidence.some((line) => !isWeakBriefLineCandidate(line))
+      })
+      .map((candidate) => ({ candidate, score: scoreAdjacentSupportIdea(idea, candidate) }))
+      .sort((a, b) => b.score - a.score || b.candidate.score - a.candidate.score)
+      .slice(0, 4)
+      .map(({ candidate }) => candidate)
+
     const thesis = pickDistinctThesis([
       idea.hook,
       idea.titleSuggestion,
@@ -1440,7 +1480,7 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
     ], usedTheses)
 
     const whyItMatters = inferWhyItMatters(idea, supportingIdeas, thesis, usedWhy)
-    const supportPoints = buildSupportPoints(idea, supportingIdeas, usedSupport, usedSupportLines, thesis, whyItMatters)
+    const supportPoints = buildSupportPoints(idea, supportingIdeas, adjacentSupportIdeas, usedSupport, usedSupportLines, thesis, whyItMatters)
 
     const scorecard = scoreBriefAngle(idea, supportingIdeas, thesis, whyItMatters, supportPoints)
     const brief: Brief = {
@@ -1483,7 +1523,7 @@ function buildBriefs(publishedIdeas: Idea[], allIdeas: Idea[], sourceSlug: strin
     'The old operating model is already expiring.',
   ], new Set())
   const fallbackWhy = inferWhyItMatters(fallbackIdea, [], fallbackThesis, new Set())
-  const fallbackSupportPoints = buildSupportPoints(fallbackIdea, [], new Set(), [], fallbackThesis, fallbackWhy)
+  const fallbackSupportPoints = buildSupportPoints(fallbackIdea, [], [], new Set(), [], fallbackThesis, fallbackWhy)
   const fallbackScorecard = scoreBriefAngle(fallbackIdea, [], fallbackThesis, fallbackWhy, fallbackSupportPoints)
 
   return [{
@@ -1600,11 +1640,14 @@ function buildCarouselBundles(
     const idea = ideas.find((entry) => entry.id === brief.primaryIdeaId)
     if (!idea) return []
     const carouselSlug = brief.carouselSlug || idea.carouselSlug || buildCarouselSlug(sourceSlug, idea)
-    const draftCarousel = buildCarousel(metadata, sourceSlug, carouselSlug, brief, idea, ideas, usedBatchTitles)
+    const draftCarousel = buildCarousel(metadata, sourceSlug, carouselSlug, brief, idea, ideas, new Set(usedBatchTitles))
     const critique = critiqueCarouselDraft(draftCarousel, brief, idea)
     const carousel = critique.status === 'rewrite'
-      ? rewriteCarouselFromCritique(draftCarousel, brief, idea, critique, usedBatchTitles)
+      ? rewriteCarouselFromCritique(draftCarousel, brief, idea, critique, new Set(usedBatchTitles))
       : draftCarousel
+
+    reserveCarouselTitles(carousel, usedBatchTitles)
+
     return [{
       brief: { ...brief, carouselSlug },
       idea: { ...idea, carouselSlug },
@@ -1612,6 +1655,16 @@ function buildCarouselBundles(
       critique,
     }]
   })
+}
+
+function reserveCarouselTitles(carousel: Carousel, reservations: Set<string>) {
+  const titleKey = normalizeTitleReservationKey(carousel.title)
+  if (titleKey) reservations.add(titleKey)
+
+  for (const slide of carousel.slides) {
+    const slideKey = normalizeTitleReservationKey(slide.title)
+    if (slideKey) reservations.add(slideKey)
+  }
 }
 
 function buildSummary(metadata: VideoMetadata, sourceSlug: string, carouselBundles: CarouselBundle[], ideas: Idea[], briefs: Brief[]) {
@@ -1764,7 +1817,7 @@ function buildCarousel(
     },
   ]
 
-  const extraSlides = uniqueNormalized([
+  const extraSlideCandidates = uniqueNormalized([
     frameworkItems[1] ?? '',
     frameworkItems[2] ?? '',
     frameworkItems[3] ?? '',
@@ -1780,16 +1833,18 @@ function buildCarousel(
   ])
     .filter((line) => line.length >= 24)
     .filter((line) => !draftSlides.some((slide) => slide.title.toLowerCase() === line.toLowerCase() || slide.body.toLowerCase().includes(line.toLowerCase())))
+    .filter((line) => isDistinctExtraSlideBeat(line, brief, draftSlides))
     .slice(0, MAX_CAROUSEL_SLIDES - MIN_CAROUSEL_SLIDES)
-    .map((line, index) => ({
-      title: takeTitle(line, titleFromSentence(line), 'This is where the workflow really changes.'),
-      body: buildBodyLines([
-        line,
-        index % 2 === 0 ? brief.whyItMatters : extractTakeaway(primary.text, companionSegments),
-      ]),
-    }))
 
-  const targetSlideCount = Math.max(MIN_CAROUSEL_SLIDES, Math.min(MAX_CAROUSEL_SLIDES, MIN_CAROUSEL_SLIDES + extraSlides.length))
+  const extraSlides = extraSlideCandidates.map((line, index) => ({
+    title: takeTitle(line, titleFromSentence(line), 'This is where the workflow really changes.'),
+    body: buildBodyLines([
+      line,
+      index % 2 === 0 ? brief.whyItMatters : extractTakeaway(primary.text, companionSegments),
+    ]),
+  }))
+
+  const targetSlideCount = determineTargetSlideCount(primary.text, extraSlideCandidates)
   const middleSlides = [...draftSlides.slice(1, -1)]
   if (targetSlideCount > MIN_CAROUSEL_SLIDES) {
     middleSlides.splice(Math.max(1, middleSlides.length - 1), 0, ...extraSlides.slice(0, targetSlideCount - MIN_CAROUSEL_SLIDES))
@@ -1804,7 +1859,7 @@ function buildCarousel(
 
   return editorialPolishCarousel(brief, {
     slug: carouselSlug,
-    title: titleBaseFromSlides(slides),
+    title: chooseCarouselTitle(brief, slides, usedBatchTitles),
     description: `${metadata.authorName ?? 'YouTube'} on ${sourceSlug}: ${primary.start} → ${primary.end}.`,
     sourceType: 'transcript',
     aspectRatio: 'portrait',
@@ -1819,11 +1874,19 @@ function editorialPolishCarousel(brief: Brief, carousel: Carousel, usedBatchTitl
   const totalSlides = carousel.slides.length
   const polishedSlides = carousel.slides.map((slide, index) => {
     const cleanedBody = polishSlideBody(slide.body, index, totalSlides)
+    const bodyCandidates = extractTitleCandidatesFromBody(cleanedBody)
     const titleCandidates = [
       slide.title,
+      titleFromSentence(slide.title),
+      ...bodyCandidates,
+      ...bodyCandidates.map((candidate) => titleFromSentence(candidate)),
       index === 0 ? brief.thesis : '',
+      index === 0 ? titleFromSentence(brief.thesis) : '',
       index === 1 ? brief.whyItMatters : '',
+      index === 1 ? titleFromSentence(brief.whyItMatters) : '',
       brief.supportPoints[index - 2] ?? '',
+      titleFromSentence(brief.supportPoints[index - 2] ?? ''),
+      ...buildBriefFallbackTitleCandidates(brief, index, totalSlides),
       fallbackTitleForPosition(index, brief, totalSlides),
     ].filter(Boolean)
 
@@ -1839,21 +1902,86 @@ function editorialPolishCarousel(brief: Brief, carousel: Carousel, usedBatchTitl
 
   return {
     ...carousel,
-    title: titleBaseFromSlides(finalSlides),
+    title: chooseCarouselTitle(brief, finalSlides, usedBatchTitles),
     slides: finalSlides,
   }
 }
 
-function titleBaseFromSlides(slides: CarouselSlide[]) {
+function extractTitleCandidatesFromBody(body: string) {
+  return uniqueNormalized(
+    body
+      .split(/\n+/)
+      .map((line) => line.replace(/^>\s*/, '').trim())
+      .map((line) => cleanSentence(line))
+      .filter(Boolean)
+      .filter((line) => !isMetaNarrationLine(line))
+      .filter((line) => !isCallToActionOrBanterLine(line))
+      .filter((line) => !isWeakBriefLineCandidate(line))
+      .slice(0, 3),
+  )
+}
+
+function chooseCarouselTitle(brief: Brief, slides: CarouselSlide[], reservedTitles: Set<string> = new Set()) {
+  const fromSlides = titleBaseFromSlides(slides, reservedTitles)
+  const syntheticSlideCount = slides.filter((slide) => isSyntheticReserveTitle(slide.title) || isGenericReserveTitle(slide.title)).length
+  const syntheticPressure = syntheticSlideCount >= Math.max(2, Math.ceil(slides.length / 2))
+  if (fromSlides && !syntheticPressure && !isSyntheticReserveTitle(fromSlides)) return fromSlides
+
+  const briefDrivenCandidates = uniqueNormalized([
+    brief.thesis,
+    titleFromSentence(brief.thesis),
+    brief.whyItMatters,
+    titleFromSentence(brief.whyItMatters),
+    ...brief.supportPoints,
+    ...brief.supportPoints.map((point) => titleFromSentence(point)),
+    ...slides.flatMap((slide) => extractTitleCandidatesFromBody(slide.body)),
+    fromSlides,
+  ])
+
+  for (const candidate of briefDrivenCandidates) {
+    const cleaned = cleanSentence(candidate)
+    const key = normalizeTitleReservationKey(cleaned)
+    if (!cleaned || !key || reservedTitles.has(key)) continue
+    if (cleaned.length < 24 || cleaned.length > 84) continue
+    if (isWeakBriefLineCandidate(cleaned) || isMetaNarrationLine(cleaned) || isCallToActionOrBanterLine(cleaned)) continue
+    if (syntheticPressure && isSyntheticReserveTitle(cleaned)) continue
+    reservedTitles.add(key)
+    return cleaned
+  }
+
+  for (const candidate of briefDrivenCandidates.flatMap((value) => buildTitleCandidateVariants(value))) {
+    const cleaned = cleanSentence(candidate)
+    const key = normalizeTitleReservationKey(cleaned)
+    if (!cleaned || !key || reservedTitles.has(key) || isWeakDisplayLine(cleaned)) continue
+    if (syntheticPressure && isSyntheticReserveTitle(cleaned)) continue
+    reservedTitles.add(key)
+    return cleaned
+  }
+
+  const title = pickUniqueTitle(new Set<string>(), briefDrivenCandidates, reservedTitles)
+  if (title && !isSyntheticReserveTitle(title)) return title
+  return title || fromSlides || 'Untitled carousel'
+}
+
+function titleBaseFromSlides(slides: CarouselSlide[], reservedTitles: Set<string> = new Set()) {
   const cleaned = slides
     .map((slide) => cleanSentence(slide.title))
     .filter(Boolean)
 
-  const preferred = cleaned.find((title, index) => index > 0 && !isGenericReserveTitle(title) && !isSyntheticReserveTitle(title))
+  const distinctCandidates = uniqueNormalized(cleaned)
+  const preferred = distinctCandidates.find((title, index) => index > 0 && !isGenericReserveTitle(title) && !isSyntheticReserveTitle(title) && !reservedTitles.has(normalizeTitleReservationKey(title)))
   if (preferred) return preferred
 
-  const fallback = cleaned.find((title) => !isGenericReserveTitle(title))
-  return fallback || cleaned[0] || 'Untitled carousel'
+  const fallback = distinctCandidates.find((title) => !isGenericReserveTitle(title) && !reservedTitles.has(normalizeTitleReservationKey(title)))
+  if (fallback) return fallback
+
+  const synthesized = synthesizeUniqueTitleVariant(
+    distinctCandidates[0] || 'Untitled carousel',
+    distinctCandidates.slice(1),
+    new Set<string>(),
+    reservedTitles,
+  )
+  return synthesized || distinctCandidates[0] || 'Untitled carousel'
 }
 
 function isGenericReserveTitle(title: string) {
@@ -1866,6 +1994,7 @@ function isSyntheticReserveTitle(title: string) {
   if (/^untitled (slide|carousel)\b/i.test(cleaned)) return true
   if (/\(\d+\)$/.test(cleaned)) return true
   if (/\b(for operators|in production|when context drifts|once the workflow shifts|before the next handoff|under real load)\b/i.test(cleaned)) return true
+  if (/(changes where human judgment belongs|makes stale coordination visible|gets expensive when review stays lazy|is where the workflow starts to break|changes what human review is for|is where stale workflows break first|becomes the checkpoint that matters|is becoming the real operating leverage)\.?$/i.test(cleaned)) return true
   return false
 }
 
@@ -1925,8 +2054,7 @@ function rewriteCarouselFromCritique(
   critique: EditorialCritique,
   usedBatchTitles: Set<string> = new Set(),
 ): Carousel {
-  const richnessBonus = idea.wordCount >= 96 ? 2 : idea.wordCount >= 64 ? 1 : 0
-  const totalSlides = Math.max(MIN_CAROUSEL_SLIDES, Math.min(carousel.slides.length, Math.min(MAX_CAROUSEL_SLIDES, MIN_CAROUSEL_SLIDES + richnessBonus)))
+  const totalSlides = determineRewriteSlideCount(idea.wordCount, carousel.slides.length)
   const trimmedSlides = carousel.slides.slice(0, totalSlides).map((slide) => ({ ...slide }))
   const slides = trimmedSlides.map((slide, index) => {
     const rewrittenTitle = rewriteSlideTitle(slide.title, brief, critique, index, totalSlides)
@@ -1940,7 +2068,7 @@ function rewriteCarouselFromCritique(
 
   return editorialPolishCarousel(brief, {
     ...carousel,
-    title: titleBaseFromSlides(slides),
+    title: chooseCarouselTitle(brief, slides, usedBatchTitles),
     slides,
   }, usedBatchTitles)
 }
@@ -2048,12 +2176,43 @@ function polishSlideBody(body: string, index: number, totalSlides = 5) {
 }
 
 function fallbackTitleForPosition(index: number, brief: Brief, totalSlides = 5) {
-  if (index === 0) return brief.thesis
-  if (index === 1) return brief.whyItMatters
-  if (index === totalSlides - 1) return buildClosingFallback(brief)
-  if (index === totalSlides - 2) return brief.supportPoints[1] ?? 'The operating model has to change.'
-  if (index === 2) return brief.supportPoints[0] ?? 'This is where the real shift shows up.'
-  return 'Untitled slide'
+  return buildBriefFallbackTitleCandidates(brief, index, totalSlides)[0] ?? 'The operating model has to change.'
+}
+
+function buildBriefFallbackTitleCandidates(brief: Brief, index: number, totalSlides = 5) {
+  const anchor = inferBriefTitleAnchor(brief)
+  const anchorLabel = anchor ? capitalize(anchor) : ''
+  const contextual = uniqueNormalized([
+    index === 0 ? brief.thesis : '',
+    index === 1 ? brief.whyItMatters : '',
+    index === totalSlides - 1 ? buildClosingFallback(brief) : '',
+    index === totalSlides - 2 ? brief.supportPoints[1] ?? '' : '',
+    index === 2 ? brief.supportPoints[0] ?? '' : '',
+    brief.supportPoints[index - 2] ?? '',
+    anchorLabel ? `${anchorLabel} is where the workflow actually changes.` : '',
+    anchorLabel ? `${anchorLabel} is what stale operators miss first.` : '',
+    anchorLabel && index >= totalSlides - 2 ? `${anchorLabel} deserves a clearer human checkpoint.` : '',
+    anchorLabel && index > 0 ? `${anchorLabel} gets expensive when teams keep stale habits.` : '',
+    anchorLabel && index === 1 ? `${anchorLabel} breaks faster than most teams expect.` : '',
+    anchorLabel && index === 2 ? `${anchorLabel} exposes the real operating bottleneck.` : '',
+    anchorLabel && index === totalSlides - 1 ? `${anchorLabel} rewards teams that update review faster.` : '',
+  ])
+
+  return contextual
+    .flatMap((candidate) => buildTitleCandidateVariants(candidate))
+    .filter(Boolean)
+    .filter((candidate) => !isWeakDisplayLine(candidate))
+}
+
+function inferBriefTitleAnchor(brief: Brief) {
+  const sources = [brief.thesis, brief.whyItMatters, ...brief.supportPoints]
+  for (const source of sources) {
+    const anchor = inferReserveTitleAnchor(source)
+    if (anchor) return anchor
+  }
+
+  const topic = inferReserveTitleTopic(sources.join(' '))
+  return topic.articleless
 }
 
 function buildClosingFallback(brief: Brief) {
@@ -2103,6 +2262,7 @@ function ensureCarouselProgression(brief: Brief, slides: CarouselSlide[], usedBa
       isWeakDisplayLine(updated[4].title) ? '' : updated[4].title,
       brief.supportPoints[2] ?? '',
       brief.supportPoints[1] ?? '',
+      ...buildBriefFallbackTitleCandidates(brief, 4, updated.length),
       buildClosingFallback(brief),
       closingReserveTitle(brief),
     ], usedBatchTitles)
@@ -2120,31 +2280,91 @@ function ensureCarouselProgression(brief: Brief, slides: CarouselSlide[], usedBa
 
 function pickUniqueTitle(usedTitles: Set<string>, candidates: string[], reservedTitles: Set<string> = new Set()) {
   const normalizedCandidates = candidates
-    .map((candidate) => cleanSentence(candidate))
+    .flatMap((candidate) => buildTitleCandidateVariants(candidate))
     .filter(Boolean)
 
   for (const candidate of normalizedCandidates) {
-    const key = candidate.toLowerCase()
-    if (isWeakDisplayLine(candidate) || usedTitles.has(key) || reservedTitles.has(key)) continue
+    const key = normalizeTitleReservationKey(candidate)
+    if (!key || isWeakDisplayLine(candidate) || usedTitles.has(key) || reservedTitles.has(key)) continue
     usedTitles.add(key)
     reservedTitles.add(key)
     return candidate
   }
 
-  const uniqueFallback = normalizedCandidates.find((candidate) => !usedTitles.has(candidate.toLowerCase()) && !reservedTitles.has(candidate.toLowerCase()))
+  const uniqueFallback = normalizedCandidates.find((candidate) => {
+    const key = normalizeTitleReservationKey(candidate)
+    return Boolean(key) && !isWeakDisplayLine(candidate) && !usedTitles.has(key) && !reservedTitles.has(key)
+  })
   if (uniqueFallback) {
-    const fallbackKey = uniqueFallback.toLowerCase()
-    usedTitles.add(fallbackKey)
-    reservedTitles.add(fallbackKey)
+    const fallbackKey = normalizeTitleReservationKey(uniqueFallback)
+    if (fallbackKey) {
+      usedTitles.add(fallbackKey)
+      reservedTitles.add(fallbackKey)
+    }
     return uniqueFallback
   }
 
-  const base = normalizedCandidates[0] || 'Untitled slide'
-  const synthesizedFallback = synthesizeUniqueTitleVariant(base, normalizedCandidates.slice(1), usedTitles, reservedTitles)
-  const fallbackKey = synthesizedFallback.toLowerCase()
-  usedTitles.add(fallbackKey)
-  reservedTitles.add(fallbackKey)
+  const salvageFallback = normalizedCandidates
+    .filter((candidate) => !isSyntheticReserveTitle(candidate))
+    .filter((candidate) => !isMetaNarrationLine(candidate))
+    .filter((candidate) => !isCallToActionOrBanterLine(candidate))
+    .filter((candidate) => cleanSentence(candidate).length >= 14)
+    .sort((a, b) => scoreDisplayCandidate(b) - scoreDisplayCandidate(a) || b.length - a.length)
+    .find((candidate) => {
+      const key = normalizeTitleReservationKey(candidate)
+      return Boolean(key) && !usedTitles.has(key) && !reservedTitles.has(key)
+    })
+
+  if (salvageFallback) {
+    const fallbackKey = normalizeTitleReservationKey(salvageFallback)
+    if (fallbackKey) {
+      usedTitles.add(fallbackKey)
+      reservedTitles.add(fallbackKey)
+    }
+    return salvageFallback
+  }
+
+  const strongBase = normalizedCandidates.find((candidate) => !isWeakDisplayLine(candidate)) || normalizedCandidates[0] || 'Untitled slide'
+  const synthesizedFallback = synthesizeUniqueTitleVariant(strongBase, normalizedCandidates.filter((candidate) => candidate !== strongBase), usedTitles, reservedTitles)
+  const fallbackKey = normalizeTitleReservationKey(synthesizedFallback)
+  if (fallbackKey) {
+    usedTitles.add(fallbackKey)
+    reservedTitles.add(fallbackKey)
+  }
   return synthesizedFallback
+}
+
+function buildTitleCandidateVariants(candidate: string) {
+  const cleaned = cleanSentence(candidate)
+  if (!cleaned) return []
+
+  const stripped = stripReserveSuffixes(stripWeakLeadIn(cleaned))
+  const clauses = splitIntoClauses(cleaned)
+    .flatMap((part) => {
+      const clause = cleanSentence(part)
+      const normalizedClause = stripReserveSuffixes(clause)
+      const strippedClause = stripReserveSuffixes(stripWeakLeadIn(clause))
+      return uniqueNormalized([
+        titleFromSentence(normalizedClause),
+        titleFromSentence(strippedClause),
+        compressTitleCandidate(normalizedClause),
+        compressTitleCandidate(strippedClause),
+        trimmedMeaningfulWindow(normalizedClause),
+        trimmedMeaningfulWindow(strippedClause),
+      ])
+    })
+
+  return uniqueNormalized([
+    titleFromSentence(cleaned),
+    titleFromSentence(stripped),
+    compressTitleCandidate(cleaned),
+    compressTitleCandidate(stripped),
+    trimmedMeaningfulWindow(cleaned),
+    trimmedMeaningfulWindow(stripped),
+    ...clauses,
+    cleaned,
+    stripped,
+  ])
 }
 
 function synthesizeUniqueTitleVariant(
@@ -2154,41 +2374,65 @@ function synthesizeUniqueTitleVariant(
   reservedTitles: Set<string>,
 ) {
   const disallowed = new Set([...usedTitles, ...reservedTitles])
-  const baseStem = buildDistinctTitleStem([base, ...alternates], disallowed)
+  const disallowedStemKeys = buildDisallowedReserveStemKeys(disallowed)
+  const combinedCandidates = [base, ...alternates]
+  const baseStem = buildDistinctTitleStem(combinedCandidates, disallowed)
   const strategicVariants = buildStrategicReserveTitleVariants(baseStem, alternates)
+  const semanticReserveVariants = buildSemanticReserveTitleVariants(baseStem, alternates)
 
-  for (const variant of strategicVariants) {
+  for (const variant of [...strategicVariants, ...semanticReserveVariants]) {
     const cleaned = cleanSentence(variant)
-    const key = cleaned.toLowerCase()
-    if (!cleaned || isWeakDisplayLine(cleaned) || disallowed.has(key)) continue
+    const key = normalizeTitleReservationKey(cleaned)
+    const stemKey = normalizeReserveStemKey(cleaned)
+    if (!cleaned || !key || isWeakDisplayLine(cleaned) || disallowed.has(key) || stemKeyBlocked(stemKey, disallowedStemKeys)) continue
     return cleaned
   }
 
-  const reserveSuffixes = [
-    'for operators',
-    'in production',
-    'when context drifts',
-    'once the workflow shifts',
-    'before the next handoff',
-    'under real load',
-  ]
-
-  for (const suffix of reserveSuffixes) {
-    const variant = cleanSentence(`${baseStem} — ${suffix}`)
-    const key = variant.toLowerCase()
-    if (!variant || isWeakDisplayLine(variant) || disallowed.has(key)) continue
-    return variant
+  const reserveTopicFallbacks = buildReserveTopicFallbacks(combinedCandidates)
+  for (const fallback of reserveTopicFallbacks) {
+    const cleaned = cleanSentence(fallback)
+    const key = normalizeTitleReservationKey(cleaned)
+    const stemKey = normalizeReserveStemKey(cleaned)
+    if (!cleaned || !key || isWeakDisplayLine(cleaned) || disallowed.has(key) || stemKeyBlocked(stemKey, disallowedStemKeys)) continue
+    return cleaned
   }
 
-  let counter = 2
-  while (counter < 20) {
-    const variant = cleanSentence(`${baseStem} (${counter})`)
-    const key = variant.toLowerCase()
-    if (!disallowed.has(key)) return variant
-    counter += 1
+  const lastResort = cleanSentence(extractStrategicFallbackThesis([baseStem, ...alternates])) || 'A stronger operating model beats a stale workflow.'
+  const lastResortKey = normalizeTitleReservationKey(lastResort)
+  const lastResortStemKey = normalizeReserveStemKey(lastResort)
+  if (lastResortKey && !disallowed.has(lastResortKey) && !stemKeyBlocked(lastResortStemKey, disallowedStemKeys)) {
+    return lastResort
   }
 
-  return `${baseStem} (${Date.now()})`
+  return buildDeterministicReservedTitle(lastResort, disallowed, combinedCandidates)
+}
+
+function buildSemanticReserveTitleVariants(baseStem: string, alternates: string[]) {
+  const combined = uniqueNormalized([baseStem, ...alternates]).join(' ')
+  const topic = inferReserveTitleTopic(combined)
+  const emphasis = inferReserveTitleEmphasis(combined)
+  const subject = topic.articleless
+  const subjectWithArticle = topic.withArticle
+  const topicLabel = capitalize(topic.label)
+  const anchor = inferReserveTitleAnchor(combined)
+  const anchorLabel = anchor ? capitalize(anchor) : ''
+  const normalizedBaseStem = normalizeReserveStem(baseStem)
+
+  return uniqueNormalized([
+    normalizedBaseStem ? `${normalizedBaseStem} once the real handoffs start.` : '',
+    normalizedBaseStem ? `${normalizedBaseStem} when teams have to ship it.` : '',
+    normalizedBaseStem ? `${normalizedBaseStem} when review debt shows up.` : '',
+    normalizedBaseStem ? `${normalizedBaseStem} when scale stops being theoretical.` : '',
+    anchorLabel ? `${anchorLabel} is where stale assumptions get expensive.` : '',
+    anchorLabel ? `${anchorLabel} reveals which shortcuts break first.` : '',
+    anchorLabel ? `${anchorLabel} turns better judgment into operating leverage.` : '',
+    `${subject} rewards teams that simplify before they automate.`,
+    `${subject} reveals which shortcuts break first.`,
+    `${subjectWithArticle} changes which judgment calls still need humans.`,
+    `${topicLabel} makes ${emphasis} the deciding advantage.`,
+    `${topicLabel} exposes where old habits stop scaling.`,
+    `${topicLabel} makes weak supervision painfully visible.`,
+  ])
 }
 
 function buildStrategicReserveTitleVariants(baseStem: string, alternates: string[]) {
@@ -2199,15 +2443,21 @@ function buildStrategicReserveTitleVariants(baseStem: string, alternates: string
   const subject = topic.articleless
   const subjectWithArticle = topic.withArticle
   const topicLabel = topic.label
-  const anchor = inferReserveTitleAnchor(combined)
-  const anchorLabel = anchor ? capitalize(anchor) : ''
+  const rawAnchor = inferReserveTitleAnchor(combined)
+  const anchorLabel = sanitizeReserveContextLabel(rawAnchor, baseStem)
+  const anchorTokens = anchorLabel
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+  const allowStrategicAnchorTemplates = anchorTokens.length >= 3 && isUsableReserveContextLabel(anchorLabel)
+  const normalizedBaseStem = normalizeReserveStem(baseStem)
 
   return uniqueNormalized([
-    anchor ? `${anchorLabel} changes where human judgment belongs.` : '',
-    anchor ? `${anchorLabel} makes stale coordination visible.` : '',
-    anchor ? `${anchorLabel} gets expensive when review stays lazy.` : '',
-    anchor ? `${anchorLabel} is where the workflow starts to break.` : '',
-    `${subjectWithArticle} changes where human judgment belongs.`,
+    allowStrategicAnchorTemplates ? `${anchorLabel} changes where human judgment belongs.` : '',
+    allowStrategicAnchorTemplates ? `${anchorLabel} makes stale coordination visible.` : '',
+    allowStrategicAnchorTemplates ? `${anchorLabel} gets expensive when review stays lazy.` : '',
+    allowStrategicAnchorTemplates ? `${anchorLabel} is where the workflow starts to break.` : '',
+    `${subjectWithArticle} is forcing a different human checkpoint.`,
     `${subject} puts the old workflow under pressure.`,
     `${subject} makes the review layer more valuable.`,
     `${subject} exposes where coordination is still leaking time.`,
@@ -2218,7 +2468,7 @@ function buildStrategicReserveTitleVariants(baseStem: string, alternates: string
     `${capitalize(topicLabel)} now punishes lazy handoffs.`,
     `${capitalize(topicLabel)} gets expensive when the workflow stays stale.`,
     strategic,
-    baseStem,
+    normalizedBaseStem,
   ])
 }
 
@@ -2247,7 +2497,8 @@ function findPreferredReserveAnchorPhrase(tokens: string[]) {
       const window = tokens.slice(index, index + size)
       if (window.length !== size) continue
       const score = scoreReserveAnchorPhrase(window)
-      if (score < 6) continue
+      const minimum = size === 2 ? 7 : 6
+      if (score < minimum) continue
       candidates.push({ phrase: window.join(' '), score, length: window.length })
     }
   }
@@ -2260,22 +2511,46 @@ function scoreReserveAnchorPhrase(tokens: string[]) {
   if (tokens.length < 2) return Number.NEGATIVE_INFINITY
   if (new Set(tokens).size !== tokens.length) return Number.NEGATIVE_INFINITY
   if (tokens.some((token) => RESERVE_TITLE_ANCHOR_BANNED.has(token))) return Number.NEGATIVE_INFINITY
+  if (!isCredibleReserveAnchorPhrase(tokens)) return Number.NEGATIVE_INFINITY
 
   let score = 0
   let domainHits = 0
+  let strongHits = 0
 
   for (const token of tokens) {
     const tokenScore = scoreReserveAnchorToken(token)
     if (tokenScore <= -4) return Number.NEGATIVE_INFINITY
     if (tokenScore > 0) domainHits += 1
+    if (tokenScore >= 3) strongHits += 1
     score += tokenScore
   }
 
   if (domainHits === 0) return Number.NEGATIVE_INFINITY
+  if (strongHits === 0 && tokens.length < 3) return Number.NEGATIVE_INFINITY
   if (domainHits >= 2) score += 4
+  if (strongHits >= 2) score += 2
   if (tokens.length === 3) score += 1
 
   return score
+}
+
+function isCredibleReserveAnchorPhrase(tokens: string[]) {
+  if (tokens.length < 2) return false
+  if (tokens.some((token) => token.length < 4)) return false
+  if (tokens.some((token) => RESERVE_TITLE_ANCHOR_BANNED.has(token) || RESERVE_TITLE_ANCHOR_WEAK.has(token))) return false
+
+  const first = tokens[0] ?? ''
+  const last = tokens[tokens.length - 1] ?? ''
+  if (RESERVE_TITLE_ANCHOR_WEAK.has(first) || RESERVE_TITLE_ANCHOR_WEAK.has(last)) return false
+  if (/(?:ly|ing)$/i.test(first) && !RESERVE_TITLE_ANCHOR_DOMAIN.test(first)) return false
+  if (/(?:ly|ing)$/i.test(last) && !RESERVE_TITLE_ANCHOR_DOMAIN.test(last)) return false
+  if (/^(?:same|some|many|more|most|only|very|quite|just|right|next|other|different)$/i.test(first)) return false
+  if (/^(?:basically|probably|actually|really|literally|accordingly|typically)$/i.test(first)) return false
+
+  const strongHits = tokens.filter((token) => scoreReserveAnchorToken(token) >= 3).length
+  const nounishHits = tokens.filter((token) => /(?:tion|sion|ment|ness|ship|ware|graph|proof|bench|guard|scope|stack|trace|queue|cache|token|trust|sales|buyer|agent|model|prompt|memory|context|review|audit|deploy|robot|voice|class|teach|student|build|checkpoint|docs|history|video|audio|spreadsheet|security|permission|training|inference|benchmark|latency|compute|founder|manager|engineer|design|product)$/i.test(token) || RESERVE_TITLE_ANCHOR_DOMAIN.test(token)).length
+
+  return strongHits >= 1 && nounishHits >= 1
 }
 
 function scoreReserveAnchorToken(token: string) {
@@ -2322,25 +2597,50 @@ function capitalize(value: string) {
 }
 
 function buildDistinctTitleStem(candidates: string[], disallowed: Set<string>) {
+  const disallowedStemKeys = buildDisallowedReserveStemKeys(disallowed)
   const cleanedCandidates = uniqueNormalized(candidates)
-    .map((candidate) => stripReserveSuffixes(candidate))
-    .map((candidate) => trimSentence(candidate.replace(/[.!?]+$/g, ''), 62) || '')
+    .flatMap((candidate) => {
+      const base = stripReserveSuffixes(candidate)
+      const stripped = stripWeakLeadIn(base)
+      return uniqueNormalized([
+        normalizeReserveStem(compressTitleCandidate(stripped)),
+        normalizeReserveStem(compressTitleCandidate(base)),
+        normalizeReserveStem(trimmedMeaningfulWindow(stripped)),
+        normalizeReserveStem(trimmedMeaningfulWindow(base)),
+        normalizeReserveStem(trimSentence(stripped.replace(/[.!?]+$/g, ''), 62) || ''),
+        normalizeReserveStem(trimSentence(base.replace(/[.!?]+$/g, ''), 62) || ''),
+      ])
+    })
     .filter(Boolean)
 
   for (const candidate of cleanedCandidates) {
-    const key = candidate.toLowerCase()
-    if (key && !disallowed.has(key) && !isWeakDisplayLine(candidate)) {
+    const key = normalizeTitleReservationKey(candidate)
+    const stemKey = normalizeReserveStemKey(candidate)
+    if (key && !disallowed.has(key) && !stemKeyBlocked(stemKey, disallowedStemKeys) && !isWeakReserveStem(candidate)) {
       return candidate
     }
   }
 
   const strategic = extractStrategicFallbackThesis(cleanedCandidates)
   const cleanedStrategic = trimSentence(stripReserveSuffixes(strategic), 62) || ''
-  if (cleanedStrategic && !disallowed.has(cleanedStrategic.toLowerCase()) && !isWeakDisplayLine(cleanedStrategic)) {
+  const cleanedStrategicKey = normalizeTitleReservationKey(cleanedStrategic)
+  const cleanedStrategicStemKey = normalizeReserveStemKey(cleanedStrategic)
+  if (cleanedStrategic && cleanedStrategicKey && !disallowed.has(cleanedStrategicKey) && !stemKeyBlocked(cleanedStrategicStemKey, disallowedStemKeys) && !isWeakReserveStem(cleanedStrategic)) {
     return cleanedStrategic
   }
 
-  return trimSentence(stripReserveSuffixes(cleanedCandidates[0] ?? ''), 62) || 'Untitled slide'
+  const reserveTopicFallback = buildReserveTopicFallbacks(cleanedCandidates)
+    .map((candidate) => trimSentence(stripReserveSuffixes(candidate), 62) || '')
+    .find((candidate) => {
+      const key = normalizeTitleReservationKey(candidate)
+      const stemKey = normalizeReserveStemKey(candidate)
+      return Boolean(candidate) && Boolean(key) && !disallowed.has(key!) && !stemKeyBlocked(stemKey, disallowedStemKeys) && !isWeakReserveStem(candidate)
+    })
+  if (reserveTopicFallback) {
+    return reserveTopicFallback
+  }
+
+  return 'Untitled slide'
 }
 
 function stripReserveSuffixes(value: string) {
@@ -2348,6 +2648,320 @@ function stripReserveSuffixes(value: string) {
     .replace(/(?:\s*[—–-]\s*(?:for operators|in production|when context drifts|once the workflow shifts|before the next handoff|under real load))+$/i, '')
     .replace(/(?:\s*\(\d+\))+$/g, '')
     .trim()
+}
+
+function normalizeReserveStem(value: string) {
+  const cleaned = stripReserveSuffixes(value)
+    .replace(/^untitled\s+slide\b[:\-–—\s]*/i, '')
+    .replace(/^untitled\b[:\-–—\s]*/i, '')
+    .trim()
+
+  if (!cleaned) return ''
+  if (/^slide\b/i.test(cleaned)) return ''
+  if (isWeakReserveStem(cleaned)) return ''
+  return cleaned.replace(/[.!?]+$/g, '')
+}
+
+function isWeakReserveStem(value: string) {
+  const cleaned = stripReserveSuffixes(value)
+  if (!cleaned) return true
+  if (isWeakDisplayLine(cleaned)) return true
+  if (isWeakBriefLineCandidate(cleaned)) return true
+  if (isMetaNarrationLine(cleaned)) return true
+  if (isCallToActionOrBanterLine(cleaned)) return true
+  if (/\b(?:thank you|thanks for watching|i(?:'| a)?ll link|check out|subscribe|here you can see|listen up everyone)\b/i.test(cleaned)) return true
+  if (/^[A-Z]?[a-z0-9' -]{0,8}$/i.test(cleaned)) return true
+  if (/^[A-Z][a-z]+(?:\s+[a-z]+){0,2}$/i.test(cleaned) && !/\b(?:AI|OpenClaw|Nvidia|Claude|Amazon|WhatsApp)\b/.test(cleaned)) return true
+  return false
+}
+
+function buildDeterministicReservedTitle(base: string, disallowed: Set<string>, contextCandidates: string[] = []) {
+  const disallowedStemKeys = buildDisallowedReserveStemKeys(disallowed)
+  const cleanedBase = stripReserveSuffixes(base) || 'A stronger operating model beats a stale workflow.'
+  const cleanedBaseKey = normalizeTitleReservationKey(cleanedBase)
+  const cleanedBaseStemKey = normalizeReserveStemKey(cleanedBase)
+  if (cleanedBaseKey && !disallowed.has(cleanedBaseKey) && !stemKeyBlocked(cleanedBaseStemKey, disallowedStemKeys)) {
+    return cleanedBase
+  }
+
+  const contextVariants = buildDeterministicReserveContextVariants(cleanedBase, contextCandidates)
+  for (const variant of contextVariants) {
+    const cleanedVariant = cleanSentence(variant)
+    const variantKey = normalizeTitleReservationKey(cleanedVariant)
+    const variantStemKey = normalizeReserveStemKey(cleanedVariant)
+    if (!cleanedVariant || !variantKey || disallowed.has(variantKey) || stemKeyBlocked(variantStemKey, disallowedStemKeys) || isWeakDisplayLine(cleanedVariant)) continue
+    return cleanedVariant
+  }
+
+  const emergencyContextVariant = buildEmergencyContextualReserveVariant(cleanedBase, disallowed, disallowedStemKeys, contextCandidates)
+  if (emergencyContextVariant) {
+    return emergencyContextVariant
+  }
+
+  for (let index = 2; index <= 24; index += 1) {
+    const variant = `${cleanedBase} (${index})`
+    const variantKey = normalizeTitleReservationKey(variant)
+    const variantStemKey = normalizeReserveStemKey(variant)
+    if (variantKey && !disallowed.has(variantKey) && !stemKeyBlocked(variantStemKey, disallowedStemKeys)) {
+      return variant
+    }
+  }
+
+  const reserveVariant = `${cleanedBase} (reserve)`
+  const reserveKey = normalizeTitleReservationKey(reserveVariant)
+  const reserveStemKey = normalizeReserveStemKey(reserveVariant)
+  if (reserveKey && !disallowed.has(reserveKey) && !stemKeyBlocked(reserveStemKey, disallowedStemKeys)) {
+    return reserveVariant
+  }
+
+  return 'Untitled slide'
+}
+
+function buildEmergencyContextualReserveVariant(
+  base: string,
+  disallowed: Set<string>,
+  disallowedStemKeys: Set<string>,
+  contextCandidates: string[],
+) {
+  const combined = uniqueNormalized([base, ...contextCandidates]).join(' ')
+  const topic = inferReserveTitleTopic(combined)
+  const emphasis = inferReserveTitleEmphasis(combined)
+  const labels = uniqueNormalized([
+    ...buildReserveContextLabels(contextCandidates, base),
+    ...extractEmergencyAnchorLabels(contextCandidates, base),
+  ]).filter((label) => isUsableReserveContextLabel(label))
+  const anchor = sanitizeReserveContextLabel(inferReserveTitleAnchor(combined), base)
+
+  const emergencyVariants = uniqueNormalized([
+    ...labels.map((label) => `${label} changes what human review is for.`),
+    ...labels.map((label) => `${label} is where stale workflows break first.`),
+    ...labels.map((label) => `${label} becomes the checkpoint that matters.`),
+    anchor && isUsableReserveContextLabel(anchor) ? `${anchor} becomes the checkpoint that matters.` : '',
+    `${capitalize(topic.label)} is where the old workflow breaks first.`,
+    emphasis !== 'operator judgment' ? `${capitalize(emphasis)} is becoming the real operating leverage.` : '',
+  ])
+
+  for (const variant of emergencyVariants) {
+    const cleaned = cleanSentence(variant)
+    const key = normalizeTitleReservationKey(cleaned)
+    const stemKey = normalizeReserveStemKey(cleaned)
+    if (!cleaned || !key || disallowed.has(key) || stemKeyBlocked(stemKey, disallowedStemKeys) || isWeakDisplayLine(cleaned)) continue
+    return cleaned
+  }
+
+  return ''
+}
+
+function extractEmergencyAnchorLabels(candidates: string[], base: string) {
+  const baseTokens = new Set(tokenizeReserveTitleAnchor(base))
+  const rawText = uniqueNormalized(candidates).join(' ')
+  const namedAnchors = Array.from(rawText.matchAll(/\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2}|[A-Z]{2,}(?:\s+[A-Z][a-z]+)?)\b/g))
+    .map((match) => cleanSentence(match[1] ?? ''))
+    .filter(Boolean)
+    .filter((label) => label.split(/\s+/).length <= 3)
+
+  const tokenPool = cleanSentence(rawText)
+    .replace(/[^A-Za-z0-9\s-]/g, ' ')
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 4)
+    .filter((token) => !RESERVE_TITLE_STOP_WORDS.has(token.toLowerCase()))
+    .filter((token) => !RESERVE_TITLE_ANCHOR_BANNED.has(token.toLowerCase()))
+
+  const tokenPairs: string[] = []
+  for (let index = 0; index < tokenPool.length; index += 1) {
+    const token = tokenPool[index] ?? ''
+    const next = tokenPool[index + 1] ?? ''
+    if (token) tokenPairs.push(token)
+    if (token && next) tokenPairs.push(`${token} ${next}`)
+  }
+
+  return uniqueNormalized([...namedAnchors, ...tokenPairs]
+    .map((label) => sanitizeEmergencyAnchorLabel(label, baseTokens)))
+    .filter(Boolean)
+    .slice(0, 6)
+}
+
+function sanitizeEmergencyAnchorLabel(label: string, baseTokens: Set<string>) {
+  const cleaned = cleanSentence(label)
+    .replace(/[^A-Za-z0-9\s-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  if (!cleaned) return ''
+
+  const tokens = cleaned.split(/\s+/)
+    .filter(Boolean)
+    .filter((token) => token.length >= 4)
+    .filter((token) => !baseTokens.has(token.toLowerCase()))
+    .filter((token) => !RESERVE_TITLE_ANCHOR_BANNED.has(token.toLowerCase()))
+
+  if (tokens.length === 0) return ''
+  if (tokens.length === 1 && scoreReserveAnchorToken(tokens[0]!.toLowerCase()) < 1 && !/^[A-Z]/.test(tokens[0]!)) return ''
+
+  return tokens.slice(0, 3).join(' ')
+}
+
+function buildDeterministicReserveContextVariants(base: string, candidates: string[]) {
+  const combined = uniqueNormalized([base, ...candidates]).join(' ')
+  const topic = inferReserveTitleTopic(combined)
+  const emphasis = inferReserveTitleEmphasis(combined)
+  const anchor = inferReserveTitleAnchor(candidates.join(' '))
+  const anchorLabel = sanitizeReserveContextLabel(anchor, base)
+  const topicLabel = topic.label
+  const contextLabels = buildReserveContextLabels(candidates, base).filter((label) => isUsableReserveContextLabel(label))
+  const distinctLabels = uniqueNormalized([
+    anchorLabel,
+    ...contextLabels,
+  ]).filter((label) => isUsableReserveContextLabel(label))
+
+  return uniqueNormalized([
+    anchorLabel && isUsableReserveContextLabel(anchorLabel) ? `${base} Around ${anchorLabel}.` : '',
+    anchorLabel && isUsableReserveContextLabel(anchorLabel) ? `${base} When ${anchorLabel} becomes the constraint.` : '',
+    anchorLabel && isUsableReserveContextLabel(anchorLabel) ? `${base} Where ${anchorLabel} sets the pace.` : '',
+    ...contextLabels.map((label) => `${base} Around ${label}.`),
+    ...contextLabels.map((label) => `${base} Where ${label} sets the pace.`),
+    ...distinctLabels.map((label) => `${label} exposes where the old workflow breaks.`),
+    ...distinctLabels.map((label) => `${label} is becoming the operating bottleneck.`),
+    ...distinctLabels.map((label) => `${label} forces a clearer human checkpoint.`),
+    `${capitalize(topicLabel)} exposes where the old workflow breaks.`,
+    `${capitalize(topicLabel)} is becoming the operating bottleneck.`,
+    emphasis !== 'operator judgment' ? `${capitalize(emphasis)} is becoming the operating bottleneck.` : '',
+    `${base} In ${topicLabel}.`,
+    emphasis !== 'operator judgment' ? `${base} Where ${emphasis} decides the outcome.` : '',
+    `${base} When the handoffs stop being theoretical.`,
+  ])
+}
+
+function buildReserveContextLabels(candidates: string[], base: string) {
+  const joined = uniqueNormalized(candidates).join(' ')
+  const anchor = sanitizeReserveContextLabel(inferReserveTitleAnchor(joined), base)
+  const tokenPool = tokenizeReserveTitleAnchor(joined)
+    .filter((token) => !RESERVE_TITLE_ANCHOR_BANNED.has(token))
+    .filter((token) => !RESERVE_TITLE_ANCHOR_WEAK.has(token))
+
+  const labels: string[] = []
+  if (anchor) labels.push(anchor)
+
+  for (let index = 0; index < tokenPool.length; index += 1) {
+    const pair = tokenPool.slice(index, index + 2)
+    if (pair.length === 2) labels.push(pair.join(' '))
+    labels.push(tokenPool[index] ?? '')
+  }
+
+  return uniqueNormalized(labels
+    .map((label) => sanitizeReserveContextLabel(label, base)))
+    .filter((label) => label.split(/\s+/).join('').length >= 8)
+    .slice(0, 4)
+}
+
+function sanitizeReserveContextLabel(label: string, base: string) {
+  const cleaned = cleanSentence(label)
+    .toLowerCase()
+    .replace(/\b(?:around|where|when|with|under|into|from|that|this|these|those)\b/g, ' ')
+    .replace(/[^a-z0-9\s-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  if (!cleaned) return ''
+
+  const baseTokens = new Set(tokenizeReserveTitleAnchor(base))
+  const filteredTokens = cleaned
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter(Boolean)
+    .filter((token) => token.length >= 4)
+    .filter((token) => !baseTokens.has(token))
+    .filter((token) => !RESERVE_TITLE_ANCHOR_BANNED.has(token))
+    .filter((token) => !RESERVE_TITLE_ANCHOR_WEAK.has(token))
+
+  if (filteredTokens.length === 0) return ''
+  if (filteredTokens.length === 1 && scoreReserveAnchorToken(filteredTokens[0] ?? '') < 3) return ''
+
+  const phrase = filteredTokens.slice(0, 3).join(' ')
+  if (!phrase) return ''
+  if (!isCredibleReserveAnchorPhrase(phrase.split(/\s+/))) return ''
+  if (!isUsableReserveContextLabel(phrase)) return ''
+
+  return capitalize(phrase)
+}
+
+function isUsableReserveContextLabel(label: string) {
+  const tokens = cleanSentence(label)
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+
+  if (tokens.length === 0) return false
+  if (new Set(tokens).size !== tokens.length) return false
+  if (tokens.some((token) => RESERVE_TITLE_ANCHOR_WEAK.has(token) || RESERVE_TITLE_ANCHOR_BANNED.has(token))) return false
+
+  const head = tokens[0] ?? ''
+  const tail = tokens[tokens.length - 1] ?? ''
+  if (RESERVE_CONTEXT_SINGLETON_WEAK.has(head) || RESERVE_CONTEXT_SINGLETON_WEAK.has(tail)) return false
+  if (tokens.length === 2 && scoreReserveAnchorToken(head) < 3) return false
+
+  const strongHits = tokens.filter((token) => scoreReserveAnchorToken(token) >= 3).length
+  if (strongHits === 0) return false
+  if (tokens.length >= 3 && strongHits < 2) return false
+
+  if (tokens.length >= 3) {
+    const middleTokens = tokens.slice(1, -1)
+    if (middleTokens.some((token) => scoreReserveAnchorToken(token) < 1 && !RESERVE_TITLE_ANCHOR_DOMAIN.test(token))) return false
+  }
+
+  return true
+}
+
+function normalizeTitleReservationKey(value: string) {
+  return cleanSentence(value)
+    .toLowerCase()
+    .replace(/[.!?,:;]+$/g, '')
+    .replace(/[“”"'`]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function normalizeReserveStemKey(value: string) {
+  const normalizedStem = normalizeReserveStem(value)
+  if (!normalizedStem) return ''
+  return normalizedStem
+    .toLowerCase()
+    .replace(/[.!?,:;]+$/g, '')
+    .replace(/[“”"'`]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function buildDisallowedReserveStemKeys(disallowed: Set<string>) {
+  const stemKeys = new Set<string>()
+  for (const title of disallowed) {
+    const stemKey = normalizeReserveStemKey(title)
+    if (stemKey) stemKeys.add(stemKey)
+  }
+  return stemKeys
+}
+
+function stemKeyBlocked(stemKey: string, disallowedStemKeys: Set<string>) {
+  return Boolean(stemKey) && disallowedStemKeys.has(stemKey)
+}
+
+function buildReserveTopicFallbacks(candidates: string[]) {
+  const combined = uniqueNormalized(candidates).join(' ')
+  const topic = inferReserveTitleTopic(combined)
+  const emphasis = inferReserveTitleEmphasis(combined)
+  const subject = topic.articleless
+  const subjectWithArticle = topic.withArticle
+  const topicLabel = capitalize(topic.label)
+
+  return uniqueNormalized([
+    `${subject} changes where good supervision matters most.`,
+    `${subject} exposes where weak handoffs break first.`,
+    `${subjectWithArticle} makes ${emphasis} harder to fake.`,
+    `${topicLabel} shifts the real bottleneck toward ${emphasis}.`,
+    `${topicLabel} punishes teams that keep stale review habits.`,
+    'A stronger operating model beats a stale workflow.',
+  ])
 }
 
 function chooseOpeningTitle(candidates: string[]) {
@@ -2377,6 +2991,56 @@ function buildFrameworkBody(intro: string, items: string[]) {
   return [normalizeForSlide(intro), list].filter(Boolean).join('\n\n')
 }
 
+function determineTargetSlideCount(primaryText: string, extraSlideCandidates: string[]) {
+  const highConfidenceExtras = extraSlideCandidates.filter((line) => isHighConfidenceExtraBeat(line))
+  const baseCount = DEFAULT_CAROUSEL_SLIDES
+  const firstExpansion = highConfidenceExtras.length >= 1 ? 1 : 0
+  const secondExpansion = highConfidenceExtras.length >= 2 && splitSentences(primaryText).length >= 6 ? 1 : 0
+
+  return Math.max(
+    MIN_CAROUSEL_SLIDES,
+    Math.min(SOFT_MAX_CAROUSEL_SLIDES, baseCount + firstExpansion + secondExpansion),
+  )
+}
+
+function determineRewriteSlideCount(wordCount: number, availableSlides: number) {
+  const richnessBonus = wordCount >= 108 ? 2 : wordCount >= 72 ? 1 : 0
+  return Math.max(
+    MIN_CAROUSEL_SLIDES,
+    Math.min(availableSlides, Math.min(SOFT_MAX_CAROUSEL_SLIDES, DEFAULT_CAROUSEL_SLIDES + richnessBonus)),
+  )
+}
+
+function isHighConfidenceExtraBeat(line: string) {
+  const cleaned = cleanSentence(line)
+  if (!cleaned) return false
+  if (cleaned.length < 42) return false
+  return splitSentences(cleaned).length > 0 || /\b(because|instead|means|creates|turns|reveals|requires|breaks|wins|fails|distribution|review|handoff|workflow|trust|coordination|moat|eval|memory|context|model)\b/i.test(cleaned)
+}
+
+function isDistinctExtraSlideBeat(line: string, brief: Brief, draftSlides: Array<{ title: string, body: string }>) {
+  const cleaned = cleanSentence(line)
+  if (!cleaned || cleaned.length < 28) return false
+  if (!isHighConfidenceExtraBeat(cleaned)) return false
+
+  const comparisonPool = uniqueNormalized([
+    brief.thesis,
+    brief.whyItMatters,
+    ...brief.supportPoints,
+    ...draftSlides.map((slide) => slide.title),
+    ...draftSlides.flatMap((slide) => splitSlideBodyLines(slide.body)),
+  ])
+
+  const normalizedLineTokens = new Set(normalizeTitleReservationKey(cleaned).split(' ').filter(Boolean))
+  if (normalizedLineTokens.size === 0) return false
+
+  return comparisonPool.every((entry) => {
+    const entryTokens = new Set(normalizeTitleReservationKey(entry).split(' ').filter(Boolean))
+    const overlap = [...normalizedLineTokens].filter((token) => entryTokens.has(token)).length
+    return overlap / normalizedLineTokens.size < 0.72
+  })
+}
+
 function uniqueNormalized(lines: string[]) {
   const seen = new Set<string>()
   const result: string[] = []
@@ -2393,15 +3057,19 @@ function uniqueNormalized(lines: string[]) {
 }
 
 const RESERVE_TITLE_STOP_WORDS = new Set([
-  'about', 'after', 'again', 'already', 'because', 'before', 'being', 'changes', 'closer', 'context', 'could', 'deserves', 'every', 'faster', 'human', 'judgment', 'layer', 'makes', 'model', 'operators', 'pressure', 'really', 'review', 'shifts', 'stale', 'still', 'teams', 'than', 'that', 'their', 'there', 'these', 'they', 'this', 'those', 'under', 'workflow', 'where', 'with', 'your',
+  'about', 'after', 'again', 'already', 'because', 'before', 'being', 'changes', 'closer', 'context', 'could', 'deserves', 'every', 'faster', 'human', 'judgment', 'layer', 'makes', 'matters', 'model', 'most', 'operators', 'pressure', 'really', 'review', 'shifts', 'stale', 'still', 'teams', 'than', 'that', 'their', 'there', 'these', 'they', 'this', 'those', 'toward', 'under', 'workflow', 'where', 'with', 'your',
 ])
 
 const RESERVE_TITLE_ANCHOR_BANNED = new Set([
-  'agent', 'agents', 'capability', 'company', 'coordination', 'faster', 'human', 'judgment', 'layer', 'model', 'operators', 'pressure', 'review', 'shift', 'shifts', 'stale', 'supervision', 'teams', 'workflow',
+  'agent', 'agents', 'basically', 'becomes', 'belongs', 'capability', 'company', 'complain', 'coordination', 'describing', 'different', 'expensive', 'faster', 'friendly', 'gets', 'goes', 'going', 'happens', 'human', 'indeed', 'interesting', 'judgment', 'layer', 'lazy', 'literally', 'makes', 'mental', 'model', 'operators', 'probably', 'pressure', 'really', 'recent', 'review', 'same', 'shift', 'shifts', 'somewhere', 'stale', 'stuff', 'supervision', 'temporary', 'textbased', 'things', 'types', 'untitled', 'visible', 'workflow',
 ])
 
 const RESERVE_TITLE_ANCHOR_WEAK = new Set([
-  'about', 'after', 'before', 'being', 'better', 'build', 'changes', 'closer', 'deserves', 'edge', 'every', 'getting', 'going', 'happens', 'important', 'keeps', 'making', 'people', 'puts', 'raises', 'really', 'rewards', 'starts', 'still', 'thing', 'things', 'update', 'visible', 'what', 'when', 'where', 'which', 'winning', 'works',
+  'about', 'absolutely', 'accordingly', 'actually', 'after', 'before', 'being', 'better', 'between', 'brilliant', 'build', 'changes', 'clear', 'clearer', 'closer', 'cost', 'deserves', 'during', 'edge', 'efficient', 'enough', 'even', 'every', 'everything', 'expect', 'fascinating', 'first', 'full', 'good', 'great', 'handle', 'harder', 'important', 'keeps', 'like', 'lowest', 'lower', 'main', 'making', 'matters', 'more', 'most', 'move', 'much', 'next', 'nobody', 'only', 'openai', 'other', 'overhead', 'people', 'playbook', 'previous', 'producing', 'punishes', 'puts', 'quite', 'raises', 'real', 'released', 'releasing', 'resilient', 'right', 'saves', 'saved', 'scattered', 'serious', 'should', 'simplest', 'smarter', 'something', 'start', 'starts', 'state', 'still', 'stronger', 'subscription', 'such', 'take', 'telling', 'then', 'there', 'thing', 'time', 'times', 'toward', 'triaging', 'typically', 'ultra', 'update', 'value', 'very', 'want', 'week', 'what', 'when', 'where', 'which', 'winning', 'work', 'works', 'would', 'zero',
+])
+
+const RESERVE_CONTEXT_SINGLETON_WEAK = new Set([
+  'checkpoint', 'expectation', 'expectations', 'judgment', 'leverage', 'operator', 'operators', 'outcome', 'pace', 'review', 'reviews', 'update', 'updates', 'winning', 'worth', 'what', 'will',
 ])
 
 const RESERVE_TITLE_ANCHOR_DOMAIN = /^(memory|context|prompt|injection|snapshot|version|eval|benchmark|latency|compute|gpu|token|browser|spreadsheet|robot|robotics|classroom|teacher|student|buyer|customer|market|sales|trust|handoff|handoffs|checkpoint|approval|audit|docs|prd|history|deployment|deployments|operator|operators|founder|founders|manager|managers|engineering|engineer|design|designer|product|security|sandbox|permission|permissions|transcript|transcripts|carousel|carousels|voice|audio|video|modeling|inference|training)$/i
@@ -2581,9 +3249,40 @@ function inferWhyItMatters(primary: Idea, support: Idea[], thesis: string, usedW
   return fallback
 }
 
+function scoreAdjacentSupportIdea(primary: Idea, candidate: Idea) {
+  const candidateLines = uniqueNormalized([
+    ...getCompleteThoughts(candidate.text),
+    ...buildMergedSupportBackfills(candidate.text).slice(0, 2),
+    titleFromSentence(candidate.titleSuggestion),
+    titleFromSentence(candidate.hook),
+    extractTakeaway(candidate.text, [primary]),
+  ])
+    .map((line) => sanitizeSupportCandidate(line))
+    .filter(Boolean)
+
+  const bestLineScore = Math.max(
+    ...candidateLines.map((line) => {
+      let score = scoreDisplayCandidate(line)
+      const overlapWithPrimary = overlapScore(`${primary.hook} ${primary.titleSuggestion} ${primary.text}`, line)
+      if (overlapWithPrimary >= 0.12) score += Math.min(8, overlapWithPrimary * 40)
+      if (/\b(because|so that|which means|this means|instead|rather than|when|once)\b/i.test(line)) score += 3
+      if (/\b(thank you|subscribe|watch|video|podcast|episode|next up|this week)\b/i.test(line)) score -= 12
+      if (/^(i('| a)?ll be honest|i did a whole video on this|if you are in any product company)\b/i.test(line)) score -= 14
+      return score
+    }),
+    Number.NEGATIVE_INFINITY,
+  )
+
+  const ordinalDistance = Math.abs(parseSegmentOrdinal(primary.id) - parseSegmentOrdinal(candidate.id))
+  const proximityBonus = Number.isFinite(ordinalDistance) ? Math.max(0, 3 - ordinalDistance) * 2 : 0
+
+  return bestLineScore + scoreSupportIdeaAffinity(primary, candidate) * 24 + candidate.score * 0.04 + proximityBonus
+}
+
 function buildSupportPoints(
   primary: Idea,
   support: Idea[],
+  adjacentSupport: Idea[],
   usedSupport: Set<string>,
   usedSupportLines: string[],
   thesis: string,
@@ -2616,18 +3315,35 @@ function buildSupportPoints(
 
   if (selected.length >= 2) return selected
 
+  const backfillIdeas = [...support, ...adjacentSupport]
+
   const backfillPoints = uniqueNormalized([
     ...splitIntoClauses(primary.text),
     ...splitIntoClauses(primary.hook),
     ...splitIntoClauses(primary.titleSuggestion),
-    ...support.flatMap((idea) => splitIntoClauses(idea.text).slice(0, 2)),
+    ...backfillIdeas.flatMap((idea) => [
+      ...getCompleteThoughts(idea.text).slice(0, 2),
+      ...splitIntoClauses(idea.text).slice(0, 2),
+    ]),
   ])
     .map((line) => sanitizeSupportCandidate(line))
     .filter(Boolean)
     .filter((line) => !reserved.has(slugify(line)))
     .filter((line) => !isWeakSupportBackfill(line))
 
-  for (const point of backfillPoints) {
+  const mergedBackfillPoints = uniqueNormalized([
+    ...buildMergedSupportBackfills(primary.text),
+    ...buildMergedSupportBackfills(primary.hook),
+    ...buildMergedSupportBackfills(primary.titleSuggestion),
+    ...backfillIdeas.flatMap((idea) => buildMergedSupportBackfills(idea.text).slice(0, 2)),
+    ...buildAdjacentCarryoverBackfills(primary, adjacentSupport),
+  ])
+    .map((line) => sanitizeSupportCandidate(line))
+    .filter(Boolean)
+    .filter((line) => !reserved.has(slugify(line)))
+    .filter((line) => !isWeakSupportBackfill(line))
+
+  for (const point of [...backfillPoints, ...mergedBackfillPoints]) {
     const key = slugify(point)
     if (usedSupport.has(key)) continue
     if (usedSupportLines.some((existing) => overlapScore(existing, point) >= 0.68)) continue
@@ -2638,8 +3354,50 @@ function buildSupportPoints(
     if (selected.length >= 3) break
   }
 
+  if (selected.length < 2) {
+    const scaffoldPoints = uniqueNormalized([
+      ...buildSupportClaimScaffolds(primary.text),
+      ...buildSupportClaimScaffolds(thesis),
+      ...buildSupportClaimScaffolds(whyItMatters),
+      ...support.flatMap((idea) => buildSupportClaimScaffolds(idea.text).slice(0, 2)),
+      ...adjacentSupport.flatMap((idea) => buildSupportClaimScaffolds(idea.text).slice(0, 2)),
+    ])
+      .filter((line) => !reserved.has(slugify(line)))
+      .filter((line) => !isWeakBriefLineCandidate(line))
+
+    for (const point of scaffoldPoints) {
+      const key = slugify(point)
+      if (usedSupport.has(key)) continue
+      if (usedSupportLines.some((existing) => overlapScore(existing, point) >= 0.68)) continue
+      if (selected.some((existing) => overlapScore(existing, point) >= 0.72)) continue
+      usedSupport.add(key)
+      usedSupportLines.push(point)
+      selected.push(point)
+      if (selected.length >= 3) break
+    }
+  }
+
   if (selected.length > 0) return selected.slice(0, 4)
   return points.slice(0, 4)
+}
+
+function parseSegmentOrdinal(id: string) {
+  const match = id.match(/segment-(\d+)/i)
+  return match ? Number.parseInt(match[1] ?? '', 10) : Number.NaN
+}
+
+function isAdjacentIdeaCandidate(primary: Idea, candidate: Idea) {
+  const primaryOrdinal = parseSegmentOrdinal(primary.id)
+  const candidateOrdinal = parseSegmentOrdinal(candidate.id)
+  if (!Number.isFinite(primaryOrdinal) || !Number.isFinite(candidateOrdinal)) return false
+  return Math.abs(primaryOrdinal - candidateOrdinal) <= 2
+}
+
+function sentenceCaseSupportFragment(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return ''
+  if (!/^[a-z]/.test(cleaned)) return cleaned
+  return `${cleaned[0]?.toUpperCase() ?? ''}${cleaned.slice(1)}`
 }
 
 function sanitizeSupportCandidate(value: string) {
@@ -2653,7 +3411,9 @@ function sanitizeSupportCandidate(value: string) {
   for (const fragment of fragments) {
     const variants = uniqueNormalized([
       fragment,
+      sentenceCaseSupportFragment(fragment),
       stripWeakLeadIn(fragment),
+      sentenceCaseSupportFragment(stripWeakLeadIn(fragment)),
     ])
 
     for (const candidate of variants) {
@@ -2666,6 +3426,95 @@ function sanitizeSupportCandidate(value: string) {
   return ''
 }
 
+function buildMergedSupportBackfills(text: string) {
+  const merged: string[] = []
+  const sentences = splitSentences(text)
+
+  for (let index = 0; index < sentences.length - 1; index += 1) {
+    merged.push(`${sentences[index]} ${sentences[index + 1]}`)
+  }
+
+  const clauses = splitIntoClauses(text)
+  for (let index = 0; index < clauses.length - 1; index += 1) {
+    merged.push(`${clauses[index]} ${clauses[index + 1]}`)
+  }
+
+  return merged.map((line) => cleanSentence(line)).filter(Boolean)
+}
+
+function buildAdjacentCarryoverBackfills(primary: Idea, adjacentSupport: Idea[]) {
+  const merged: string[] = []
+  const primaryNeedsCarryover = !/[.!?]$/.test(primary.text.trim())
+
+  for (const adjacent of adjacentSupport) {
+    const adjacentStartsFragment = /^[a-z]/.test(adjacent.text.trim())
+    const ordinalDistance = Math.abs(parseSegmentOrdinal(primary.id) - parseSegmentOrdinal(adjacent.id))
+    if (!Number.isFinite(ordinalDistance) || ordinalDistance > 1) continue
+    if (!primaryNeedsCarryover && !adjacentStartsFragment) continue
+
+    const combined = cleanSentence(`${primary.text} ${adjacent.text}`)
+    if (!combined) continue
+
+    merged.push(...buildMergedSupportBackfills(combined).slice(0, 4))
+    merged.push(...splitSentences(combined).map((line) => cleanSentence(line)).filter(Boolean).slice(0, 3))
+  }
+
+  return uniqueNormalized(merged)
+}
+
+function buildSupportClaimScaffolds(text: string) {
+  const cleaned = cleanSentence(text)
+  if (!cleaned) return []
+
+  const scaffolds = uniqueNormalized([
+    ...splitSentences(cleaned),
+    ...splitIntoClauses(cleaned),
+    ...extractSupportConnectorClaims(cleaned),
+  ])
+
+  return scaffolds
+    .map((line) => sanitizeSupportCandidate(line))
+    .filter(Boolean)
+    .filter((line) => !isWeakSupportBackfill(line))
+}
+
+function extractSupportConnectorClaims(text: string) {
+  const claims: string[] = []
+  const normalized = cleanSentence(text)
+  if (!normalized) return claims
+
+  const connectorPatterns = [
+    /\bbecause\b/i,
+    /\bwhich means\b/i,
+    /\bso that\b/i,
+    /\bso\b/i,
+    /\binstead of\b/i,
+    /\brather than\b/i,
+    /\bwhen\b/i,
+    /\bif\b/i,
+    /\bbut\b/i,
+  ]
+
+  for (const pattern of connectorPatterns) {
+    const match = pattern.exec(normalized)
+    if (!match || match.index < 0) continue
+    const before = cleanSentence(normalized.slice(0, match.index))
+    const after = cleanSentence(normalized.slice(match.index))
+    if (before) claims.push(before)
+    if (after) claims.push(after)
+  }
+
+  if (/\bfrom\b.+\bto\b/i.test(normalized)) {
+    const parts = normalized.split(/\bto\b/i).map((part) => cleanSentence(part)).filter(Boolean)
+    if (parts.length >= 2) {
+      claims.push(parts[0] ?? '')
+      claims.push(`To ${parts.slice(1).join(' to ')}`)
+    }
+  }
+
+  return claims
+}
+
 function isWeakSupportBackfill(value: string) {
   const line = normalizeForSlide(value)
   if (!line) return true
@@ -2673,6 +3522,7 @@ function isWeakSupportBackfill(value: string) {
   if (/\?$/.test(line)) return true
   if (/^(for|to|and|but|or|so|because)\b/i.test(line)) return true
   if (/^(i'm|i am|we're|we are|this is where|think about|if you are)\b/i.test(line) && line.length < 80) return true
+  if (/^(i('| a)?ll be honest|i did a whole video on this|if you are in any product company)\b/i.test(line)) return true
   return false
 }
 
