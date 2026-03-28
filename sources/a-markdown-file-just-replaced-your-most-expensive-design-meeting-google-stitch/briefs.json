@@ -1,0 +1,153 @@
+[
+  {
+    "id": "brief-segment-13",
+    "primaryIdeaId": "segment-13",
+    "supportingIdeaIds": [
+      "segment-02"
+    ],
+    "thesis": "If it's not an MCP, you got problems.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "I think this is a much bigger deal than the tool and the 2026 use case.",
+    "supportPoints": [
+      "It's actually about rethinking how we do design in the age of AI.",
+      "I want to get into detail, talk about each release, talk about what it does for you, and talk about where we can go with it to build appropriately."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-01",
+      "brief-segment-92",
+      "brief-segment-57"
+    ],
+    "scorecard": {
+      "themeStrength": 3,
+      "authorityPotential": 4,
+      "clarity": 4,
+      "distinctness": 4,
+      "commercialRelevance": 2,
+      "fidelity": 5,
+      "total": 22
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Angle feels thinner than the best concept-led carousels."
+      ],
+      "rewriteGoals": [
+        "Center the strongest underlying theme, not just the most quotable line."
+      ]
+    },
+    "carouselSlug": "a-markdown-file-just-replaced-your--segment-13-00-03-08-if-it-s-not-an-mcp-you-g"
+  },
+  {
+    "id": "brief-segment-01",
+    "primaryIdeaId": "segment-01",
+    "supportingIdeaIds": [
+      "segment-87",
+      "segment-02"
+    ],
+    "thesis": "This is not about taking jobs away from designers.",
+    "audience": "Audience: product, design, and engineering leaders figuring out where AI changes the work.",
+    "whyItMatters": "The world is getting overloaded in AI slump.",
+    "supportPoints": [
+      "I think three big releases dropped in the last week or so that we need to pay attention to as builders.",
+      "It reviews all the PR shipped since yesterday and updates the docs."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-13",
+      "brief-segment-92",
+      "brief-segment-57"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 4,
+      "clarity": 5,
+      "distinctness": 4,
+      "commercialRelevance": 5,
+      "fidelity": 5,
+      "total": 28
+    },
+    "critique": {
+      "status": "accept",
+      "reasons": [],
+      "rewriteGoals": [
+        "Preserve the real theme, keep the voice sharp, and avoid filler."
+      ]
+    },
+    "carouselSlug": "a-markdown-file-just-replaced-your--segment-01-00-00-00-the-world-is-getting-ove"
+  },
+  {
+    "id": "brief-segment-92",
+    "primaryIdeaId": "segment-92",
+    "supportingIdeaIds": [],
+    "thesis": "I keep emphasizing this is not",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "If your mental model is stale, you redesign the wrong part of the workflow.",
+    "supportPoints": [
+      "You can do the remotion skill for the cost of claude code.",
+      "Google's giving you free iterations on Stitch.",
+      "A new tool lowers the floor of who can produce good enough work and incumbents start to panic and then reality sets in."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-13",
+      "brief-segment-01",
+      "brief-segment-57"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 3,
+      "clarity": 5,
+      "distinctness": 5,
+      "commercialRelevance": 4,
+      "fidelity": 5,
+      "total": 26
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "a-markdown-file-just-replaced-your--segment-92-00-23-58-i-keep-emphasizing-this-"
+  },
+  {
+    "id": "brief-segment-57",
+    "primaryIdeaId": "segment-57",
+    "supportingIdeaIds": [
+      "segment-55"
+    ],
+    "thesis": "You just install the reotion skill into Claude code with a single terminal command.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "This is what we mean when we say the cost of software is falling to zero.",
+    "supportPoints": [
+      "Remotion number two, now we're going from design to video.",
+      "If that sounds exhausting to you, just be glad Claude is doing it.",
+      "If that sounds exhausting to you"
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-13",
+      "brief-segment-01",
+      "brief-segment-92"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 3,
+      "clarity": 5,
+      "distinctness": 4,
+      "commercialRelevance": 2,
+      "fidelity": 5,
+      "total": 23
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "a-markdown-file-just-replaced-your--segment-57-00-14-34-you-just-install-the-reo"
+  }
+]

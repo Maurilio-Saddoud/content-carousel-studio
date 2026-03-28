@@ -1,0 +1,98 @@
+{
+  "slug": "a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch",
+  "sourceType": "transcript",
+  "sourceUrl": "https://youtu.be/CDClFY-R0dI?si=tPypnHogsFnevueX",
+  "fetchedAt": "2026-03-28T01:42:26.419Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "A Markdown File Just Replaced Your Most Expensive Design Meeting. (Google Stitch)",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/CDClFY-R0dI/hqdefault.jpg"
+  },
+  "transcriptLineCount": 863,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 4,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 111,
+  "briefCount": 4,
+  "publishedIdeaIds": [
+    "segment-13",
+    "segment-01",
+    "segment-92",
+    "segment-57"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-13",
+      "primaryIdeaId": "segment-13",
+      "thesis": "If it's not an MCP, you got problems.",
+      "slug": "a-markdown-file-just-replaced-your--segment-13-00-03-08-if-it-s-not-an-mcp-you-g"
+    },
+    {
+      "id": "brief-segment-01",
+      "primaryIdeaId": "segment-01",
+      "thesis": "This is not about taking jobs away from designers.",
+      "slug": "a-markdown-file-just-replaced-your--segment-01-00-00-00-the-world-is-getting-ove"
+    },
+    {
+      "id": "brief-segment-92",
+      "primaryIdeaId": "segment-92",
+      "thesis": "I keep emphasizing this is not",
+      "slug": "a-markdown-file-just-replaced-your--segment-92-00-23-58-i-keep-emphasizing-this-"
+    },
+    {
+      "id": "brief-segment-57",
+      "primaryIdeaId": "segment-57",
+      "thesis": "You just install the reotion skill into Claude code with a single terminal command.",
+      "slug": "a-markdown-file-just-replaced-your--segment-57-00-14-34-you-just-install-the-reo"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "a-markdown-file-just-replaced-your--segment-13-00-03-08-if-it-s-not-an-mcp-you-g",
+      "segmentId": "segment-13",
+      "title": "Agent workflow shifts the bottleneck toward human review.",
+      "previewPath": "/carousel/a-markdown-file-just-replaced-your--segment-13-00-03-08-if-it-s-not-an-mcp-you-g",
+      "carouselPath": "carousels/a-markdown-file-just-replaced-your--segment-13-00-03-08-if-it-s-not-an-mcp-you-g/carousel.md"
+    },
+    {
+      "slug": "a-markdown-file-just-replaced-your--segment-01-00-00-00-the-world-is-getting-ove",
+      "segmentId": "segment-01",
+      "title": "Docs need attention reveals which shortcuts break first.",
+      "previewPath": "/carousel/a-markdown-file-just-replaced-your--segment-01-00-00-00-the-world-is-getting-ove",
+      "carouselPath": "carousels/a-markdown-file-just-replaced-your--segment-01-00-00-00-the-world-is-getting-ove/carousel.md"
+    },
+    {
+      "slug": "a-markdown-file-just-replaced-your--segment-92-00-23-58-i-keep-emphasizing-this-",
+      "segmentId": "segment-92",
+      "title": "When the workflow changes, the review layer becomes the real operating leverage. Around Remotion skill.",
+      "previewPath": "/carousel/a-markdown-file-just-replaced-your--segment-92-00-23-58-i-keep-emphasizing-this-",
+      "carouselPath": "carousels/a-markdown-file-just-replaced-your--segment-92-00-23-58-i-keep-emphasizing-this-/carousel.md"
+    },
+    {
+      "slug": "a-markdown-file-just-replaced-your--segment-57-00-14-34-you-just-install-the-reo",
+      "segmentId": "segment-57",
+      "title": "This is what we mean when we say the cost of software",
+      "previewPath": "/carousel/a-markdown-file-just-replaced-your--segment-57-00-14-34-you-just-install-the-reo",
+      "carouselPath": "carousels/a-markdown-file-just-replaced-your--segment-57-00-14-34-you-just-install-the-reo/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch/source.json",
+    "sources/a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch/raw-transcript.md",
+    "sources/a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch/clean-transcript.md",
+    "sources/a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch/segments.json",
+    "sources/a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch/ideas.json",
+    "sources/a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch/briefs.json",
+    "sources/a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch/summary.md",
+    "carousels/a-markdown-file-just-replaced-your--segment-13-00-03-08-if-it-s-not-an-mcp-you-g/carousel.md",
+    "carousels/a-markdown-file-just-replaced-your--segment-01-00-00-00-the-world-is-getting-ove/carousel.md",
+    "carousels/a-markdown-file-just-replaced-your--segment-92-00-23-58-i-keep-emphasizing-this-/carousel.md",
+    "carousels/a-markdown-file-just-replaced-your--segment-57-00-14-34-you-just-install-the-reo/carousel.md",
+    "carousels/index.json"
+  ]
+}
