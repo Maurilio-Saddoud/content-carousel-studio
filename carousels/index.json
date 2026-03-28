@@ -6,7 +6,7 @@
     "sourceType": "transcript",
     "aspectRatio": "portrait",
     "updatedAt": "2026-03-28",
-    "createdAt": "2026-03-28",
+    "createdAt": "2026-03-28T01:42:26.419Z",
     "theme": {
       "accent": "#1D9BF0",
       "background": "#000000",
@@ -21,7 +21,7 @@
     "sourceType": "transcript",
     "aspectRatio": "portrait",
     "updatedAt": "2026-03-28",
-    "createdAt": "2026-03-28",
+    "createdAt": "2026-03-28T01:42:26.419Z",
     "theme": {
       "accent": "#1D9BF0",
       "background": "#000000",
@@ -36,7 +36,7 @@
     "sourceType": "transcript",
     "aspectRatio": "portrait",
     "updatedAt": "2026-03-28",
-    "createdAt": "2026-03-28",
+    "createdAt": "2026-03-28T01:42:26.419Z",
     "theme": {
       "accent": "#1D9BF0",
       "background": "#000000",
@@ -48,6 +48,66 @@
     "slug": "a-markdown-file-just-replaced-your--segment-92-00-23-58-i-keep-emphasizing-this-",
     "title": "When the workflow changes, the review layer becomes the real operating leverage. Around Remotion skill.",
     "description": "AI News & Strategy Daily | Nate B Jones on a-markdown-file-just-replaced-your-most-expensive-design-meeting-google-stitch: 00:23:58 → 00:24:15.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-28",
+    "createdAt": "2026-03-28T01:42:26.419Z",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "anthropic-just-gave-you-3-tools-th--segment-01-00-00-00-anthropic-finished-up-sh",
+    "title": "Project enthropic stack is where stale assumptions get expensive.",
+    "description": "AI News & Strategy Daily | Nate B Jones on anthropic-just-gave-you-3-tools-that-work-while-you-re-gone: 00:00:00 → 00:00:15.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-28",
+    "createdAt": "2026-03-28",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "anthropic-just-gave-you-3-tools-th--segment-25-00-06-41-there-are-some-places-th",
+    "title": "Agent workflow makes human review the deciding advantage.",
+    "description": "AI News & Strategy Daily | Nate B Jones on anthropic-just-gave-you-3-tools-that-work-while-you-re-gone: 00:06:41 → 00:06:56.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-28",
+    "createdAt": "2026-03-28",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "anthropic-just-gave-you-3-tools-th--segment-43-00-11-33-when-a-manager-is-truly-",
+    "title": "Labeled research preview is where stale assumptions get expensive.",
+    "description": "AI News & Strategy Daily | Nate B Jones on anthropic-just-gave-you-3-tools-that-work-while-you-re-gone: 00:11:33 → 00:11:47.",
+    "sourceType": "transcript",
+    "aspectRatio": "portrait",
+    "updatedAt": "2026-03-28",
+    "createdAt": "2026-03-28",
+    "theme": {
+      "accent": "#1D9BF0",
+      "background": "#000000",
+      "foreground": "#E7E9EA",
+      "muted": "#71767B"
+    }
+  },
+  {
+    "slug": "anthropic-just-gave-you-3-tools-th--segment-60-00-16-09-think-about-something-th",
+    "title": "Capability shift changes where good supervision matters most",
+    "description": "AI News & Strategy Daily | Nate B Jones on anthropic-just-gave-you-3-tools-that-work-while-you-re-gone: 00:16:09 → 00:16:26.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
     "updatedAt": "2026-03-28",
@@ -106,7 +166,7 @@
   },
   {
     "slug": "agents-means-4-different-things-an--segment-01-00-00-00-we-want-agents-but-we-do",
-    "title": "Operator deciding advantage is where stale assumptions get expensive.",
+    "title": "Agent workflow pressure reveals which shortcuts break first.",
     "description": "AI News & Strategy Daily | Nate B Jones on agents-means-4-different-things-and-almost-nobody-knows-which-one-they-need: 00:00:00 → 00:00:18.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -601,7 +661,7 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-01-00-00-00-i-m-going-to-get-into-wh",
-    "title": "Agent workflow shifts the bottleneck toward buyer trust.",
+    "title": "Team redesign exposes where coordination is still leaking time.",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:00:00 → 00:00:14.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -616,7 +676,7 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-10-00-02-28-if-you-are-in-any-kind-o",
-    "title": "Update your mental model before you update the workflow.",
+    "title": "When AI agent harnesses can go directly from insight to code in",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:02:28 → 00:02:49.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -646,7 +706,7 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-23-00-06-37-think-about-what-happens",
-    "title": "Harness starting task changes where human judgment belongs.",
+    "title": "Agent workflow pressure makes context quality harder to fake",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:06:37 → 00:06:51.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -661,7 +721,7 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-39-00-11-32-i-know-that-there-are-ma",
-    "title": "Agent workflow pressure exposes where weak handoffs break first",
+    "title": "Agent workflow makes context quality the deciding advantage.",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:11:32 → 00:11:49.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -676,7 +736,7 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-41-00-12-11-i-m-describing-is-going-",
-    "title": "Checkpoint words simplify changes where human judgment belongs.",
+    "title": "Agent workflow pressure changes where good supervision matters most",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:12:11 → 00:12:30.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -691,7 +751,7 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-bl--segment-42-00-12-33-this-is-where-the-analys",
-    "title": "A marketing campaign becomes a deployed landing page with conversion metrics.",
+    "title": "Agent workflow pressure makes buyer trust harder to fake",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:12:33 → 00:12:48.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",
@@ -706,7 +766,7 @@
   },
   {
     "slug": "4-000-people-lost-their-jobs-at-block-d--segment-63-00-18-33-thank-you-very-much",
-    "title": "Operator bottleneck system changes where human judgment belongs.",
+    "title": "Agent workflow shifts the real bottleneck toward operator judgment",
     "description": "AI News & Strategy Daily | Nate B Jones on 4-000-people-lost-their-jobs-at-block-dorsey-blamed-ai-here-s-what-actually-happ: 00:18:33 → 00:18:49.",
     "sourceType": "transcript",
     "aspectRatio": "portrait",

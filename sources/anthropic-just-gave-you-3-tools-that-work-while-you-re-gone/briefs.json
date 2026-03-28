@@ -1,0 +1,154 @@
+[
+  {
+    "id": "brief-segment-25",
+    "primaryIdeaId": "segment-25",
+    "supportingIdeaIds": [],
+    "thesis": "There are some places that don't let you put auto payments on a schedule.",
+    "audience": "Audience: people using AI in real work, not just talking about it.",
+    "whyItMatters": "You have to remember to pay your bills on time.",
+    "supportPoints": [
+      "I think that one of the biggest challenges in 2026 is",
+      "You can run that schedule every hour.",
+      "Another great example of what you can do with this, let's say, look, aviation prices are up."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-60",
+      "brief-segment-01",
+      "brief-segment-43"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 4,
+      "clarity": 5,
+      "distinctness": 5,
+      "commercialRelevance": 1,
+      "fidelity": 5,
+      "total": 24
+    },
+    "critique": {
+      "status": "accept",
+      "reasons": [],
+      "rewriteGoals": [
+        "Preserve the real theme, keep the voice sharp, and avoid filler."
+      ]
+    },
+    "carouselSlug": "anthropic-just-gave-you-3-tools-th--segment-25-00-06-41-there-are-some-places-th"
+  },
+  {
+    "id": "brief-segment-60",
+    "primaryIdeaId": "segment-60",
+    "supportingIdeaIds": [],
+    "thesis": "Think about something that is not ever going to be easy to get data out of.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "Think about something that is not ever ever going to be easy to get data out of.",
+    "supportPoints": [
+      "Just send the task via dispatch.",
+      "Walk away and let Claude manage it for you.",
+      "I've been the person who had to go through the agonizing process of checking two or three different antique sites for data that I then manually put into a spreadsheet and it took me like half the day."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-25",
+      "brief-segment-01",
+      "brief-segment-43"
+    ],
+    "scorecard": {
+      "themeStrength": 4,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 5,
+      "commercialRelevance": 4,
+      "fidelity": 5,
+      "total": 25
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "anthropic-just-gave-you-3-tools-th--segment-60-00-16-09-think-about-something-th"
+  },
+  {
+    "id": "brief-segment-01",
+    "primaryIdeaId": "segment-01",
+    "supportingIdeaIds": [
+      "segment-52",
+      "segment-74",
+      "segment-33"
+    ],
+    "thesis": "Anthropic finished up shipping OpenClaw for Claude.",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "What they shipped is dispatch and then a day later computer use.",
+    "supportPoints": [
+      "Start to work on whatever the thing is that is your pet project.",
+      "Enthropic is going to rain it in a little bit.",
+      "Enthropic stack runs on cloud.",
+      "You're dispatching work to parallel agents from a mobile interface wherever you happen to be."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-25",
+      "brief-segment-60",
+      "brief-segment-43"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 5,
+      "distinctness": 4,
+      "commercialRelevance": 2,
+      "fidelity": 5,
+      "total": 24
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "anthropic-just-gave-you-3-tools-th--segment-01-00-00-00-anthropic-finished-up-sh"
+  },
+  {
+    "id": "brief-segment-43",
+    "primaryIdeaId": "segment-43",
+    "supportingIdeaIds": [
+      "segment-52"
+    ],
+    "thesis": "When a manager is truly managing a person, do they sit there and look over their",
+    "audience": "Audience: operators, team leads, and founders redesigning AI-assisted workflows.",
+    "whyItMatters": "Claude has labeled this research preview.",
+    "supportPoints": [
+      "I think the unlock you get from being freed from the desk is really huge because fundamentally it moves you into the correct pattern for agents.",
+      "You are in a management pattern."
+    ],
+    "distinctFromBriefIds": [
+      "brief-segment-25",
+      "brief-segment-60",
+      "brief-segment-01"
+    ],
+    "scorecard": {
+      "themeStrength": 5,
+      "authorityPotential": 3,
+      "clarity": 4,
+      "distinctness": 4,
+      "commercialRelevance": 3,
+      "fidelity": 5,
+      "total": 24
+    },
+    "critique": {
+      "status": "rewrite",
+      "reasons": [
+        "Voice risks sounding descriptive instead of sharp and opinionated."
+      ],
+      "rewriteGoals": [
+        "Make the framing feel more like a real point of view with operator conviction."
+      ]
+    },
+    "carouselSlug": "anthropic-just-gave-you-3-tools-th--segment-43-00-11-33-when-a-manager-is-truly-"
+  }
+]

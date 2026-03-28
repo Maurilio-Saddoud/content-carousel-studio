@@ -1,0 +1,98 @@
+{
+  "slug": "anthropic-just-gave-you-3-tools-that-work-while-you-re-gone",
+  "sourceType": "transcript",
+  "sourceUrl": "https://youtu.be/3e7gmNPr5Vo?si=KikfrZMBjH0OitRB",
+  "fetchedAt": "2026-03-28T18:37:17.707Z",
+  "transcriptMode": "official-transcript",
+  "whisperModel": "base",
+  "video": {
+    "title": "Anthropic Just Gave You 3 Tools That Work While You're Gone.",
+    "authorName": "AI News & Strategy Daily | Nate B Jones",
+    "authorUrl": "https://www.youtube.com/@NateBJones",
+    "thumbnailUrl": "https://i.ytimg.com/vi/3e7gmNPr5Vo/hqdefault.jpg"
+  },
+  "transcriptLineCount": 829,
+  "defaultBehavior": "creates source artifacts, ranks candidate ideas, and publishes markdown carousels only for selected ideas",
+  "ideaRule": {
+    "publishLimit": 4,
+    "threshold": "Ideas must pass the editorial filter (score >= 4, 28-155 words, at least 2 full sentences, no obvious intro/outro junk, no near-duplicates)."
+  },
+  "ideaCount": 105,
+  "briefCount": 4,
+  "publishedIdeaIds": [
+    "segment-25",
+    "segment-60",
+    "segment-01",
+    "segment-43"
+  ],
+  "briefs": [
+    {
+      "id": "brief-segment-25",
+      "primaryIdeaId": "segment-25",
+      "thesis": "There are some places that don't let you put auto payments on a schedule.",
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-25-00-06-41-there-are-some-places-th"
+    },
+    {
+      "id": "brief-segment-60",
+      "primaryIdeaId": "segment-60",
+      "thesis": "Think about something that is not ever going to be easy to get data out of.",
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-60-00-16-09-think-about-something-th"
+    },
+    {
+      "id": "brief-segment-01",
+      "primaryIdeaId": "segment-01",
+      "thesis": "Anthropic finished up shipping OpenClaw for Claude.",
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-01-00-00-00-anthropic-finished-up-sh"
+    },
+    {
+      "id": "brief-segment-43",
+      "primaryIdeaId": "segment-43",
+      "thesis": "When a manager is truly managing a person, do they sit there and look over their",
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-43-00-11-33-when-a-manager-is-truly-"
+    }
+  ],
+  "carousels": [
+    {
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-25-00-06-41-there-are-some-places-th",
+      "segmentId": "segment-25",
+      "title": "Agent workflow makes human review the deciding advantage.",
+      "previewPath": "/carousel/anthropic-just-gave-you-3-tools-th--segment-25-00-06-41-there-are-some-places-th",
+      "carouselPath": "carousels/anthropic-just-gave-you-3-tools-th--segment-25-00-06-41-there-are-some-places-th/carousel.md"
+    },
+    {
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-60-00-16-09-think-about-something-th",
+      "segmentId": "segment-60",
+      "title": "Capability shift changes where good supervision matters most",
+      "previewPath": "/carousel/anthropic-just-gave-you-3-tools-th--segment-60-00-16-09-think-about-something-th",
+      "carouselPath": "carousels/anthropic-just-gave-you-3-tools-th--segment-60-00-16-09-think-about-something-th/carousel.md"
+    },
+    {
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-01-00-00-00-anthropic-finished-up-sh",
+      "segmentId": "segment-01",
+      "title": "Project enthropic stack is where stale assumptions get expensive.",
+      "previewPath": "/carousel/anthropic-just-gave-you-3-tools-th--segment-01-00-00-00-anthropic-finished-up-sh",
+      "carouselPath": "carousels/anthropic-just-gave-you-3-tools-th--segment-01-00-00-00-anthropic-finished-up-sh/carousel.md"
+    },
+    {
+      "slug": "anthropic-just-gave-you-3-tools-th--segment-43-00-11-33-when-a-manager-is-truly-",
+      "segmentId": "segment-43",
+      "title": "Labeled research preview is where stale assumptions get expensive.",
+      "previewPath": "/carousel/anthropic-just-gave-you-3-tools-th--segment-43-00-11-33-when-a-manager-is-truly-",
+      "carouselPath": "carousels/anthropic-just-gave-you-3-tools-th--segment-43-00-11-33-when-a-manager-is-truly-/carousel.md"
+    }
+  ],
+  "createdFiles": [
+    "sources/anthropic-just-gave-you-3-tools-that-work-while-you-re-gone/source.json",
+    "sources/anthropic-just-gave-you-3-tools-that-work-while-you-re-gone/raw-transcript.md",
+    "sources/anthropic-just-gave-you-3-tools-that-work-while-you-re-gone/clean-transcript.md",
+    "sources/anthropic-just-gave-you-3-tools-that-work-while-you-re-gone/segments.json",
+    "sources/anthropic-just-gave-you-3-tools-that-work-while-you-re-gone/ideas.json",
+    "sources/anthropic-just-gave-you-3-tools-that-work-while-you-re-gone/briefs.json",
+    "sources/anthropic-just-gave-you-3-tools-that-work-while-you-re-gone/summary.md",
+    "carousels/anthropic-just-gave-you-3-tools-th--segment-25-00-06-41-there-are-some-places-th/carousel.md",
+    "carousels/anthropic-just-gave-you-3-tools-th--segment-60-00-16-09-think-about-something-th/carousel.md",
+    "carousels/anthropic-just-gave-you-3-tools-th--segment-01-00-00-00-anthropic-finished-up-sh/carousel.md",
+    "carousels/anthropic-just-gave-you-3-tools-th--segment-43-00-11-33-when-a-manager-is-truly-/carousel.md",
+    "carousels/index.json"
+  ]
+}
